@@ -1,0 +1,92 @@
+C51 COMPILER V8.02   EXAMPLE1                                                              02/13/2011 01:07:26 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE EXAMPLE1
+OBJECT MODULE PLACED IN .\debug\example1.obj
+COMPILER INVOKED BY: E:\WorkSpace\Keil UV3\C51\BIN\C51.EXE example1.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\debug\exam
+                    -ple1.lst) OBJECT(.\debug\example1.obj)
+
+line level    source
+
+   1          //这是一个通过delphi上位机控制开发板12864
+   2          //液晶显示的demo
+   3          
+   4          #include "example1.h"
+   5          #include "uip.h"
+   6          //#include "AT45DB321.h"
+   7          
+   8          #include <string.h>
+   9          //#include "lcd_app.h"
+  10          #include "USART.h"
+  11          #include "stdio.h"
+  12          
+  13          void example1_init(void) 
+  14          {
+  15   1              uip_listen(HTONS(8001));
+  16   1      }
+  17          
+  18          void example1_app(void) 
+  19          {
+  20   1              u16_t i;
+  21   1              idata u8_t RxdBuf[100];
+  22   1      //      u16_t sector;
+  23   1              if(uip_connected())
+  24   1              {
+  25   2                      SendString("example1 is connected!\r\n");
+  26   2              }
+  27   1      //      if(uip_stopped())
+  28   1              {
+  29   2      //              printu("example1 is stopped!\r\n");
+  30   2              }
+  31   1              if(uip_acked())
+  32   1              {
+  33   2                      SendString("example1 is acked!\r\n");
+  34   2              }
+  35   1              if(uip_closed())
+  36   1              {
+  37   2                      SendString("example1 is closed!\r\n");
+  38   2              }
+  39   1              if(uip_timedout())
+  40   1              {
+  41   2                      printf("example1 is timedout!\r\n");
+  42   2              }
+  43   1              if(uip_newdata() || uip_rexmit()) 
+  44   1              {
+  45   2                      memcpy(RxdBuf, uip_appdata, uip_len);
+  46   2                      printf(RxdBuf);
+  47   2                      //printuf("\r\n收到0x%x 字节\r\n", uip_len);
+  48   2                      //printf("\r\n收到0x%x 字节\r\n", uip_len);
+  49   2                      SendString("\r\n收到字节\r\n");
+  50   2                      RxdBuf[uip_len] = '\0';
+  51   2                      //ClearScreen(0);
+  52   2                      //putstring(6,0, &RxdBuf[0]);   
+  53   2      
+  54   2      //              printu("LCD正在显示\r\n");                      
+C51 COMPILER V8.02   EXAMPLE1                                                              02/13/2011 01:07:26 PAGE 2   
+
+  55   2      //              ClearScreen(0);
+  56   2      
+  57   2      
+  58   2      //              LCD_print12(4, 2 * uip_appdata[1], "                                             ");
+  59   2      //              LCD_print12(4, 2 * uip_appdata[1], &uip_appdata[2]);
+  60   2              //      memcpy(&uip_appdata[0], "LCD正在显示\r\n", 11);
+  61   2              //      uip_send(&uip_appdata[0], 11);
+  62   2      
+  63   2                      
+  64   2              }
+  65   1      }
+*** WARNING C280 IN LINE 20 OF EXAMPLE1.C: 'i': unreferenced local variable
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    140    ----
+   CONSTANT SIZE    =    105    ----
+   XDATA SIZE       =   ----       2
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----     100
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

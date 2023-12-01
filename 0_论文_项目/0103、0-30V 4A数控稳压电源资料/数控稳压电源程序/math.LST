@@ -1,0 +1,133 @@
+C51 COMPILER V8.08   MATH                                                                  10/01/2008 23:53:31 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE MATH
+OBJECT MODULE PLACED IN math.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE math.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #include "math.h"
+   3          #define  uchar unsigned char
+   4          #define uint unsigned int
+   5          
+   6          void draw(uchar x,uchar y);//画点函数   
+   7          void clear_xy(uchar x,uchar y);//清点函数  
+   8          
+   9          /*画正弦波函数 */     
+  10          void sin_lcd(void)
+  11          {
+  12   1          float x,y;
+  13   1          for(x=0;x<128;x+=0.15)
+  14   1          {
+  15   2              draw(x,y=20*sin(x*1/4)+32);
+  16   2          }
+  17   1          for(x=0;x<128;x+=0.15)
+  18   1          {
+  19   2              clear_xy(x,y=20*sin(x*1/4)+32);
+  20   2          }
+  21   1      }
+  22          /*画圆函数 */
+  23          void round(uchar x,uchar y,uchar r)
+  24          {
+  25   1          float angle;
+  26   1          uchar dx,dy;
+  27   1          for(angle=0;angle<3.14/4;angle+=0.03)//0.03
+  28   1          {
+  29   2              dx=r*sin(angle);
+  30   2              dy=r*cos(angle);
+  31   2              draw(x+dx,y+dy);
+  32   2              draw(x-dx,y+dy);
+  33   2              draw(x+dx,y-dy);
+  34   2              draw(x-dx,y-dy);
+  35   2              draw(x+dy,y+dx);
+  36   2              draw(x-dy,y+dx);
+  37   2              draw(x+dy,y-dx);
+  38   2              draw(x-dy,y-dx);
+  39   2          }
+  40   1      }
+  41          /*画椭圆函数 */
+  42          void ellipsoid(uchar x,uchar y,uchar a,uchar b)
+  43          {
+  44   1          float angle;
+  45   1          uchar dx,dy;
+  46   1          for(angle=0;angle<6.28;angle+=0.06)
+  47   1          {
+  48   2              dx=a*sin(angle);
+  49   2              dy=b*cos(angle);
+  50   2              draw(x+dx,y+dy);
+  51   2              draw(x+dx,y-dy);
+  52   2              draw(x-dx,y-dy);
+  53   2              draw(x-dx,y+dy);
+  54   2          }
+  55   1      }
+C51 COMPILER V8.08   MATH                                                                  10/01/2008 23:53:31 PAGE 2   
+
+  56          /*抛物线 */
+  57          void parabalo(float x)
+  58          {
+  59   1          for(;x<128;x+=0.4)
+  60   1          draw(x,x*x/256);
+  61   1      }
+  62          /*对数 */
+  63          void fan(float x)
+  64          {
+  65   1          for(;x<128;x+=0.2)
+  66   1          draw(x,30*log10(x));
+  67   1      }
+  68          /**/
+  69          void nn(uchar x,uchar y,uchar R)
+  70          {
+  71   1          float angle,x0,y0,r1=15,r2=5;
+  72   1          for(angle=0;angle<2*3.14*3;angle+=0.03)
+  73   1          {
+  74   2              x0=(R-r1)*sin(angle)-r2*sin(R/r1*angle);
+  75   2              y0=(R-r1)*cos(angle)+r2*cos(R/r1*angle);
+  76   2              draw(x+x0,y+y0);
+  77   2          }
+  78   1      }
+  79          /*
+  80          void beenline(float x,float y,float xe,float ye)
+  81          {
+  82              float dx,k;
+  83              k=(ye-y)/(xe-x);
+  84              dx=(xe-x)/128;
+  85              for(;x<=xe;x+=dx)
+  86              {
+  87                  draw(x,k*x+y);
+  88              }
+  89          }
+  90          */
+  91          void  Lin(uchar x1,uchar y1,uchar x2,uchar y2)
+  92          {
+  93   1          uint x=x1<<8,y=y1<<8;     //高8位为坐标值，低8位为积分累加器
+  94   1          char dx=x2-x1,dy=y2-y1,mm,nn;
+  95   1      
+  96   1          while( abs(dx)<64 && abs(dy)<64 && dx*dy!=0 ) {dx*=6;dy*=6;} //调整插补速度  //2
+  97   1      
+  98   1          while( (x>>8)!=x2 || (y>>8)!=y2)
+  99   1          {
+ 100   2              draw(mm=x>>8,nn=y>>8);
+ 101   2              x+=dx;
+ 102   2              y+=dy;
+ 103   2          }
+ 104   1      
+ 105   1          draw(x>>8,y>>8);         //画终点
+ 106   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1493    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      70
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V8.08   MATH                                                                  10/01/2008 23:53:31 PAGE 3   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

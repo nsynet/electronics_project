@@ -1,0 +1,472 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Documents and Settings\Administrator\桌面\led大屏幕点阵\时钟\led.uv2
+Project File Date:  08/15/2007
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4697
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4697
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4697
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4697
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4697
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4524
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4697
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4524
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4524
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4524
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4706
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4697
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4706
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4546
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4524
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4697
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4699
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4699
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4691
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=25.2 xdata=0 code=4691
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=41.2 xdata=0 code=5690
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=41.2 xdata=0 code=5690
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=41.2 xdata=0 code=5690
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+Program Size: data=42.1 xdata=0 code=5685
+creating hex file from "led"...
+"led" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+Program Size: data=42.1 xdata=0 code=5685
+creating hex file from "led"...
+"led" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+Program Size: data=50.1 xdata=0 code=5599
+creating hex file from "led"...
+"led" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+Program Size: data=50.1 xdata=0 code=5602
+creating hex file from "led"...
+"led" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+Program Size: data=50.1 xdata=0 code=5596
+creating hex file from "led"...
+"led" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+Program Size: data=29.1 xdata=0 code=4595
+creating hex file from "led"...
+"led" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+Program Size: data=29.1 xdata=0 code=4598
+creating hex file from "led"...
+"led" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+Program Size: data=29.1 xdata=0 code=4598
+creating hex file from "led"...
+"led" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+Program Size: data=50.1 xdata=0 code=5599
+creating hex file from "led"...
+"led" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+Program Size: data=50.1 xdata=0 code=5596
+creating hex file from "led"...
+"led" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+Program Size: data=70.1 xdata=0 code=5594
+creating hex file from "led"...
+"led" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+1302.H(105): error C141: syntax error near ')'
+Target not created
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CHANGEDATA?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_ROW?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_PIC?LED
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=71.2 xdata=0 code=5751
+creating hex file from "led"...
+"led" - 0 Error(s), 5 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=47.2 xdata=0 code=4836
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?DS1302_SETPROTECT?LED
+    CALLER1: ?PR?SERIAL_INT?LED
+    CALLER2: ?C_C51STARTUP
+Program Size: data=48.2 xdata=0 code=4853
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+1302.H(90): error C261: bit(s) in reentrant()
+1302.H(97): error C261: bit(s) in reentrant()
+Target not created
+Build target 'Target 1'
+compiling led.c...
+linking...
+Program Size: data=47.0 xdata=0 code=4836
+creating hex file from "led"...
+"led" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+Program Size: data=47.0 xdata=0 code=4836
+creating hex file from "led"...
+"led" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+Program Size: data=47.0 xdata=0 code=4910
+creating hex file from "led"...
+"led" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+Program Size: data=47.0 xdata=0 code=4910
+creating hex file from "led"...
+"led" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+Program Size: data=47.0 xdata=0 code=4940
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+Program Size: data=47.0 xdata=0 code=4940
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling led.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_COUNT?LED
+Program Size: data=47.0 xdata=0 code=4940
+creating hex file from "led"...
+"led" - 0 Error(s), 1 Warning(s).

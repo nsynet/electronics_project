@@ -1,0 +1,15 @@
+1--GND
+2--VCC
+3--TX_EN
+4--TRX_CE
+5--PWR_up
+6--UPCLK
+7--CD
+8--AM
+9-DR
+10--MISO
+11--MOSI
+12--SCK
+13--CSN
+14--NC(Пе)
+

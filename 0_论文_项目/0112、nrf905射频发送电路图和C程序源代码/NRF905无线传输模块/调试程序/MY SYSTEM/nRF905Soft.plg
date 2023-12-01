@@ -1,0 +1,14 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+D:\全国赛资料\NRF905无线传输模块\调试程序\MY SYSTEM\nRF905Soft.uv2
+Project File Date:  09/01/2009
+
+<h2>Output:</h2>
+Build target 'Target 1'
+linking...
+Program Size: data=84.0 xdata=0 code=637
+creating hex file from "nRF905Soft"...
+"nRF905Soft" - 0 Error(s), 0 Warning(s).

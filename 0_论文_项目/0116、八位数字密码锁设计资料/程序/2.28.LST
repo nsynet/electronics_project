@@ -1,0 +1,239 @@
+C51 COMPILER V7.06   2_28                                                                  03/01/2007 18:07:27 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 2_28
+OBJECT MODULE PLACED IN 2.28.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE 2.28.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include<reg52.h>             
+   2          #include<math.h>                
+   3          #include<intrins.h>              
+   4          #define uchar unsigned char      
+   5          #define uint unsigned int
+   6          #define  data_IO P2
+   7          
+   8          sbit     rs=P3^0;       //Ö¸ÁîºÍÊı¾İ¼Ä´æÆ÷ ¡°1ÊÇÊı¾İ£¬¡± ¡°0ÊÇÖ¸Áî¡±
+   9          sbit     rw=P3^1;//¶ÁĞ´¿ØÖÆ£¬¡°1¶Á¡± ¡°0Ğ´¡±
+  10          sbit      e=P3^2; //Æ¬Ñ¡ĞÅºÅ
+  11          sbit      p=P2^7;
+  12          sbit   deng=P0^0;///ÏìÒôÀÖµÄ¶Ë¿Ú
+  13          sbit   md=P0^1;///ĞŞ¸ÄÃÜÂëÊ±µÄµÆ
+  14          
+  15          
+  16          uchar  pwflag;//ÃÜÂëÊÇ·ñÕıÈ·µÄ±êÖ¾Î»
+  17          uchar  count;//
+  18          uchar  gg=0 ;//Ö»ÓĞÊäÈëÕıÈ·µÄÃÜÂë²ÅÄÜĞŞ¸ÄÃÜÂë
+  19          uchar  cs=3 ;//ÊäÈëÃÜÂëµÄ´íÎó´ÎÊı
+  20          
+  21          
+  22          uchar m[]={1,2,3,4,5,6}; ///³õÊ¼ÃÜÂë
+  23          static uchar mbuf[6];///ÊäÈëµÄÃÜÂë
+  24          
+  25          
+  26           char d[32]={' ','I','M','P','O','R','T',' ','C','I','P','H','E','R',':',' ',
+  27                       ' ',' ','_',' ',' ','_','_','_','_','_','_',' ',' ',' ',' ',' '};//ÊäÈëÃÜÂë
+  28          
+  29          code  char ks[32]={'C','O','N','G','R','A','T','U','L','A','T','E',' ','Y','O','U',
+  30                                    ' ','O','P','E','N','I','N','G',' ',' ','L','O','C','K','!',' '};////¿ªËø
+  31          
+  32          code char cw[32]={' ','C','I','P','H','E','R',' ',' ','E','R','R','O','R',' ',' ',
+  33                                        '~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~' };////´íÎó          
+  34          
+  35          code char xc[32]={' ',' ','A','M','E','N','D',' ','S','U','C','C','E','E','D',' ',
+  36                            ' ',' ',' ',' ',' ','!','!','!','!','!','!',' ',' ',' ',' ',' '};//ĞŞ¸Ä³É¹¦  
+  37          
+  38          code char xg[32]={' ','A','M','E','N','D',' ',' ','C','I','P','H','E','R',':',' ',
+  39                            ' ',' ',' ',' ',' ','_','_','_','_','_','_',' ',' ',' ',' ',' '};///ĞŞ¸ÄÃÜÂë*/
+  40          
+  41          
+  42          void yanshi(uint n)///////////////ÑÓÊ±º¯Êı///////////////////////////////////
+  43          {
+  44   1       uint i;
+  45   1        for(i=0;i<n;i++){};
+  46   1      }
+  47          
+  48          void delay(uint n)///////////////ÑÓÊ±º¯Êı///////////////////////////////////
+  49          {
+  50   1       uint i,j;
+  51   1        for(i=0;i<1000;i++)
+  52   1         {for(j=0;j<n;j++){}}
+  53   1         
+  54   1      }
+  55          
+C51 COMPILER V7.06   2_28                                                                  03/01/2007 18:07:27 PAGE 2   
+
+  56          void busy() ////////////////////ÅĞ¶ÏÊÇ·ñÃ¦////////////////////////////////////////
+  57          {data_IO=0xff;
+  58   1       rs=0; //Ğ´Ö¸Áî        ////////////////////
+  59   1       rw=1; //±íÊ¾¶Á×´Ì¬    // Èı¸öµÄ×´Ì¬±íÊ¾ //
+  60   1       e=1;  //ÏÂ½µÑÓ//      // ÅĞÃ¦×´Ì¬       //
+  61   1       while(!p);         ////////////////////
+  62   1      // e=0;
+  63   1      } 
+  64          void xiezl(uchar shuju) /////////////////////*Ğ´Ö¸Áî*/////////////////////////////
+  65          {
+  66   1       busy();/*yanshi(6500);*/
+  67   1       data_IO=shuju;
+  68   1       rs=0; //Ğ´Ö¸Áî        ////////////////////
+  69   1       rw=0; //±íÊ¾Ğ´×´Ì¬    // Èı¸öµÄ×´Ì¬±íÊ¾ //
+  70   1       e=1;  //ÏÂ½µÑÓ//      // Ğ´Ö¸Áî         //
+  71   1       e=0;  /////////       ////////////////////
+  72   1      
+  73   1      }
+  74          
+  75          void w_dat(uint n)//////////////////Ğ´Êı¾İ//////////////////////////
+  76          {
+  77   1       busy(); /*yanshi(6500) ;*/
+  78   1        data_IO=n;
+  79   1         rs=1; //Ğ´Êı¾İ       ////////////////////
+  80   1         rw=0; //±íÊ¾Ğ´×´Ì¬    // Èı¸öµÄ×´Ì¬±íÊ¾ //
+  81   1         e=1;  //ÏÂ½µÑÓ//      //Ğ´Êı¾İ         //
+  82   1         e=0;  /////////       ////////////////////
+  83   1        // return;
+  84   1      }
+  85          
+  86          void xianshi(uchar js[]) //////////////////ÏÔÊ¾º¯Êı///////////////////////////////
+  87          {
+  88   1        uchar h,v;
+  89   1        xiezl(0x01); //ÇåÆÁÏÔÊ¾
+  90   1        yanshi(2000) ;
+  91   1        xiezl(0x80); // DDRAMµØÖ·µÄÉèÖÃ
+  92   1       for(h=0;h<16;h++)
+  93   1         {w_dat(js[h]);  ///n±íÊ¾ÓĞĞ´¼¸Î»Êı¾İ
+  94   2         yanshi(100) ;
+  95   2         }
+  96   1         xiezl(0xc0);//»»ĞĞ
+  97   1       for(v=(16);v<32;v++)
+  98   1         {w_dat(js[v]);  ///n±íÊ¾ÓĞĞ´¼¸Î»Êı¾İ
+  99   2         yanshi(100) ;
+ 100   2         }
+ 101   1      }
+ 102          
+ 103          void chushihua(void)///////////////////*Òº¾§Ä£¿é³õÊ¼»¯*/
+ 104           { uchar i;
+ 105   1         rs=0; //Ğ´Ö¸Áî
+ 106   1         rw=0; //±íÊ¾Ğ´×´Ì¬
+ 107   1         e=0;  //Ê¹ÄÜ
+ 108   1         for(i=0;i<3;i++)
+ 109   1         {
+ 110   2          xiezl(0x38);  //¹¦ÄÜÉèÖÃ,8Î»,Ò»ĞĞÏÔÊ¾,5*7µãÕó
+ 111   2          yanshi(1000);
+ 112   2         }
+ 113   1          xiezl(0x38); //Á½ĞĞÏÔÊ¾
+ 114   1          xiezl(0x0f); //ÏÔÊ¾¿ª¹Ø¿ØÖÆÎ»
+ 115   1          xiezl(0x18); //ÒÆÎ»¿ØÖÆ,¹â±êºÍÏÔÊ¾Ò»Æğ×óÒÆ  
+ 116   1          xiezl(0x06); //ÉèÖÃÊäÈëÄ£Ê½
+ 117   1          xiezl(0x01); //ÇåÆÁÏÔÊ¾
+C51 COMPILER V7.06   2_28                                                                  03/01/2007 18:07:27 PAGE 3   
+
+ 118   1          xiezl(0x80); // DDRAMµØÖ·µÄÉèÖÃ
+ 119   1          }
+ 120          
+ 121          bit pwcmp(void)
+ 122          {
+ 123   1              bit flag;
+ 124   1              uchar i;
+ 125   1              for (i=0;i<6;i++)
+ 126   1              {
+ 127   2                      if (m[i]==mbuf[i])   flag = 1;   //*ÃÜÂëÕıÈ·*/
+ 128   2                      else  { flag = 0;  i=6; } //*ÃÜÂë´íÎó*/
+ 129   2              }
+ 130   1              return(flag);
+ 131   1      }
+ 132          
+ 133          void gb(void)/////////×ªÒÆ¹â±ê
+ 134          {  uchar c;
+ 135   1         xiezl(0xc0);//»»ĞĞ
+ 136   1         yanshi(3000) ;
+ 137   1         for(c=0;c<5;c++)
+ 138   1         {w_dat(' ');///n±íÊ¾ÓĞĞ´¼¸Î»Êı¾İ
+ 139   2          yanshi(2000) ;
+ 140   2         } 
+ 141   1      }
+ 142          uchar getkey(void)///µÃµ½¼üÖµ
+ 143          { uchar h,l,k;
+ 144   1        while(P1!=0x0f)
+ 145   1        {
+ 146   2         h=P1&0x0f;
+ 147   2         P1=0xf0;
+ 148   2         l=P1&0xf0;
+ 149   2         k=h|l;
+ 150   2         return(k);
+ 151   2        }
+ 152   1      }
+ 153          
+ 154          
+ 155          void diaoyong(uchar i)///////////µ÷ÓÃ¸÷¼üµÄº¯Êı//////ÊäÈëÃÜÂë
+ 156          {  uchar lq;
+ 157   1               switch(i)
+ 158   1                  {
+ 159   2                case 0x7e: if (count<6) { mbuf[count]=1; count++;  w_dat('*');} break;  // 01111110       1
+ 160   2                case 0xbe: if (count<6) { mbuf[count]=2; count++;  w_dat('*');}break;  // 10111110             2
+ 161   2                case 0xde: if (count<6) { mbuf[count]=3; count++;  w_dat('*');} break;  // 11011110            3
+ 162   2                case 0xee: if (count<6) { mbuf[count]=4; count++;  w_dat('*');} break;  // 11101110            4
+ 163   2      
+ 164   2                case 0x7d: if (count<6) { mbuf[count]=5; count++;  w_dat('*');} break;  // 01111101            5
+ 165   2                case 0xbd: if (count<6) { mbuf[count]=6; count++;  w_dat('*');} break; // 10111101             6
+ 166   2                case 0xdd: if (count<6) { mbuf[count]=7; count++;  w_dat('*');} break;  // 11011101            7
+ 167   2                case 0xed: if (count<6) { mbuf[count]=8; count++;  w_dat('*');} break;  // 11101101            8
+ 168   2      
+ 169   2                case 0x7b: if (count<6) { mbuf[count]=9; count++;  w_dat('*');} break;  // 01111011            9
+ 170   2                case 0xbb: if (count<6) { mbuf[count]=0; count++;  w_dat('*');}break;  // 10111011             0
+ 171   2                case 0xdb:   if (count==6) { pwflag = pwcmp();}   else  pwflag = 0;// Ö»ÓĞÊäÈë6¸öÃÜÂëºó°´È·ÈÏ¼ü²
+             -Å×÷ÃÜÂë±È½Ï
+ 172   2                                         if(pwflag) {deng=0; xianshi(ks);gg=1; }   else { cs--;deng=1; xianshi(cw); delay(200); xians
+             -hi(d);gb();count = 0; }
+ 173   2                                          break;  // 11011011          a         
+ 174   2                case 0xeb:  count = 0;deng=1; xianshi(d);  gb();gg=0;         /*È¡Ïû¼ü*/
+ 175   2                                     break;  // 11101011               b       
+ 176   2      
+ 177   2                case 0x77: if(gg==1){ count=0;xianshi(xg); gb();} //ĞŞ¸ÃÃÜÂë
+C51 COMPILER V7.06   2_28                                                                  03/01/2007 18:07:27 PAGE 4   
+
+ 178   2                                     break;  // 01110111               c
+ 179   2                
+ 180   2                        case 0xb7: if((count==6)&&(gg==1)) { count=0;for (lq=0;lq<6;lq++){ m[lq]=mbuf[lq]; yanshi(10000);} md=
+             -0; xianshi(xc); delay(200);md=1; xianshi(d);yanshi(2000);gb();yanshi(200);gg=0;}//±£´æÃÜÂë
+ 181   2                                     break;  // 10110111               d
+ 182   2                /*case 0xd7: sr[jm]='e'; break;  // 11010111           e
+ 183   2                  case 0xe7: sr[jm]='f'; break;  // 11100111           f      */
+ 184   2      
+ 185   2                default: break; 
+ 186   2                }
+ 187   1             
+ 188   1      }
+ 189          
+ 190          
+ 191          void main(void)
+ 192          {uchar key;
+ 193   1      chushihua();
+ 194   1      xianshi(d);//ÏÔÊ¾º¯Êı
+ 195   1      gb(); //ÒÆ¹â±êµ½µÚ¶şĞĞµÚÁùÎ»
+ 196   1      while(cs)
+ 197   1      {
+ 198   2        P1=0x0f;
+ 199   2        if(P1!=0x0f)  
+ 200   2       {
+ 201   3         yanshi(20); 
+ 202   3         key=getkey(); 
+ 203   3         diaoyong(key); 
+ 204   3         yanshi(20000);
+ 205   3      }
+ 206   2      }while(1);
+ 207   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    814    ----
+   CONSTANT SIZE    =    128    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     48       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

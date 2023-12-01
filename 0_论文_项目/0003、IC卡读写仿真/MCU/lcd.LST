@@ -1,0 +1,561 @@
+C51 COMPILER V8.02   LCD                                                                   03/26/2009 15:06:07 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN lcd.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE lcd.c BROWSE DEBUG OBJECTEXTEND LISTINCLUDE SYMBOLS
+
+line level    source
+
+   1          #include "reg52.h"
+   1      =1  /*--------------------------------------------------------------------------
+   2      =1  REG52.H
+   3      =1  
+   4      =1  Header file for generic 80C52 and 80C32 microcontroller.
+   5      =1  Copyright (c) 1988-2002 Keil Elektronik GmbH and Keil Software, Inc.
+   6      =1  All rights reserved.
+   7      =1  --------------------------------------------------------------------------*/
+   8      =1  
+   9      =1  #ifndef __REG52_H__
+  10      =1  #define __REG52_H__
+  11      =1  
+  12      =1  /*  BYTE Registers  */
+  13      =1  sfr P0    = 0x80;
+  14      =1  sfr P1    = 0x90;
+  15      =1  sfr P2    = 0xA0;
+  16      =1  sfr P3    = 0xB0;
+  17      =1  sfr PSW   = 0xD0;
+  18      =1  sfr ACC   = 0xE0;
+  19      =1  sfr B     = 0xF0;
+  20      =1  sfr SP    = 0x81;
+  21      =1  sfr DPL   = 0x82;
+  22      =1  sfr DPH   = 0x83;
+  23      =1  sfr PCON  = 0x87;
+  24      =1  sfr TCON  = 0x88;
+  25      =1  sfr TMOD  = 0x89;
+  26      =1  sfr TL0   = 0x8A;
+  27      =1  sfr TL1   = 0x8B;
+  28      =1  sfr TH0   = 0x8C;
+  29      =1  sfr TH1   = 0x8D;
+  30      =1  sfr IE    = 0xA8;
+  31      =1  sfr IP    = 0xB8;
+  32      =1  sfr SCON  = 0x98;
+  33      =1  sfr SBUF  = 0x99;
+  34      =1  
+  35      =1  /*  8052 Extensions  */
+  36      =1  sfr T2CON  = 0xC8;
+  37      =1  sfr RCAP2L = 0xCA;
+  38      =1  sfr RCAP2H = 0xCB;
+  39      =1  sfr TL2    = 0xCC;
+  40      =1  sfr TH2    = 0xCD;
+  41      =1  
+  42      =1  
+  43      =1  /*  BIT Registers  */
+  44      =1  /*  PSW  */
+  45      =1  sbit CY    = PSW^7;
+  46      =1  sbit AC    = PSW^6;
+  47      =1  sbit F0    = PSW^5;
+  48      =1  sbit RS1   = PSW^4;
+  49      =1  sbit RS0   = PSW^3;
+  50      =1  sbit OV    = PSW^2;
+  51      =1  sbit P     = PSW^0; //8052 only
+  52      =1  
+  53      =1  /*  TCON  */
+  54      =1  sbit TF1   = TCON^7;
+C51 COMPILER V8.02   LCD                                                                   03/26/2009 15:06:07 PAGE 2   
+
+  55      =1  sbit TR1   = TCON^6;
+  56      =1  sbit TF0   = TCON^5;
+  57      =1  sbit TR0   = TCON^4;
+  58      =1  sbit IE1   = TCON^3;
+  59      =1  sbit IT1   = TCON^2;
+  60      =1  sbit IE0   = TCON^1;
+  61      =1  sbit IT0   = TCON^0;
+  62      =1  
+  63      =1  /*  IE  */
+  64      =1  sbit EA    = IE^7;
+  65      =1  sbit ET2   = IE^5; //8052 only
+  66      =1  sbit ES    = IE^4;
+  67      =1  sbit ET1   = IE^3;
+  68      =1  sbit EX1   = IE^2;
+  69      =1  sbit ET0   = IE^1;
+  70      =1  sbit EX0   = IE^0;
+  71      =1  
+  72      =1  /*  IP  */
+  73      =1  sbit PT2   = IP^5;
+  74      =1  sbit PS    = IP^4;
+  75      =1  sbit PT1   = IP^3;
+  76      =1  sbit PX1   = IP^2;
+  77      =1  sbit PT0   = IP^1;
+  78      =1  sbit PX0   = IP^0;
+  79      =1  
+  80      =1  /*  P3  */
+  81      =1  sbit RD    = P3^7;
+  82      =1  sbit WR    = P3^6;
+  83      =1  sbit T1    = P3^5;
+  84      =1  sbit T0    = P3^4;
+  85      =1  sbit INT1  = P3^3;
+  86      =1  sbit INT0  = P3^2;
+  87      =1  sbit TXD   = P3^1;
+  88      =1  sbit RXD   = P3^0;
+  89      =1  
+  90      =1  /*  SCON  */
+  91      =1  sbit SM0   = SCON^7;
+  92      =1  sbit SM1   = SCON^6;
+  93      =1  sbit SM2   = SCON^5;
+  94      =1  sbit REN   = SCON^4;
+  95      =1  sbit TB8   = SCON^3;
+  96      =1  sbit RB8   = SCON^2;
+  97      =1  sbit TI    = SCON^1;
+  98      =1  sbit RI    = SCON^0;
+  99      =1  
+ 100      =1  /*  P1  */
+ 101      =1  sbit T2EX  = P1^1; // 8052 only
+ 102      =1  sbit T2    = P1^0; // 8052 only
+ 103      =1               
+ 104      =1  /*  T2CON  */
+ 105      =1  sbit TF2    = T2CON^7;
+ 106      =1  sbit EXF2   = T2CON^6;
+ 107      =1  sbit RCLK   = T2CON^5;
+ 108      =1  sbit TCLK   = T2CON^4;
+ 109      =1  sbit EXEN2  = T2CON^3;
+ 110      =1  sbit TR2    = T2CON^2;
+ 111      =1  sbit C_T2   = T2CON^1;
+ 112      =1  sbit CP_RL2 = T2CON^0;
+ 113      =1  
+ 114      =1  #endif
+   2          #include "absacc.h"
+   1      =1  /*--------------------------------------------------------------------------
+C51 COMPILER V8.02   LCD                                                                   03/26/2009 15:06:07 PAGE 3   
+
+   2      =1  ABSACC.H
+   3      =1  
+   4      =1  Direct access to 8051, extended 8051 and Philips 80C51MX memory areas.
+   5      =1  Copyright (c) 1988-2002 Keil Elektronik GmbH and Keil Software, Inc.
+   6      =1  All rights reserved.
+   7      =1  --------------------------------------------------------------------------*/
+   8      =1  
+   9      =1  #ifndef __ABSACC_H__
+  10      =1  #define __ABSACC_H__
+  11      =1  
+  12      =1  #define CBYTE ((unsigned char volatile code  *) 0)
+  13      =1  #define DBYTE ((unsigned char volatile data  *) 0)
+  14      =1  #define PBYTE ((unsigned char volatile pdata *) 0)
+  15      =1  #define XBYTE ((unsigned char volatile xdata *) 0)
+  16      =1  
+  17      =1  #define CWORD ((unsigned int volatile code  *) 0)
+  18      =1  #define DWORD ((unsigned int volatile data  *) 0)
+  19      =1  #define PWORD ((unsigned int volatile pdata *) 0)
+  20      =1  #define XWORD ((unsigned int volatile xdata *) 0)
+  21      =1  
+  22      =1  
+  23      =1  #ifdef __CX51__
+           =1 #define FVAR(object, addr)   (*((object volatile far *) (addr)))
+           =1 #define FARRAY(object, base) ((object volatile far *) (base))
+           =1 #define FCVAR(object, addr)   (*((object const far *) (addr)))
+           =1 #define FCARRAY(object, base) ((object const far *) (base))
+           =1 #else
+  29      =1  #define FVAR(object, addr)    (*((object volatile far *) ((addr)+0x10000L)))
+  30      =1  #define FCVAR(object, addr)   (*((object const far *) ((addr)+0x810000L)))
+  31      =1  #define FARRAY(object, base)  ((object volatile far *) ((base)+0x10000L))
+  32      =1  #define FCARRAY(object, base) ((object const far *) ((base)+0x810000L))
+  33      =1  #endif
+  34      =1  
+  35      =1  #endif
+   3          #include "string.h"
+   1      =1  /*--------------------------------------------------------------------------
+   2      =1  STRING.H
+   3      =1  
+   4      =1  String functions.
+   5      =1  Copyright (c) 1988-2002 Keil Elektronik GmbH and Keil Software, Inc.
+   6      =1  All rights reserved.
+   7      =1  --------------------------------------------------------------------------*/
+   8      =1  
+   9      =1  #ifndef __STRING_H__
+  10      =1  #define __STRING_H__
+  11      =1  
+  12      =1  #ifndef _SIZE_T
+  13      =1   #define _SIZE_T
+  14      =1   typedef unsigned int size_t;
+  15      =1  #endif
+  16      =1  
+  17      =1  #ifndef NULL
+  18      =1   #define NULL ((void *) 0L)
+  19      =1  #endif
+  20      =1  
+  21      =1  #pragma SAVE
+  22      =1  #pragma REGPARMS
+  23      =1  extern char *strcat (char *s1, char *s2);
+  24      =1  extern char *strncat (char *s1, char *s2, int n);
+  25      =1  
+  26      =1  extern char strcmp (char *s1, char *s2);
+  27      =1  extern char strncmp (char *s1, char *s2, int n);
+C51 COMPILER V8.02   LCD                                                                   03/26/2009 15:06:07 PAGE 4   
+
+  28      =1  
+  29      =1  extern char *strcpy (char *s1, char *s2);
+  30      =1  extern char *strncpy (char *s1, char *s2, int n);
+  31      =1  
+  32      =1  extern int strlen (char *);
+  33      =1  
+  34      =1  extern char *strchr (const char *s, char c);
+  35      =1  extern int strpos (const char *s, char c);
+  36      =1  extern char *strrchr (const char *s, char c);
+  37      =1  extern int strrpos (const char *s, char c);
+  38      =1  
+  39      =1  extern int strspn (char *s, char *set);
+  40      =1  extern int strcspn (char *s, char *set);
+  41      =1  extern char *strpbrk (char *s, char *set);
+  42      =1  extern char *strrpbrk (char *s, char *set);
+  43      =1  extern char *strstr  (char *s, char *sub);
+  44      =1  extern char *strtok  (char *str, const char *set);
+  45      =1  
+  46      =1  extern char memcmp (void *s1, void *s2, int n);
+  47      =1  extern void *memcpy (void *s1, void *s2, int n);
+  48      =1  extern void *memchr (void *s, char val, int n);
+  49      =1  extern void *memccpy (void *s1, void *s2, char val, int n);
+  50      =1  extern void *memmove (void *s1, void *s2, int n);
+  51      =1  extern void *memset  (void *s, char val, int n);
+  52      =1  #pragma RESTORE
+  53      =1  
+  54      =1  #endif
+   4          #include "lcd.h"
+   1      =1  #ifndef _LCD_H
+   2      =1  #define _LCD_H
+   3      =1  
+   4      =1  #define LCD_DATA   P0
+   5      =1  sbit LCD_RS = P2^0;
+   6      =1  sbit LCD_RW = P2^1;
+   7      =1  sbit LCD_EN = P2^2;
+   8      =1  
+   9      =1  void LCD_Busy(void);
+  10      =1  void LCD_Wr_Command(unsigned char);
+  11      =1  void LCD_Wr_Data(unsigned char);
+  12      =1  void LCD_Wr_Char(unsigned char,unsigned char,unsigned char);
+  13      =1  void LCD_Wr_String(unsigned char,unsigned char,unsigned char *);
+  14      =1  void Print(unsigned char x,unsigned char y,unsigned char *str);
+  15      =1  void LCD_Init(void);
+  16      =1  void GoTo_XY(unsigned char x, unsigned char y);
+  17      =1  void LCD_Clear_All(void);
+  18      =1  void write_CGRAM(unsigned char add,unsigned char *p_tab,unsigned char size);
+  19      =1  
+  20      =1  #endif
+   5          
+   6          //#define WR_COM XBYTE[0x7ff0]
+   7          //#define RD_STA XBYTE[0x7ff2]
+   8          //#define WR_DAT XBYTE[0x7ff1]
+   9          //#define RD_DAT XBYTE[0x7ff3]
+  10          bit fTemp;
+  11          
+  12          /************************************************
+  13          ** 函数名称: Delay
+  14          ** 功能描述: 延时一段时间
+  15          ** 输　  入: unsigned char i
+  16          ** 输　  出: 无
+  17          ** 全局变量: 
+  18          ** 设    计: 简小木     时间:2008-10-12
+C51 COMPILER V8.02   LCD                                                                   03/26/2009 15:06:07 PAGE 5   
+
+  19          *************************************************/
+  20          void Delay(unsigned char i)
+  21          {
+  22   1              while(i--);
+  23   1      }
+  24          
+  25          /************************************************
+  26          ** 函数名称: LCD_Busy
+  27          ** 功能描述: 判断LCD是否处于忙状态
+  28          ** 输　  入: 无
+  29          ** 输　  出: 无
+  30          ** 全局变量: 
+  31          ** 设    计: 简小木     时间:2008-10-12
+  32          *************************************************/
+  33          void LCD_Busy(void)
+  34          {
+  35   1              bit BusyFlag;
+  36   1              LCD_DATA = 0xff;
+  37   1              while(1)
+  38   1              {
+  39   2                      LCD_RS = 0;
+  40   2                      Delay(1);
+  41   2                      LCD_RW = 1;
+  42   2                      Delay(1);
+  43   2                      LCD_EN = 1;
+  44   2                      BusyFlag = (bit)((LCD_DATA && 0x80)>>7);
+  45   2                      if(!BusyFlag)break;
+  46   2                      LCD_EN =0;
+  47   2              }
+  48   1      }
+  49          
+  50          /************************************************
+  51          ** 函数名称: LCD_Wr_Command
+  52          ** 功能描述: 给LCD写指令
+  53          ** 输　  入: 命令com
+  54          ** 输　  出: 无
+  55          ** 全局变量: 
+  56          ** 设    计: 简小木     时间:2008-10-12
+  57          *************************************************/
+  58          void LCD_Wr_Command(unsigned char com)
+  59          {
+  60   1              LCD_Busy();
+  61   1              LCD_DATA = com;
+  62   1              LCD_RS = 0;
+  63   1              Delay(1);
+  64   1              LCD_RW = 0;
+  65   1              Delay(1);
+  66   1              LCD_EN = 0;
+  67   1      }
+  68          
+  69          /************************************************
+  70          ** 函数名称: LCD_Wr_Data
+  71          ** 功能描述: 给LCD写数据
+  72          ** 输　  入: 数据dat
+  73          ** 输　  出: 无
+  74          ** 全局变量: 
+  75          ** 设    计: 简小木     时间:2008-10-12
+  76          *************************************************/
+  77          void LCD_Wr_Data(unsigned char dat)
+  78          {
+  79   1              LCD_Busy();
+  80   1              LCD_DATA = dat;
+C51 COMPILER V8.02   LCD                                                                   03/26/2009 15:06:07 PAGE 6   
+
+  81   1              LCD_RS = 1;
+  82   1              Delay(1);
+  83   1              LCD_RW = 0;
+  84   1              Delay(1);
+  85   1              LCD_EN = 0;
+  86   1      }
+  87          
+  88          /************************************************
+  89          ** 函数名称: LCD_Wr_Char
+  90          ** 功能描述: 写字符
+  91          ** 输　  入: 列:x, 行:y, 字符:c
+  92          ** 输　  出: 无
+  93          ** 全局变量: 
+  94          ** 设    计: 简小木     时间:2008-10-12
+  95          *************************************************/
+  96          void LCD_Wr_Char(unsigned char x,unsigned char y,unsigned char c)
+  97          {
+  98   1              if(y==0)
+  99   1                      LCD_Wr_Command(0x80+x);
+ 100   1              else if(y==1)
+ 101   1                      LCD_Wr_Command(0xc0+x);
+ 102   1      
+ 103   1              else if(y>1){}
+ 104   1      
+ 105   1              LCD_Wr_Data(c);
+ 106   1      }
+ 107          
+ 108          /************************************************
+ 109          ** 函数名称: LCD_Wr_String
+ 110          ** 功能描述: 写字符串
+ 111          ** 输　  入: 列:x, 行:y, 字符串指针:str
+ 112          ** 输　  出: 无
+ 113          ** 全局变量: 
+ 114          ** 设    计: 简小木     时间:2008-10-12
+ 115          *************************************************/
+ 116          void LCD_Wr_String(unsigned char x,unsigned char y,unsigned char *str)
+ 117          {
+ 118   1              unsigned int i;
+ 119   1              i=strlen(str);
+ 120   1              
+ 121   1              while(i!=0)
+ 122   1              {
+ 123   2                      if(x>=16)
+ 124   2                      {
+ 125   3                              y++;
+ 126   3                              x = 0;
+ 127   3                      }
+ 128   2                      if(y>=2)break;
+ 129   2      
+ 130   2                      LCD_Wr_Char(x,y,*str);
+ 131   2                      x++;
+ 132   2                      str++;
+ 133   2                      i--;
+ 134   2              }
+ 135   1      }
+ 136          
+ 137          void Print(unsigned char x,unsigned char y,unsigned char *str)
+ 138          {
+ 139   1              while(*str!='\0')
+ 140   1              {
+ 141   2                      if(x>=16)
+ 142   2                      {
+C51 COMPILER V8.02   LCD                                                                   03/26/2009 15:06:07 PAGE 7   
+
+ 143   3                              y++;
+ 144   3                              x = 0;
+ 145   3                      }
+ 146   2                      if(y>=2)break;
+ 147   2      
+ 148   2                      LCD_Wr_Char(x,y,*str);
+ 149   2                      x++;
+ 150   2                      str++;
+ 151   2              }
+ 152   1      }
+ 153          
+ 154          /************************************************
+ 155          ** 函数名称: LCD_Init
+ 156          ** 功能描述: 液晶初始化
+ 157          ** 输　  入: 无
+ 158          ** 输　  出: 无
+ 159          ** 全局变量: 
+ 160          ** 设    计: 简小木     时间:2008-10-12
+ 161          *************************************************/
+ 162          void LCD_Init(void)
+ 163          {
+ 164   1              LCD_RS = 0;
+ 165   1              LCD_RW = 0;
+ 166   1              LCD_EN = 0;
+ 167   1              LCD_Wr_Command(0x30|0x28|0x20);
+ 168   1              Delay(2);
+ 169   1              LCD_Wr_Command(0x0c);
+ 170   1              LCD_Wr_Command(0x01);
+ 171   1              LCD_Wr_Command(0x80);
+ 172   1      }
+ 173          
+ 174          /************************************************
+ 175          ** 函数名称: write_CGRAM
+ 176          ** 功能描述: 向CGRAM写入数据
+ 177          ** 输　  入: add为首地址，size为字符的个数
+ 178          ** 输　  出: 无
+ 179          ** 全局变量: 
+ 180          ** 设    计: 简小木     时间:2009-02-02
+ 181          *************************************************/      
+ 182          void write_CGRAM(unsigned char add,unsigned char *p_tab,unsigned char size)
+ 183          {
+ 184   1              unsigned char lenth=0;                  
+ 185   1              lenth=size*8;                   //每个字符，8个码               
+ 186   1              add=0x40+8*add;         //CGRAM的地址D5位要为1                
+ 187   1              while(lenth!=0)                 
+ 188   1              {
+ 189   2                      if(add>=0x80)                   //CGRAM的地址到顶
+ 190   2                              break;
+ 191   2                      LCD_Wr_Command(add);                    //写CGRAM地址
+ 192   2                      LCD_Wr_Data(*p_tab);                    //写CGRAM数据
+ 193   2                      lenth--;                                                //下一个码
+ 194   2                      add++;                          //下个地址                                  
+ 195   2                      p_tab++;                                //下个字符
+ 196   2              }
+ 197   1      }
+ 198          
+ 199          /************************************************
+ 200          ** 函数名称: GotoXY
+ 201          ** 功能描述: 指定坐标的位置
+ 202          ** 输　  入: 无
+ 203          ** 输　  出: 无
+ 204          ** 全局变量: 
+C51 COMPILER V8.02   LCD                                                                   03/26/2009 15:06:07 PAGE 8   
+
+ 205          ** 设    计: 简小木     时间:2008-10-12
+ 206          *************************************************/
+ 207          /*
+ 208          void GoTo_XY(unsigned char x, unsigned char y)
+ 209          {
+ 210                  if(y==0)
+ 211                          LCD_Wr_Command(0x80|x);
+ 212                  if(y==1)
+ 213                          LCD_Wr_Command(0x80|(x-0x40));
+ 214          }
+ 215          */
+ 216          /************************************************
+ 217          ** 函数名称: num_to_char
+ 218          ** 功能描述: 
+ 219          ** 输　  入: 无
+ 220          ** 输　  出: 无
+ 221          ** 全局变量: 
+ 222          ** 设    计: 简小木     时间:2008-10-12
+ 223          *************************************************/
+ 224          //unsigned char  num_to_char(unsigned char num)
+ 225          //{
+ 226          //      return(num+'0');
+ 227          //}
+ 228          
+ 229          /************************************************
+ 230          ** 函数名称: LCD_Clear_ALL
+ 231          ** 功能描述: 
+ 232          ** 输　  入: 无
+ 233          ** 输　  出: 无
+ 234          ** 全局变量: 
+ 235          ** 设    计: 简小木     时间:2008-10-12
+ 236          *************************************************/
+ 237          void LCD_Clear_All(void)
+ 238          {
+ 239   1              unsigned char i,j;
+ 240   1      
+ 241   1              if(fTemp)
+ 242   1              {
+ 243   2                      for(j=0;j<2;j++)
+ 244   2                      {
+ 245   3                              for(i=0;i<16;i++)
+ 246   3                                      LCD_Wr_Char(i,j,0x00);
+ 247   3                      }
+ 248   2              }
+ 249   1      }
+C51 COMPILER V8.02   LCD                                                                   03/26/2009 15:06:07 PAGE 9   
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+fTemp. . . . . . . . . . . . . . . . .  PUBLIC   DATA   BIT      0000H  1
+P0 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0080H  1
+P1 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0090H  1
+_LCD_Wr_Command. . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  com. . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+P2 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A0H  1
+P3 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B0H  1
+IE . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A8H  1
+size_t . . . . . . . . . . . . . . . .  TYPEDEF  -----  U_INT    -----  2
+LCD_Clear_All. . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0001H  1
+  j. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0002H  1
+IP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B8H  1
+SCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0098H  1
+TCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0088H  1
+_LCD_Wr_String . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  x. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0000H  1
+  y. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0001H  1
+  str. . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0002H  3
+  i. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_INT    0005H  2
+_LCD_Wr_Data . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  dat. . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+_LCD_Wr_Char . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  x. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0006H  1
+  y. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+  c. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0004H  1
+LCD_EN . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A2H  1
+LCD_Init . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+_Delay . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0009H  -----
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+LCD_Busy . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  BusyFlag . . . . . . . . . . . . . .  AUTO     DATA   BIT      0000H  1
+LCD_RS . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A0H  1
+_write_CGRAM . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  add. . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0004H  1
+  p_tab. . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0001H  3
+  size . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0004H  1
+  lenth. . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0005H  1
+LCD_RW . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A1H  1
+T2CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C8H  1
+_Print . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  x. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0000H  1
+  y. . . . . . . . . . . . . . . . . .  AUTO     DATA   U_CHAR   0001H  1
+  str. . . . . . . . . . . . . . . . .  AUTO     DATA   PTR      0002H  3
+PSW. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D0H  1
+_strlen. . . . . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    391    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      18
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

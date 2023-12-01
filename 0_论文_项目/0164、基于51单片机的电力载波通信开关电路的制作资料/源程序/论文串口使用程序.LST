@@ -1,0 +1,65 @@
+C51 COMPILER V8.02   论文串口使用程序                                                      02/10/2009 09:17:15 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE 论文串口使用程序
+OBJECT MODULE PLACED IN 论文串口使用程序.OBJ
+COMPILER INVOKED BY: d:\Keil\C51\BIN\C51.EXE 论文串口使用程序.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*
+   2          此程序已经经本人亲自调试运行过，如有疑问，请与马同学联系
+   3          QQ：277039462
+   4          
+   5          */
+   6          #include<reg52.h>         //预定义头文件
+   7          #define uchar unsigned char     //宏定义
+   8          sbit keyin=P3^3; //按键定义
+   9          sbit led=P3^5; //指示灯定义
+  10          uchar a;        //接收数据记存器
+  11          void main()     //主函数
+  12          {
+  13   1              keyin=1; //按键口置1
+  14   1              led=1;   //灭led灯
+  15   1              TMOD=0x20; //选择顶时器/计数器1中的方式2
+  16   1              SP=0x60;   //   设置堆榨地址
+  17   1              TH1=0xfd; //波特率9600bit/s
+  18   1              TL1=0xfd;
+  19   1              SCON=0x50;      //串口通信方式2，允许收发
+  20   1              TR1=1;          //开启计数器
+  21   1              while(1)   //循环
+  22   1              {               
+  23   2                      if(keyin==0) //判断按键是否按下，是则按键处理
+  24   2                      {
+  25   3                              SBUF=0x00;      //接收数据处理
+  26   3                              while(TI==0) ;  //发送完清除接收标志位
+  27   3                              TI=0;
+  28   3                      }
+  29   2                      if(RI==1)  //是否接收
+  30   2                      {
+  31   3                              RI=0;    //接收完接收标志位清零
+  32   3                              a=SBUF;   //读接收数据
+  33   3                              if(a==0)   //判断接收数据是否正确
+  34   3                              {
+  35   4                                      if(led==1)      //正确led灯取反
+  36   4                                      led=0;
+  37   4                                      else 
+  38   4                                      led=1;
+  39   4                              }
+  40   3                      }
+  41   2              }
+  42   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     55    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,81 @@
+A51 MACRO ASSEMBLER  DL                                                                   01/09/2006 22:13:54 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.10
+OBJECT MODULE PLACED IN DL.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE DL.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+                      14     
+                      15     DLP  SEGMENT  CODE    ;程序段
+                      16     
+                      17     PUBLIC  _DL                       ;入口地址，跳转到DL标号处执行汇编程序
+                      18     
+----                  19     RSEG  DLP                         ;程序段
+                      20     
+                      21     
+                      22     
+0000                  23     _DL:;125MS延时汇编程序
+                      24         ;-------------------------------------------字节全转换程序
+0000                  25     ABBA:  ;将字节中的76543210变为01234567
+0000 EF               26             MOV             A,R7
+0001 F5F0             27          MOV    B,A
+0003 A2F0             28              MOV    C,B.0
+0005 92E7             29              MOV    ACC.7,C
+0007 A2F1             30              MOV    C,B.1
+0009 92E6             31              MOV    ACC.6,C
+000B A2F2             32              MOV    C,B.2
+000D 92E5             33              MOV    ACC.5,C
+000F A2F3             34              MOV    C,B.3
+0011 92E4             35              MOV    ACC.4,C
+0013 A2F4             36              MOV    C,B.4
+0015 92E3             37              MOV    ACC.3,C
+0017 A2F5             38              MOV    C,B.5
+0019 92E2             39              MOV    ACC.2,C
+001B A2F6             40              MOV    C,B.6
+001D 92E1             41              MOV    ACC.1,C
+001F A2F7             42              MOV    C,B.7
+0021 92E0             43              MOV    ACC.0,C
+0023 FF               44              MOV    R7,A
+0024 22               45         RET                           ;汇编结束，返回C程序
+                      46     
+                      47     
+                      48             end                               ;程序文件编译结束
+                             
+                             
+                             
+                             
+                             
+A51 MACRO ASSEMBLER  DL                                                                   01/09/2006 22:13:54 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ABBA . . . . . . .  C ADDR   0000H   R   SEG=DLP
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DLP. . . . . . . .  C SEG    0025H       REL=UNIT
+_DL. . . . . . . .  C ADDR   0000H   R   SEG=DLP
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

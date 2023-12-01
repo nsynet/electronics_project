@@ -1,0 +1,214 @@
+#include <iom16v.h>
+#include <macros.h>
+#define uchar  unsigned  char 
+#define  uint  unsigned  int
+void  turnLLL(void);//左转45度
+void  turnLL(void);//左转30度
+void  turnL(void);//左转15度
+void  turn(void);//居中
+void  turnR(void);//右转15度
+void  turnRR(void);//右转30度
+void  turnRRR(void);//右转45度
+void  delay(uint z);//延时0.1ms
+void main()
+{ 
+  	uint i;
+ 	DDRA=0X00;
+	DDRB=0XFF;
+    DDRD|=0X30;
+	TCCR1A=0x91; //8位相位修正PWM 8000000/(64*2*256)=244.14hz
+	TCCR1B=0x03; //clk/64
+	OCR1A=250;	//初值占空比100%
+	while(1)
+	{
+	 	PINA=i;
+		for(i=0;i<8;i++)
+		{
+		  	 if(PINA==0xf7)//加速前进4灯1111,0111
+		 	 {
+		  	     OCR1A=170;//占空比100%/202
+			     turn();//居中
+		     }
+			 if(PINA==0xef)//加速前5灯1110,1111
+		 	 {
+		  	     OCR1A=170;//占空比100%
+			     turn();//居中
+		     }
+			 if(PINA==0xe7)//加速前进4、5灯1110,0111
+		 	 {
+		  	     OCR1A=170;//占空比100%
+			     turn();//居中
+		     }
+		     if(PINA==0xcf)//速度稍减前进5、6灯1100,1111
+		     {
+		  	    OCR1A=170;//占空比90%/176
+			    turnL();//左转-15度
+		     }
+			  if(PINA==0xdf)//速度稍减前进6灯1101,1111
+		     {
+		  	    OCR1A=120;//占空比90%/176
+			    turnL();//左转-15度
+		     }
+		     if(PINA==0x9f)//速度再减前进6、7灯1001,1111
+		     {
+		  	    OCR1A=110;//占空比80%/150
+			    turnLL();//左转-30度
+		     }
+			    if(PINA==0xbf)//速度再减前进7灯1011,1111
+		     {
+		  	    OCR1A=110;//占空比80%/150
+			    turnLL();//左转-30度
+		     }
+		      if(PINA==0x3f)//速度减前进7、8灯0011,1111
+		      {
+		  	    OCR1A=90;//占空比70%/150
+			    turnLLL();//左转-45度
+		      }
+		      if(PINA==0X7f)//速度稍减前进8灯0111,1111
+		      {
+		  	    OCR1A=90;//占空比70%/150
+		        turnLLL();//右转45度
+		      }
+		     if(PINA==0xf3)//速度稍减前进3、4灯1111,0011
+		     {
+		  	    OCR1A=120;//占空比90%/176
+			    turnR();//右转15度
+		     }
+			   if(PINA==0xfb)//速度稍减前进3灯1111,1011
+		     {
+		  	    OCR1A=120;//占空比90%/176
+			    turnR();//右转15度
+		     }
+		     if(PINA==0Xf9)//速度再减前进2、3灯1111,1001
+		     {
+		  	    OCR1A=110;//占空比80%150
+			    turnRR();//右转30度
+		    }
+			    if(PINA==0Xfd)//速度再减前进2灯1111,1101
+		     {
+		  	    OCR1A=110;//占空比80%/150
+			    turnRR();//右转30度
+		    }
+		    if(PINA==0Xfc)//速度稍减前进1、2灯1111,1100
+		    {
+		  	  OCR1A=90;//占空比70%/150
+			  turnRRR();//右转45度
+		    }
+		    if(PINA==0Xfe)//速度稍减前进1灯1111,1110
+		    {
+		  	    OCR1A=90;//占空比70%/150
+			   turnRRR();//右转45度
+		    }
+		}
+	}
+}
+
+/*-45度*/
+void  turnLLL()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<5;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(4);
+	}
+}
+/*-30度*/
+void  turnLL()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<5;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(6);
+	}
+}
+/*-15度*/
+void  turnL()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<5;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(8);
+	}
+}
+
+/*0度居中*/
+void  turn()//居中
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<5;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(10);
+	}
+}
+
+/*15度*/
+void  turnR()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<5;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(12);
+	}
+} 
+/*30度*/
+void  turnRR()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<5;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(14);
+	}
+}
+/*45度*/
+void  turnRRR()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<5;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(17);
+	}
+}
+
+/*定时0.1MS*/
+void  delay(uint z)
+{
+ 	  uint i,j;
+	  for(i=0;i<z;i++)
+	  		for(j=0;j<90;j++);
+}
+

@@ -1,0 +1,69 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+D:\全国赛资料\NRF905无线传输模块\调试程序\通用调试\keil\chengxu.uv2
+Project File Date:  09/01/2009
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling chengxu.c...
+CHENGXU.C(104): error C202: 'TXEN': undefined identifier
+CHENGXU.C(125): error C202: 'TXEN': undefined identifier
+CHENGXU.C(139): error C202: 'TXEN': undefined identifier
+CHENGXU.C(153): error C202: 'TXEN': undefined identifier
+CHENGXU.C(161): error C202: 'TXEN': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling chengxu.c...
+CHENGXU.C(104): error C202: 'TXEN': undefined identifier
+CHENGXU.C(125): error C202: 'TXEN': undefined identifier
+CHENGXU.C(139): error C202: 'TXEN': undefined identifier
+CHENGXU.C(153): error C202: 'TXEN': undefined identifier
+CHENGXU.C(161): error C202: 'TXEN': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling chengxu.c...
+CHENGXU.C(104): error C202: 'TXEN': undefined identifier
+CHENGXU.C(125): error C202: 'TXEN': undefined identifier
+CHENGXU.C(139): error C202: 'TXEN': undefined identifier
+CHENGXU.C(153): error C202: 'TXEN': undefined identifier
+CHENGXU.C(161): error C202: 'TXEN': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling chengxu.c...
+linking...
+Program Size: data=21.0 xdata=0 code=501
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=21.0 xdata=0 code=501
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=21.0 xdata=0 code=501
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=21.0 xdata=0 code=501
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=21.0 xdata=0 code=501
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=21.0 xdata=0 code=501
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=21.0 xdata=0 code=501
+creating hex file from "chengxu"...
+"chengxu" - 0 Error(s), 0 Warning(s).

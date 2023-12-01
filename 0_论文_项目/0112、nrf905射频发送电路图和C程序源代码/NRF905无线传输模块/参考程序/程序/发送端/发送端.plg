@@ -1,0 +1,26 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+D:\全国赛资料\NRF905无线传输模块\程序\发送端\发送端.uv2
+Project File Date:  08/30/2009
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling 发送端.c...
+linking...
+Program Size: data=42.0 xdata=0 code=527
+creating hex file from "发送端"...
+"发送端" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling 发送端.c...
+linking...
+Program Size: data=42.0 xdata=0 code=527
+creating hex file from "发送端"...
+"发送端" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=42.0 xdata=0 code=527
+creating hex file from "发送端"...
+"发送端" - 0 Error(s), 0 Warning(s).

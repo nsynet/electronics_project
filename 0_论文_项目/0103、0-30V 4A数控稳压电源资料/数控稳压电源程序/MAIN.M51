@@ -1,0 +1,660 @@
+BL51 BANKED LINKER/LOCATER V6.05                                                        09/19/2008  05:01:15  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.05, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE D:\稳压电源\科写程序\MAIN.OBJ TO D:\稳压电源\科写程序\MAIN RS (256)
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FPADD)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FPDIV)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FCAST)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?CASTF)
+  C:\KEIL\C51\LIB\C51FPS.LIB (ATOF)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?ATOF)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FPNEG)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FTNPWR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CSTPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LNEG)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LLDIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LLDIDATA0)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LSTIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LSTKIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDIIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (ISSPACE)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  D:\稳压电源\科写程序\MAIN (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0009H     UNIT         ?DT?MAIN
+            DATA    0011H     0008H     UNIT         _DATA_GROUP_
+                    0019H     0007H                  *** GAP ***
+            BIT     0020H.0   0000H.5   UNIT         _BIT_GROUP_
+            BIT     0020H.5   0000H.1   UNIT         ?BI?MAIN
+                    0020H.6   0000H.2                *** GAP ***
+            IDATA   0021H     0017H     UNIT         ?ID?MAIN
+            IDATA   0038H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0037H     UNIT         ?PR?_ADJISUAN_I?MAIN
+                    003AH     0001H                  *** GAP ***
+            CODE    003BH     0003H     ABSOLUTE     
+            CODE    003EH     04F0H     UNIT         ?C?LIB_CODE
+            CODE    052EH     01A4H     UNIT         ?PR?_CHAI?MAIN
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 2
+
+
+            CODE    06D2H     00E6H     UNIT         ?PR??C?ATOF??C?ATOF
+            CODE    07B8H     00BFH     UNIT         ?PR?MAIN?MAIN
+            CODE    0877H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0903H     004AH     UNIT         ?PR?SCANF_FLOAT?MAIN
+            CODE    094DH     0048H     UNIT         ?PR?ATOF?ATOF
+            CODE    0995H     003EH     UNIT         ?PR?_LCM_W_WORD?MAIN
+            CODE    09D3H     0034H     UNIT         ?PR?DISP_SHEDING?MAIN
+            CODE    0A07H     002CH     UNIT         ?PR?_ADJISUAN_U?MAIN
+            CODE    0A33H     0026H     UNIT         ?PR?KEY_DAC?MAIN
+            CODE    0A59H     001EH     UNIT         ?CO?MAIN
+            CODE    0A77H     0013H     UNIT         ?PR?_ISSPACE?ISSPACE
+            CODE    0A8AH     000DH     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   D:\稳压电源\科写程序\MAIN (MAIN)
+
+
+SEGMENT                           BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH     START    LENGTH
+------------------------------------------------------------------
+?C_C51STARTUP                  -----    -----      -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                  -----    -----      0011H    0002H
+  +--> ?PR?DISP_SHEDING?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_LCM_W_WORD?MAIN
+  +--> ?PR?_ADJISUAN_U?MAIN
+  +--> ?PR?_CHAI?MAIN
+  +--> ?PR?KEY_DAC?MAIN
+  +--> ?PR?_ADJISUAN_I?MAIN
+
+?PR?DISP_SHEDING?MAIN          -----    -----      -----    -----
+  +--> ?PR?_LCM_W_WORD?MAIN
+  +--> ?PR?_CHAI?MAIN
+
+?PR?_LCM_W_WORD?MAIN           -----    -----      0013H    0003H
+  +--> ?CO?MAIN
+
+?PR?_CHAI?MAIN                 0020H.0  0000H.1    0013H    0006H
+
+?PR?KEY_DAC?MAIN               -----    -----      -----    -----
+  +--> ?PR?SCANF_FLOAT?MAIN
+  +--> ?PR?DISP_SHEDING?MAIN
+
+?PR?SCANF_FLOAT?MAIN           -----    -----      0013H    0001H
+  +--> ?PR?ATOF?ATOF
+
+?PR?ATOF?ATOF                  -----    -----      0014H    0003H
+  +--> ?PR?_ISSPACE?ISSPACE
+  +--> ?PR??C?ATOF??C?ATOF
+
+?PR??C?ATOF??C?ATOF            0020H.0  0000H.5    0017H    0002H
+
+
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 3
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   ?LED_ONOFF?BIT
+   KEY_SM
+   LCD_RST
+   LED_ONOFF
+   RST_AD
+   SET_7705_1CH
+   SET_7705_2CH
+   _CONVER
+   _DAC
+   _DELAY
+   _READ_AD_DATA
+   _WRITE_AD
+   _W_CODE
+   _W_DATA
+
+
+
+SYMBOL TABLE OF MODULE:  D:\稳压电源\科写程序\MAIN (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  I:0021H         PUBLIC        sheding_temp
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:0903H         PUBLIC        scanf_float
+  C:0A07H         PUBLIC        _adjisuan_U
+  D:00A8H         PUBLIC        IE
+  D:000EH         PUBLIC        idac
+  C:0535H         PUBLIC        _chai
+  D:00B8H         PUBLIC        IP
+  B:0090H.4       PUBLIC        RS
+  C:07B8H         PUBLIC        main
+  B:0090H.5       PUBLIC        RW
+  I:0025H         PUBLIC        sheding_temp1
+  C:099FH         PUBLIC        _lcm_w_word
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  I:0029H         PUBLIC        GOUT
+  I:0030H         PUBLIC        dac_temp
+  C:0A33H         PUBLIC        key_dac
+  D:0010H         PUBLIC        key_qiao
+  D:00C8H         PUBLIC        T2CON
+  I:0034H         PUBLIC        temp1
+  C:09D3H         PUBLIC        disp_sheding
+  C:003BH         PUBLIC        dx516
+  D:00D0H         PUBLIC        PSW
+  C:0003H         PUBLIC        _adjisuan_I
+  C:0530H         SYMBOL        L?0035
+  -------         PROC          L?0034
+  -------         ENDPROC       L?0034
+  C:0530H         SYMBOL        L?0035
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 4
+
+
+  -------         PROC          _CHAI
+  D:0013H         SYMBOL        x
+  B:0020H.0       SYMBOL        y
+  -------         DO            
+  D:0017H         SYMBOL        i
+  -------         ENDDO         
+  C:0535H         LINE#         44
+  C:053DH         LINE#         45
+  C:053DH         LINE#         47
+  C:0542H         LINE#         48
+  C:0557H         LINE#         49
+  C:055DH         LINE#         50
+  C:055DH         LINE#         51
+  C:0576H         LINE#         52
+  C:057CH         LINE#         53
+  C:0582H         LINE#         55
+  C:0589H         LINE#         56
+  C:05A1H         LINE#         57
+  C:05BBH         LINE#         58
+  C:05CBH         LINE#         60
+  C:05E5H         LINE#         61
+  C:05FAH         LINE#         62
+  C:05FDH         LINE#         64
+  C:05FDH         LINE#         66
+  C:0601H         LINE#         67
+  C:0604H         LINE#         68
+  C:0607H         LINE#         70
+  C:0607H         LINE#         71
+  C:0620H         LINE#         72
+  C:0626H         LINE#         73
+  C:062CH         LINE#         75
+  C:0633H         LINE#         76
+  C:064BH         LINE#         77
+  C:0665H         LINE#         78
+  C:0675H         LINE#         79
+  C:068FH         LINE#         80
+  C:069FH         LINE#         81
+  C:06B9H         LINE#         82
+  C:06C9H         LINE#         83
+  C:06C9H         LINE#         84
+  C:06CDH         LINE#         85
+  C:06D1H         LINE#         86
+  -------         ENDPROC       _CHAI
+  -------         PROC          L?0033
+  -------         ENDPROC       L?0033
+  -------         PROC          _LCM_W_WORD
+  D:0007H         SYMBOL        x
+  D:0005H         SYMBOL        y
+  D:0013H         SYMBOL        str
+  C:099FH         LINE#         107
+  C:09A5H         LINE#         108
+  C:09A5H         LINE#         109
+  C:09A8H         LINE#         110
+  C:09ABH         LINE#         111
+  C:09B6H         LINE#         112
+  C:09B6H         LINE#         113
+  C:09C7H         LINE#         114
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 5
+
+
+  C:09C9H         LINE#         115
+  -------         ENDPROC       _LCM_W_WORD
+  -------         PROC          DISP_SHEDING
+  C:09D3H         LINE#         120
+  C:09D3H         LINE#         121
+  C:09D3H         LINE#         122
+  C:09D6H         LINE#         123
+  C:09EBH         LINE#         124
+  C:09F0H         LINE#         125
+  C:09FDH         LINE#         126
+  C:0A02H         LINE#         127
+  -------         ENDPROC       DISP_SHEDING
+  -------         PROC          _ADJISUAN_U
+  D:0002H         SYMBOL        x
+  C:0A07H         LINE#         132
+  C:0A0BH         LINE#         133
+  C:0A0BH         LINE#         134
+  C:0A14H         LINE#         135
+  C:0A2DH         LINE#         136
+  C:0A32H         LINE#         137
+  -------         ENDPROC       _ADJISUAN_U
+  -------         PROC          _ADJISUAN_I
+  D:0002H         SYMBOL        x
+  C:0003H         LINE#         139
+  C:0007H         LINE#         140
+  C:0007H         LINE#         141
+  C:0010H         LINE#         142
+  C:0034H         LINE#         143
+  C:0039H         LINE#         144
+  -------         ENDPROC       _ADJISUAN_I
+  -------         PROC          SCANF_FLOAT
+  -------         DO            
+  D:0008H         SYMBOL        i
+  D:0009H         SYMBOL        x
+  B:0020H.5       SYMBOL        k
+  D:0013H         SYMBOL        temp1
+  D:0007H         SYMBOL        temp2
+  -------         ENDDO         
+  C:0903H         LINE#         150
+  C:0903H         LINE#         151
+  C:0903H         LINE#         156
+  C:0908H         LINE#         157
+  C:090BH         LINE#         158
+  C:0914H         LINE#         159
+  C:0914H         LINE#         160
+  C:0916H         LINE#         161
+  C:0918H         LINE#         162
+  C:0918H         LINE#         163
+  C:091BH         LINE#         164
+  C:091BH         LINE#         165
+  C:091DH         LINE#         166
+  C:0924H         LINE#         167
+  C:0926H         LINE#         168
+  C:0931H         LINE#         169
+  C:0931H         LINE#         170
+  C:0934H         LINE#         171
+  C:0937H         LINE#         172
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 6
+
+
+  C:093AH         LINE#         173
+  C:093DH         LINE#         174
+  C:0940H         LINE#         175
+  C:0943H         LINE#         176
+  C:0943H         LINE#         177
+  C:094CH         LINE#         178
+  C:094CH         LINE#         179
+  -------         ENDPROC       SCANF_FLOAT
+  -------         PROC          KEY_DAC
+  C:0A33H         LINE#         184
+  C:0A33H         LINE#         185
+  C:0A33H         LINE#         186
+  C:0A38H         LINE#         207
+  C:0A40H         LINE#         208
+  C:0A43H         LINE#         209
+  C:0A4FH         LINE#         210
+  C:0A52H         LINE#         211
+  -------         ENDPROC       KEY_DAC
+  -------         PROC          MAIN
+  -------         DO            
+  D:0011H         SYMBOL        ADC_DATA_V
+  D:0006H         SYMBOL        ii
+  -------         ENDDO         
+  C:07B8H         LINE#         218
+  C:07B8H         LINE#         219
+  C:07B8H         LINE#         222
+  C:07BBH         LINE#         223
+  C:07BEH         LINE#         224
+  C:07C7H         LINE#         225
+  C:07C9H         LINE#         226
+  C:07CBH         LINE#         227
+  C:07D3H         LINE#         228
+  C:07D6H         LINE#         229
+  C:07DBH         LINE#         230
+  C:07DEH         LINE#         231
+  C:07E1H         LINE#         232
+  C:07E6H         LINE#         233
+  C:07E9H         LINE#         234
+  C:07EEH         LINE#         236
+  C:07EEH         LINE#         237
+  C:07EEH         LINE#         238
+  C:07FBH         LINE#         239
+  C:07FEH         LINE#         240
+  C:080BH         LINE#         241
+  C:0818H         LINE#         242
+  C:081DH         LINE#         243
+  C:0822H         LINE#         244
+  C:082BH         LINE#         246
+  C:082EH         LINE#         247
+  C:0831H         LINE#         248
+  C:083EH         LINE#         249
+  C:0841H         LINE#         251
+  C:0846H         LINE#         252
+  C:084BH         LINE#         253
+  C:0854H         LINE#         255
+  C:0857H         LINE#         256
+  C:085AH         LINE#         257
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 7
+
+
+  C:0867H         LINE#         258
+  C:086AH         LINE#         260
+  C:086FH         LINE#         261
+  C:0874H         LINE#         263
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?FPADD
+  C:0045H         PUBLIC        ?C?FPADD
+  C:0041H         PUBLIC        ?C?FPSUB
+  -------         ENDMOD        ?C?FPADD
+
+  -------         MODULE        ?C?FPMUL
+  C:0136H         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FPDIV
+  C:023FH         PUBLIC        ?C?FPDIV
+  -------         ENDMOD        ?C?FPDIV
+
+  -------         MODULE        ?C?FCAST
+  C:02E6H         PUBLIC        ?C?FCASTC
+  C:02E1H         PUBLIC        ?C?FCASTI
+  C:02DCH         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:031AH         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        ATOF
+  C:094DH         PUBLIC        _ATOF
+  -------         ENDMOD        ATOF
+
+  -------         MODULE        ?C?FPNEG
+  C:039BH         PUBLIC        ?C?FPNEG
+  -------         ENDMOD        ?C?FPNEG
+
+  -------         MODULE        ?C?FTNPWR
+  C:03DCH         PUBLIC        ?C?FTNPWR
+  -------         ENDMOD        ?C?FTNPWR
+
+  -------         MODULE        ?C?CLDPTR
+  C:041CH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:0435H         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?UIDIV
+  C:0447H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        ?C?SIDIV
+  C:049CH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 8
+
+
+
+  -------         MODULE        ?C?LNEG
+  C:04D2H         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+  -------         MODULE        ?C?LLDIDATA
+  C:04E0H         PUBLIC        ?C?LLDIDATA
+  -------         ENDMOD        ?C?LLDIDATA
+
+  -------         MODULE        ?C?LLDIDATA0
+  C:04ECH         PUBLIC        ?C?LLDIDATA0
+  -------         ENDMOD        ?C?LLDIDATA0
+
+  -------         MODULE        ?C?LSTIDATA
+  C:04F9H         PUBLIC        ?C?LSTIDATA
+  -------         ENDMOD        ?C?LSTIDATA
+
+  -------         MODULE        ?C?LSTKIDATA
+  C:0505H         PUBLIC        ?C?LSTKIDATA
+  -------         ENDMOD        ?C?LSTKIDATA
+
+  -------         MODULE        ?C?PLDIIDATA
+  C:051EH         PUBLIC        ?C?PLDIIDATA
+  -------         ENDMOD        ?C?PLDIIDATA
+
+  -------         MODULE        ISSPACE
+  C:0A77H         PUBLIC        _isspace
+  -------         ENDMOD        ISSPACE
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _READ_AD_DATA
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  RST_AD
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  KEY_SM
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _CONVER
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _DELAY
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _DAC
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  LED_ONOFF
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 9
+
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  ?LED_ONOFF?BIT
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _WRITE_AD
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  SET_7705_1CH
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  SET_7705_2CH
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  LCD_RST
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _W_DATA
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _W_CODE
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _W_CODE
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 09A9H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _W_DATA
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 09C5H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _W_CODE
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0A00H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _W_DATA
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0A05H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  KEY_SM
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0904H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  KEY_SM
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0909H
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 10
+
+
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  KEY_SM
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0A34H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _CONVER
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0A49H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _DAC
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0A50H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _DELAY
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0A57H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  LCD_RST
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07B9H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  RST_AD
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07BCH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _CONVER
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07D1H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _DAC
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07D4H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?LED_ONOFF?BIT
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07D7H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  LED_ONOFF
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07D9H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  SET_7705_1CH
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07DFH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+BL51 BANKED LINKER/LOCATER V6.05                                                      09/19/2008  05:01:15  PAGE 11
+
+
+    SYMBOL:  _READ_AD_DATA
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07E4H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  SET_7705_2CH
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07E7H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _READ_AD_DATA
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 07ECH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _WRITE_AD
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 081BH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _WRITE_AD
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0820H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _READ_AD_DATA
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0825H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _WRITE_AD
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0844H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _WRITE_AD
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0849H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _READ_AD_DATA
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 084EH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _W_CODE
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 086DH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _W_DATA
+    MODULE:  D:\稳压电源\科写程序\MAIN.OBJ (MAIN)
+    ADDRESS: 0872H
+
+Program Size: data=49.6 xdata=0 code=2710
+LINK/LOCATE RUN COMPLETE.  42 WARNING(S),  0 ERROR(S)

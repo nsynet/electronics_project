@@ -1,0 +1,185 @@
+C51 COMPILER V8.02   MAIN                                                                  02/13/2011 01:07:24 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\debug\main.obj
+COMPILER INVOKED BY: E:\WorkSpace\Keil UV3\C51\BIN\C51.EXE main.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\debug\main.lst
+                    -) OBJECT(.\debug\main.obj)
+
+line level    source
+
+   1          /*
+   2           * Copyright (c) 2001-2003, Adam Dunkels.
+   3           * All rights reserved. 
+   4           *
+   5           * Redistribution and use in source and binary forms, with or without 
+   6           * modification, are permitted provided that the following conditions 
+   7           * are met: 
+   8           * 1. Redistributions of source code must retain the above copyright 
+   9           *    notice, this list of conditions and the following disclaimer. 
+  10           * 2. Redistributions in binary form must reproduce the above copyright 
+  11           *    notice, this list of conditions and the following disclaimer in the 
+  12           *    documentation and/or other materials provided with the distribution. 
+  13           * 3. The name of the author may not be used to endorse or promote
+  14           *    products derived from this software without specific prior
+  15           *    written permission.  
+  16           *
+  17           * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
+  18           * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  19           * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  20           * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+  21           * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  22           * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+  23           * GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  24           * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  25           * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  26           * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  27           * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+  28           *
+  29           * This file is part of the uIP TCP/IP stack.
+  30           *
+  31           * $Id: main.c,v 1.10.2.1 2003/10/04 22:54:17 adam Exp $
+  32           *
+  33           */
+  34          #include "uip.h" 
+  35          #include "uip_arp.h"
+  36          //#include "rtl8019as.h"
+  37          #include "httpd.h"
+  38          //#include "telnet.h"
+  39          #include "enc28j60.h"
+  40          
+  41          #include "tcp_server.h"
+  42          #include "USART.h"
+  43          #include "stdio.h"
+  44          
+  45          #define BUF ((struct uip_eth_hdr *)&uip_buf[0])
+  46          
+  47          #ifndef NULL
+              #define NULL (void *)0
+              #endif /* NULL */
+  50          
+  51          /*-----------------------------------------------------------------------------------*/
+  52          int
+  53          main(void)
+  54          {
+C51 COMPILER V8.02   MAIN                                                                  02/13/2011 01:07:24 PAGE 2   
+
+  55   1              idata u8_t i, arptimer;
+  56   1              idata u16_t j;
+  57   1      
+  58   1              USART_Init();
+  59   1              SendString("ENC28J60 Test Start...\r\n");
+  60   1              /* Initialize the device driver. */ 
+  61   1              //  rtl8019as_init();
+  62   1              dev_init();
+  63   1              uip_arp_init();
+  64   1              /* Initialize the uIP TCP/IP stack. */
+  65   1              uip_init();
+  66   1              SendString("http://ag-embeded.taobao.com\r\n");
+  67   1              /* Initialize the HTTP server. */
+  68   1      //      httpd_init();
+  69   1              tcp_server_init();
+  70   1              
+  71   1              arptimer = 0;
+  72   1              SendString("http://shop64454242.taobao.com\r\n");
+  73   1        while(1) {
+  74   2          /* Let the tapdev network device driver read an entire IP packet
+  75   2             into the uip_buf. If it must wait for more than 0.5 seconds, it
+  76   2             will return with the return value 0. If so, we know that it is
+  77   2             time to call upon the uip_periodic(). Otherwise, the tapdev has
+  78   2             received an IP packet that is to be processed by uIP. */
+  79   2          uip_len = dev_poll();
+  80   2              for(j=0;j<500;j++);
+  81   2      /*
+  82   2              if(uip_len > 0)
+  83   2              {
+  84   2                      printuf("--------------- uip_len = 0x%x", uip_len);
+  85   2                      printuf("%x ----------\r\n", uip_len);
+  86   2                      for(i=0;i<uip_len;i++)
+  87   2                      {
+  88   2                              printuf("%x ", uip_buf[i]);
+  89   2                              if((i+1)%16==0) printu("\r\n");                 
+  90   2                      }
+  91   2                      printu("\r\n");                 
+  92   2              }
+  93   2      */
+  94   2          if(uip_len == 0) {
+  95   3            for(i = 0; i < UIP_CONNS; i++) {
+  96   4              uip_periodic(i);
+  97   4              /* If the above function invocation resulted in data that
+  98   4                 should be sent out on the network, the global variable
+  99   4                 uip_len is set to a value > 0. */
+ 100   4              if(uip_len > 0) {
+ 101   5                uip_arp_out();
+ 102   5                dev_send();
+ 103   5              }
+ 104   4            }
+ 105   3      
+ 106   3      #if UIP_UDP
+                    for(i = 0; i < UIP_UDP_CONNS; i++) {
+                      uip_udp_periodic(i);
+                      /* If the above function invocation resulted in data that
+                         should be sent out on the network, the global variable
+                         uip_len is set to a value > 0. */
+                      if(uip_len > 0) {
+                        uip_arp_out();
+                        dev_send();
+                      }
+                    }
+C51 COMPILER V8.02   MAIN                                                                  02/13/2011 01:07:24 PAGE 3   
+
+              #endif /* UIP_UDP */
+ 118   3            
+ 119   3            /* Call the ARP timer function every 10 seconds. */
+ 120   3            if(++arptimer == 20) {    
+ 121   4              uip_arp_timer();
+ 122   4              arptimer = 0;
+ 123   4            }
+ 124   3            
+ 125   3          } else {
+ 126   3            if(BUF->type == htons(UIP_ETHTYPE_IP)) {
+ 127   4              uip_arp_ipin();
+ 128   4              uip_input();
+ 129   4              /* If the above function invocation resulted in data that
+ 130   4                 should be sent out on the network, the global variable
+ 131   4                 uip_len is set to a value > 0. */
+ 132   4              if(uip_len > 0) {
+ 133   5                uip_arp_out();
+ 134   5                dev_send();
+ 135   5              }
+ 136   4            } else if(BUF->type == htons(UIP_ETHTYPE_ARP)) {
+ 137   4              uip_arp_arpin();
+ 138   4              /* If the above function invocation resulted in data that
+ 139   4                 should be sent out on the network, the global variable
+ 140   4                 uip_len is set to a value > 0. */    
+ 141   4              if(uip_len > 0) {       
+ 142   5                dev_send();
+ 143   5              }
+ 144   4            }
+ 145   3          }
+ 146   2          
+ 147   2        }
+ 148   1        return 0;
+ 149   1      }
+ 150          /*-----------------------------------------------------------------------------------*/
+ 151          void
+ 152          uip_log(char *m)
+ 153          {
+ 154   1      //  printf("uIP log message: %s\n", m);
+ 155   1      }
+*** WARNING C280 IN LINE 152 OF MAIN.C: 'm': unreferenced local variable
+ 156          /*-----------------------------------------------------------------------------------*/
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    287    ----
+   CONSTANT SIZE    =     89    ----
+   XDATA SIZE       =   ----       3
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----       4
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

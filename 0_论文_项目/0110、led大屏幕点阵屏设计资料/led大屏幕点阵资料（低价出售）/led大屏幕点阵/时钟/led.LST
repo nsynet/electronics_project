@@ -1,0 +1,83 @@
+C51 COMPILER V8.09   LED                                                                   02/25/2008 14:41:10 PAGE 1   
+
+
+C51 COMPILER V8.09, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN led.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE led.c BROWSE MODA2 DEBUG OBJECTEXTEND TABS(3)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<absacc.h>
+   3          #include<stdio.h>
+   4          #include"define.h"
+   5          #include"disdata.c"
+   6          #include"numbercode.c"
+   7          #include"word.c"
+   8          #include"1302.h"
+   9          #include"autoisp.c"
+  10          #include"discontrol.h"
+  11          
+  12          /*******************
+  13          使用双倍速下载，波特率为115200bps
+  14           可以通过串口设定时间，格式如下：
+  15           2008-02-25/5/14:35:20
+  16          ****************/
+  17          void main()
+  18          {
+  19   1         unsigned char Row = 0;
+  20   1         unsigned int count = 0;
+  21   1         unsigned char Sel = 0;
+  22   1         timer1_init();
+  23   1         UpData=0;
+  24   1         DisSwitch=0;//off led
+  25   1         Initial_DS1302();
+  26   1         while(1)
+  27   1         {  
+  28   2            for(Row=0;Row<8;Row++)
+  29   2            {
+  30   3               if(count>300)
+  31   3               {
+  32   4                  switch(Sel)
+  33   4                  {
+  34   5                     case 0: Out_pic(Row,dis1); break; //图片1
+  35   5                     case 1: Out_pic(Row,dis2);  break; //图片2
+  36   5                     case 2: Out_pic(Row,dis3);  break; //图片3
+  37   5                     //case 0: Out_count(Row)    ;  break; //倒计时牌
+  38   5                     default: Out_pic(Row,dis1);Sel=0;break;
+  39   5                  }
+  40   4               }  
+  41   3               else 
+  42   3               {
+  43   4                  Out_row(Row); //显示万年历
+  44   4               }
+  45   3               ChangeData(Row);
+  46   3             }
+  47   2             if(count>450)
+  48   2             {
+  49   3                count=0;    
+  50   3                Sel++;
+  51   3             }
+  52   2             count++;                    
+  53   2         }
+  54   1      }
+  55          
+C51 COMPILER V8.09   LED                                                                   02/25/2008 14:41:10 PAGE 2   
+
+  56          
+  57          
+  58          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1772    ----
+   CONSTANT SIZE    =   2862    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7      13
+   IDATA SIZE       =     21    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

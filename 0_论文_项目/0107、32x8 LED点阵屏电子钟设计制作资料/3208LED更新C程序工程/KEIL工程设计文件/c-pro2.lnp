@@ -1,0 +1,6 @@
+"STARTUP.obj",
+"wannianli.obj",
+"DL.obj",
+"ds.obj" 
+TO "c-pro2" 
+RAMSIZE(256) 

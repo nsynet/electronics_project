@@ -1,0 +1,8 @@
+"12864.obj",
+"MAIN.obj",
+"math.obj",
+"DAC.obj",
+"AD.obj",
+"KEY.obj" 
+TO "dianyuan1" 
+RAMSIZE(256) 

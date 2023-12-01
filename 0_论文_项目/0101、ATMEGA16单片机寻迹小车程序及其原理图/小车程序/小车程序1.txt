@@ -1,0 +1,171 @@
+#include <iom16v.h>
+#include <macros.h>
+#define uchar  unsigned  char 
+#define  uint  unsigned  int
+void main()
+{ 
+ 	DDRA=0X00;
+	DDRB=0XFF;
+    DDRD|=0X30;
+	TCCR1A=0x91; //8位相位修正PWM 8000000/(64*2*256)=244.14hz
+	TCCR1B=0x03; //clk/64
+	OCR1A=250;	//初值占空比100%
+	while(1)
+	{
+	     if(PINA==0xe7)//加速前进4、5灯
+		 {
+		  	OCR1A=202;//占空比100%
+			turn();//居中
+		 }
+		 if(PINA==0xcf)//速度稍减前进5、6灯
+		 {
+		  	OCR1A=202;//占空比90%
+			turnL();//左转-15度
+		 }
+		  if(PINA==0x9f)//速度再减前进6、7灯
+		 {
+		  	OCR1A=176;//占空比80%
+			turnLL();//左转-30度
+		 }
+		  if(PINA==0x3f)//速度减前进7、8灯
+		 {
+		  	OCR1A=176;//占空比70%
+			turnLLL();//左转-45度
+		 }
+		  if(PINA==0X7f)//速度稍减前进8灯
+		 {
+		  	OCR1A=176;//占空比70%
+			turnLLL();//右转45度
+		 }
+		  if(PINA==0xf3)//速度稍减前进3、4灯
+		 {
+		  	OCR1A=202;//占空比90%
+			turnR();//右转15度
+		 }
+		  if(PINA==0Xf9)//速度再减前进2、3灯
+		 {
+		  	OCR1A=176;//占空比80%
+			turnRR();//右转30度
+		 }
+		  if(PINA==0Xfc)//速度稍减前进1、2灯
+		 {
+		  	OCR1A=176;//占空比70%
+			turnRRR();//右转45度
+		 }
+		  if(PINA==0Xfe)//速度稍减前进1灯
+		 {
+		  	OCR1A=176;//占空比70%
+			turnRRR();//右转45度
+		 }
+	}
+}
+
+/*-45度*/
+void  turnLLL()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<30;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(4);
+	}
+}
+/*-30度*/
+void  turnLL()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<30;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(6);
+	}
+}
+/*-15度*/
+void  turnL()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<30;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(8);
+	}
+}
+
+/*0度居中*/
+void  turn()//居中
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<30;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(10);
+	}
+}
+
+/*15度*/
+void  turnR()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<30;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(12);
+	}
+} 
+/*30度*/
+void  turnRR()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<30;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(14);
+	}
+}
+/*45度*/
+void  turnRRR()
+{
+ 	uchar i;
+	DDRB=0XFF;
+	PORTB=0XFF;
+	for(i=0;i<30;i++)
+	{
+		PORTB&=~BIT(0);          				
+		delay(18);        
+		PORTB|=BIT(0);
+		delay(17);
+	}
+}
+
+/*定时0.1MS*/
+void  delay(uint z)
+{
+ 	  uint i,j;
+	  for(i=0;i<z;i++)
+	  		for(j=0;j<90;j++);
+}
+

@@ -1,0 +1,221 @@
+C51 COMPILER V8.05a   CHENGXU                                                              09/01/2009 13:19:28 PAGE 1   
+
+
+C51 COMPILER V8.05a, COMPILATION OF MODULE CHENGXU
+OBJECT MODULE PLACED IN chengxu.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE chengxu.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*2008/11/3
+   2            AT89S52       12M*/
+   3          #include<reg52.h>
+   4          #include <intrins.h>
+   5          #define uint  unsigned int
+   6          #define uchar unsigned char
+   7          sbit    TXEN    =P2^6;
+   8          sbit    TRX_CE  =P2^5;
+   9          sbit    PWR     =P2^4;
+  10          sbit    MISO    =P2^3;
+  11          sbit    MOSI    =P2^2;
+  12          sbit    SCK     =P2^1;
+  13          sbit    CSN     =P2^0;
+  14          
+  15          sbit    AM      =P3^2;
+  16          sbit    DR      =P3^3;
+  17          sbit    CD      =P3^5;
+  18           /*
+  19          sbit TRX_CE=P1^0;     //使能芯片接收和发送
+  20          sbit TXEN=P1^4;       //收发状态选择：1发射，0接收
+  21          sbit PWR=P1^5;        //工作状态控制：1正常工作，0微功耗
+  22          sbit AM=P1^1;         //地址匹配
+  23          sbit CD=P1^6;         //载波监听
+  24          sbit MISO=P1^2;       //SPI 输出,MCU 由此口从RF 芯片读入资料
+  25          sbit DR=P1^7;         //接收或发送就绪
+  26          sbit CSN=P3^1;        //SPI 使能，低激活
+  27          sbit MOSI=P3^0;       //SPI 输入,MCU 由此口向RF 芯片写入资料
+  28          sbit SCK=P1^3;        //SPI 时钟 */
+  29          sbit LCD=P0^1;            //指示灯      
+  30          sbit jian1=P0^3;          //控制键1
+  31          sbit jian2=P0^2;          //控制键2
+  32          //RF寄存器配置//
+  33          unsigned char idata RFConf[11]=
+  34          {
+  35              0x00,        //配置命令//
+  36              0x6C,        //CH_NO,频率433.2MHZ
+  37              0x2c,        //功率10db,重发,节电正常模式
+  38              0x44,        //地址宽度,4字节
+  39              0x01,0x01,    //接收发送数据有效长度
+  40              0xE7,0xE7,0xE7,0xE7,    //接收地址
+  41              0xDE,        //CRC允许,16位CRC校验,外部时钟信号使能,16M晶振 0xDE
+  42          };
+  43          
+  44          uchar TxRxBuffer;
+  45          ///////////延时/////////////////
+  46          void Delay(uint x)
+  47          {
+  48   1          uint i;
+  49   1          for(i=0;i<x;i++){
+  50   2              _nop_();
+  51   2          }
+  52   1      }
+  53          
+  54          ////////////用SPI写数据至NRF905//////////
+  55          void SpiWrite(unsigned char b)
+C51 COMPILER V8.05a   CHENGXU                                                              09/01/2009 13:19:28 PAGE 2   
+
+  56          {
+  57   1          unsigned char i=8;
+  58   1          while (i--)
+  59   1          {
+  60   2              Delay(10);
+  61   2              SCK=0;
+  62   2              MOSI=(bit)(b&0x80);
+  63   2              b<<=1 ; 
+  64   2              Delay(10);
+  65   2              SCK=1; 
+  66   2              Delay(10);
+  67   2          }
+  68   1          SCK=0;
+  69   1      }
+  70          ///////////////从nrf905读取数据////////////////
+  71          unsigned char SpiRead(void)
+  72          {
+  73   1          register unsigned char i=8;
+  74   1          unsigned char ddata=0;
+  75   1          while (i--)
+  76   1          {
+  77   2                      Delay(10);
+  78   2              ddata<<=1 ;
+  79   2              SCK=1;
+  80   2              ddata|=MISO;
+  81   2                      Delay(10);
+  82   2              SCK=0 ;
+  83   2          }
+  84   1          SCK=0;
+  85   1          return ddata;
+  86   1      }
+  87          ///////////////接收数据包/////////////////
+  88          void RxPacket(void)
+  89          {
+  90   1          TxRxBuffer= SpiRead();
+  91   1      }
+  92          
+  93          /*
+  94          ;写发射数据命令:20H
+  95          ;读发射数据命令:21H
+  96          ;写发射地址命令:22H
+  97          ;读发射地址命令:23H
+  98          ;读接收数据命令:24H
+  99          */
+ 100          ///////////////发送数据包/////////////////
+ 101          void TxPacket(uchar a)
+ 102          {
+ 103   1              TRX_CE=0;
+ 104   1          TXEN=1;
+ 105   1          CSN=1;
+ 106   1              Delay(10);
+ 107   1              CSN=0;
+ 108   1          SpiWrite(0x22);        //写发送地址,4位地址//
+ 109   1          SpiWrite(0x00);
+ 110   1          SpiWrite(0x00);
+ 111   1          SpiWrite(0x00);
+ 112   1          SpiWrite(0x00);
+ 113   1          CSN=1;
+ 114   1          Delay(10);
+ 115   1          CSN=0;
+ 116   1          SpiWrite(0x20);        //写发送数据//
+ 117   1          SpiWrite(a);
+C51 COMPILER V8.05a   CHENGXU                                                              09/01/2009 13:19:28 PAGE 3   
+
+ 118   1          CSN=1;
+ 119   1          Delay(10);
+ 120   1          TRX_CE=1;                    //使能发射模式//
+ 121   1              Delay(10000);
+ 122   1          while(!DR);                    //等待发射完成//
+ 123   1          TRX_CE=0;
+ 124   1              TRX_CE=1;
+ 125   1              TXEN=0;
+ 126   1              Delay(1000);
+ 127   1      }          
+ 128          ////////////////等待接收数据包///////////////////
+ 129          void Wait_Rec_Packet(void)
+ 130          { 
+ 131   1              TRX_CE=0;            //数据准备好,进入待机模式
+ 132   1          CSN=1;
+ 133   1              Delay(1000);
+ 134   1              CSN=0;
+ 135   1          SpiWrite(0x24);
+ 136   1          RxPacket();
+ 137   1          CSN=1;
+ 138   1              TRX_CE=1;
+ 139   1              TXEN=0;
+ 140   1              Delay(10);
+ 141   1      }
+ 142          ////////////初始化配置寄存器////////////////
+ 143          void Ini_System(void)
+ 144          {
+ 145   1          uchar i;
+ 146   1          LCD=0;
+ 147   1          Delay(1000);
+ 148   1          LCD=1;
+ 149   1          CSN=1;
+ 150   1          SCK=0;
+ 151   1              PWR=1;
+ 152   1          TRX_CE=0;
+ 153   1          TXEN=0;
+ 154   1          Delay(10);
+ 155   1          CSN=0;
+ 156   1          for(i=0;i<11;i++){
+ 157   2              SpiWrite(RFConf[i]);
+ 158   2          }
+ 159   1          CSN=1;
+ 160   1          TRX_CE=1;
+ 161   1          TXEN=0;
+ 162   1          Delay(1000);
+ 163   1              LCD=0;
+ 164   1      }
+ 165                  
+ 166          void main(void)
+ 167          {
+ 168   1              Delay(1000);
+ 169   1          Ini_System();
+ 170   1          while(1)
+ 171   1          {
+ 172   2                      jian1=jian2=1;
+ 173   2              if(jian1==0){
+ 174   3                              TxPacket(0x03);
+ 175   3                              Delay(10000);
+ 176   3                      }
+ 177   2                      if(jian2==0){
+ 178   3                              TxPacket(0x02);
+ 179   3                              Delay(10000);
+C51 COMPILER V8.05a   CHENGXU                                                              09/01/2009 13:19:28 PAGE 4   
+
+ 180   3                      }
+ 181   2                      if(DR==1){
+ 182   3                              Wait_Rec_Packet();
+ 183   3                              Delay(10000);
+ 184   3                      }
+ 185   2                      if(TxRxBuffer==0x03){
+ 186   3                              LCD=0;
+ 187   3                      }
+ 188   2                      if(TxRxBuffer==0x02){
+ 189   3                              LCD=1;
+ 190   3                      }               
+ 191   2          }
+ 192   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    344    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =     11    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

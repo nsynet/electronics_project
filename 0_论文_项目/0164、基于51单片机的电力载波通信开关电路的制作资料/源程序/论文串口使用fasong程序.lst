@@ -1,0 +1,73 @@
+A51 MACRO ASSEMBLER  论文__口使用FASONG____                                               11/20/2008 17:58:57 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.00d
+OBJECT MODULE PLACED IN .\论文串口使用fasong程序.obj
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE ..\论文使用\论文串口使用fasong程序.asm SET(SMALL) DEBUG PRINT(.\论文串口使
+                      用fasong程序.lst) OBJECT(.\论文串口使用fasong程序.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1      ORG 00H                 
+0000 800E              2      JMP START                
+0010                   3      ORG 10H                   
+0010                   4     START:
+0010 758160            5             MOV SP,#60H         
+0013 759850            6             MOV SCON,#50H    
+0016 758920            7             MOV  TMOD,#20H   
+0019 758DFD            8             MOV TH1,#0FDH    
+001C 758BFD            9             MOV TL1,#0FDH
+001F D28E             10             SETB TR1          
+0021 D2B3             11             SETB P3.3         
+0023 D2B5             12             SETB P3.5         
+0025                  13     SCAN:
+0025 20980E           14             JB RI,UART         
+0028 30B302           15             JNB P3.3,KEYIN   
+002B 80F8             16             JMP SCAN                 
+002D                  17     KEYIN:
+002D 745A             18             MOV  A,#5AH              
+002F F599             19             MOV SBUF,A               
+0031                  20     WAIT:                            
+0031 1099F1           21             JBC TI,SCAN              
+0034 80FB             22             JMP WAIT
+0036                  23     UART:                       
+0036 E599             24             MOV A,SBUF 
+0038 B45A04           25             CJNE A,#5AH,ERROR   
+003B C298             26             CLR RI                           
+003D B2B5             27             CPL P3.5                         
+003F                  28     ERROR:
+003F 80E4             29             JMP SCAN                         
+                      30     END
+                             
+                                     
+                             
+A51 MACRO ASSEMBLER  论文__口使用FASONG____                                               11/20/2008 17:58:57 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ERROR. . . . . . .  C ADDR   003FH   A   
+KEYIN. . . . . . .  C ADDR   002DH   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCAN . . . . . . .  C ADDR   0025H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+START. . . . . . .  C ADDR   0010H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+UART . . . . . . .  C ADDR   0036H   A   
+WAIT . . . . . . .  C ADDR   0031H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

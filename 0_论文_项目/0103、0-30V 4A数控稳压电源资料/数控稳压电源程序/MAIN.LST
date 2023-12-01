@@ -1,0 +1,265 @@
+C51 COMPILER V8.08   MAIN                                                                  10/01/2008 23:53:31 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN MAIN.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE MAIN.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          
+   2          /***********************************************************************
+   3           名字：  main.c
+   4           作者：  春风  
+   5           创建日：2008-8-15 
+   6           工程：  数控稳压电源  
+   7          ***********************************************************************/
+   8          
+   9          #include"reg52.h"
+  10          //#include"math.h"
+  11          #include"stdlib.h"
+  12          #include"function.h"
+  13          
+  14          
+  15          sbit RS = P1^4;
+  16          sbit RW = P1^5;
+  17          sbit E  = P1^6;
+  18          
+  19          #define DBUS P0
+  20          sbit clk_574_1 = P2^3;
+  21          //sbit clk_574_2 = P1^3;
+  22          //sbit lcd_rs    = P1^4; 
+  23          
+  24          uint idac;
+  25                  
+  26          
+  27          idata uchar GOUT[7];
+  28          idata float temp1;
+  29          idata float dac_temp; 
+  30          idata float sheding_temp; 
+  31          idata float sheding_temp1;
+  32          char  code dx516[3] _at_ 0x003b;//这是为了仿真设置的(大虾仿真器) 
+  33          
+  34          /************************************************************************************
+  35                                        把浮点数拆开存储指针型数据  
+  36                                                                    输入浮点数，方式0：设定值，1：检测值  
+  37          ************************************************************************************/
+  38          void chai(float x,bit y)  
+  39          {
+  40   1              uint i;
+  41   1              for(i = 0;i < 7;i ++)
+  42   1                      GOUT[i] = 0;
+  43   1              if(y == 0)
+  44   1              {
+  45   2                      i = x / 10;
+  46   2                      if(i == 0)
+  47   2                              GOUT[0] = ' ';
+  48   2                      else
+  49   2                              GOUT[0] = i + '0';
+  50   2                      GOUT[1] = (int)x % 10 + '0';
+  51   2                      x = x * 10;
+  52   2                      GOUT[3] = (int)x % 10 + '0';
+  53   2      
+  54   2                      x = x * 10;
+  55   2                      if(((int)x % 10) >= 5 )// 防止后面大于4的数被舍去  
+C51 COMPILER V8.08   MAIN                                                                  10/01/2008 23:53:31 PAGE 2   
+
+  56   2                      {GOUT[3] = GOUT[3] + 1;}
+  57   2                      else
+  58   2                      {;}
+  59   2      
+  60   2                      GOUT[4] = ' ';
+  61   2                      GOUT[5] = ' ';
+  62   2              }
+  63   1              else
+  64   1              {
+  65   2                      i = x / 10;
+  66   2                      if(i == 0)
+  67   2                              GOUT[0] = ' ';
+  68   2                      else
+  69   2                              GOUT[0] = i + '0';
+  70   2                      GOUT[1] = (int)x % 10 + '0';
+  71   2                      x = x * 10;
+  72   2                      GOUT[3] = (int)x % 10 + '0';
+  73   2                      x = x * 10;
+  74   2                      GOUT[4] = (int)x % 10 + '0';
+  75   2                      x = (x * 10);
+  76   2                      GOUT[5] = (unsigned int)x % 10 + '0';
+  77   2              }
+  78   1              GOUT[2] =  '.';
+  79   1              GOUT[6] =  '\0';
+  80   1      }
+  81          
+  82          /************************************************************************************
+  83          
+  84          //向LCM发送一个字符串,长度64字符之内。  
+  85          
+  86          ************************************************************************************/
+  87          void lcm_w_word(uchar x,uchar y,uchar *str)
+  88          {
+  89   1         x = x+y;
+  90   1         w_code(x);
+  91   1        while(*str != '\0')
+  92   1        {
+  93   2             w_data(*str++);
+  94   2         }
+  95   1        *str = 0;
+  96   1      }
+  97          /************************************************************************************
+  98                                        显示设定电压  
+  99          ************************************************************************************/
+ 100          void  disp_sheding()
+ 101          {
+ 102   1          lcm_w_word(0x90,0x00,"设定：");
+ 103   1          sheding_temp1 = sheding_temp + 0.0005;//------加0.0005修正有时显示.0999 
+ 104   1              chai(sheding_temp1,1);  
+ 105   1          lcm_w_word(0x90,3,GOUT);
+ 106   1              w_code(0x96);
+ 107   1          w_data('V');        
+ 108   1      }
+ 109          /************************************************************************************
+ 110                           AD的16位整形数转换成浮点电压或电流值  
+ 111          ************************************************************************************/
+ 112          float adjisuan_U(uint x)
+ 113          {
+ 114   1              temp1 = 11.990 / 0x5e1f;
+ 115   1              temp1 = x * temp1;
+ 116   1              return temp1;
+ 117   1      }
+C51 COMPILER V8.08   MAIN                                                                  10/01/2008 23:53:31 PAGE 3   
+
+ 118          
+ 119          float adjisuan_I(uint x)  //
+ 120          {
+ 121   1              temp1 = 0.899 / 0x253d;
+ 122   1              temp1 = (x * temp1)-0.005;
+ 123   1              return temp1;
+ 124   1      }
+ 125          /************************************************************************************
+ 126          *
+ 127          *函数功能:输入浮点数  
+ 128          *
+ 129          ************************************************************************************/
+ 130          float scanf_float(void)
+ 131          {
+ 132   1              static uchar i = 0;
+ 133   1              static uchar x[5] = {'0','0','0','0','0'};
+ 134   1              static bit k = 1;
+ 135   1              uchar temp1,temp2;
+ 136   1              temp1 = key_sm();
+ 137   1              temp2 = key_sm();
+ 138   1              if((temp2 == 0xff) || (temp1 != temp2))
+ 139   1              {
+ 140   2                      k = 1;
+ 141   2                      return(atof(x));
+ 142   2              }
+ 143   1              else if(k)
+ 144   1              {
+ 145   2                      k = 0;
+ 146   2                      x[i] = temp1;
+ 147   2                      i ++;
+ 148   2                      if((temp1 == key_esc) || (i == 4))
+ 149   2                      {
+ 150   3                              x[0] = '0';
+ 151   3                              x[1] = '0';
+ 152   3                              x[2] = '0';
+ 153   3                              x[3] = '0';
+ 154   3                              x[4] = '0';
+ 155   3                              i = 0;
+ 156   3                      }
+ 157   2                      return(atof(x));
+ 158   2              }
+ 159   1      }
+ 160          
+ 161          /************************************************************************************
+ 162          
+ 163                                        扫描按键，并根据键值修改DAC的电压  
+ 164          
+ 165          ************************************************************************************/
+ 166          void key_dac()
+ 167          {
+ 168   1                      uchar key_qiao;
+ 169   1                 key_qiao = key_sm();
+ 170   1              switch(key_sm())
+ 171   1                      {
+ 172   2              case key_shang:dac_temp = dac_temp + 1.0;break;//---按下上键电压加1V 
+ 173   2              case key_xia  :dac_temp = dac_temp - 1.0;break;//---按下下键电压减1 
+ 174   2              case key_zuo  :dac_temp = dac_temp - 0.1;break;//---按下左键电压减0.1
+ 175   2          case key_you  :dac_temp = dac_temp + 0.1;break;//---按下右键电压加0.1 
+ 176   2          case key_0    :dac_temp = 0;             break;//---按下0键电压归0 
+ 177   2              default: key_qiao = 0xff;
+ 178   2                       }
+ 179   1                      if(key_qiao != 0xff)  //  10月1日 这里原来是0x00就读AD不正常      
+C51 COMPILER V8.08   MAIN                                                                  10/01/2008 23:53:31 PAGE 4   
+
+ 180   1                              {
+ 181   2                      RS  =  1;                       
+ 182   2                              RW  =  0;       //--------避免液晶屏干扰数据总线 
+ 183   2                              if(dac_temp < 0){dac_temp = 0;} //----判断电压低于0大于30时把数据归0 
+ 184   2                              if(dac_temp >= 30.10){dac_temp = 0;}    
+ 185   2                              sheding_temp = dac_temp ;
+ 186   2                              disp_sheding();
+ 187   2                              idac = conver(dac_temp);  
+ 188   2                              dac(idac);
+ 189   2                              delay(50000);
+ 190   2                              }
+ 191   1      }
+ 192          /************************************************************************************
+ 193                                               主函数    
+ 194          ************************************************************************************/
+ 195          main()
+ 196          {
+ 197   1       
+ 198   1                              lcd_rst(0);
+ 199   1                              rst_ad();       
+ 200   1                              dac_temp = 0 ;
+ 201   1                      RS  =  1;                       
+ 202   1                      RW  =  0;       //--------避免液晶屏干扰数据总线                
+ 203   1                              dac(conver(dac_temp));     //吸合低压继电器并输出0V 
+ 204   1                      LED_ONOFF(1);//  打开背光源   
+ 205   1                              set_7705_ch(0);
+ 206   1                          read_AD_data(0x38);
+ 207   1                          set_7705_ch(1);
+ 208   1                          read_AD_data(0x39);
+ 209   1      
+ 210   1                         disp_sheding();//显示设定电压   
+ 211   1                         while(1)
+ 212   1                         {
+ 213   2                         lcm_w_word(0x80,0x02,"稳压电源"); 
+ 214   2                         lcm_w_word(0x90,0x00,"设定：");                
+ 215   2                         lcm_w_word(0x88,0x00,"电压：");   
+ 216   2                         lcm_w_word(0x98,0x00,"电流："); 
+ 217   2                              
+ 218   2                         write_ad(0x10);
+ 219   2                     write_ad(0x04);
+ 220   2                         adjisuan_U(read_AD_data(0x38));
+ 221   2                         chai(temp1,1);  
+ 222   2                 lcm_w_word(0x88,3,GOUT);
+ 223   2                         key_dac();
+ 224   2      
+ 225   2                         write_ad(0x11);
+ 226   2                     write_ad(0x14); 
+ 227   2                         adjisuan_I(read_AD_data(0x39));
+ 228   2                         chai(temp1,1);  
+ 229   2                 lcm_w_word(0x98,3,GOUT);
+ 230   2                         key_dac();
+ 231   2                         
+ 232   2                         }
+ 233   1                                                                                                                                                 
+ 234   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1089    ----
+   CONSTANT SIZE    =     30    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V8.08   MAIN                                                                  10/01/2008 23:53:31 PAGE 5   
+
+   DATA SIZE        =      8      11
+   IDATA SIZE       =     23    ----
+   BIT SIZE         =      1       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

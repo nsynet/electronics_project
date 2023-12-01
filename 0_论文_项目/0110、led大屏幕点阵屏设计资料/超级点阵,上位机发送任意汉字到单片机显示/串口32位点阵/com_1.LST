@@ -1,0 +1,161 @@
+C51 COMPILER V6.12  COM_1                                                                  06/27/2007 23:29:00 PAGE 1   
+
+
+C51 COMPILER V6.12, COMPILATION OF MODULE COM_1
+OBJECT MODULE PLACED IN .\com_1.OBJ
+COMPILER INVOKED BY: d:\Keil\C51\BIN\C51.EXE .\com_1.c DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include "reg51.h"
+   2          #include "string.h"
+   3          sbit P3_2=P3^2;
+   4          char receive_data[96];
+   5          char flag;
+   6          char converse=0;
+   7          unsigned char code table[]={
+   8          0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F};
+   9          //´®¿Ú³õÊ¼»¯ ¾§ÕñÎª11.0592M¡¡·½Ê½1 ²¨ÌØÂÊ300£­57600
+  10          void InitCom(unsigned char BaudRate)
+  11          {
+  12   1      unsigned char THTL;
+  13   1      switch (BaudRate)
+  14   1      {
+  15   2      case 1: THTL = 64; break; //²¨ÌØÂÊ300
+  16   2      case 2: THTL = 160; break; //600
+  17   2      case 3: THTL = 208; break; //1200
+  18   2      case 4: THTL = 232; break; //2400
+  19   2      case 5: THTL = 244; break; //4800
+  20   2      case 6: THTL = 250; break; //9600
+  21   2      case 7: THTL = 253; break; //19200
+  22   2      case 8: THTL = 255; break; //57600
+  23   2      default: THTL = 208;
+  24   2      }
+  25   1      SCON = 0x50; //´®¿Ú·½Ê½1,ÔÊÐí½ÓÊÕ
+  26   1      TMOD = 0x20; //¶¨Ê±Æ÷1¶¨Ê±·½Ê½2
+  27   1      TCON = 0x40; //Éè¶¨Ê±Æ÷1¿ªÊ¼¼ÆÊý
+  28   1      TH1 = THTL;
+  29   1      TL1 = THTL;
+  30   1      PCON = 0x80; //²¨ÌØÂÊ¼Ó±¶¿ØÖÆ,SMODÎ»
+  31   1      RI = 0; //ÇåÊÕ·¢±êÖ¾
+  32   1      TI = 0;
+  33   1      TR1 = 1; //Æô¶¯¶¨Ê±Æ÷
+  34   1      }
+  35          
+  36          //´Ó´®¿Ú½ÓÊÕÒ»¸ö¶¨³¤×Ö·û´®(·ÇÖÐ¶Ï·½Ê½,Ö»ÓÃÓÚ×Ö·ûÐèÓÐÒ»¸öµÄidata×Ö·û´®Êý×é)
+  37          //Èçunsigned char *Str;
+  38          //unsigned char i[]="abcd";
+  39          //InHandStr = &i;
+  40          void ComInStr(unsigned char *Str)
+  41          {
+  42   1      while(*Str !='@') //ÅÐ¶ÏÊÇ·ñµ½ÁË×Ö·û´®µÄÎ²²¿
+  43   1      {
+  44   2      while(!RI); //¿ÕÓï¾äÅÐ¶Ï×Ö·ûÊÇ·ñÊÕÍê
+  45   2      *Str = SBUF; //±£´æ×Ö·û
+  46   2      RI = 0; //ÇåRI
+  47   2      Str++; //×Ö·û´®Ö¸Õë¼ÓÒ»
+  48   2      converse=1;
+  49   2      }
+  50   1      }
+  51          
+  52          void delay(int c)
+  53              {
+  54   1          int i,j;
+  55   1          for(i=0;i<c;i++)
+C51 COMPILER V6.12  COM_1                                                                  06/27/2007 23:29:00 PAGE 2   
+
+  56   1              for(j=0;j<10;j++)
+  57   1                  ;
+  58   1           }
+  59          void delay1s(void) 
+  60          
+  61          { 
+  62   1      
+  63   1        unsigned char i,j,k; 
+  64   1      
+  65   1        for(k=60;k>0;k--) 
+  66   1      
+  67   1        for(i=20;i>0;i--) 
+  68   1      
+  69   1        for(j=248;j>0;j--); 
+  70   1      
+  71   1      } 
+  72          void main()
+  73          {
+  74   1          unsigned char i,j;    //i:Ã¿¸ö×ÖµÄÏÔÊ¾Ñ­»·£»jÃ¿¸ö×ÖµÄÏÔÊ¾Âë³ýÒÔ2£
+  75   1          unsigned int b=0;      //ÏÔÊ¾Æ«ÒÆ¿ØÖÆ£¬charÀàÐÍ×î¶àÖ»ÄÜÏÔÊ¾14¸öºº×Ö+Ò»¸ö¿Õ°×Î»×Ö·û
+  76   1          unsigned char a;//¿ØÖÆÒÆ¶¯¼ä¸ôÊ±¼ä
+  77   1         InitCom(6);
+  78   1            EA=1;
+  79   1            ES=1;
+  80   1            ET1=0;
+  81   1         while(1)
+  82   1         {  char i;
+  83   2            ComInStr(receive_data);
+  84   2      while(converse)
+  85   2          {
+  86   3          j=0;
+  87   3          if(a>3) //ÒÆ¶¯¼ä¸ôÊ±¼ä£»È¡Öµ0--255
+  88   3              {
+  89   4              a=0;
+  90   4              b+=2;
+  91   4              if(b>=96)  //ÏÔÊ¾µ½×îºóÒ»¸ö×Ö£¬»ØÍ·ÏÔÊ¾£¬ÅÐ¶ÏÖµ=×ÖÊý*32
+  92   4                  {
+  93   5                  b=0;
+  94   5                  }   
+  95   4              }
+  96   3           P3_2=1;
+  97   3           for(i=0;i<16;i++)
+  98   3              {
+  99   4              P1=i;
+ 100   4              P0=receive_data[j+b];
+ 101   4              P2=receive_data[j+b+1];
+ 102   4              delay(5);
+ 103   4              P0=0x00;
+ 104   4              P2=0x00;
+ 105   4              j+=2;
+ 106   4              }
+ 107   3      
+ 108   3           P3_2=0;
+ 109   3           for(i=0;i<16;i++)
+ 110   3              {
+ 111   4              P1=i;
+ 112   4              P0=receive_data[j+b];
+ 113   4              P2=receive_data[j+b+1];
+ 114   4              delay(5);
+ 115   4              P0=0x00;
+ 116   4              P2=0x00;
+ 117   4              j+=2;
+C51 COMPILER V6.12  COM_1                                                                  06/27/2007 23:29:00 PAGE 3   
+
+ 118   4              }
+ 119   3              a++;
+ 120   3      
+ 121   3          }
+ 122   2      	  
+ 123   2        }
+ 124   1      
+ 125   1      
+ 126   1      }
+*** WARNING C280 IN LINE 74 OF .\COM_1.C: 'i': unreferenced local variable
+ 127          
+ 128          //´®¿Ú½ÓÊÕÖÐ¶Ïº¯Êý 
+ 129          //void serial () interrupt 4 using 3
+ 130          //{
+ 131             //ComInStr(receive_data);
+ 132             //flag=1;
+ 133          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    347    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     98       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

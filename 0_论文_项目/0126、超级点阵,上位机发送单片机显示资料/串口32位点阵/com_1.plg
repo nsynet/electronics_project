@@ -1,0 +1,36 @@
+Build target 'Target 1'
+compiling com_1.c...
+.\COM_1.C(74): warning C280: 'i': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY1S?COM_1
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?CO?COM_1
+
+creating hex file from "com_1"...
+"com_1" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling com_1.c...
+.\COM_1.C(74): warning C280: 'i': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY1S?COM_1
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?CO?COM_1
+
+creating hex file from "com_1"...
+"com_1" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling com_1.c...
+.\COM_1.C(74): warning C280: 'i': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY1S?COM_1
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?CO?COM_1
+
+creating hex file from "com_1"...
+"com_1" - 0 Error(s), 3 Warning(s).

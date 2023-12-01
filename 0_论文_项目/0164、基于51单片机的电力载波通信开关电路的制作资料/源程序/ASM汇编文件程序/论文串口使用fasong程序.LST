@@ -1,0 +1,80 @@
+A51 MACRO ASSEMBLER  ÂÛÎÄ´_¿ÚÊ¹ÓÃFASONG³__ò                                               02/10/2009 09:22:18 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.00
+OBJECT MODULE PLACED IN ÂÛÎÄ´®¿ÚÊ¹ÓÃfasong³ÌÐò.OBJ
+ASSEMBLER INVOKED BY: d:\Keil\C51\BIN\A51.EXE ÂÛÎÄ´®¿ÚÊ¹ÓÃfasong³ÌÐò.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+0000                   9      ORG 00H                 
+0000 800E             10      JMP START                
+0010                  11      ORG 10H                   
+0010                  12     START:
+0010 758160           13             MOV SP,#60H         
+0013 759850           14             MOV SCON,#50H    
+0016 758920           15             MOV  TMOD,#20H   
+0019 758DFD           16             MOV TH1,#0FDH    
+001C 758BFD           17             MOV TL1,#0FDH
+001F D28E             18             SETB TR1          
+0021 D2B3             19             SETB P3.3         
+0023 D2B5             20             SETB P3.5         
+0025                  21     SCAN:
+0025 20980E           22             JB RI,UART         
+0028 30B302           23             JNB P3.3,KEYIN   
+002B 80F8             24             JMP SCAN                 
+002D                  25     KEYIN:
+002D 745A             26             MOV  A,#5AH              
+002F F599             27             MOV SBUF,A               
+0031                  28     WAIT:                            
+0031 1099F1           29             JBC TI,SCAN              
+0034 80FB             30             JMP WAIT
+0036                  31     UART:                       
+0036 E599             32             MOV A,SBUF 
+0038 B45A04           33             CJNE A,#5AH,ERROR   
+003B C298             34             CLR RI                           
+003D B2B5             35             CPL P3.5                         
+003F                  36     ERROR:
+003F 80E4             37             JMP SCAN                         
+                      38     END
+                             
+                                     
+                             
+A51 MACRO ASSEMBLER  ÂÛÎÄ´_¿ÚÊ¹ÓÃFASONG³__ò                                               02/10/2009 09:22:18 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ERROR. . . . . . .  C ADDR   003FH   A   
+KEYIN. . . . . . .  C ADDR   002DH   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCAN . . . . . . .  C ADDR   0025H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+START. . . . . . .  C ADDR   0010H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+UART . . . . . . .  C ADDR   0036H   A   
+WAIT . . . . . . .  C ADDR   0031H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

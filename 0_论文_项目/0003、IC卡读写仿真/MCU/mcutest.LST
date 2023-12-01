@@ -1,0 +1,617 @@
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MCUTEST
+OBJECT MODULE PLACED IN mcutest.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE mcutest.c BROWSE DEBUG OBJECTEXTEND LISTINCLUDE SYMBOLS
+
+line level    source
+
+   1          #include "reg52.h"
+   1      =1  /*--------------------------------------------------------------------------
+   2      =1  REG52.H
+   3      =1  
+   4      =1  Header file for generic 80C52 and 80C32 microcontroller.
+   5      =1  Copyright (c) 1988-2002 Keil Elektronik GmbH and Keil Software, Inc.
+   6      =1  All rights reserved.
+   7      =1  --------------------------------------------------------------------------*/
+   8      =1  
+   9      =1  #ifndef __REG52_H__
+  10      =1  #define __REG52_H__
+  11      =1  
+  12      =1  /*  BYTE Registers  */
+  13      =1  sfr P0    = 0x80;
+  14      =1  sfr P1    = 0x90;
+  15      =1  sfr P2    = 0xA0;
+  16      =1  sfr P3    = 0xB0;
+  17      =1  sfr PSW   = 0xD0;
+  18      =1  sfr ACC   = 0xE0;
+  19      =1  sfr B     = 0xF0;
+  20      =1  sfr SP    = 0x81;
+  21      =1  sfr DPL   = 0x82;
+  22      =1  sfr DPH   = 0x83;
+  23      =1  sfr PCON  = 0x87;
+  24      =1  sfr TCON  = 0x88;
+  25      =1  sfr TMOD  = 0x89;
+  26      =1  sfr TL0   = 0x8A;
+  27      =1  sfr TL1   = 0x8B;
+  28      =1  sfr TH0   = 0x8C;
+  29      =1  sfr TH1   = 0x8D;
+  30      =1  sfr IE    = 0xA8;
+  31      =1  sfr IP    = 0xB8;
+  32      =1  sfr SCON  = 0x98;
+  33      =1  sfr SBUF  = 0x99;
+  34      =1  
+  35      =1  /*  8052 Extensions  */
+  36      =1  sfr T2CON  = 0xC8;
+  37      =1  sfr RCAP2L = 0xCA;
+  38      =1  sfr RCAP2H = 0xCB;
+  39      =1  sfr TL2    = 0xCC;
+  40      =1  sfr TH2    = 0xCD;
+  41      =1  
+  42      =1  
+  43      =1  /*  BIT Registers  */
+  44      =1  /*  PSW  */
+  45      =1  sbit CY    = PSW^7;
+  46      =1  sbit AC    = PSW^6;
+  47      =1  sbit F0    = PSW^5;
+  48      =1  sbit RS1   = PSW^4;
+  49      =1  sbit RS0   = PSW^3;
+  50      =1  sbit OV    = PSW^2;
+  51      =1  sbit P     = PSW^0; //8052 only
+  52      =1  
+  53      =1  /*  TCON  */
+  54      =1  sbit TF1   = TCON^7;
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 2   
+
+  55      =1  sbit TR1   = TCON^6;
+  56      =1  sbit TF0   = TCON^5;
+  57      =1  sbit TR0   = TCON^4;
+  58      =1  sbit IE1   = TCON^3;
+  59      =1  sbit IT1   = TCON^2;
+  60      =1  sbit IE0   = TCON^1;
+  61      =1  sbit IT0   = TCON^0;
+  62      =1  
+  63      =1  /*  IE  */
+  64      =1  sbit EA    = IE^7;
+  65      =1  sbit ET2   = IE^5; //8052 only
+  66      =1  sbit ES    = IE^4;
+  67      =1  sbit ET1   = IE^3;
+  68      =1  sbit EX1   = IE^2;
+  69      =1  sbit ET0   = IE^1;
+  70      =1  sbit EX0   = IE^0;
+  71      =1  
+  72      =1  /*  IP  */
+  73      =1  sbit PT2   = IP^5;
+  74      =1  sbit PS    = IP^4;
+  75      =1  sbit PT1   = IP^3;
+  76      =1  sbit PX1   = IP^2;
+  77      =1  sbit PT0   = IP^1;
+  78      =1  sbit PX0   = IP^0;
+  79      =1  
+  80      =1  /*  P3  */
+  81      =1  sbit RD    = P3^7;
+  82      =1  sbit WR    = P3^6;
+  83      =1  sbit T1    = P3^5;
+  84      =1  sbit T0    = P3^4;
+  85      =1  sbit INT1  = P3^3;
+  86      =1  sbit INT0  = P3^2;
+  87      =1  sbit TXD   = P3^1;
+  88      =1  sbit RXD   = P3^0;
+  89      =1  
+  90      =1  /*  SCON  */
+  91      =1  sbit SM0   = SCON^7;
+  92      =1  sbit SM1   = SCON^6;
+  93      =1  sbit SM2   = SCON^5;
+  94      =1  sbit REN   = SCON^4;
+  95      =1  sbit TB8   = SCON^3;
+  96      =1  sbit RB8   = SCON^2;
+  97      =1  sbit TI    = SCON^1;
+  98      =1  sbit RI    = SCON^0;
+  99      =1  
+ 100      =1  /*  P1  */
+ 101      =1  sbit T2EX  = P1^1; // 8052 only
+ 102      =1  sbit T2    = P1^0; // 8052 only
+ 103      =1               
+ 104      =1  /*  T2CON  */
+ 105      =1  sbit TF2    = T2CON^7;
+ 106      =1  sbit EXF2   = T2CON^6;
+ 107      =1  sbit RCLK   = T2CON^5;
+ 108      =1  sbit TCLK   = T2CON^4;
+ 109      =1  sbit EXEN2  = T2CON^3;
+ 110      =1  sbit TR2    = T2CON^2;
+ 111      =1  sbit C_T2   = T2CON^1;
+ 112      =1  sbit CP_RL2 = T2CON^0;
+ 113      =1  
+ 114      =1  #endif
+   2          #include "lcd.h"
+   1      =1  #ifndef _LCD_H
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 3   
+
+   2      =1  #define _LCD_H
+   3      =1  
+   4      =1  #define LCD_DATA   P0
+   5      =1  sbit LCD_RS = P2^0;
+   6      =1  sbit LCD_RW = P2^1;
+   7      =1  sbit LCD_EN = P2^2;
+   8      =1  
+   9      =1  void LCD_Busy(void);
+  10      =1  void LCD_Wr_Command(unsigned char);
+  11      =1  void LCD_Wr_Data(unsigned char);
+  12      =1  void LCD_Wr_Char(unsigned char,unsigned char,unsigned char);
+  13      =1  void LCD_Wr_String(unsigned char,unsigned char,unsigned char *);
+  14      =1  void Print(unsigned char x,unsigned char y,unsigned char *str);
+  15      =1  void LCD_Init(void);
+  16      =1  void GoTo_XY(unsigned char x, unsigned char y);
+  17      =1  void LCD_Clear_All(void);
+  18      =1  void write_CGRAM(unsigned char add,unsigned char *p_tab,unsigned char size);
+  19      =1  
+  20      =1  #endif
+   3          
+   4          unsigned char Rec_Buffer[4];
+   5          #define DELAY_IIC_TIME 60 
+   6          #define TRUE 1
+   7          #define FALSE 0
+   8          
+   9          sbit SCL=P1^0;  //时钟线
+  10          sbit SDA=P1^1;    //数据线
+  11          
+  12          unsigned int money;
+  13          
+  14          bit err_flag;
+  15          
+  16          
+  17          //PC发送的命令
+  18          #define CardID_Addr     0x00    //卡号 地址       00~02
+  19          #define Password_Addr   0x0a    //密码             0a~0d
+  20          #define Money_Addr          0x0f        //金额             0f~10
+  21          
+  22          #define COM_RD_CARD 0x45   //上位机发的读卡命令
+  23          #define COM_WR_CARD 0x67        //上位机发的写卡命令
+  24          #define COM_ADD_MONEY 0xab      //上位机发的充钱命令
+  25          #define COM_DEC_MONEY 0x89      //上位机发的扣钱命令
+  26          
+  27          #define COM_WR_ERROR  0xdd      //出错
+  28          
+  29          #define FLAG_RD_OK      0x12            //上传的数据,表示读卡完毕
+  30          #define FLAG_WR_OK      0x34            //上传的数据,表示写卡完毕
+  31          #define FLAG_RD_ER      0x56            //上传的数据,表示读卡错误
+  32          #define FLAG_WR_ER      0x78            //上传的数据,表示写卡错误
+  33          #define FLAG_NO_MONEY 0x9a              //卡上金额不足
+  34          #define FLAG_FULL_MONEY 0xbc    //卡上金额过多
+  35          
+  36          #define adr_mon_h 0x0f  //钱的高位地址
+  37          #define adr_mon_l 0x10
+  38          
+  39          unsigned char Card_num[]={"ID:          "};
+  40          unsigned char Money_num[]={"MONEY:    .  "};
+  41          
+  42          bit Check_Acknowledge(void);
+  43          void I2C_Start(void);
+  44          void I2C_Stop(void);
+  45          unsigned char Read_One_Byte(unsigned char);
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 4   
+
+  46          unsigned char  ReadI2CByte(void);
+  47          void Send_0(void);
+  48          void Send_1(void);
+  49          void WriteI2CByte(unsigned char) ;
+  50          void Write_One_Byte(unsigned char,unsigned char);
+  51          
+  52          /********** Function Definition 函数定义 ************/
+  53          void DELAY_IIC(unsigned int t)
+  54          {
+  55   1              while(t!=0)
+  56   1              t--;
+  57   1      }
+  58          
+  59          
+  60          void I2C_Start(void)
+  61          {
+  62   1              SDA=1;
+  63   1              SCL=1;
+  64   1              DELAY_IIC(DELAY_IIC_TIME);
+  65   1              SDA=0;
+  66   1              DELAY_IIC(DELAY_IIC_TIME);
+  67   1              SCL=0;
+  68   1              DELAY_IIC(DELAY_IIC_TIME);
+  69   1      }
+  70          
+  71          
+  72          void I2C_Stop(void)
+  73          
+  74          {
+  75   1              SDA=0;
+  76   1              SCL=1;
+  77   1              DELAY_IIC(DELAY_IIC_TIME);
+  78   1              SDA=1;
+  79   1              DELAY_IIC(DELAY_IIC_TIME);
+  80   1              SCL=0;
+  81   1              DELAY_IIC(DELAY_IIC_TIME);
+  82   1      }
+  83          
+  84          
+  85          void Send_0(void)
+  86          {
+  87   1              SDA=0;
+  88   1              SCL=1;
+  89   1              DELAY_IIC(DELAY_IIC_TIME);
+  90   1              SCL=0;
+  91   1              DELAY_IIC(DELAY_IIC_TIME);
+  92   1      }
+  93          
+  94          void Send_1(void)
+  95          {
+  96   1              SDA=1;
+  97   1              SCL=1;
+  98   1              DELAY_IIC(DELAY_IIC_TIME);
+  99   1              SCL=0;
+ 100   1              DELAY_IIC(DELAY_IIC_TIME);
+ 101   1      }
+ 102          
+ 103          
+ 104          bit Check_Acknowledge(void)
+ 105          {
+ 106   1              SDA=1;
+ 107   1              SCL=1;
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 5   
+
+ 108   1              DELAY_IIC(DELAY_IIC_TIME/2);
+ 109   1              F0=SDA;
+ 110   1              DELAY_IIC(DELAY_IIC_TIME/2);
+ 111   1              SCL=0;
+ 112   1              DELAY_IIC(DELAY_IIC_TIME);
+ 113   1              if(F0==1)
+ 114   1                      return FALSE;
+ 115   1              return TRUE;
+ 116   1      }
+ 117          
+ 118          void WriteI2CByte(unsigned char b)
+ 119          {
+ 120   1              char i;
+ 121   1              for(i=0;i<8;i++)
+ 122   1                      if((b<<i)&0x80)
+ 123   1                              Send_1();
+ 124   1              else    
+ 125   1                      Send_0();
+ 126   1      }
+ 127          
+ 128          unsigned char ReadI2CByte(void)
+ 129          {
+ 130   1              unsigned char b=0,i;
+ 131   1              for(i=0;i<8;i++)
+ 132   1              {
+ 133   2                      SDA=1; 
+ 134   2                      SCL=1; 
+ 135   2                      DELAY_IIC(10);
+ 136   2                      F0=SDA;
+ 137   2                      DELAY_IIC(10);
+ 138   2                      SCL=0;
+ 139   2                      if(F0==1)
+ 140   2                      {
+ 141   3                              b=b<<1;
+ 142   3                              b=b|0x01;
+ 143   3                      }
+ 144   2                      else
+ 145   2                              b=b<<1;
+ 146   2              }
+ 147   1              return b;
+ 148   1      }
+ 149          
+ 150          /**********以下为读写24c02的函数**********/
+ 151          void Write_One_Byte(unsigned char addr,unsigned char thedata)
+ 152          {
+ 153   1              bit acktemp=1;
+ 154   1              I2C_Start();
+ 155   1              WriteI2CByte(0xa0);
+ 156   1              acktemp=Check_Acknowledge();
+ 157   1              WriteI2CByte(addr);
+ 158   1              acktemp=Check_Acknowledge();
+ 159   1              WriteI2CByte(thedata);
+ 160   1              acktemp=Check_Acknowledge();
+ 161   1              I2C_Stop();
+ 162   1      }       
+ 163          
+ 164          unsigned char Read_One_Byte(unsigned char addr) 
+ 165          { 
+ 166   1              bit acktemp=1;
+ 167   1              unsigned char mydata;
+ 168   1              I2C_Start();
+ 169   1              WriteI2CByte(0xa0);
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 6   
+
+ 170   1              acktemp=Check_Acknowledge();
+ 171   1              WriteI2CByte(addr);
+ 172   1              acktemp=Check_Acknowledge();
+ 173   1              I2C_Start();
+ 174   1              WriteI2CByte(0xa1);
+ 175   1              acktemp=Check_Acknowledge();
+ 176   1              mydata=ReadI2CByte();
+ 177   1              acktemp=Check_Acknowledge();
+ 178   1              return mydata;
+ 179   1              I2C_Stop();
+ 180   1      }
+ 181          
+ 182          char Num2Char(unsigned char ch)
+ 183          {
+ 184   1              if(ch<=9)
+ 185   1                      return (ch+'0');
+ 186   1              else return (ch-10+'a');
+ 187   1      }
+ 188          
+ 189          void System_Init(void)
+ 190          {
+ 191   1              TMOD=0x21;              //串行口初始化
+ 192   1              TH1=0xfd;TL1=0xfd;      //设定波特率  9600  
+ 193   1              PCON=0x00;
+ 194   1              TR1=1;                  //启动T1
+ 195   1              SCON=0x50;      //串行口工作在方式1，并允许接收 
+ 196   1              EA=1;                   
+ 197   1              ES=1;   
+ 198   1      }
+ 199          
+ 200          void main(void)
+ 201          {
+ 202   1              System_Init();          //初始化
+ 203   1              LCD_Init();
+ 204   1      
+ 205   1              while(1)
+ 206   1              {
+ 207   2              //////////////此代码用来测试IIC读写/////////////////
+ 208   2      #ifdef _IIC_DUBG                 
+                               Write_One_Byte(0,2); //ADD0 写入数据2
+                               Write_One_Byte(1,7); //ADD1 写入数据3
+                               LCD_Wr_Char(0,0,Read_One_Byte(0)+'0');  //读取24C02 并在LM016显示
+                               LCD_Wr_Char(1,0,Read_One_Byte(1)+'0');          
+              #endif           
+ 214   2              //////////////////IIC测试结束//////////////////////////
+ 215   2                      Money_num[6]=((money/10000)%10)+'0';
+ 216   2                      Money_num[7]=((money/1000)%10)+'0';
+ 217   2                      Money_num[8]=((money/100)%10)+'0';
+ 218   2                      Money_num[9]=((money/10)%10)+'0';
+ 219   2                      Money_num[11]=(money%10)+'0';
+ 220   2      
+ 221   2                      LCD_Wr_String(0,0,Card_num);
+ 222   2                      LCD_Wr_String(0,1,Money_num);
+ 223   2              }
+ 224   1      
+ 225   1      }
+ 226          
+ 227          //IC卡读和写子程序,中断 
+ 228          void rxdata(void) interrupt 4 using 0
+ 229          {
+ 230   1              unsigned char i,j;
+ 231   1              unsigned char rdbuf[20]; //读取卡中的数据缓冲
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 7   
+
+ 232   1              unsigned char RxBuf[20];  //读取串口数据缓冲
+ 233   1              EA=0;
+ 234   1              for(i=0;i<2;i++) ////读取命令,第一个字节为命令字节,第二个字节为在第二个字节之后还有多少个字节      
+ 235   1              {
+ 236   2                      while(!RI);
+ 237   2                      RI=0;
+ 238   2                      RxBuf[i]=SBUF;  
+ 239   2              }
+ 240   1      
+ 241   1              if(RxBuf[1]!=0)   //如果字节数不是0，则继续读取剩余的数据
+ 242   1              {
+ 243   2                      for(i=0;i<RxBuf[1];i++)
+ 244   2                      {
+ 245   3                              while(!RI);
+ 246   3                              RI=0;
+ 247   3                              RxBuf[2+i]=SBUF; 
+ 248   3                      }
+ 249   2              }
+ 250   1      
+ 251   1              if(RxBuf[0]==COM_RD_CARD) //读卡命令
+ 252   1              {
+ 253   2                      err_flag=0;
+ 254   2                      rdbuf[0]=Read_One_Byte(CardID_Addr);   //读卡中的ID号
+ 255   2                      rdbuf[1]=Read_One_Byte(CardID_Addr+1);
+ 256   2                      rdbuf[2]=Read_One_Byte(CardID_Addr+2);
+ 257   2                      rdbuf[3]=Read_One_Byte(CardID_Addr+3);
+ 258   2                      rdbuf[4]=Read_One_Byte(CardID_Addr+4);
+ 259   2      
+ 260   2                      rdbuf[5]=Read_One_Byte(Money_Addr);
+ 261   2                      rdbuf[6]=Read_One_Byte(Money_Addr+1);
+ 262   2      
+ 263   2                      SBUF= COM_RD_CARD; //发送读卡命令返回PC
+ 264   2      
+ 265   2                      while(!TI);
+ 266   2                      TI=0;
+ 267   2      
+ 268   2                      for(j=0;j<7;j++) //发送卡数据返回PC
+ 269   2                      {
+ 270   3                              SBUF=rdbuf[j];
+ 271   3                              while(!TI);
+ 272   3                              TI=0;
+ 273   3                      }
+ 274   2      
+ 275   2                Card_num[3]=(rdbuf[0]>>4) +'0';         
+ 276   2                        Card_num[4]=(rdbuf[0]&0x0f) +'0';  
+ 277   2                        Card_num[5]=(rdbuf[1]>>4) + '0';
+ 278   2                        Card_num[6]=(rdbuf[1]&0x0f) + '0';
+ 279   2                        Card_num[7]=(rdbuf[2]>>4) + '0';
+ 280   2                        Card_num[8]=(rdbuf[2]&0x0f) + '0';
+ 281   2                        Card_num[9]=(rdbuf[3]>>4) + '0';
+ 282   2                        Card_num[10]=(rdbuf[3]&0x0f) + '0';
+ 283   2                        Card_num[11]=(rdbuf[4]>>4) + '0';
+ 284   2                        Card_num[12]=(rdbuf[4]&0x0f) + '0';
+ 285   2                              
+ 286   2                        money=rdbuf[5]*256+rdbuf[6];
+ 287   2      
+ 288   2              }
+ 289   1              else if(RxBuf[0]==COM_WR_CARD) //写卡命令
+ 290   1              {
+ 291   2                      err_flag=0;
+ 292   2                      Write_One_Byte(CardID_Addr,RxBuf[2]); //写卡号
+ 293   2                      Write_One_Byte(CardID_Addr+1,RxBuf[3]);
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 8   
+
+ 294   2                      Write_One_Byte(CardID_Addr+2,RxBuf[4]);
+ 295   2                      Write_One_Byte(CardID_Addr+3,RxBuf[5]);
+ 296   2                      Write_One_Byte(CardID_Addr+4,RxBuf[6]);
+ 297   2      
+ 298   2                      Write_One_Byte(Money_Addr,RxBuf[7]);
+ 299   2                      Write_One_Byte(Money_Addr+1,RxBuf[8]);
+ 300   2                      SBUF=COM_WR_CARD;while(!TI);TI=0;
+ 301   2                      SBUF=COM_WR_CARD;while(!TI);TI=0;
+ 302   2                      SBUF=COM_WR_CARD;while(!TI);TI=0;
+ 303   2                      /*if((Read_One_Byte(CardID_Addr)!=RxBuf[2])
+ 304   2                       ||(Read_One_Byte(CardID_Addr+1)!=RxBuf[3])
+ 305   2                       ||(Read_One_Byte(CardID_Addr+2)!=RxBuf[4])
+ 306   2                       ||(Read_One_Byte(CardID_Addr+3)!=RxBuf[5])
+ 307   2                       ||(Read_One_Byte(CardID_Addr+4)!=RxBuf[6]))
+ 308   2                       err_flag=1;
+ 309   2      
+ 310   2                      if(!err_flag)
+ 311   2                      {
+ 312   2                              SBUF=COM_WR_CARD;while(!TI);TI=0;
+ 313   2                              SBUF=COM_WR_CARD;while(!TI);TI=0;
+ 314   2                              SBUF=COM_WR_CARD;while(!TI);TI=0;
+ 315   2                              SBUF=COM_WR_CARD;while(!TI);TI=0;
+ 316   2                      }
+ 317   2                      else
+ 318   2                      {
+ 319   2                              SBUF=COM_WR_ERROR;
+ 320   2                              while(!TI);
+ 321   2                              TI=0;
+ 322   2                      } */
+ 323   2              }
+ 324   1              else if(RxBuf[0]==COM_ADD_MONEY) //充钱命令
+ 325   1              {
+ 326   2                      err_flag=0;
+ 327   2                      money=Read_One_Byte(Money_Addr)*256+Read_One_Byte(Money_Addr+1);
+ 328   2                      money += (RxBuf[7]*256 + RxBuf[8]);
+ 329   2      
+ 330   2                      if( Read_One_Byte(Money_Addr)!=(money/256)
+ 331   2                       || Read_One_Byte(Money_Addr+1)!=(money%256))
+ 332   2                              err_flag=1;
+ 333   2      
+ 334   2                      if(!err_flag)
+ 335   2                      {
+ 336   3                              SBUF=COM_ADD_MONEY;
+ 337   3                              while(!TI);
+ 338   3                              TI=0;
+ 339   3                      }else 
+ 340   2                      {
+ 341   3                              SBUF=COM_WR_ERROR;
+ 342   3                              while(!TI);
+ 343   3                              TI=0;
+ 344   3                      } 
+ 345   2              }
+ 346   1              else if(RxBuf[0]==COM_DEC_MONEY)
+ 347   1              {
+ 348   2                               err_flag=0;
+ 349   2                               money=Read_One_Byte(Money_Addr)*256+Read_One_Byte(Money_Addr+1);
+ 350   2                               money -= (RxBuf[7]*256 + RxBuf[8]); 
+ 351   2      
+ 352   2                               Write_One_Byte(Money_Addr,money/256);
+ 353   2                               Write_One_Byte(Money_Addr+1,money%256);          
+ 354   2      
+ 355   2                               if( Read_One_Byte(Money_Addr)!=(money/256)
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 9   
+
+ 356   2                                       || Read_One_Byte(Money_Addr+1)!=(money%256))
+ 357   2                               err_flag=1;
+ 358   2      
+ 359   2                               if(!err_flag)
+ 360   2                               {
+ 361   3                                      SBUF=COM_DEC_MONEY;
+ 362   3                                      while(!TI);
+ 363   3                                      TI=0;
+ 364   3                               }else 
+ 365   2                               {
+ 366   3                                      SBUF=COM_WR_ERROR;
+ 367   3                                      while(!TI);
+ 368   3                                      TI=0;
+ 369   3                               }              
+ 370   2              }
+ 371   1              EA=1;
+ 372   1      
+ 373   1      }
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 10  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+System_Init. . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+P1 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0090H  1
+P2 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A0H  1
+P3 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B0H  1
+EA . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AFH  1
+_DELAY_IIC . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0008H  -----
+  t. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_INT    0006H  2
+rxdata . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+  j. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+  rdbuf. . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    0000H  20
+  RxBuf. . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    0014H  20
+IE . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A8H  1
+ES . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ACH  1
+IP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B8H  1
+RI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0098H  1
+Send_0 . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+Send_1 . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+TI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0099H  1
+main . . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+money. . . . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    0000H  2
+Check_Acknowledge. . . . . . . . . . .  PUBLIC   CODE   PROC     0008H  -----
+Card_num . . . . . . . . . . . . . . .  PUBLIC   DATA   ARRAY    0002H  14
+I2C_Start. . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+SBUF . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0099H  1
+PCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0087H  1
+SCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0098H  1
+TMOD . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0089H  1
+TCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0088H  1
+_LCD_Wr_String . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+Money_num. . . . . . . . . . . . . . .  PUBLIC   DATA   ARRAY    0010H  14
+_Num2Char. . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  ch . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+_WriteI2CByte. . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  b. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   CHAR     0004H  1
+I2C_Stop . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+err_flag . . . . . . . . . . . . . . .  PUBLIC   DATA   BIT      0000H  1
+LCD_Init . . . . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+TH1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008DH  1
+TL1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008BH  1
+ReadI2CByte. . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  b. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0004H  1
+TR1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008EH  1
+_Read_One_Byte . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  addr . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0003H  1
+  acktemp. . . . . . . . . . . . . . .  AUTO     DATA   BIT      0000H  1
+  mydata . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+SDA. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0091H  1
+Rec_Buffer . . . . . . . . . . . . . .  PUBLIC   DATA   ARRAY    001EH  4
+SCL. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0090H  1
+T2CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C8H  1
+_Write_One_Byte. . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  addr . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0002H  1
+  thedata. . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0003H  1
+  acktemp. . . . . . . . . . . . . . .  AUTO     DATA   BIT      0000H  1
+C51 COMPILER V8.02   MCUTEST                                                               03/26/2009 15:06:07 PAGE 11  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+F0 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D5H  1
+PSW. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D0H  1
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1022    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     34      40
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1       2
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

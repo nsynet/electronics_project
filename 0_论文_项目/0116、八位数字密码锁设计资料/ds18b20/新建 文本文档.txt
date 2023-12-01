@@ -1,0 +1,126 @@
+#include<reg52.h>
+#include<stdio.h>
+#define uchar  unsigned char
+#define uint   unsigned int
+ uchar code xuhao[2][8]= {{ 0x28 ,0xC5 ,0x39, 0xE1, 0x00 ,0x00 ,0x00 ,0xDB ,},
+                          { 0x28 ,0xF0 ,0x2D ,0xE1 ,0x00 ,0x00 ,0x00, 0xBE ,}  //18b20的序号代码，通过另一个软件读出来的
+                         };  
+#define  read_r 0x33 /////////////读代码  ///////////////////////////////
+#define tg_r 0xcc ///////////////跳过     //主机检测到18B20的存在时    //
+#define pipei_r 0x55//////////////匹配    // 所要发出的命令            //
+#define  sousuo_r 0xf0////////////搜索代码//                           //
+#define  gj_r 0xec///////////告警       ///////////////////////////////
+#define  start 0x44 ///////////开始温度变换
+#define  xie_r 0x4e///////////改写ROM
+#define  du_r  0xbe////////////读温度值
+sbit DQ=P1^0;
+void delay(uchar n)  ////////////////延时
+ {
+  uchar i;
+  for(i=0;i<n;i++);
+ }
+ uchar reset(void)//////////////////////复位函数//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ {uchar ready,j;
+  DQ=0;
+  delay(100); //480~960
+  DQ=1;
+  for(j=0;j<6;j++); /*delay(3); *///15~60
+  ready=DQ;
+  delay(80);
+  return(ready);
+ }
+ uchar read_bit(void) ///////////////////读（传字节）//////////////////////////////////////////////////////////////////////////
+{
+ uchar i;
+ DQ=0;
+ for(i=0;i<2;i++);
+ DQ=1;
+ return(DQ);
+}
+ uchar read_byte(void)//////////////////读数据////////////////////////////////////////////////////////////////////////////////
+ {
+   uchar i,m=1,shuju=0;
+   for(i=0;i<8;i++)
+   {
+    if(read_bit()) {shuju=shuju+(m<<i);}
+    delay(2);
+    }
+   return(shuju);
+ }
+ void write_bit(uchar i)//////////////////传序号位/////////////////////////////////////////////////////////////////////////////////
+ {
+  DQ=0;
+  if(i==1) DQ=1;
+  delay(6);
+  DQ=1;
+ }
+ void xiem(uchar bian)/////////////////////写序号码//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ {
+   uchar i,shuju ,j;
+   for(i=0;i<8;i++)
+   { for(j=0;j<8;j++)
+    { shuju=xuhao[bian][i]>>j;
+      shuju=shuju&0x01;
+      write_bit(shuju);
+      delay(2);
+    }
+   }
+ }
+
+ void chuan_bit(uchar i)//////////////////传字节/////////////////////////////////////////////////////////////////////////////////
+ {
+  DQ=0;
+  if(i==1) DQ=1;
+  delay(6);
+  DQ=1;
+ }
+ void write(uchar xie)/////////////////////写数据//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ {
+   uchar i,shuju ;
+   for(i=0;i<8;i++)
+   {
+    shuju=xie>>i;
+    shuju=shuju&0x01;
+    chuan_bit(shuju);
+    delay(2);
+   }
+ }
+ void main()
+ {
+  uchar fuhaowei,wenduzhi,l;////////////////温度值
+   TMOD=0X20 ;
+   TH1=0XFD;TH1=0XFD; //定时益处
+   SCON=0XD8; //11011000
+   PCON=0X00;
+   TR1=1;
+ 
+  {
+   reset();
+   write(tg_r); ///////////发出跳过ROM的命令
+   write(start);///////////开始转换温度
+  
+   for(l=0;l<2;l++)////////因为线上带了两个从机
+   {
+    reset();
+    write(pipei_r); ///////////发命令开始搜索
+    xiem(l);//////////写代码
+    write(du_r); ///////////读温度值
+    wenduzhi= read_byte(); //////////读低八位温度值
+    fuhaowei=read_byte(); //////////读高八位温度值
+    /*if(fuhaowei|0xf8){}//表示有负温度
+    else{wenduzhi=fuhaowei<<4|wenduzhi>>4;}  */
+    wenduzhi=((fuhaowei&0x07)<<4)|(wenduzhi>>4);
+    SBUF=wenduzhi;
+    while(TI==0);
+    TI=0;
+    //P0=wenduzhi; //实际的温度值了
+    //P2=fuhaowei; //判断是正温读值还负温度值；1是负温度。0是正温度
+    }
+   }  while(1);
+ }
+
+
+
+
+
+

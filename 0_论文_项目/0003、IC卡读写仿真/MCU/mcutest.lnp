@@ -1,0 +1,5 @@
+"STARTUP.obj",
+"mcutest.obj",
+"lcd.obj" 
+TO "mcutest" 
+RAMSIZE(256) 

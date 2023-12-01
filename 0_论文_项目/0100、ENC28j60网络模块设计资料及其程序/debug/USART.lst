@@ -1,0 +1,83 @@
+C51 COMPILER V8.02   USART                                                                 02/13/2011 01:07:26 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE USART
+OBJECT MODULE PLACED IN .\debug\USART.obj
+COMPILER INVOKED BY: E:\WorkSpace\Keil UV3\C51\BIN\C51.EXE USART.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\debug\USART.l
+                    -st) OBJECT(.\debug\USART.obj)
+
+line level    source
+
+   1          #include "USART.h"
+   2          #include "STC12C5A.h"
+   3          #define BAUD 9600
+   4          //串口初始化
+   5          void USART_Init()
+   6          {
+   7   1              PCON &= 0x7f;           //波特率不倍速 SMOD=0
+   8   1              SCON = 0x50;            //8位数据,可变波特率
+   9   1              AUXR |= 0x40;           //定时器1时钟为Fosc,即1T
+  10   1              AUXR &= 0xfe;           //串口1选择定时器1为波特率发生器
+  11   1              TMOD &= 0x0f;           //清除定时器1模式位
+  12   1              TMOD |= 0x20;           //设定定时器1为8位自动重装方式
+  13   1              TL1 = 0xB2;                     //设定定时初值
+  14   1              TH1 = 0xB2;                     //设定定时器重装值
+  15   1              ET1 = 0;                        //禁止定时器1中断
+  16   1              TR1 = 1;                        //启动定时器1
+  17   1              ES = 1;                         //开串行中断
+  18   1              EA = 1;                         //开总中断
+  19   1      }         
+  20          
+  21          //发送一个字符,ASCII码
+  22          void SendASC(unsigned char d)
+  23          {
+  24   1              
+  25   1              SBUF=d;
+  26   1              while(!TI);     //等待发送完成,TI置位
+  27   1              TI=0;
+  28   1      }
+  29          
+  30          //发送字符串
+  31          void SendString(unsigned char *str)     
+  32          {
+  33   1              while(*str)
+  34   1              {
+  35   2                      SendASC(*str) ;
+  36   2                      str++;
+  37   2              }
+  38   1      }
+  39          
+  40          
+  41          //串口中断服务程序
+  42          void USART_Interrupt(void)  interrupt 4   //放在这里 和放在main（）里面是一样的
+  43          {
+  44   1              unsigned char RxData=0;
+  45   1              EA=0; 
+  46   1              if(RI)                  //必须判断RI(接收中断标志)是否为1
+  47   1          {
+  48   2              RI=0;
+  49   2              RxData = SBUF;  //在这里添加你的接收代码
+  50   2                      SendString("The word you send is ");
+  51   2                      SendASC(RxData);
+  52   2                      SendASC('\n');
+  53   2          }
+  54   1              EA=1;
+C51 COMPILER V8.02   USART                                                                 02/13/2011 01:07:26 PAGE 2   
+
+  55   1      }
+  56          
+  57          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    130    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,211 @@
+C51 COMPILER V8.05a   CHENGXU                                                              09/01/2009 15:02:53 PAGE 1   
+
+
+C51 COMPILER V8.05a, COMPILATION OF MODULE CHENGXU
+OBJECT MODULE PLACED IN chengxu.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE chengxu.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          
+   3          #define WC              0x00
+   4          #define RC              0x10
+   5          #define WTP             0x20
+   6          #define RTP             0x21
+   7          #define WTA             0x22
+   8          #define RTA             0x23
+   9          #define RRP             0x24
+  10          //#define BYTE_BIT0     0x01
+  11          #define uchar unsigned char
+  12          #define uint  unsigned int
+  13          unsigned char idata RFConf[11]=
+  14          {
+  15            0x00,                             //配置命令//
+  16            0x4c,                             //CH_NO,配置频段在423MHZ
+  17            0x0c,                             //输出功率为10db,不重发，节电为正常模式
+  18            0x44,                             //地址宽度设置，为4字节
+  19            0x03,0x03,                        //接收发送有效数据长度为3字节
+  20            0xCC,0xCC,0xCC,0xCC,              //接收地址
+  21            0x58,                             //CRC充许，8位CRC校验，外部时钟信号不使能，16M晶振
+  22          };
+  23          
+  24          unsigned char led[]={0X01,0X37,0X42,0X22,0X34,0X28,0X08,0X33,0X00,0X20};//预发送数据码
+  25           unsigned char send_bruff[3]={0X01,0X01,0X01};
+  26          unsigned char TxAddress[4]={0xcc,0xcc,0xcc,0xcc};       //地址码
+  27          //unsigned char rx_bruff;    
+  28          bdata unsigned  char DATA_BUF;             
+  29          sbit flag=DATA_BUF^7;
+  30          
+  31          sbit AM=P3^7;    //      8
+  32          sbit CD=P3^6;    //      7
+  33          sbit CSN=P1^0;   //13
+  34          sbit SCK=P1^1;   //     12
+  35          sbit MISO=P1^2;  //     10
+  36          sbit MOSI=P1^3;  //     11
+  37          sbit DR=P1^4;    //     9
+  38          sbit PWR=P1^5;   //     5
+  39          sbit TRX_CE=P1^6;//     4
+  40          sbit TXEN=P1^7;  //     3
+  41          
+  42          sbit add_n=P2^3;        
+  43          sbit send=P2^2;
+  44          sbit led0 =P3^0;
+  45          sbit led1 =P3^1;
+  46          sbit led2 =P3^2;
+  47          
+  48          //---------------延时--------------//
+  49          void Delay(unsigned char n)
+  50          {
+  51   1              unsigned int i;
+  52   1              while(n--)
+  53   1              for(i=0;i<80;i++);
+  54   1      
+  55   1      }
+C51 COMPILER V8.05a   CHENGXU                                                              09/01/2009 15:02:53 PAGE 2   
+
+  56          //--------------------------------11.0592M晶振  n=100 868us 左右-------------------------------
+  57          //------------------------------------------  毫秒延时         -----------------------------------------
+  58          void Delay_ms(uchar n)
+  59          { 
+  60   1              unsigned int i,j,k;
+  61   1      
+  62   1              for(i=0;i<n;i++)
+  63   1              {
+  64   2                      for(k=0;k<5;k++)
+  65   2                      {
+  66   3                              for(j=0;j<200;j++);     
+  67   3                      }
+  68   2              }
+  69   1      }
+  70          //------------SPI写操作代码---------//
+  71          
+  72          void SpiWrite(unsigned char send)
+  73          {
+  74   1              unsigned char i;
+  75   1              DATA_BUF=send;
+  76   1              for (i=0;i<8;i++)
+  77   1              {
+  78   2                      if (flag)       //总是发送最高位
+  79   2                      {
+  80   3                              MOSI=1;
+  81   3                      }
+  82   2                      else
+  83   2                      {
+  84   3                              MOSI=0;
+  85   3                      }
+  86   2                      SCK=1;
+  87   2                      DATA_BUF=DATA_BUF<<1;
+  88   2                      SCK=0;
+  89   2              }
+  90   1      }
+  91          
+  92          //-------------初始化设置---------------//
+  93          void nRF905Init(void)
+  94          {
+  95   1          CSN=1;                                              // Spi  disable
+  96   1              SCK=0;                                          // Spi clock line init low
+  97   1              DR=0;                                           //  DR=1  接收准备。DR＝0 发送准备  
+  98   1              AM=0;                                           // Init AM for input
+  99   1              CD=0;                                           // Init CD for input
+ 100   1              PWR=1;                                      // nRF905 power on
+ 101   1              TRX_CE=0;                                       // Set nRF905 in standby mode
+ 102   1              TXEN=0;                                     // set radio in Rx mode
+ 103   1      }
+ 104          
+ 105          
+ 106          //----------设置配置寄存器-------//
+ 107          void Config905(void)
+ 108          {
+ 109   1              unsigned char i;
+ 110   1              CSN=0;                                          
+ 111   1              //SpiWrite(WC);                         
+ 112   1              for (i=0;i<11;i++)      
+ 113   1              {
+ 114   2                 SpiWrite(RFConf[i]);
+ 115   2              }
+ 116   1              CSN=1;                                  
+ 117   1      }
+C51 COMPILER V8.05a   CHENGXU                                                              09/01/2009 15:02:53 PAGE 3   
+
+ 118          
+ 119          
+ 120          //------------发送数据-------------//
+ 121          void TxPacket()
+ 122          {
+ 123   1         unsigned char i,j;
+ 124   1         CSN=0;
+ 125   1         
+ 126   1         SpiWrite(WTP);
+ 127   1                      for(j=0;j<3;j++)
+ 128   1                        {
+ 129   2                   SpiWrite(send_bruff[1]); //循环3次发送3个字节
+ 130   2                 }
+ 131   1        CSN=1;
+ 132   1        Delay(1);                                             
+ 133   1        CSN=0;        
+ 134   1        SpiWrite(WTA);                                        // Write address command
+ 135   1        for (i=0;i<4;i++)                     // Write 4 bytes address
+ 136   1                 {
+ 137   2                       SpiWrite(TxAddress[1]);
+ 138   2                  }
+ 139   1        CSN=1;
+ 140   1        Delay(1);
+ 141   1        TRX_CE=1;
+ 142   1        Delay(1);
+ 143   1        TRX_CE=0;
+ 144   1      }
+ 145          //-----------------set send  mode-----------------//
+ 146          void SetTxMode(void)
+ 147          {
+ 148   1              
+ 149   1          TRX_CE=0;
+ 150   1              TXEN=1;
+ 151   1              Delay(1);                                       // delay for mode change(>=650us)
+ 152   1      }
+ 153          
+ 154          //-----------------按键发送函数---------------------------------
+ 155          void sender_bruff() 
+ 156          {
+ 157   1                                  
+ 158   1                        SetTxMode();
+ 159   1                                        Delay_ms(10);
+ 160   1                        TxPacket();    //发送数据
+ 161   1                        Delay_ms(100);    
+ 162   1      }
+ 163          
+ 164          //************************main function/***********************// 
+ 165          void main()
+ 166           {
+ 167   1         
+ 168   1         nRF905Init();  //初始化设置
+ 169   1         Config905();   //设置配置寄存器
+ 170   1         while(1)
+ 171   1               {
+ 172   2                              if(add_n==0)
+ 173   2                                      {  
+ 174   3                               sender_bruff();
+ 175   3                                       Delay_ms(100);
+ 176   3                                   }          
+ 177   2                                        
+ 178   2                                                  
+ 179   2               }
+C51 COMPILER V8.05a   CHENGXU                                                              09/01/2009 15:02:53 PAGE 4   
+
+ 180   1      
+ 181   1                              
+ 182   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    246    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18    ----
+   IDATA SIZE       =     11    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

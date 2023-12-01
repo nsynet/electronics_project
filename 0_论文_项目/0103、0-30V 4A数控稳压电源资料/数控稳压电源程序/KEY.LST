@@ -1,0 +1,97 @@
+C51 COMPILER V8.08   KEY                                                                   10/01/2008 23:53:32 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN KEY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE KEY.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #include"function.h"
+   3          
+   4          sbit clk_574_2 = P1^3;
+   5          sbit lcd_rs    = P1^4;
+   6          sbit RS = P1^4;
+   7          sbit RW = P1^5;
+   8          
+   9          sbit key1 = P1^1;
+  10          sbit key2 = P1^2;
+  11          
+  12          uchar key_data;
+  13          
+  14          #define DBUS P0
+  15          /************************************************************************************
+  16          *按键扫描 
+  17          *返回键值    
+  18          ************************************************************************************/
+  19          uchar key_sm()
+  20          {
+  21   1              RS  =  1;                       
+  22   1              RW  =  0;       //--------避免液晶屏干扰数据总线 
+  23   1              key1 = 1;
+  24   1              key2 = 1;       //--------按键置高电平  
+  25   1              key_data = 0xff;
+  26   1                 DBUS = 0xff;
+  27   1                 clk_574_2 = 0;       
+  28   1                 clk_574_2 = 1;
+  29   1              if(key1 == 0){key_data = key_enter;}
+  30   1                 DBUS = 0xfe;
+  31   1                 clk_574_2 = 0;       
+  32   1             clk_574_2 = 1;
+  33   1              if(key1 == 0){key_data = key_9;}
+  34   1              if(key2 == 0){key_data = key_dian;}
+  35   1                 DBUS = 0xfd;
+  36   1                 clk_574_2 = 0;       
+  37   1                 clk_574_2 = 1;
+  38   1              if(key1 == 0){key_data = key_6;}
+  39   1              if(key2 == 0){key_data = key_3;}
+  40   1                 DBUS = 0xfb;
+  41   1                 clk_574_2 = 0;       
+  42   1                 clk_574_2 = 1;
+  43   1              if(key1 == 0){key_data = key_5;}
+  44   1              if(key2 == 0){key_data = key_2;}
+  45   1                 DBUS = 0xf7;
+  46   1                 clk_574_2 = 0;       
+  47   1                 clk_574_2 = 1;
+  48   1              if(key1 == 0){key_data = key_8;}
+  49   1              if(key2 == 0){key_data = key_0;}
+  50   1                 DBUS = 0xef;
+  51   1                 clk_574_2 = 0;       
+  52   1                 clk_574_2 = 1;
+  53   1              if(key1 == 0){key_data = key_4;}
+  54   1              if(key2 == 0){key_data = key_1;}
+  55   1                      DBUS = 0xdf;
+C51 COMPILER V8.08   KEY                                                                   10/01/2008 23:53:32 PAGE 2   
+
+  56   1                      clk_574_2 = 0;  
+  57   1                      clk_574_2 = 1;  
+  58   1              if(key1 == 0){key_data = key_7;}
+  59   1              if(key2 == 0){key_data = key_esc;}
+  60   1                      DBUS = 0xbf;
+  61   1                      clk_574_2 = 0;  
+  62   1                      clk_574_2 = 1;  
+  63   1              if(key1 == 0){key_data = key_you;}
+  64   1              if(key2 == 0){key_data = key_xia;}
+  65   1                      DBUS = 0x7f;
+  66   1                      clk_574_2 = 0;  
+  67   1                      clk_574_2 = 1;          
+  68   1              if(key1 == 0){key_data = key_zuo;}
+  69   1              if(key2 == 0){key_data = key_shang;}
+  70   1      
+  71   1              return  key_data;       
+  72   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    179    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

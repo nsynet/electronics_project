@@ -1,0 +1,327 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+D:\Proteus\PC-51 Communication\test\MCU\mcutest.uv2
+Project File Date:  03/25/2009
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_ONE_BYTE?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ_ONE_BYTE?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCD_WR_STRING?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=33.4 xdata=0 code=841
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 7 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+MCUTEST.C(209): error C202: 'money': undefined identifier
+MCUTEST.C(210): error C202: 'money': undefined identifier
+MCUTEST.C(211): error C202: 'money': undefined identifier
+MCUTEST.C(212): error C202: 'money': undefined identifier
+MCUTEST.C(213): error C202: 'money': undefined identifier
+compiling lcd.c...
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_ONE_BYTE?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=92.4 xdata=0 code=1295
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 5 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_ONE_BYTE?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=92.4 xdata=0 code=1295
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 5 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_ONE_BYTE?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=91.4 xdata=0 code=1294
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 5 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_ONE_BYTE?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=90.4 xdata=0 code=1395
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 5 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=90.4 xdata=0 code=1521
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=100.4 xdata=0 code=1521
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=100.4 xdata=0 code=1523
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=100.4 xdata=0 code=1523
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+MCUTEST.C(220): error C141: syntax error near ')'
+compiling lcd.c...
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=101.4 xdata=0 code=1567
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=101.4 xdata=0 code=1524
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=101.4 xdata=0 code=1636
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=101.4 xdata=0 code=1766
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=101.4 xdata=0 code=1770
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=101.4 xdata=0 code=1797
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=101.4 xdata=0 code=1797
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=101.4 xdata=0 code=1707
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling mcutest.c...
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUM2CHAR?MCUTEST
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_PRINT?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_CGRAM?LCD
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CLEAR_ALL?LCD
+Program Size: data=101.4 xdata=0 code=1723
+creating hex file from "mcutest"...
+"mcutest" - 0 Error(s), 4 Warning(s).

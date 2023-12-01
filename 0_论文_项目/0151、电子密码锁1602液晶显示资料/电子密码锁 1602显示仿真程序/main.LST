@@ -1,0 +1,206 @@
+C51 COMPILER V8.01   MAIN                                                                  03/08/2008 20:16:56 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: G:\keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //作者QQ:497259320
+   2          //南阳理工学院
+   3          //学习是遗忘的最好的方式
+   4          //只花了很少时间写的,有很多不足的算法与编程序方式,见谅!
+   5          #include"at89x51.h"
+   6          #include"key.h"
+   7          #include"lcd.h"
+   8          uchar code show_0[]="Please input the password:";
+   9          uchar code show_1[]="The cipher is:" ;
+  10          uchar code show_2[]="********";
+  11          uchar code show_3[]="The password is wrong!";
+  12          uchar code show_4[]="This is the last time,";
+  13          uchar code show_5[]="Please try it tomorrow!";
+  14          uchar code show_6[]="you are right!";
+  15          uchar code show_7[]="Please input the new cipher:";
+  16          uchar code show_8[]="Input it again!";
+  17          uchar code show_9[]="Establishes successful! ";
+  18          uchar code show_10[]="(^_^)";
+  19          uchar  init_pswd[]={8,8,8,8,8,8,8,8};
+  20          uchar  pswd[8]={0};
+  21          uchar  pswd_1[8]={0};
+  22          void play(uchar *j,uchar k)       //K是显示的个数,j是地址
+  23          {
+  24   1         uchar  i;
+  25   1         for(i=0;i<k;i++)
+  26   1         {
+  27   2          dat_w(*(j+i));
+  28   2              delay(20);
+  29   2         }
+  30   1      }
+  31          main()
+  32          {
+  33   1        uchar j=0,i=0,sum_1=0;
+  34   1        loop:init();
+  35   1        clear();
+  36   1        gotoxy(1,0);
+  37   1        play(show_0,16);
+  38   1        gotoxy(2,0);
+  39   1        play(show_0+17,10);
+  40   1        /****密码输入****/
+  41   1        do
+  42   1        {
+  43   2          key();
+  44   2        }
+  45   1        while(ki!=15);
+  46   1        clear();
+  47   1        gotoxy(1,0);
+  48   1        play(show_1,15);
+  49   1        do
+  50   1        {
+  51   2          flag=0;
+  52   2          key();
+  53   2              gotoxy(2,0);
+  54   2              if(flag==1&&ki<=9)
+  55   2               {
+C51 COMPILER V8.01   MAIN                                                                  03/08/2008 20:16:56 PAGE 2   
+
+  56   3                pswd[i]=ki;
+  57   3                play(show_2,i);
+  58   3                i++;
+  59   3               }
+  60   2              if(ki==14)      //14则退出.
+  61   2                break;
+  62   2         }    
+  63   1         while(i<=8);
+  64   1         for(i=0;i<=7;i++)
+  65   1         {
+  66   2           sum_1=init_pswd[i]-pswd[i]+sum_1;
+  67   2           if(sum_1!=0)
+  68   2               {
+  69   3                 clear();
+  70   3                 j++;
+  71   3                 if(j==3)
+  72   3                 {
+  73   4                  clear();
+  74   4                  gotoxy(1,0);
+  75   4                  play(show_4,16);
+  76   4                      gotoxy(2,0);
+  77   4                      play(show_4+16,14);
+  78   4                      delay(500);
+  79   4                      delay(500);
+  80   4                      clear();
+  81   4                      gotoxy(1,0);
+  82   4                      play(show_5+7,16);
+  83   4                      gotoxy(2,5);
+  84   4                      play(show_10,5);
+  85   4                  while(1);   //三次输入密码失败,自锁
+  86   4                 }
+  87   3                 gotoxy(1,0);
+  88   3                 play(show_3,16);
+  89   3                 gotoxy(2,5);
+  90   3                 play(show_3+15,7);
+  91   3                 delay(500);
+  92   3                 clear();
+  93   3                 gotoxy(1,0);
+  94   3                 play(show_8,15);
+  95   3                 goto loop;
+  96   3                }
+  97   2                if(sum_1==0) 
+  98   2                {
+  99   3                 
+ 100   3                 clear();
+ 101   3                 gotoxy(1,0);
+ 102   3                 play(show_6,15);
+ 103   3                 do
+ 104   3                 {
+ 105   4                 key();
+ 106   4                 }
+ 107   3                 while(ki!=13);
+ 108   3                 loop1:clear();
+ 109   3                 gotoxy(1,0);
+ 110   3                 play(show_7,13);
+ 111   3                 gotoxy(2,0);
+ 112   3                 play(show_7+13,15);
+ 113   3                 /****第一次输密码***/
+ 114   3                 i=0;
+ 115   3                  do
+ 116   3                  {
+ 117   4                        flag=0;
+C51 COMPILER V8.01   MAIN                                                                  03/08/2008 20:16:56 PAGE 3   
+
+ 118   4                key();
+ 119   4                        if(flag==1&&ki<=9)
+ 120   4                    {
+ 121   5                     pswd[i]=ki;
+ 122   5                         i++;
+ 123   5                         clear();
+ 124   5                         gotoxy(1,0);
+ 125   5                         play(show_2,i);
+ 126   5                         }
+ 127   4                       }while(i<=7);
+ 128   3                       clear();
+ 129   3                       gotoxy(1,0);
+ 130   3                   play(show_8,15);
+ 131   3                 /***第二次输密码****/
+ 132   3                       i=0;
+ 133   3                       sum_1=0;
+ 134   3                  do
+ 135   3                  {
+ 136   4                        flag=0;
+ 137   4                key();
+ 138   4                        if(flag==1&&ki<=9)
+ 139   4                    {
+ 140   5                     pswd_1[i]=ki;
+ 141   5                         i++;
+ 142   5                         clear();
+ 143   5                         gotoxy(1,0);
+ 144   5                         play(show_2,i);
+ 145   5                         }
+ 146   4                       }
+ 147   3                       while(i<=7);
+ 148   3                       for(i=0;i<=7;i++)
+ 149   3                        {
+ 150   4                         sum_1=sum_1+ pswd_1[i]-pswd[i];
+ 151   4                         }
+ 152   3                       if(sum_1==0)
+ 153   3                         {
+ 154   4                          clear();
+ 155   4                              gotoxy(1,2);
+ 156   4                              play(show_9,12);
+ 157   4                              gotoxy(2,2);
+ 158   4                              play(show_9+13,11);
+ 159   4                              for(i=0;i<=7;i++)
+ 160   4                              {
+ 161   5                              init_pswd[i]=pswd[1];
+ 162   5                               }
+ 163   4                              while(1);
+ 164   4                         }
+ 165   3                       if(sum_1!=0)
+ 166   3                         {
+ 167   4                           clear();
+ 168   4                           goto loop1;
+ 169   4                         }
+ 170   3                }       
+ 171   2          } 
+ 172   1                 
+ 173   1               
+ 174   1       }  
+ 175            
+ 176            
+ 177            
+
+
+C51 COMPILER V8.01   MAIN                                                                  03/08/2008 20:16:56 PAGE 4   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    829    ----
+   CONSTANT SIZE    =    212    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     26       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

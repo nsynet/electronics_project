@@ -1,0 +1,256 @@
+#include<reg52.h>
+
+#define WC		0x00
+#define RC		0x10
+#define WTP		0x20
+#define RTP		0x21
+#define WTA		0x22
+#define RTA		0x23
+#define RRP		0x24
+#define BYTE_BIT0	0x01
+#define uchar unsigned char
+#define uint unsigned int
+unsigned char idata RFConf[11]=
+{
+  0x00,                             //配置命令//
+  0x4c,                             //CH_NO,配置频段在423MHZ
+  0x0c,                             //输出功率为10db,不重发，节电为正常模式
+  0x44,                             //地址宽度设置，为4字节
+  0x01,0x01,                        //接收发送有效数据长度为1字节
+  0xCC,0xCC,0xCC,0xCC,              //接收地址
+  0x58,                             //CRC充许，8位CRC校验，外部时钟信号不使能，16M晶振
+};
+unsigned char led[]={0X01,0X37,0X42,0X22,
+                          0X34,0X28,0X08,0X33,0X00,0X20};//预发送数据码
+unsigned char send_bruff[3]={0X01,0X01,0X01};	 //发送数据码
+unsigned char TxAddress[4]={0xcc,0xcc,0xcc,0xcc};   //接收方的地址 
+unsigned char TxRxBuffer;          //用于存放接收到的数据  
+	 unsigned char k;   
+bdata unsigned  char DATA_BUF;        
+sbit flag=DATA_BUF^7;  //数据发送时用的可位操作的变量    
+ 
+//*************管脚定义********************************//
+sbit AM=P3^7;
+sbit CD=P3^6;
+sbit CSN=P1^0;
+sbit SCK=P1^1;
+sbit MISO=P1^2;
+sbit MOSI=P1^3;
+sbit DR=P1^4;
+sbit PWR=P1^5;
+sbit TRX_CE=P1^6;
+sbit TXEN=P1^7;
+//按键定义
+sbit send=P3^2;        
+sbit add=P3^3;
+sbit led0=P3^0;
+sbit led1=P3^1;
+sbit led2=P3^5;
+//×××××××××××延时×××××××××××××××//
+void Delay(unsigned char n)
+{
+	unsigned int i;
+	while(n--)
+	for(i=0;i<80;i++);
+}
+void Delay_ms(uchar n)     //毫秒延时
+{ 
+  unsigned int i,j,k;
+
+  for(i=0;i<n;i++)
+	  {
+		for(k=0;k<5;k++)
+		   {
+			 for(j=0;j<200;j++);	
+	    	}
+      }
+}
+//********************SPI写操作代码*********************//
+void SpiWrite(unsigned char send)
+{
+	unsigned char i;
+	DATA_BUF=send;
+	for (i=0;i<8;i++)
+	{
+		if (flag)	//总是发送最高位
+		{
+			MOSI=1;
+		}
+		else
+		{
+			MOSI=0;
+		}
+		SCK=1;
+		DATA_BUF=DATA_BUF<<1;      //左移一位
+		SCK=0;
+	}
+}
+//**************IO口初始化设置***********************//
+void nRF905Init(void)
+{
+    CSN=1;						// Spi 	disable
+	SCK=0;						// Spi clock line init low
+	DR=1;						// Init DR for input
+	AM=0;						// Init AM for input
+	CD=0;						// Init CD for input
+	PWR=1;					    // nRF905 power on
+	TRX_CE=0;					// Set nRF905 in standby mode
+	TXEN=0;					    // set radio in Rx mode
+}
+//*****************配置905内部寄存器*********************//
+void Config905(void)
+{
+	unsigned char i;
+	CSN=0;						
+	for (i=0;i<11;i++)	
+	{
+	   SpiWrite(RFConf[i]);
+	}
+	CSN=1;					
+}
+
+
+
+
+//******************发送数据********************//
+void TxPacket(unsigned char Txdate)
+{ 
+  unsigned char i;
+   CSN=0;   
+   SpiWrite(WTP);
+       SpiWrite(Txdate);      
+   CSN=1;
+   Delay(1);						
+	CSN=0;	
+   SpiWrite(WTA);				        // Write address command
+	for (i=0;i<4;i++)			// Write 4 bytes address
+	{
+		SpiWrite(TxAddress[i]);
+	}
+	CSN=1;
+ Delay(1);
+ TRX_CE=1;
+ Delay(1);
+ TRX_CE=0;
+}
+//*****************设置为发送模式************************//
+void SetTxMode(void)
+{	
+TRX_CE=0;
+	TXEN=1;
+	Delay(1); 					// delay for mode change(>=650us)
+}
+////////////////////%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%////
+
+
+
+
+//*********************SPI读操作代码************************//
+unsigned char SpiRead(void)
+{
+	unsigned char j;
+	for (j=0;j<8;j++)
+	{
+        DATA_BUF=DATA_BUF<<1;
+		SCK=1;
+		if (MISO)	//读取最高位，保存至最末尾，通过左移位完成整个字节
+		{
+			DATA_BUF|=BYTE_BIT0;
+		}
+		else
+		{
+			DATA_BUF&=~BYTE_BIT0;
+		}
+		SCK=0;
+	 }
+	 return DATA_BUF;
+}
+//-*********************设置为发送状态********************-//
+void SetRxMode(void)
+{
+	TXEN=0;
+	TRX_CE=1;
+	Delay(1); 					// delay for mode change(>=650us)
+}
+//********************读取RF905接收数据*********************//
+void RxPacket(void)						
+{
+	unsigned char i;
+    Delay(1);			
+    Delay(100);
+    TRX_CE=0;		 // Set nRF905 in standby mode
+	CSN=0;						// Spi enable for write a spi command
+    Delay(1);
+	SpiWrite(RRP);
+	for (i = 0 ;i < 1 ;i++)
+	{ 
+		TxRxBuffer=SpiRead();		// Read data and save to buffer       
+	}
+	CSN=1;   
+    Delay(10);
+	TRX_CE=1;							
+}
+//*******************检查是否有新数据传入********************//
+unsigned char CheckDR(void)		//检查是否有新数据传入 Data Ready
+{
+	if (DR)                    //当数据完全接收DR为1
+	{
+       return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+//*******************数据接收******************************//
+void  RX(void)
+{
+          SetRxMode();			      // Set nRF905 in Rx mode
+          while (CheckDR()==0);       //RX wait
+		  Delay(10);
+	  	  RxPacket();
+		  Delay(10);
+}
+//*********************LED  and  ISD*************************//
+void led_isd()
+{
+  led0=~led0;
+  led1=~led1;
+  led2= ~led2;
+  
+}
+
+//&&&&&&&&&&&&&&&&&&&
+int0()  interrupt 0 using 0
+	{
+	   SetTxMode();
+	   TxPacket(led[k]); 
+	  
+	  	
+	}
+int2()  interrupt 2 using 2
+	{ 	    
+			   Delay_ms(1000);
+                 k++;
+				 if(k==10)k=0;
+			
+	}	
+//***********************main function***********************//
+void main()
+ {
+   EX0=1;
+   IT0=1;
+   EX1=1;
+   IT1=1;
+    EA=1;
+   nRF905Init();
+   Config905();
+   while(1)
+         {
+		  RX();
+		 // EA=1;	
+	      if(TxRxBuffer==0x11) led_isd(); 
+	 
+			                         
+         }		
+}
