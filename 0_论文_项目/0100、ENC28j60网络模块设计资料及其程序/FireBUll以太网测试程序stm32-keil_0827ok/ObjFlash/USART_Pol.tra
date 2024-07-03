@@ -1,0 +1,27 @@
+*** Creating Trace Output File '..\ObjFlash\USART_Pol.tra' Ok.
+### Preparing for ADS-LD.
+### Creating ADS-LD Command Line
+### List of Objects: adding '"..\objflash\retarget.o"'
+### List of Objects: adding '"..\objflash\stm32_init.o"'
+### List of Objects: adding '"..\objflash\main.o"'
+### List of Objects: adding '".\STM32F10xR.LIB"'
+### List of Objects: adding '"..\objflash\ip_arp_udp_tcp.o"'
+### List of Objects: adding '"..\objflash\simple_server.o"'
+### List of Objects: adding '"..\objflash\enc28j60.o"'
+### List of Objects: adding '"..\objflash\spi.o"'
+### List of Objects: adding '"..\objflash\stm32f10x.o"'
+### ADS-LD Command completed:
+--device DARMSTM "..\objflash\retarget.o" "..\objflash\stm32_init.o" "..\objflash\main.o" ".\STM32F10xR.LIB" "..\objflash\ip_arp_udp_tcp.o" "..\objflash\simple_server.o" "..\objflash\enc28j60.o" "..\objflash\spi.o" "..\objflash\stm32f10x.o" --strict --scatter "..\ObjFlash\USART_Pol.sct" 
+--autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list "..\LstFlash\USART_Pol.map" -o "..\ObjFlash\USART_Pol.axf"### Preparing Environment (PrepEnvAds)
+### ADS-LD Output File: '..\ObjFlash\USART_Pol.axf'
+### ADS-LD Command File: '..\ObjFlash\USART_Pol.lnp'
+### Checking for dirty Components...
+### Creating CmdFile '..\ObjFlash\USART_Pol.lnp', Handle=0x00000338
+### Writing '.lnp' file
+### ADS-LD Command file '..\ObjFlash\USART_Pol.lnp' is ready.
+### ADS-LD: About to start ADS-LD Thread.
+### ADS-LD: executed with 0 errors
+### Updating obj list
+### LDADS_file() completed.

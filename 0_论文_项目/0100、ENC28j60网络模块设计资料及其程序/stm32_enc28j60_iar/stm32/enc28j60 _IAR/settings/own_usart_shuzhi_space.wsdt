@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+  <CurrentConfigs><Project>usart_sendshuzhi_520/Debug</Project></CurrentConfigs></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>281</Column0><Column1>6</Column1><Column2>27</Column2><Column3>1242260</Column3></ColumnWidths>
+      </Workspace>
+      <Build>
+        
+        
+        
+        
+      <PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Debug-Log</Factory></Window></Windows></PreferedWindows><ColumnWidth0>23</ColumnWidth0><ColumnWidth1>915</ColumnWidth1><ColumnWidth2>244</ColumnWidth2><ColumnWidth3>61</ColumnWidth3></Build>
+      <TerminalIO/>
+    <Debug-Log><PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Build</Factory></Window></Windows></PreferedWindows></Debug-Log><Disassembly><MixedMode>1</MixedMode><CodeCovShow>0</CodeCovShow></Disassembly></Static>
+    <Windows>
+      
+      
+    <Wnd0>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-29505-10007</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>usart_sendshuzhi_520</ExpandedNode><ExpandedNode>usart_sendshuzhi_520/EWARM</ExpandedNode><ExpandedNode>usart_sendshuzhi_520/Output</ExpandedNode><ExpandedNode>usart_sendshuzhi_520/TCPIP</ExpandedNode><ExpandedNode>usart_sendshuzhi_520/User</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd0><Wnd2><Tabs><Tab><Identity>TabID-18464-1400</Identity><TabName>Build</TabName><Factory>Build</Factory><Session/></Tab><Tab><Identity>TabID-7156-775</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd2></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>F:\b&#x767e;&#x5229;&#x80DC;\enc28j60\enc28j60 _IAR\TCPIP\ENC28J60.C</Filename><XPos>3</XPos><YPos>148</YPos><SelStart>2642</SelStart><SelEnd>2642</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>F:\b&#x767e;&#x5229;&#x80DC;\enc28j60\enc28j60 _IAR\TCPIP\simple_server.c</Filename><XPos>0</XPos><YPos>152</YPos><SelStart>5651</SelStart><SelEnd>5651</SelEnd></Tab><ActiveTab>1</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>F:\b&#x767e;&#x5229;&#x80DC;\enc28j60\enc28j60 _IAR\TCPIP\ip_arp_udp_tcp.c</Filename><XPos>0</XPos><YPos>285</YPos><SelStart>8088</SelStart><SelEnd>8114</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>F:\b&#x767e;&#x5229;&#x80DC;\enc28j60\enc28j60 _IAR\main.c</Filename><XPos>0</XPos><YPos>118</YPos><SelStart>4816</SelStart><SelEnd>4829</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>F:\b&#x767e;&#x5229;&#x80DC;\enc28j60\enc28j60 _IAR\TCPIP\enc28j60.h</Filename><XPos>0</XPos><YPos>228</YPos><SelStart>8187</SelStart><SelEnd>8187</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-00be84b0><key>iaridepm.enu1</key></Toolbar-00be84b0></Sizes></Row0></Top><Left><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>467</Bottom><Right>334</Right><x>-2</x><y>-2</y><xscreen>0</xscreen><yscreen>0</yscreen><sizeHorzCX>0</sizeHorzCX><sizeHorzCY>0</sizeHorzCY><sizeVertCX>328125</sizeVertCX><sizeVertCY>677746</sizeVertCY></Rect></Wnd0></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>180</Bottom><Right>1026</Right><x>-2</x><y>-2</y><xscreen>1028</xscreen><yscreen>182</yscreen><sizeHorzCX>1003906</sizeHorzCX><sizeHorzCY>263006</sizeHorzCY><sizeVertCX>107422</sizeVertCX><sizeVertCY>263006</sizeVertCY></Rect></Wnd2></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+

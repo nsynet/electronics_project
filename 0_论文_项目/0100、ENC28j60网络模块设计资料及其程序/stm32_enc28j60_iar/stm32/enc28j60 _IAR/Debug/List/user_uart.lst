@@ -1,0 +1,170 @@
+###############################################################################
+#                                                                             #
+#                                                       21/Apr/2009  21:08:12 #
+# IAR ANSI C/C++ Compiler V5.20.2.21007/W32 EVALUATION for ARM                #
+# Copyright 1999-2008 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\user_uart.c            #
+#    Command line =  "F:\b百利胜\enc28j60\enc28j60 _IAR\user_uart.c" -lcN     #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -lb      #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -o       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\" --no_cse  #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "D:\Program  #
+#                    Files\IAR Systems\Embedded Workbench 5.0                 #
+#                    Evaluation\ARM\INC\DLib_Config_Full.h" -I                #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\EWARM_V2.0.2\library\inc\" -I                       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\EWARM_V2.0.2\" -I     #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\" -I                  #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\" -I            #
+#                    "D:\Program Files\IAR Systems\Embedded Workbench 5.0     #
+#                    Evaluation\ARM\INC\" -Ol                                 #
+#    List file    =  F:\b百利胜\enc28j60\enc28j60                             #
+#                    _IAR\Debug\List\user_uart.lst                            #
+#    Object file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\user_uart.o  #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+F:\b百利胜\enc28j60\enc28j60 _IAR\user_uart.c
+      1          
+      2          
+      3          /* Includes ------------------------------------------------------------------*/
+      4          #include "user_uart.h"
+      5          
+      6          void UART1_NVIC_Configuration(void)
+      7          {
+      8             NVIC_InitTypeDef NVIC_InitStructure;
+      9            
+     10            /* Configure the NVIC Preemption Priority Bits */  
+     11            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+     12            
+     13            /* Enable the USART1 Interrupt */
+     14            NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQChannel;
+     15            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+     16            NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+     17            NVIC_Init(&NVIC_InitStructure);
+     18          }
+     19          /*******************************************************************************
+     20          * Function Name  : UART1_Configuration
+     21          * Description    : Configures the uart1 
+     22          * Input          : None
+     23          * Output         : None
+     24          * Return         : None
+     25          *******************************************************************************/
+     26          void UART1_Configuration(void)
+     27          {
+     28            USART_InitTypeDef USART_InitStructure;
+     29            /* USART1 configured as follow:
+     30                  - BaudRate = 9600 baud  
+     31                  - Word Length = 8 Bits
+     32                  - One Stop Bit
+     33                  - No parity
+     34                  - Hardware flow control disabled (RTS and CTS signals)
+     35                  - Receive and transmit enabled
+     36            */
+     37            USART_InitStructure.USART_BaudRate = 9600;
+     38            USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+     39            USART_InitStructure.USART_StopBits = USART_StopBits_1;
+     40            USART_InitStructure.USART_Parity = USART_Parity_No ;
+     41            USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+     42            USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+     43            /* Configure the USART1*/ 
+     44            USART_Init(USART1, &USART_InitStructure);
+     45          
+     46            /* Enable USART1 Receive and Transmit interrupts */
+     47            USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+     48            /* Enable the USART1 */
+     49            USART_Cmd(USART1, ENABLE);  
+     50          }
+     51          
+     52          
+     53          /*******************************************************************************
+     54          * Function Name  : UART1_GPIO_Configuration
+     55          * Description    : Configures the uart1 GPIO ports.
+     56          * Input          : None
+     57          * Output         : None
+     58          * Return         : None
+     59          *******************************************************************************/
+     60          void UART1_GPIO_Configuration(void)
+     61          {
+     62            GPIO_InitTypeDef GPIO_InitStructure;
+     63            // Configure USART1_Tx as alternate function push-pull 
+     64            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+     65            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+     66            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+     67            GPIO_Init(GPIOA, &GPIO_InitStructure);
+     68          
+     69            // Configure USART1_Rx as input floating 
+     70            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+     71            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+     72            GPIO_Init(GPIOA, &GPIO_InitStructure);  
+     73          }
+     74          
+     75          
+     76          /*******************************************************************************
+     77          * Function Name  : Uart1_PutChar
+     78          * Description    : printf a char to the uart.
+     79          * Input          : ch 需要发送的字符 
+     80          * Output         : None
+     81          * Return         : None
+     82          *******************************************************************************/
+     83          u8 Uart1_PutChar(u8 ch)//发送一个字符
+     84          {
+     85            /* Write a character to the USART */
+     86            USART_SendData(USART1, (u8) ch);
+     87            while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+     88            {
+     89            }
+     90            return ch;
+     91          }
+     92          
+     93          /*******************************************************************************
+     94          * Function Name  : Uart1_PutString
+     95          * Description    : print a string to the uart1
+     96          * Input          : buf为发送数据的地址 , len为发送字符的个数
+     97          * Output         : None
+     98          * Return         : None
+     99          *******************************************************************************/
+    100          void Uart1_PutString(u8* buf , u8 len)//发送一个字符串
+    101          {
+    102              for(u8 i=0;i<len;i++)
+    103              {
+    104                  Uart1_PutChar(*buf++);
+    105              }
+    106          }
+    107          
+
+   Maximum stack usage in bytes:
+
+     Function                 .cstack
+     --------                 -------
+     UART1_Configuration           0
+     UART1_GPIO_Configuration      0
+     UART1_NVIC_Configuration      0
+     Uart1_PutChar                 0
+     Uart1_PutString               0
+
+
+   Section sizes:
+
+     Function/Label           Bytes
+     --------------           -----
+     UART1_NVIC_Configuration   36
+     UART1_Configuration        72
+     UART1_GPIO_Configuration   60
+     Uart1_PutChar              34
+     Uart1_PutString            30
+     ??DataTable4                4
+
+ 
+ 236 bytes in section .text
+ 
+ 236 bytes of CODE memory
+
+Errors: none
+Warnings: none

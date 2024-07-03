@@ -1,0 +1,67 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.12.0.0
+Copyright (C) 2014 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Martin Zhang, M.Z, LIC=1WS63-AF3J4-JM098-3MQTC-PI1FD-VQ5K6
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.12.0.0
+Toolchain Path:  F:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 (build 41)
+Assembler:       Armasm.exe V5.05 (build 41)
+Linker/Locator:  ArmLink.exe V5.05 (build 41)
+Library Manager: ArmAr.exe V5.05 (build 41)
+Hex Converter:   FromElf.exe V5.05 (build 41)
+CPU DLL:         SARMCM3.DLL V5.12.0.0
+Dialog DLL:      DCM.DLL V1.13.0.0
+    Target DLL: STLink\ST-LINKIII-KEIL_SWO.dll
+Dialog DLL:      TCM.DLL V1.14.2.0
+ 
+<h2>Project:</h2>
+G:\SmartLED\software\code\SmartLED\Projects\MDK-ARM\SmartLED.uvproj
+Project File Date:  12/21/2014
+
+<h2>Output:</h2>
+Build target 'SmartLED Configuration'
+compiling main.c...
+..\..\Src\main.c(254): warning:  #177-D: variable "chByte" was declared but never referenced
+        uint8_t chByte;
+..\..\Src\main.c(427): warning:  #177-D: function "task_delay" was declared but never referenced
+  static  fsm_rt_t task_delay(void)
+..\..\Src\main.c(237): warning:  #550-D: variable "s_bFlag" was set but never used
+  static bool s_bFlag = false;
+..\..\Src\main.c: 3 warnings, 0 errors
+linking...
+Program Size: Code=6372 RO-data=272 RW-data=44 ZI-data=1196  
+"SmartLED Configuration\SmartLED Configuration.axf" - 0 Error(s), 3 Warning(s).
+Load "SmartLED Configuration\\SmartLED Configuration.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+</pre>
+</body>
+</html>
+(s).
+Load "SmartLED Configuration\\SmartLED Configuration.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Done.
+Verify OK.
+compiling main.c...
+..\..\Src\main.c(282): warning:  #177-D: function "task_receive" was declared but never referenced
+  static fsm_rt_t task_receive(void)
+..\..\Src\main.c(362): warning:  #177-D: function "task_adjust" was declared but never referenced
+  static fsm_rt_t task_adjust(void)
+..\..\Src\main.c(411): warning:  #177-D: function "task_delay" was declared but never referenced
+  static  fsm_rt_t task_delay(void)
+..\..\Src\main.c(237): warning:  #550-D: variable "s_bFlag" was set but never used
+  static bool s_bFlag = false;
+..\..\Src\main.c: 4 warnings, 0 errors
+"..\..\Src\main.c" - 0 Error(s), 4 Warning(s).
+ static bool s_bFlag = false;
+..\..\Src\main.c: 5 warnings, 0 errors
+"..\..\Src\main.c" - 0 Error(s), 5 Warning(s).

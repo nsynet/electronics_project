@@ -1,0 +1,77 @@
+Configuration	homekits
+STM32CubeMX 	4.6.0
+Date	01/28/2015
+MCU	STM32F072RBTx
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+ADC	IN0	ADC_IN0	PA0
+RCC	Crystal/Ceramic Resonator	RCC_OSC_IN	PF0-OSC_IN
+RCC	Crystal/Ceramic Resonator	RCC_OSC_OUT	PF1-OSC_OUT
+RCC	Crystal/Ceramic Resonator	RCC_OSC32_IN	PC14-OSC32_IN
+RCC	Crystal/Ceramic Resonator	RCC_OSC32_OUT	PC15-OSC32_OUT
+RTC	Internal Alarm A	RTC_VS_RTC_Alarm_A_Intern	VP_RTC_VS_RTC_Alarm_A_Intern
+RTC	Internal WakeUp	RTC_VS_RTC_WakeUp_intern	VP_RTC_VS_RTC_WakeUp_intern
+SPI1	Full-Duplex Master	SPI1_MISO	PA6
+SPI1	Full-Duplex Master	SPI1_MOSI	PA7
+SPI1	Full-Duplex Master	SPI1_SCK	PB3
+SYS	Serial-WireDebug	SYS_SWCLK	PA14
+SYS	Serial-WireDebug	SYS_SWDIO	PA13
+TIM1	Internal Clock	TIM1_VS_ClockSourceINT	VP_TIM1_VS_ClockSourceINT
+TIM1	PWM Generation CH2	TIM1_CH2	PA9
+TIM2	Internal Clock	TIM2_VS_ClockSourceINT	VP_TIM2_VS_ClockSourceINT
+USART2	Asynchronous	USART2_RX	PA3
+USART2	Asynchronous	USART2_TX	PA2
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+3	PC14-OSC32_IN	RCC_OSC32_IN	
+4	PC15-OSC32_OUT	RCC_OSC32_OUT	
+5	PF0-OSC_IN	RCC_OSC_IN	
+6	PF1-OSC_OUT	RCC_OSC_OUT	
+8	PC0	GPIO_Output	SPI1_CS
+9	PC1	GPIO_Output	SPI1_DC
+10	PC2	GPIO_Output	DS18B20_DATA
+14	PA0	ADC_IN0	
+16	PA2	USART2_TX	USART_TX
+17	PA3	USART2_RX	USART_RX
+21	PA5	GPIO_Output	LD2 [Green Led]
+22	PA6	SPI1_MISO	
+23	PA7	SPI1_MOSI	
+26	PB0	GPIO_Output	SPI1_RST
+34	PB13	GPIO_EXTI13	
+41	PA8	GPIO_Input	PIR_IN
+42	PA9	TIM1_CH2	
+46	PA13	SYS_SWDIO	TMS
+49	PA14	SYS_SWCLK	TCK
+55	PB3	SPI1_SCK	
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : homekits
+Project Folder : C:\Users\New\Documents\stm32\f072\homekits
+Toolchain / IDE : MDK-ARM 4.73
+Firmware Package Name and Version : STM32Cube FW_F0 V1.2.1
+
+
+Code Generation Settings : 
+STM32Cube Firmware Library Package : Copy all used libraries into the project folder
+Generate peripheral initialization as a pair of '.c/.h' files per IP : Yes
+Backup previously generated files when re-generating : No
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : No
+
+
+Toolchains Settings : 
+Compiler Optimizations : Balanced Size/Speed
+
+
+
+
+
+

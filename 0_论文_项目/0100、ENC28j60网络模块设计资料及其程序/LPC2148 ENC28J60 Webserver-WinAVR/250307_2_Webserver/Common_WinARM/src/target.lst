@@ -1,0 +1,250 @@
+   1              		.file	"target.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	IRQ_Exception
+  13              	IRQ_Exception:
+  14              	.LFB2:
+  15              		.file 1 "../Common_WinARM/src/target.c"
+   1:../Common_WinARM/src/target.c **** /*****************************************************************************
+   2:../Common_WinARM/src/target.c ****  *   target.c:  Target C file for Philips LPC214x Family Microprocessors
+   3:../Common_WinARM/src/target.c ****  *
+   4:../Common_WinARM/src/target.c ****  *   Copyright(C) 2006, Philips Semiconductor
+   5:../Common_WinARM/src/target.c ****  *   All rights reserved.
+   6:../Common_WinARM/src/target.c ****  *
+   7:../Common_WinARM/src/target.c ****  *   History
+   8:../Common_WinARM/src/target.c ****  *   2005.10.01  ver 1.00    Prelimnary version, first Release
+   9:../Common_WinARM/src/target.c ****  *
+  10:../Common_WinARM/src/target.c **** *****************************************************************************/
+  11:../Common_WinARM/src/target.c **** 
+  12:../Common_WinARM/src/target.c **** #include "LPC214x.h"
+  13:../Common_WinARM/src/target.c **** #include "type.h"
+  14:../Common_WinARM/src/target.c **** #include "irq.h"
+  15:../Common_WinARM/src/target.c **** #include "target.h"
+  16:../Common_WinARM/src/target.c **** 
+  17:../Common_WinARM/src/target.c **** /*****************************************************************************
+  18:../Common_WinARM/src/target.c **** ** Function name:		IRQ_Exception
+  19:../Common_WinARM/src/target.c **** **
+  20:../Common_WinARM/src/target.c **** ** Descriptions:		interrupt exceptional handler , change it as needed
+  21:../Common_WinARM/src/target.c **** **
+  22:../Common_WinARM/src/target.c **** ** parameters:			None
+  23:../Common_WinARM/src/target.c **** ** Returned value:		None
+  24:../Common_WinARM/src/target.c **** ** 
+  25:../Common_WinARM/src/target.c **** *****************************************************************************/
+  26:../Common_WinARM/src/target.c **** void IRQ_Exception(void) __irq;
+  27:../Common_WinARM/src/target.c **** void IRQ_Exception(void) __irq  
+  28:../Common_WinARM/src/target.c **** {
+  16              	 Function supports interworking.
+  17              		@ args = 0, pretend = 0, frame = 0
+  18              		@ frame_needed = 0, uses_anonymous_args = 0
+  19              		@ link register save eliminated.
+  20              		@ lr needed for prologue
+  21              	.L3:
+  22              		b	.L3
+  23 0000 FEFFFFEA 	.LFE2:
+  25              		.align	2
+  26              		.global	FIQ_Exception
+  28              	FIQ_Exception:
+  29              	.LFB3:
+  30              		.loc 1 43 0
+  29:../Common_WinARM/src/target.c ****     while(1);                   /*  change it to your code */
+  30:../Common_WinARM/src/target.c **** }
+  31:../Common_WinARM/src/target.c **** 
+  32:../Common_WinARM/src/target.c **** /*****************************************************************************
+  33:../Common_WinARM/src/target.c **** ** Function name:		FIQ_Exception
+  34:../Common_WinARM/src/target.c **** **
+  35:../Common_WinARM/src/target.c **** ** Descriptions:		Fast interrupt exceptional handler , change it as needed
+  36:../Common_WinARM/src/target.c **** **
+  37:../Common_WinARM/src/target.c **** ** parameters:			None
+  38:../Common_WinARM/src/target.c **** ** Returned value:		None
+  39:../Common_WinARM/src/target.c **** **
+  40:../Common_WinARM/src/target.c **** ******************************************************************************/
+  41:../Common_WinARM/src/target.c **** void FIQ_Exception(void) __fiq;
+  42:../Common_WinARM/src/target.c **** void FIQ_Exception(void) __fiq 
+  43:../Common_WinARM/src/target.c **** {
+  31              	ports interworking.
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35              		.loc 1 43 0
+  36              		@ lr needed for prologue
+  37              	.L7:
+  38              		b	.L7
+  39 0004 FEFFFFEA 	.LFE3:
+  41              		.align	2
+  42              		.global	TargetInit
+  44              	TargetInit:
+  45              	.LFB4:
+  46              		.loc 1 58 0
+  44:../Common_WinARM/src/target.c ****     while(1);                   /* change it to your code */
+  45:../Common_WinARM/src/target.c **** }
+  46:../Common_WinARM/src/target.c **** 
+  47:../Common_WinARM/src/target.c **** /******************************************************************************
+  48:../Common_WinARM/src/target.c **** ** Function name:		TargetInit
+  49:../Common_WinARM/src/target.c **** **
+  50:../Common_WinARM/src/target.c **** ** Descriptions:		Initialize the target board; it is called in a necessary 
+  51:../Common_WinARM/src/target.c **** **				place, change it as needed
+  52:../Common_WinARM/src/target.c **** **
+  53:../Common_WinARM/src/target.c **** ** parameters:			None
+  54:../Common_WinARM/src/target.c **** ** Returned value:		None
+  55:../Common_WinARM/src/target.c **** ** 
+  56:../Common_WinARM/src/target.c **** ******************************************************************************/
+  57:../Common_WinARM/src/target.c **** void TargetInit(void)
+  58:../Common_WinARM/src/target.c **** {
+  47              	orts interworking.
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50              		@ link register save eliminated.
+  51              		.loc 1 58 0
+  52              		@ lr needed for prologue
+  53              		.loc 1 60 0
+  59:../Common_WinARM/src/target.c ****     /* Add your codes here */
+  60:../Common_WinARM/src/target.c **** }
+  54              	.LFE4:
+  56              		.align	2
+  57              		.global	TargetResetInit
+  59              	TargetResetInit:
+  60              	.LFB5:
+  61              		.loc 1 75 0
+  62              		@ Function supports interworking.
+  61:../Common_WinARM/src/target.c **** 
+  62:../Common_WinARM/src/target.c **** /******************************************************************************
+  63:../Common_WinARM/src/target.c **** ** Function name:		TargetResetInit
+  64:../Common_WinARM/src/target.c **** **
+  65:../Common_WinARM/src/target.c **** ** Descriptions:		Initialize the target board before running the main() 
+  66:../Common_WinARM/src/target.c **** **				function; User may change it as needed, but may not 
+  67:../Common_WinARM/src/target.c **** **				deleted it.
+  68:../Common_WinARM/src/target.c **** **
+  69:../Common_WinARM/src/target.c **** ** parameters:			None
+  70:../Common_WinARM/src/target.c **** ** Returned value:		None
+  71:../Common_WinARM/src/target.c **** ** 
+  72:../Common_WinARM/src/target.c **** ******************************************************************************/
+  73:../Common_WinARM/src/target.c **** /* mthomas: all reset-initialisation is done in startup.S */
+  74:../Common_WinARM/src/target.c **** void TargetResetInit(void)
+  75:../Common_WinARM/src/target.c **** {
+  63              	 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  66              		.loc 1 89 0
+  67              		ldr	r2, .L17
+  76:../Common_WinARM/src/target.c **** #ifdef __DEBUG_RAM    
+  77:../Common_WinARM/src/target.c ****     MEMMAP = 0x2;                   /* set remap register */
+  78:../Common_WinARM/src/target.c **** #endif
+  79:../Common_WinARM/src/target.c **** 
+  80:../Common_WinARM/src/target.c **** #ifdef __DEBUG_FLASH    
+  81:../Common_WinARM/src/target.c ****     MEMMAP = 0x1;                   /* set remap register */
+  82:../Common_WinARM/src/target.c **** #endif
+  83:../Common_WinARM/src/target.c **** 
+  84:../Common_WinARM/src/target.c **** #ifdef __IN_CHIP    
+  85:../Common_WinARM/src/target.c ****     MEMMAP = 0x1;                   /* set remap register */
+  86:../Common_WinARM/src/target.c **** #endif
+  87:../Common_WinARM/src/target.c **** 
+  88:../Common_WinARM/src/target.c ****     /* Set system timers for each component */
+  89:../Common_WinARM/src/target.c ****     PLLCON = 1;
+  68              	r3, #1
+  69 000c 64209FE5 		str	r3, [r2, #128]
+  70 0010 0130A0E3 		.loc 1 91 0
+  71 0014 803082E5 		mov	r3, #0
+  90:../Common_WinARM/src/target.c **** #if (Fpclk / (Fcclk / 4)) == 1
+  91:../Common_WinARM/src/target.c ****     VPBDIV = 0;
+  72              		r3, [r2, #256]
+  73 0018 0030A0E3 		.loc 1 104 0
+  74 001c 003182E5 		add	r3, r3, #36
+  92:../Common_WinARM/src/target.c **** #endif
+  93:../Common_WinARM/src/target.c **** #if (Fpclk / (Fcclk / 4)) == 2
+  94:../Common_WinARM/src/target.c ****     VPBDIV = 2;
+  95:../Common_WinARM/src/target.c **** #endif
+  96:../Common_WinARM/src/target.c **** #if (Fpclk / (Fcclk / 4)) == 4
+  97:../Common_WinARM/src/target.c ****     VPBDIV = 1;
+  98:../Common_WinARM/src/target.c **** #endif
+  99:../Common_WinARM/src/target.c **** 
+ 100:../Common_WinARM/src/target.c **** #if (Fcco / Fcclk) == 2
+ 101:../Common_WinARM/src/target.c ****     PLLCFG = ((Fcclk / Fosc) - 1) | (0 << 5);
+ 102:../Common_WinARM/src/target.c **** #endif
+ 103:../Common_WinARM/src/target.c **** #if (Fcco / Fcclk) == 4
+ 104:../Common_WinARM/src/target.c ****     PLLCFG = ((Fcclk / Fosc) - 1) | (1 << 5);
+  75              	s interworking.
+  76 0020 243083E2 		@ args = 0, pretend = 0, frame = 0
+  77 0024 843082E5 		@ frame_needed = 0, uses_anonymous_args = 0
+ 105:../Common_WinARM/src/target.c **** #endif
+ 106:../Common_WinARM/src/target.c **** #if (Fcco / Fcclk) == 8
+ 107:../Common_WinARM/src/target.c ****     PLLCFG = ((Fcclk / Fosc) - 1) | (2 << 5);
+ 108:../Common_WinARM/src/target.c **** #endif
+ 109:../Common_WinARM/src/target.c **** #if (Fcco / Fcclk) == 16
+ 110:../Common_WinARM/src/target.c ****     PLLCFG = ((Fcclk / Fosc) - 1) | (3 << 5);
+ 111:../Common_WinARM/src/target.c **** #endif
+ 112:../Common_WinARM/src/target.c ****     PLLFEED = 0xaa;
+  78              	link register save eliminated.
+  79 0028 863083E2 		.loc 1 89 0
+  80 002c 8C3082E5 		ldr	r2, .L17
+ 113:../Common_WinARM/src/target.c ****     PLLFEED = 0x55;
+  81              	v	r3, #1
+  82 0030 5530A0E3 		str	r3, [r2, #128]
+  83 0034 8C3082E5 		.loc 1 91 0
+  84              		mov	r3, #0
+  85              		str	r3, [r2, #256]
+  86              		.loc 1 104 0
+ 114:../Common_WinARM/src/target.c ****     while((PLLSTAT & (1 << 10)) == 0);
+  87              	3, r3, #36
+  88 0038 38109FE5 		str	r3, [r2, #132]
+  89 003c 883091E5 		.loc 1 112 0
+  90 0040 010B13E3 		add	r3, r3, #134
+  91 0044 FBFFFF0A 		str	r3, [r2, #140]
+ 115:../Common_WinARM/src/target.c ****     PLLCON = 3;
+  92              	s_anonymous_args = 0
+  93 0048 0320A0E3 		@ link register save eliminated.
+ 116:../Common_WinARM/src/target.c ****     PLLFEED = 0xaa;
+  94              	loc 1 89 0
+  95 004c AA30A0E3 		ldr	r2, .L17
+  96              		mov	r3, #1
+  97 0050 802081E5 		str	r3, [r2, #128]
+  98              		.loc 1 91 0
+  99 0054 8C3081E5 		mov	r3, #0
+ 117:../Common_WinARM/src/target.c ****     PLLFEED = 0x55;
+ 100              	3, [r2, #256]
+ 101 0058 5530A0E3 		.loc 1 104 0
+ 102 005c 8C3081E5 		add	r3, r3, #36
+ 118:../Common_WinARM/src/target.c ****     
+ 119:../Common_WinARM/src/target.c ****     /* Set memory accelerater module*/
+ 120:../Common_WinARM/src/target.c ****     MAMCR = 0;
+ 103              	s interworking.
+ 104 0060 0030A0E3 		@ args = 0, pretend = 0, frame = 0
+ 105 0064 003081E5 		@ frame_needed = 0, uses_anonymous_args = 0
+ 121:../Common_WinARM/src/target.c **** #if Fcclk < 20000000
+ 122:../Common_WinARM/src/target.c ****     MAMTIM = 1;
+ 123:../Common_WinARM/src/target.c **** #else
+ 124:../Common_WinARM/src/target.c **** #if Fcclk < 40000000
+ 125:../Common_WinARM/src/target.c ****     MAMTIM = 2;
+ 126:../Common_WinARM/src/target.c **** #else
+ 127:../Common_WinARM/src/target.c ****     MAMTIM = 3;
+ 128:../Common_WinARM/src/target.c **** #endif
+ 129:../Common_WinARM/src/target.c **** #endif
+ 130:../Common_WinARM/src/target.c ****     MAMCR = 2;
+ 106              	link register save eliminated.
+ 107 0068 023083E2 		.loc 1 89 0
+ 108              		ldr	r2, .L17
+ 109 006c 042081E5 		mov	r3, #1
+ 110              		str	r3, [r2, #128]
+ 111 0070 003081E5 		.loc 1 91 0
+ 131:../Common_WinARM/src/target.c ****     
+ 132:../Common_WinARM/src/target.c ****     /* Add your codes here */
+ 133:../Common_WinARM/src/target.c ****     return;
+ 134:../Common_WinARM/src/target.c **** }
+ 112              	3, #0
+ 113 0074 1EFF2FE1 		str	r3, [r2, #256]
+ 114              		.loc 1 104 0
+ 115              		add	r3, r3, #36
+ 116              		str	r3, [r2, #132]
+ 117 0078 00C01FE0 		.loc 1 112 0
+ 118              		add	r3, r3, #134
+ 119              		str	r3, [r2, #140]
+ 168              		.byte	0xe
+DEFINED SYMBOLS
+                            *ABS*:00000000 target.c
+C:\WINDOWS\TEMP/ccaWaaaa.s:13     .text:00000000 IRQ_Exception
+C:\WINDOWS\TEMP/ccaWaaaa.s:23     .text:00000000 $a
+C:\WINDOWS\TEMP/ccaWaaaa.s:29     .text:00000004 FIQ_Exception
+C:\WINDOWS\TEMP/ccaWaaaa.s:45     .text:00000008 TargetInit
+C:\WINDOWS\TEMP/ccaWaaaa.s:61     .text:0000000c TargetResetInit
+C:\WINDOWS\TEMP/ccaWaaaa.s:117    .text:00000078 $d
+
+NO UNDEFINED SYMBOLS

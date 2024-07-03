@@ -1,0 +1,4 @@
+"main.o" "retarget.o" "serial.o" "startup.o" "enc28j60.o" "enc_main.o" "ip_arp_udp_tcp.o" "simple_server.o" --strict --scatter "lpc2103.sct" 
+--map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\lpc2103.map" -o "lpc2103.axf"

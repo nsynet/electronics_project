@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>191904331</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\Debug\List\user_uart.lst</file>
+      <file>$PROJ_DIR$\Debug\List\SPI.s</file>
+      <file>$PROJ_DIR$\Debug\Obj\ENC28J60.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\ip_arp_udp_tcp.o</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_usart.s</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_rcc.h</file>
+      <file>$PROJ_DIR$\TCPIP\simple_server.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_rtc.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_usart.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_tim.h</file>
+      <file>$TOOLKIT_DIR$\inc\xencoding_limits.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_usart.lst</file>
+      <file>$PROJ_DIR$\Debug\Obj\simple_server.o</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_lib.h</file>
+      <file>$PROJ_DIR$\TCPIP\STM32_Init.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_nvic.pbi</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_gpio.h</file>
+      <file>$PROJ_DIR$\TCPIP\STM32_Reg.h</file>
+      <file>$PROJ_DIR$\TCPIP\STM32_Init.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\SPI.o</file>
+      <file>$PROJ_DIR$\Debug\List\ENC28J60.lst</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_spi.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\USART_Pol.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_flash.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_nvic.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\STM32_Init.pbi</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_gpio.s</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_it.s</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_flash.c</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_gpio.c</file>
+      <file>$TOOLKIT_DIR$\lib\dl7M_tl_if.a</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_spi.h</file>
+      <file>$PROJ_DIR$\Debug\List\main.s</file>
+      <file>$PROJ_DIR$\Debug\Obj\ip_arp_udp_tcp.pbi</file>
+      <file>$PROJ_DIR$\Debug\List\simple_server.lst</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\stm32f10x_conf.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_spi.pbi</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_type.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\simple_server.pbi</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_spi.lst</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_nvic.s</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_vector.lst</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_nvic.lst</file>
+      <file>$PROJ_DIR$\Debug\Obj\cortexm3_macro.o</file>
+      <file>$TOOLKIT_DIR$\inc\string.h</file>
+      <file>$TOOLKIT_DIR$\inc\DLib_Product_string.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_gpio.o</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\cortexm3_macro.h</file>
+      <file>$PROJ_DIR$\SPI_45db161.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_gpio.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\user_uart.pbi</file>
+      <file>$PROJ_DIR$\SPI_45db161.c</file>
+      <file>$PROJ_DIR$\Debug\Exe\usart_sendshuzhi_520.out</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_rcc.pbi</file>
+      <file>$PROJ_DIR$\Debug\List\user_uart.s</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_it.lst</file>
+      <file>$PROJ_DIR$\TCPIP\USART_Pol.c</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_exti.h</file>
+      <file>$PROJ_DIR$\user_uart.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_map.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_flash.h</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_gpio.lst</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_spi.s</file>
+      <file>$TOOLKIT_DIR$\inc\yvals.h</file>
+      <file>$PROJ_DIR$\TCPIP\enc28j60.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_it.pbi</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_rcc.lst</file>
+      <file>$TOOLKIT_DIR$\inc\ysizet.h</file>
+      <file>$TOOLKIT_DIR$\inc\ycheck.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_vector.pbi</file>
+      <file>$PROJ_DIR$\Debug\List\SPI.lst</file>
+      <file>$PROJ_DIR$\Debug\Obj\usart_sendshuzhi_520.pbd</file>
+      <file>$PROJ_DIR$\Debug\Obj\USART_Pol.pbi</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_flash.lst</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_it.o</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_vector.s</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_flash.s</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_usart.o</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_rcc.s</file>
+      <file>$PROJ_DIR$\main.h</file>
+      <file>$TOOLKIT_DIR$\inc\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\stm32f10x_it.h</file>
+      <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
+      <file>$PROJ_DIR$\TCPIP\spi.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_lib.o</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_nvic.h</file>
+      <file>$PROJ_DIR$\Debug\List\ENC28J60.s</file>
+      <file>$PROJ_DIR$\Debug\Obj\ENC28J60.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_lib.pbi</file>
+      <file>$PROJ_DIR$\TCPIP\net.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\SPI_45db161.o</file>
+      <file>$PROJ_DIR$\Debug\List\simple_server.s</file>
+      <file>$TOOLKIT_DIR$\inc\DLib_Threads.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_sdio.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_systick.h</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_lib.lst</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_flash.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\SPI_45db161.pbi</file>
+      <file>$PROJ_DIR$\TCPIP\ip_arp_udp_tcp.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_pwr.h</file>
+      <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_rcc.o</file>
+      <file>$TOOLKIT_DIR$\inc\DLib_Config_Full.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_wwdg.h</file>
+      <file>$TOOLKIT_DIR$\inc\stdio.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_usart.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\DLib_Product.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\user_uart.o</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_fsmc.h</file>
+      <file>$PROJ_DIR$\Debug\List\main.lst</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\stm32f10x_flash.icf</file>
+      <file>$PROJ_DIR$\Debug\List\stm32f10x_lib.s</file>
+      <file>$PROJ_DIR$\Debug\List\ip_arp_udp_tcp.lst</file>
+      <file>$PROJ_DIR$\Debug\Obj\STM32_Init.o</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_bkp.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\inc\stm32f10x_iwdg.h</file>
+      <file>$PROJ_DIR$\Debug\List\usart_sendshuzhi_520.map</file>
+      <file>$PROJ_DIR$\Debug\Obj\SPI.pbi</file>
+      <file>$PROJ_DIR$\my_PWM_1k.h</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\cortexm3_macro.s</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\stm32f10x_vector.c</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_lib.c</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_nvic.c</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_rcc.c</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_spi.c</file>
+      <file>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_usart.c</file>
+      <file>$PROJ_DIR$\TCPIP\ENC28J60.C</file>
+      <file>$PROJ_DIR$\TCPIP\ip_arp_udp_tcp.c</file>
+      <file>$PROJ_DIR$\TCPIP\simple_server.c</file>
+      <file>$PROJ_DIR$\TCPIP\SPI.C</file>
+      <file>$PROJ_DIR$\main.c</file>
+      <file>$PROJ_DIR$\stm32f10x_it.c</file>
+      <file>$PROJ_DIR$\user_uart.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm32f10x_vector.o</file>
+      <file>$PROJ_DIR$\Debug\List\ip_arp_udp_tcp.s</file>
+    </outputs>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 53 118</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\TCPIP\STM32_Init.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 114</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 26</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104 18</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104 18</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_flash.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 77 74 24</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 97</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 61 60 36 38 48</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 61 60 36 38 48</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_gpio.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 27 62 47</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 50</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 17 60 36 38 48 5</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 17 60 36 38 48 5</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\SPI_45db161.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 91</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 98</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 49 14 60 36 38 48 58 61 17 86 5 32 8</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 49 14 60 36 38 48 58 61 17 86 5 32 8</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\usart_sendshuzhi_520.out</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 118</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 111 2 20 44 3 116 13 24 47 75 85 25 102 22 78 135 108 101 83 31</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\TCPIP\USART_Pol.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 23</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 73</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 105 69 64 81 107 10 93 68 14 60 36 38 48 58 61 17 86 5 32 8 19 84 65 6</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Obj\usart_sendshuzhi_520.pbd</name>
+      <inputs>
+        <tool>
+          <name>BILINK</name>
+          <file> 88 119 34 11 39 97 50 66 89 16 54 37 106 70 51</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\EWARM_V2.0.2\cortexm3_macro.s</name>
+      <outputs>
+        <tool>
+          <name>AARM</name>
+          <file> 44</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\EWARM_V2.0.2\stm32f10x_vector.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 76 42 135</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 70</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104 82</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104 82</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_lib.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 112 96 85</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 89</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_nvic.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 41 43 25</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 16</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 86 60 36 38 48</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 86 60 36 38 48</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_rcc.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 79 67 102</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 54</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 5 60 36 38 48</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 5 60 36 38 48</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_spi.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 63 40 22</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 37</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 32 60 36 38 48 5</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 32 60 36 38 48 5</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\EWARM_V2.0.2\library\src\stm32f10x_usart.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 4 12 78</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 106</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 8 60 36 38 48 5</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 8 60 36 38 48 5</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\TCPIP\ENC28J60.C</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 87 21 2</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 88</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 65 17 60 36 38 48 84 105 69 64 81 103 107 10 93 68</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 65 17 60 36 38 48 84 105 69 64 81 107 10 93 68</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\TCPIP\ip_arp_udp_tcp.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 136 113 3</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 34</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 90 99 65 17 60 36 38 48</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 90 99 65 17 60 36 38 48</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\TCPIP\simple_server.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 92 35 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 39</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 45 69 64 81 103 107 10 93 68 46 65 17 60 36 38 48 99 90 6</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 45 69 64 81 107 10 93 68 46 65 17 60 36 38 48 99 90 6</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\TCPIP\SPI.C</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 1 71 20</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 119</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 32 60 36 38 48 17 5</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 32 60 36 38 48 17 5</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 33 110 116</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 11</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 80 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104 59 45 69 64 81 103 107 10 93 68 46 120 105 65 84 6</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 80 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104 59 45 69 64 81 107 10 93 68 46 120 105 65 84 6</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\stm32f10x_it.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 28 56 75</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 66</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 82 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\user_uart.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 55 0 108</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 59 80 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104 45 69 64 81 103 107 10 93 68 46</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 59 80 14 60 36 38 48 115 58 61 109 17 117 86 100 5 7 94 32 95 9 8 104 45 69 64 81 107 10 93 68 46</file>
+        </tool>
+      </inputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>ILINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+

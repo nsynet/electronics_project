@@ -1,0 +1,66 @@
+Configuration	GokitShield_Nucleo64_STM32L073RZ
+STM32CubeMX 	4.18.0
+Date	12/27/2016
+MCU	STM32L073RZTx
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+SYS	Serial_Wire	SYS_SWCLK	PA14
+SYS	Serial_Wire	SYS_SWDIO	PA13
+SYS	SysTick	SYS_VS_Systick	VP_SYS_VS_Systick
+TIM3	Internal Clock	TIM3_VS_ClockSourceINT	VP_TIM3_VS_ClockSourceINT
+TIM3	PWM Generation CH1	TIM3_CH1	PB4
+TIM3	PWM Generation CH2	TIM3_CH2	PB5
+USART2	Asynchronous	USART2_RX	PA3
+USART2	Asynchronous	USART2_TX	PA2
+USART4	Asynchronous	USART4_RX	PA1
+USART4	Asynchronous	USART4_TX	PC10
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+14	PA0	GPIO_Output	RGB_LED_EN
+15	PA1	USART4_RX	
+16	PA2	USART2_TX	
+17	PA3	USART2_RX	
+21	PA5	GPIO_Output	NucleoGreenLD2
+29	PB10	GPIO_Input	key1
+41	PA8	GPIO_Input	key2
+43	PA10	GPIO_Input	Infrared
+46	PA13	SYS_SWDIO	
+49	PA14	SYS_SWCLK	
+51	PC10	USART4_TX	
+55	PB3	GPIO_Output	DHT11_DIN
+56	PB4	TIM3_CH1	
+57	PB5	TIM3_CH2	
+61	PB8	GPIO_Output	RGBLED_CLK
+62	PB9	GPIO_Output	RGBLED_DIN
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : GokitShield_Nucleo64_STM32L073RZ
+Project Folder : C:\Users\DengQ\Desktop\使用CubeMX配置Nucleo-L073综合案例\GokitShield_Nucleo64_STM32L073RZ
+Toolchain / IDE : EWARM
+Firmware Package Name and Version : STM32Cube FW_L0 V1.7.0
+
+
+Code Generation Settings : 
+STM32Cube Firmware Library Package : Copy all used libraries into the project folder
+Generate peripheral initialization as a pair of '.c/.h' files per peripheral : Yes
+Backup previously generated files when re-generating : No
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : No
+
+
+Toolchains Settings : 
+Compiler Optimizations : Balanced Size/Speed
+
+
+
+
+
+

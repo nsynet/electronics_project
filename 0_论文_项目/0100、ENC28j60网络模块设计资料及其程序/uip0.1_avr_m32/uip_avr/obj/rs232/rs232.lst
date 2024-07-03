@@ -1,0 +1,496 @@
+   1               		.file	"rs232.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	RS232_Init
+  20               	RS232_Init:
+  21               	.LFB4:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24               	/* prologue end (size=0) */
+  25               	.LM2:
+  26 0000 1AB8      		out 42-0x20,__zero_reg__
+  27               	.LM3:
+  28 0002 1BB8      		out 43-0x20,__zero_reg__
+  29               	.LM4:
+  30 0004 86E0      		ldi r24,lo8(6)
+  31 0006 80BD      		out 64-0x20,r24
+  32               	.LM5:
+  33 0008 83E3      		ldi r24,lo8(51)
+  34 000a 89B9      		out 41-0x20,r24
+  35               	.LM6:
+  36 000c 10BC      		out 64-0x20,__zero_reg__
+  37               	.LM7:
+  38 000e 88E1      		ldi r24,lo8(24)
+  39 0010 8AB9      		out 42-0x20,r24
+  40               	.LM8:
+  41 0012 81E0      		ldi r24,lo8(1)
+  42 0014 90E0      		ldi r25,hi8(1)
+  43               	/* epilogue: frame size=0 */
+  44 0016 0895      		ret
+  45               	/* epilogue end (size=1) */
+  46               	/* function RS232_Init size 12 (11) */
+  47               	.LFE4:
+  49               	.global	RS232_SendByte
+  51               	RS232_SendByte:
+  52               	.LFB5:
+  53               	.LM9:
+  54               	/* prologue: frame size=0 */
+  55               	/* prologue end (size=0) */
+  56               	.LM10:
+  57 0018 8A30      		cpi r24,lo8(10)
+  58 001a 11F4      		brne .L3
+  59               	.LM11:
+  60 001c 8DE0      		ldi r24,lo8(13)
+  61 001e 09C0      		rjmp .L12
+  62               	.L3:
+  63               	.LM12:
+  64 0020 8930      		cpi r24,lo8(9)
+  65 0022 39F4      		brne .L12
+  66               	.LM13:
+  67 0024 80E2      		ldi r24,lo8(32)
+  68               	.L6:
+  69               	.LM14:
+  70 0026 5D9B      		sbis 43-0x20,5
+  71 0028 FECF      		rjmp .L6
+  72               	.LM15:
+  73 002a 8CB9      		out 44-0x20,r24
+  74               	.L9:
+  75               	.LM16:
+  76 002c 5D9B      		sbis 43-0x20,5
+  77 002e FECF      		rjmp .L9
+  78               	.LM17:
+  79 0030 8CB9      		out 44-0x20,r24
+  80               	.L12:
+  81               	.LM18:
+  82 0032 5D9B      		sbis 43-0x20,5
+  83 0034 FECF      		rjmp .L12
+  84               	.LM19:
+  85 0036 8CB9      		out 44-0x20,r24
+  86               	/* epilogue: frame size=0 */
+  87 0038 0895      		ret
+  88               	/* epilogue end (size=1) */
+  89               	/* function RS232_SendByte size 17 (16) */
+  90               	.LFE5:
+  92               	.global	RS232_RecvByte
+  94               	RS232_RecvByte:
+  95               	.LFB6:
+  96               	.LM20:
+  97               	/* prologue: frame size=0 */
+  98               	/* prologue end (size=0) */
+  99               	.L16:
+ 100               	.LM21:
+ 101 003a 5F9B      		sbis 43-0x20,7
+ 102 003c FECF      		rjmp .L16
+ 103               	.LM22:
+ 104 003e 8CB1      		in r24,44-0x20
+ 105               	.LM23:
+ 106 0040 9927      		clr r25
+ 107               	/* epilogue: frame size=0 */
+ 108 0042 0895      		ret
+ 109               	/* epilogue end (size=1) */
+ 110               	/* function RS232_RecvByte size 5 (4) */
+ 111               	.LFE6:
+ 113               	.global	RS232_SendStr
+ 115               	RS232_SendStr:
+ 116               	.LFB7:
+ 117               	.LM24:
+ 118               	/* prologue: frame size=0 */
+ 119 0044 CF93      		push r28
+ 120 0046 DF93      		push r29
+ 121               	/* prologue end (size=2) */
+ 122 0048 EC01      		movw r28,r24
+ 123               	.LM25:
+ 124 004a 8991      		ld r24,Y+
+ 125 004c 8823      		tst r24
+ 126 004e 41F0      		breq .L19
+ 127               	.L21:
+ 128               	.LM26:
+ 129 0050 0E94 0000 		call RS232_SendByte
+ 130               	.LM27:
+ 131 0054 8991      		ld r24,Y+
+ 132 0056 8823      		tst r24
+ 133 0058 D9F7      		brne .L21
+ 134               	.LM28:
+ 135 005a 8AE0      		ldi r24,lo8(10)
+ 136 005c 0E94 0000 		call RS232_SendByte
+ 137               	.L19:
+ 138               	/* epilogue: frame size=0 */
+ 139 0060 DF91      		pop r29
+ 140 0062 CF91      		pop r28
+ 141 0064 0895      		ret
+ 142               	/* epilogue end (size=3) */
+ 143               	/* function RS232_SendStr size 17 (12) */
+ 144               	.LFE7:
+ 146               	.global	RS232_RecvStr
+ 148               	RS232_RecvStr:
+ 149               	.LFB8:
+ 150               	.LM29:
+ 151               	/* prologue: frame size=0 */
+ 152 0066 FF92      		push r15
+ 153 0068 0F93      		push r16
+ 154 006a 1F93      		push r17
+ 155 006c CF93      		push r28
+ 156               	/* prologue end (size=4) */
+ 157 006e 8C01      		movw r16,r24
+ 158               	.LM30:
+ 159 0070 FF24      		clr r15
+ 160               	.LM31:
+ 161 0072 892B      		or r24,r25
+ 162 0074 31F1      		breq .L24
+ 163               	.L36:
+ 164               	.LM32:
+ 165 0076 0E94 0000 		call RS232_RecvByte
+ 166 007a C82F      		mov r28,r24
+ 167               	.LM33:
+ 168 007c 8D30      		cpi r24,lo8(13)
+ 169 007e 39F4      		brne .L28
+ 170               	.LM34:
+ 171 0080 0E94 0000 		call RS232_SendByte
+ 172               	.LM35:
+ 173 0084 0F0D      		add r16,r15
+ 174 0086 111D      		adc r17,__zero_reg__
+ 175 0088 F801      		movw r30,r16
+ 176 008a 1082      		st Z,__zero_reg__
+ 177               	.LM36:
+ 178 008c 1AC0      		rjmp .L24
+ 179               	.L28:
+ 180               	.LM37:
+ 181 008e 8830      		cpi r24,lo8(8)
+ 182 0090 81F4      		brne .L29
+ 183               	.LM38:
+ 184 0092 FF20      		tst r15
+ 185 0094 41F0      		breq .L30
+ 186               	.LM39:
+ 187 0096 0E94 0000 		call RS232_SendByte
+ 188               	.LM40:
+ 189 009a 80E2      		ldi r24,lo8(32)
+ 190 009c 0E94 0000 		call RS232_SendByte
+ 191               	.LM41:
+ 192 00a0 8C2F      		mov r24,r28
+ 193 00a2 0E94 0000 		call RS232_SendByte
+ 194               	.L30:
+ 195               	.LM42:
+ 196 00a6 8F2D      		mov r24,r15
+ 197 00a8 9927      		clr r25
+ 198 00aa F110      		cpse r15,__zero_reg__
+ 199 00ac 0197      		sbiw r24,1
+ 200               	.L31:
+ 201 00ae F82E      		mov r15,r24
+ 202 00b0 E2CF      		rjmp .L36
+ 203               	.L29:
+ 204               	.LM43:
+ 205 00b2 F801      		movw r30,r16
+ 206 00b4 EF0D      		add r30,r15
+ 207 00b6 F11D      		adc r31,__zero_reg__
+ 208 00b8 8083      		st Z,r24
+ 209 00ba F394      		inc r15
+ 210               	.LM44:
+ 211 00bc 0E94 0000 		call RS232_SendByte
+ 212 00c0 DACF      		rjmp .L36
+ 213               	.L24:
+ 214               	/* epilogue: frame size=0 */
+ 215 00c2 CF91      		pop r28
+ 216 00c4 1F91      		pop r17
+ 217 00c6 0F91      		pop r16
+ 218 00c8 FF90      		pop r15
+ 219 00ca 0895      		ret
+ 220               	/* epilogue end (size=5) */
+ 221               	/* function RS232_RecvStr size 52 (43) */
+ 222               	.LFE8:
+ 224               	.global	RS232_Printf
+ 226               	RS232_Printf:
+ 227               	.LFB9:
+ 228               	.LM45:
+ 229               	/* prologue: frame size=6 */
+ 230 00cc 9F92      		push r9
+ 231 00ce AF92      		push r10
+ 232 00d0 BF92      		push r11
+ 233 00d2 CF92      		push r12
+ 234 00d4 DF92      		push r13
+ 235 00d6 EF92      		push r14
+ 236 00d8 FF92      		push r15
+ 237 00da 0F93      		push r16
+ 238 00dc 1F93      		push r17
+ 239 00de CF93      		push r28
+ 240 00e0 DF93      		push r29
+ 241 00e2 CDB7      		in r28,__SP_L__
+ 242 00e4 DEB7      		in r29,__SP_H__
+ 243 00e6 2697      		sbiw r28,6
+ 244 00e8 0FB6      		in __tmp_reg__,__SREG__
+ 245 00ea F894      		cli
+ 246 00ec DEBF      		out __SP_H__,r29
+ 247 00ee 0FBE      		out __SREG__,__tmp_reg__
+ 248 00f0 CDBF      		out __SP_L__,r28
+ 249               	/* prologue end (size=19) */
+ 250 00f2 E4E1      		ldi r30,lo8(20)
+ 251 00f4 AE2E      		mov r10,r30
+ 252 00f6 B12C      		mov r11,__zero_reg__
+ 253 00f8 AC0E      		add r10,r28
+ 254 00fa BD1E      		adc r11,r29
+ 255               	.LM46:
+ 256 00fc 9924      		clr r9
+ 257               	.LM47:
+ 258 00fe F501      		movw r30,r10
+ 259 0100 C190      		ld r12,Z+
+ 260 0102 D190      		ld r13,Z+
+ 261 0104 5F01      		movw r10,r30
+ 262 0106 F601      		movw r30,r12
+ 263 0108 8081      		ld r24,Z
+ 264 010a 8823      		tst r24
+ 265 010c 09F4      		brne .+2
+ 266 010e A5C0      		rjmp .L67
+ 267               	.L65:
+ 268               	.LM48:
+ 269 0110 F601      		movw r30,r12
+ 270 0112 8081      		ld r24,Z
+ 271 0114 8532      		cpi r24,lo8(37)
+ 272 0116 09F0      		breq .+2
+ 273 0118 6EC0      		rjmp .L70
+ 274               	.LM49:
+ 275 011a 0894      		sec
+ 276 011c C11C      		adc r12,__zero_reg__
+ 277 011e D11C      		adc r13,__zero_reg__
+ 278               	.LM50:
+ 279 0120 F601      		movw r30,r12
+ 280 0122 8081      		ld r24,Z
+ 281 0124 9927      		clr r25
+ 282 0126 8436      		cpi r24,100
+ 283 0128 9105      		cpc r25,__zero_reg__
+ 284 012a 81F0      		breq .L43
+ 285 012c 8536      		cpi r24,101
+ 286 012e 9105      		cpc r25,__zero_reg__
+ 287 0130 2CF4      		brge .L60
+ 288 0132 8336      		cpi r24,99
+ 289 0134 9105      		cpc r25,__zero_reg__
+ 290 0136 09F4      		brne .+2
+ 291 0138 56C0      		rjmp .L53
+ 292 013a 75C0      		rjmp .L42
+ 293               	.L60:
+ 294 013c 8337      		cpi r24,115
+ 295 013e 9105      		cpc r25,__zero_reg__
+ 296 0140 09F4      		brne .+2
+ 297 0142 5CC0      		rjmp .L54
+ 298 0144 8837      		cpi r24,120
+ 299 0146 9105      		cpc r25,__zero_reg__
+ 300 0148 19F1      		breq .L47
+ 301 014a 6DC0      		rjmp .L42
+ 302               	.L43:
+ 303               	.LM51:
+ 304 014c F501      		movw r30,r10
+ 305 014e 82E0      		ldi r24,lo8(2)
+ 306 0150 90E0      		ldi r25,hi8(2)
+ 307 0152 A80E      		add r10,r24
+ 308 0154 B91E      		adc r11,r25
+ 309 0156 0081      		ld r16,Z
+ 310 0158 1181      		ldd r17,Z+1
+ 311               	.LM52:
+ 312 015a 9924      		clr r9
+ 313 015c 9E01      		movw r18,r28
+ 314 015e 2F5F      		subi r18,lo8(-(1))
+ 315 0160 3F4F      		sbci r19,hi8(-(1))
+ 316               	.L44:
+ 317               	.LM53:
+ 318 0162 E92D      		mov r30,r9
+ 319 0164 FF27      		clr r31
+ 320 0166 E7FD      		sbrc r30,7
+ 321 0168 F095      		com r31
+ 322 016a E20F      		add r30,r18
+ 323 016c F31F      		adc r31,r19
+ 324 016e C801      		movw r24,r16
+ 325 0170 6AE0      		ldi r22,lo8(10)
+ 326 0172 70E0      		ldi r23,hi8(10)
+ 327 0174 0E94 0000 		call __divmodhi4
+ 328 0178 8083      		st Z,r24
+ 329               	.LM54:
+ 330 017a C801      		movw r24,r16
+ 331 017c 6AE0      		ldi r22,lo8(10)
+ 332 017e 70E0      		ldi r23,hi8(10)
+ 333 0180 0E94 0000 		call __divmodhi4
+ 334 0184 8B01      		movw r16,r22
+ 335               	.LM55:
+ 336 0186 9394      		inc r9
+ 337               	.LM56:
+ 338 0188 1616      		cp __zero_reg__,r22
+ 339 018a 1706      		cpc __zero_reg__,r23
+ 340 018c 54F3      		brlt .L44
+ 341 018e 29C0      		rjmp .L69
+ 342               	.L47:
+ 343               	.LM57:
+ 344 0190 F501      		movw r30,r10
+ 345 0192 82E0      		ldi r24,lo8(2)
+ 346 0194 90E0      		ldi r25,hi8(2)
+ 347 0196 A80E      		add r10,r24
+ 348 0198 B91E      		adc r11,r25
+ 349 019a 0081      		ld r16,Z
+ 350 019c 1181      		ldd r17,Z+1
+ 351               	.LM58:
+ 352 019e 9924      		clr r9
+ 353 01a0 AE01      		movw r20,r28
+ 354 01a2 4F5F      		subi r20,lo8(-(1))
+ 355 01a4 5F4F      		sbci r21,hi8(-(1))
+ 356               	.L48:
+ 357               	.LM59:
+ 358 01a6 E92D      		mov r30,r9
+ 359 01a8 FF27      		clr r31
+ 360 01aa E7FD      		sbrc r30,7
+ 361 01ac F095      		com r31
+ 362 01ae E40F      		add r30,r20
+ 363 01b0 F51F      		adc r31,r21
+ 364 01b2 9801      		movw r18,r16
+ 365 01b4 17FF      		sbrs r17,7
+ 366 01b6 02C0      		rjmp .L51
+ 367 01b8 215F      		subi r18,lo8(-(15))
+ 368 01ba 3F4F      		sbci r19,hi8(-(15))
+ 369               	.L51:
+ 370 01bc 74E0      		ldi r23,4
+ 371 01be 3595      	1:	asr r19
+ 372 01c0 2795      		ror r18
+ 373 01c2 7A95      		dec r23
+ 374 01c4 E1F7      		brne 1b
+ 375 01c6 C901      		movw r24,r18
+ 376 01c8 64E0      		ldi r22,4
+ 377 01ca 880F      	1:	lsl r24
+ 378 01cc 991F      		rol r25
+ 379 01ce 6A95      		dec r22
+ 380 01d0 E1F7      		brne 1b
+ 381 01d2 081B      		sub r16,r24
+ 382 01d4 190B      		sbc r17,r25
+ 383 01d6 0083      		st Z,r16
+ 384               	.LM60:
+ 385 01d8 8901      		movw r16,r18
+ 386               	.LM61:
+ 387 01da 9394      		inc r9
+ 388               	.LM62:
+ 389 01dc 1216      		cp __zero_reg__,r18
+ 390 01de 1306      		cpc __zero_reg__,r19
+ 391 01e0 14F3      		brlt .L48
+ 392               	.L69:
+ 393               	.LM63:
+ 394 01e2 9A94      		dec r9
+ 395               	.LM64:
+ 396 01e4 20C0      		rjmp .L42
+ 397               	.L53:
+ 398               	.LM65:
+ 399 01e6 9FEF      		ldi r25,lo8(-1)
+ 400 01e8 992E      		mov r9,r25
+ 401               	.LM66:
+ 402 01ea F501      		movw r30,r10
+ 403 01ec 82E0      		ldi r24,lo8(2)
+ 404 01ee 90E0      		ldi r25,hi8(2)
+ 405 01f0 A80E      		add r10,r24
+ 406 01f2 B91E      		adc r11,r25
+ 407               	.LM67:
+ 408 01f4 8081      		ld r24,Z
+ 409               	.L70:
+ 410 01f6 0E94 0000 		call RS232_SendByte
+ 411               	.LM68:
+ 412 01fa 27C0      		rjmp .L40
+ 413               	.L54:
+ 414               	.LM69:
+ 415 01fc 8FEF      		ldi r24,lo8(-1)
+ 416 01fe 982E      		mov r9,r24
+ 417               	.LM70:
+ 418 0200 F501      		movw r30,r10
+ 419 0202 82E0      		ldi r24,lo8(2)
+ 420 0204 90E0      		ldi r25,hi8(2)
+ 421 0206 A80E      		add r10,r24
+ 422 0208 B91E      		adc r11,r25
+ 423 020a E080      		ld r14,Z
+ 424 020c F180      		ldd r15,Z+1
+ 425               	.L55:
+ 426               	.LM71:
+ 427 020e F701      		movw r30,r14
+ 428 0210 8191      		ld r24,Z+
+ 429 0212 7F01      		movw r14,r30
+ 430 0214 082F      		mov r16,r24
+ 431 0216 1127      		clr r17
+ 432               	.LM72:
+ 433 0218 0115      		cp r16,__zero_reg__
+ 434 021a 1105      		cpc r17,__zero_reg__
+ 435 021c B1F0      		breq .L40
+ 436               	.LM73:
+ 437 021e 802F      		mov r24,r16
+ 438 0220 0E94 0000 		call RS232_SendByte
+ 439 0224 F4CF      		rjmp .L55
+ 440               	.L42:
+ 441               	.LM74:
+ 442 0226 97FC      		sbrc r9,7
+ 443 0228 10C0      		rjmp .L40
+ 444 022a 092D      		mov r16,r9
+ 445 022c 1127      		clr r17
+ 446 022e 07FD      		sbrc r16,7
+ 447 0230 1095      		com r17
+ 448               	.L64:
+ 449               	.LM75:
+ 450 0232 FE01      		movw r30,r28
+ 451 0234 E00F      		add r30,r16
+ 452 0236 F11F      		adc r31,r17
+ 453 0238 8181      		ldd r24,Z+1
+ 454               	.LM76:
+ 455 023a 805D      		subi r24,lo8(-(48))
+ 456 023c 0E94 0000 		call RS232_SendByte
+ 457               	.LM77:
+ 458 0240 9A94      		dec r9
+ 459 0242 0150      		subi r16,lo8(-(-1))
+ 460 0244 1040      		sbci r17,hi8(-(-1))
+ 461 0246 97FE      		sbrs r9,7
+ 462 0248 F4CF      		rjmp .L64
+ 463               	.L40:
+ 464               	.LM78:
+ 465 024a 0894      		sec
+ 466 024c C11C      		adc r12,__zero_reg__
+ 467 024e D11C      		adc r13,__zero_reg__
+ 468 0250 F601      		movw r30,r12
+ 469 0252 8081      		ld r24,Z
+ 470 0254 8823      		tst r24
+ 471 0256 09F0      		breq .+2
+ 472 0258 5BCF      		rjmp .L65
+ 473               	.L67:
+ 474               	/* epilogue: frame size=6 */
+ 475 025a 2696      		adiw r28,6
+ 476 025c 0FB6      		in __tmp_reg__,__SREG__
+ 477 025e F894      		cli
+ 478 0260 DEBF      		out __SP_H__,r29
+ 479 0262 0FBE      		out __SREG__,__tmp_reg__
+ 480 0264 CDBF      		out __SP_L__,r28
+ 481 0266 DF91      		pop r29
+ 482 0268 CF91      		pop r28
+ 483 026a 1F91      		pop r17
+ 484 026c 0F91      		pop r16
+ 485 026e FF90      		pop r15
+ 486 0270 EF90      		pop r14
+ 487 0272 DF90      		pop r13
+ 488 0274 CF90      		pop r12
+ 489 0276 BF90      		pop r11
+ 490 0278 AF90      		pop r10
+ 491 027a 9F90      		pop r9
+ 492 027c 0895      		ret
+ 493               	/* epilogue end (size=18) */
+ 494               	/* function RS232_Printf size 219 (182) */
+ 495               	.LFE9:
+ 497               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 rs232.c
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:20     .text:00000000 RS232_Init
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:51     .text:00000018 RS232_SendByte
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:94     .text:0000003a RS232_RecvByte
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:115    .text:00000044 RS232_SendStr
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:148    .text:00000066 RS232_RecvStr
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmwbaaa.s:226    .text:000000cc RS232_Printf
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__divmodhi4

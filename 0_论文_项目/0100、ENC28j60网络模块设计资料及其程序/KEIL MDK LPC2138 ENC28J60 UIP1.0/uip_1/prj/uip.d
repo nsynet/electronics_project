@@ -1,0 +1,11 @@
+uip.o: ..\uip\src\uip.c
+uip.o: ..\uip\src\uip.h
+uip.o: ..\uip\src\uipopt.h
+uip.o: ..\uip\inc\uip-conf.h
+uip.o: ..\app\mydef.h
+uip.o: C:\Keil\ARM\RV31\INC\stdint.h
+uip.o: ..\uip\inc\../../app/service/telnetd/telnetd.h
+uip.o: ..\uip\src\uipopt.h
+uip.o: ..\uip\src\uip_arch.h
+uip.o: C:\Keil\ARM\RV31\INC\string.h
+uip.o: C:\Keil\ARM\RV31\INC\stdio.h

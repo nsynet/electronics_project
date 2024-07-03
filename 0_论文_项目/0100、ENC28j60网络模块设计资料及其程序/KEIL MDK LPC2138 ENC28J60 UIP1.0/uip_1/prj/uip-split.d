@@ -1,0 +1,12 @@
+uip-split.o: ..\uip\src\uip-split.c
+uip-split.o: e:\Keil\ARM\RV31\INC\string.h
+uip-split.o: ..\uip\src\uip-split.h
+uip-split.o: ..\uip\src\uip.h
+uip-split.o: ..\uip\src\uipopt.h
+uip-split.o: ..\uip\inc\uip-conf.h
+uip-split.o: ..\..\..\INC\NXP\mydef.h
+uip-split.o: e:\Keil\ARM\RV31\INC\stdint.h
+uip-split.o: ..\uip\inc\../../app/telnetd/telnetd.h
+uip-split.o: ..\uip\src\uipopt.h
+uip-split.o: ..\uip\src\uip-fw.h
+uip-split.o: ..\uip\src\uip_arch.h

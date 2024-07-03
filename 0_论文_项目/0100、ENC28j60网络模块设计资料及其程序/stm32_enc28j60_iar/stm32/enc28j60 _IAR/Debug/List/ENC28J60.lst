@@ -1,0 +1,416 @@
+###############################################################################
+#                                                                             #
+#                                                       21/Apr/2009  21:08:09 #
+# IAR ANSI C/C++ Compiler V5.20.2.21007/W32 EVALUATION for ARM                #
+# Copyright 1999-2008 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\ENC28J60.C       #
+#    Command line =  "F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\ENC28J60.C"     #
+#                    -lcN "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\"     #
+#                    -lb "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -o   #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\" --no_cse  #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "D:\Program  #
+#                    Files\IAR Systems\Embedded Workbench 5.0                 #
+#                    Evaluation\ARM\INC\DLib_Config_Full.h" -I                #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\EWARM_V2.0.2\library\inc\" -I                       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\EWARM_V2.0.2\" -I     #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\" -I                  #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\" -I            #
+#                    "D:\Program Files\IAR Systems\Embedded Workbench 5.0     #
+#                    Evaluation\ARM\INC\" -Ol                                 #
+#    List file    =  F:\b百利胜\enc28j60\enc28j60                             #
+#                    _IAR\Debug\List\ENC28J60.lst                             #
+#    Object file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\ENC28J60.o   #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\ENC28J60.C
+      1          //#include "includes.h"
+      2          #include "enc28j60.h"
+      3          #include "spi.h"
+      4          #include <stdio.h>
+      5          
+      6          static u8 Enc28j60Bank;
+      7          static u16 NextPacketPtr;
+      8          
+      9          
+     10          unsigned char enc28j60ReadOp(unsigned char op, unsigned char address)
+     11          	{
+     12          	unsigned char dat = 0;
+     13          	
+     14          	ENC28J60_CSL();
+     15          	
+     16          	dat = op | (address & ADDR_MASK);
+     17          	SPI1_ReadWrite(dat);
+     18          	dat = SPI1_ReadWrite(0xFF);
+     19          	// do dummy read if needed (for mac and mii, see datasheet page 29)
+     20          	if(address & 0x80)
+     21          	    {
+     22          		dat = SPI1_ReadWrite(0xFF);
+     23          	    }
+     24          	// release CS
+     25          	ENC28J60_CSH();
+     26          	return dat;
+     27          	}
+     28          
+     29          void enc28j60WriteOp(unsigned char op, unsigned char address, unsigned char data)
+     30          	{
+     31          	unsigned char dat = 0;
+     32          	  
+     33          	ENC28J60_CSL();
+     34          	// issue write command
+     35          	dat = op | (address & ADDR_MASK);//写指令数据
+     36          	SPI1_ReadWrite(dat);
+     37          	// write data
+     38          	dat = data;
+     39          	SPI1_ReadWrite(dat);
+     40          	ENC28J60_CSH();
+     41          	}
+     42          
+     43          void enc28j60ReadBuffer(unsigned int len, unsigned char* data)
+     44          	{
+     45          	ENC28J60_CSL();
+     46          	// issue read command
+     47          	SPI1_ReadWrite(ENC28J60_READ_BUF_MEM);
+     48          	while(len)
+     49          		{
+     50                  len--;
+     51                  // read data
+     52                  *data = (unsigned char)SPI1_ReadWrite(0);
+     53                  data++;
+     54          		}
+     55          	*data='\0';
+     56          	ENC28J60_CSH();
+     57          	}
+     58          
+     59          void enc28j60WriteBuffer(unsigned int len, unsigned char* data)
+     60          	{
+     61          	ENC28J60_CSL();
+     62          	// issue write command
+     63          	SPI1_ReadWrite(ENC28J60_WRITE_BUF_MEM);
+     64          	
+     65          	while(len)
+     66          		{
+     67          		len--;
+     68          		SPI1_ReadWrite(*data);
+     69          		data++;
+     70          		}
+     71          	ENC28J60_CSH();
+     72          	}
+     73          
+     74          void enc28j60SetBank(unsigned char address)
+     75          	{
+     76          	// set the bank (if needed)
+     77          	if((address & BANK_MASK) != Enc28j60Bank)
+     78          		{
+     79                  // set the bank
+     80                  enc28j60WriteOp(ENC28J60_BIT_FIELD_CLR, ECON1, (ECON1_BSEL1|ECON1_BSEL0));
+     81                  enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, (address & BANK_MASK)>>5);
+     82                  Enc28j60Bank = (address & BANK_MASK);
+     83          		}
+     84          	}
+     85          
+     86          unsigned char enc28j60Read(unsigned char address)
+     87          	{
+     88          	// set the bank
+     89          	enc28j60SetBank(address);
+     90          	// do the read
+     91          	return enc28j60ReadOp(ENC28J60_READ_CTRL_REG, address);
+     92          	}
+     93          
+     94          void enc28j60Write(unsigned char address, unsigned char data)
+     95          	{
+     96          	// set the bank
+     97          	enc28j60SetBank(address);
+     98          	// do the write
+     99          	enc28j60WriteOp(ENC28J60_WRITE_CTRL_REG, address, data);
+    100          	}
+    101          
+    102          void enc28j60PhyWrite(unsigned char address, unsigned int data)
+    103          	{
+    104          	// set the PHY register address
+    105          	enc28j60Write(MIREGADR, address);
+    106          	// write the PHY data
+    107          	enc28j60Write(MIWRL, data);
+    108          	enc28j60Write(MIWRH, data>>8);
+    109          	// wait until the PHY write completes
+    110          	while(enc28j60Read(MISTAT) & MISTAT_BUSY)
+    111          		{
+    112          	    	//Del_10us(1);
+    113          			//_nop_();
+    114          		}
+    115          	}
+    116          
+    117          void enc28j60clkout(unsigned char clk)
+    118          	{
+    119              //setup clkout: 2 is 12.5MHz:
+    120          	enc28j60Write(ECOCON, clk & 0x7);
+    121          	}
+    122          
+    123          void enc28j60Init(unsigned char* macaddr)
+    124          	{
+    125          	// initialize I/O
+    126          	//enc28j60CSinit();
+    127          	ENC28J60_CSH();  //选通脚拉高
+    128          
+    129              //enc28j60SetSCK();
+    130              //enc28j60HWreset();
+    131          	// perform system reset
+    132          	enc28j60WriteOp(ENC28J60_SOFT_RESET, 0, ENC28J60_SOFT_RESET);//系统软件复位指令
+    133          //	Del_1ms(250);
+    134          	// check CLKRDY bit to see if reset is complete
+    135                  // The CLKRDY does not work. See Rev. B4 Silicon Errata point. Just wait.
+    136          	//while(!(enc28j60Read(ESTAT) & ESTAT_CLKRDY));
+    137          	// do bank 0 stuff
+    138          	// initialize receive buffer
+    139          	// 16-bit transfers, must write low byte first
+    140          	// set receive buffer start address
+    141                  //在接收数据包前，必须编程ERXST 和ERXND 指针来
+    142                  //对接收缓冲器进行初始化。ERXST 和ERXND 之间的
+    143                  //存储空间（包括这两个地址）专供接收硬件使用。 建议
+    144                  //用偶地址编程ERXST 指针
+    145          	NextPacketPtr = RXSTART_INIT;//RXSTART_INIT     0x0
+    146                  // Rx start接收缓冲设区置
+    147          	enc28j60Write(ERXSTL, RXSTART_INIT&0xFF);//#define ERXSTL           (0x08|0x00)
+    148          	enc28j60Write(ERXSTH, RXSTART_INIT>>8);
+    149          	// set receive pointer address设置接收缓冲区地址
+    150          	enc28j60Write(ERXRDPTL, RXSTART_INIT&0xFF);
+    151          	enc28j60Write(ERXRDPTH, RXSTART_INIT>>8);
+    152          	// RX end
+    153          	enc28j60Write(ERXNDL, RXSTOP_INIT&0xFF);
+    154          	enc28j60Write(ERXNDH, RXSTOP_INIT>>8);
+    155          	// TX start
+    156          	enc28j60Write(ETXSTL, TXSTART_INIT&0xFF);
+    157          	enc28j60Write(ETXSTH, TXSTART_INIT>>8);
+    158          	// TX end
+    159          	enc28j60Write(ETXNDL, TXSTOP_INIT&0xFF);
+    160          	enc28j60Write(ETXNDH, TXSTOP_INIT>>8);
+    161          	// do bank 1 stuff, packet filter:
+    162                  // For broadcast packets we allow only ARP packtets
+    163                  // All other packets should be unicast only for our mac (MAADR)
+    164                  //
+    165                  // The pattern to match on is therefore
+    166                  // Type     ETH.DST
+    167                  // ARP      BROADCAST
+    168                  // 06 08 -- ff ff ff ff ff ff -> ip checksum for theses bytes=f7f9
+    169                  // in binary these poitions are:11 0000 0011 1111
+    170                  // This is hex 303F->EPMM0=0x3f,EPMM1=0x30
+    171                  //接收过滤器配置
+    172          	enc28j60Write(ERXFCON, ERXFCON_UCEN|ERXFCON_CRCEN|ERXFCON_PMEN);//enc28j60Write((0x18|0x20),  0x20|0x20|0x10)
+    173          	enc28j60Write(EPMM0, 0x3f);//	enc28j60Write((0x08|0x20),0x3f)
+    174          	enc28j60Write(EPMM1, 0x30);//	enc28j60Write((0x09|0x20), 0x30)
+    175          	enc28j60Write(EPMCSL, 0xf9);//	enc28j60Write((0x10|0x20), 0xf9)
+    176          	enc28j60Write(EPMCSH, 0xf7);//	enc28j60Write((0x11|0x20), 0xf7)
+    177                  //
+    178                  //
+    179          	// do bank 2 stuff
+    180          	// enable MAC receive
+    181          	enc28j60Write(MACON1, MACON1_MARXEN|MACON1_TXPAUS|MACON1_RXPAUS);//enc28j60Write(0x00|0x40|0x80, 0x01|0x08|0x04);
+    182          	// bring MAC out of reset
+    183          	enc28j60Write(MACON2, 0x00);//enc28j60Write(0x01|0x40|0x80, 0x00);
+    184          	// enable automatic padding to 60bytes and CRC operations
+    185          	enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, MACON3, MACON3_PADCFG0|MACON3_TXCRCEN|MACON3_FRMLNEN|MACON3_FULDPX);
+    186                  //enc28j60WriteOp(0x80, 0x02|0x40|0x80, 0x20|0x10|0x02|0x01);
+    187          	// set inter-frame gap (non-back-to-back)
+    188          	enc28j60Write(MAIPGL, 0x12);//	enc28j60Write(0x06|0x40|0x80, 0x12);
+    189          	enc28j60Write(MAIPGH, 0x0C);//	enc28j60Write(0x07|0x40|0x80, 0x0C);
+    190          	// set inter-frame gap (back-to-back)
+    191          	enc28j60Write(MABBIPG, 0x12);//enc28j60Write(0x04|0x40|0x80, 0x12)
+    192          	// Set the maximum packet size which the controller will accept
+    193                  // Do not send packets longer than MAX_FRAMELEN:
+    194          	enc28j60Write(MAMXFLL, MAX_FRAMELEN&0xFF);//enc28j60Write(0x0A|0x40|0x80, 1500&0xFF);	
+    195          	enc28j60Write(MAMXFLH, MAX_FRAMELEN>>8);//enc28j60Write(0x0B|0x40|0x80, 1500>>8)
+    196          	// do bank 3 stuff
+    197          	// write MAC address
+    198          	// NOTE: MAC address in ENC28J60 is byte-backward
+    199                  //MAADR0~5=(0x00|0x60|0x80).(0x01|0x60|0x80).(0x02|0x60|0x80).(0x03|0x60|0x80). (0x04|0x60|0x80)
+    200                  //mymac[6] = {0x54,0x55,0x58,0x10,0x00,0x24};
+    201          	enc28j60Write(MAADR5, macaddr[0]);	
+    202          	enc28j60Write(MAADR4, macaddr[1]);
+    203          	enc28j60Write(MAADR3, macaddr[2]);
+    204          	enc28j60Write(MAADR2, macaddr[3]);
+    205          	enc28j60Write(MAADR1, macaddr[4]);
+    206          	enc28j60Write(MAADR0, macaddr[5]);
+    207          
+    208          	printf("MAADR5 = 0x%x\r\n", enc28j60Read(MAADR5));
+    209          	printf("MAADR4 = 0x%x\r\n", enc28j60Read(MAADR4));
+    210          	printf("MAADR3 = 0x%x\r\n", enc28j60Read(MAADR3));
+    211          	printf("MAADR2 = 0x%x\r\n", enc28j60Read(MAADR2));
+    212          	printf("MAADR1 = 0x%x\r\n", enc28j60Read(MAADR1));
+    213          	printf("MAADR0 = 0x%x\r\n", enc28j60Read(MAADR0));
+    214          
+    215          	enc28j60PhyWrite(PHCON1, PHCON1_PDPXMD);//enc28j60PhyWrite(0x00, 0x0100);
+    216          
+    217          
+    218          	// no loopback of transmitted frames
+    219          	enc28j60PhyWrite(PHCON2, PHCON2_HDLDIS);//enc28j60PhyWrite(0x10, 0x0100);
+    220          	// switch to bank 0
+    221          	enc28j60SetBank(ECON1);//enc28j60SetBank(0x1F);
+    222          	// enable interrutps
+    223          	enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, EIE, EIE_INTIE|EIE_PKTIE);//enc28j60WriteOp(0x80,  0x1B, 0x80|0x40);
+    224          	// enable packet reception
+    225          	enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_RXEN);//enc28j60WriteOp(0x80, 0x1F, 0x04);
+    226          	}
+    227          
+    228          // read the revision of the chip:
+    229          unsigned char enc28j60getrev(void)
+    230          	{
+    231          	return(enc28j60Read(EREVID));
+    232          	}
+    233          
+    234          void enc28j60PacketSend(unsigned int len, unsigned char* packet)
+    235          	{
+    236          	// Set the write pointer to start of transmit buffer area
+    237          	enc28j60Write(EWRPTL, TXSTART_INIT&0xFF);
+    238          	enc28j60Write(EWRPTH, TXSTART_INIT>>8);
+    239          
+    240          	// Set the TXND pointer to correspond to the packet size given
+    241          	enc28j60Write(ETXNDL, (TXSTART_INIT+len)&0xFF);
+    242          	enc28j60Write(ETXNDH, (TXSTART_INIT+len)>>8);
+    243          
+    244          	// write per-packet control byte (0x00 means use macon3 settings)
+    245          	enc28j60WriteOp(ENC28J60_WRITE_BUF_MEM, 0, 0x00);
+    246          
+    247          	// copy the packet into the transmit buffer
+    248          	enc28j60WriteBuffer(len, packet);
+    249          
+    250          	// send the contents of the transmit buffer onto the network
+    251          	enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_TXRTS);
+    252          
+    253              // Reset the transmit logic problem. See Rev. B4 Silicon Errata point 12.
+    254          	if( (enc28j60Read(EIR) & EIR_TXERIF) )
+    255          		{
+    256                  enc28j60WriteOp(ENC28J60_BIT_FIELD_CLR, ECON1, ECON1_TXRTS);
+    257                  }
+    258          	}
+    259          
+    260          // Gets a packet from the network receive buffer, if one is available.
+    261          // The packet will by headed by an ethernet header.
+    262          //      maxlen  The maximum acceptable length of a retrieved packet.
+    263          //      packet  Pointer where packet data should be stored.
+    264          // Returns: Packet length in bytes if a packet was retrieved, zero otherwise.
+    265          unsigned int enc28j60PacketReceive(unsigned int maxlen, unsigned char* packet)
+    266          	{
+    267          	unsigned int rxstat;
+    268          	unsigned int len;
+    269          
+    270          	// check if a packet has been received and buffered
+    271          	//if( !(enc28j60Read(EIR) & EIR_PKTIF) ){
+    272                  // The above does not work. See Rev. B4 Silicon Errata point 6.
+    273          	if( enc28j60Read(EPKTCNT) ==0 )
+    274          		{
+    275          		return(0);
+    276                  }
+    277          
+    278          	// Set the read pointer to the start of the received packet
+    279          	enc28j60Write(ERDPTL, (NextPacketPtr));
+    280          	enc28j60Write(ERDPTH, (NextPacketPtr)>>8);
+    281          
+    282          	// read the next packet pointer
+    283          	NextPacketPtr  = enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0);
+    284          	NextPacketPtr |= enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0)<<8;
+    285          
+    286          	// read the packet length (see datasheet page 43)
+    287          	len  = enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0);
+    288          	len |= enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0)<<8;
+    289          
+    290              len-=4; //remove the CRC count
+    291          	// read the receive status (see datasheet page 43)
+    292          	rxstat  = enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0);
+    293          	rxstat |= enc28j60ReadOp(ENC28J60_READ_BUF_MEM, 0)<<8;
+    294          	// limit retrieve length
+    295              if (len>maxlen-1)
+    296          		{
+    297                  len=maxlen-1;
+    298              	}
+    299          
+    300                  // check CRC and symbol errors (see datasheet page 44, table 7-3):
+    301                  // The ERXFCON.CRCEN is set by default. Normally we should not
+    302                  // need to check this.
+    303              if ((rxstat & 0x80)==0)
+    304          			{
+    305          		    // invalid
+    306          		    len=0;
+    307          		    }
+    308          		else
+    309          			{
+    310                      // copy the packet from the receive buffer
+    311                      enc28j60ReadBuffer(len, packet);
+    312                  	}
+    313          	// Move the RX read pointer to the start of the next received packet
+    314          	// This frees the memory we just read out
+    315          	enc28j60Write(ERXRDPTL, (NextPacketPtr));
+    316          	enc28j60Write(ERXRDPTH, (NextPacketPtr)>>8);
+    317          
+    318          	// decrement the packet counter indicate we are done with this packet
+    319          	enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON2, ECON2_PKTDEC);
+    320          	return(len);
+    321          	}
+    322          
+    323          
+    324          
+
+   Maximum stack usage in bytes:
+
+     Function              .cstack
+     --------              -------
+     enc28j60Init               0
+     enc28j60PacketReceive      0
+     enc28j60PacketSend         0
+     enc28j60PhyWrite           0
+     enc28j60Read               0
+     enc28j60ReadBuffer         0
+     enc28j60ReadOp             0
+     enc28j60SetBank            0
+     enc28j60Write              0
+     enc28j60WriteBuffer        0
+     enc28j60WriteOp            0
+     enc28j60clkout             0
+     enc28j60getrev             0
+
+
+   Section sizes:
+
+     Function/Label                  Bytes
+     --------------                  -----
+     Enc28j60Bank                       1
+     NextPacketPtr                      2
+     enc28j60ReadOp                    68
+     enc28j60WriteOp                   54
+     enc28j60ReadBuffer                52
+     enc28j60WriteBuffer               46
+     enc28j60SetBank                   60
+     enc28j60Read                      24
+     enc28j60Write                     30
+     enc28j60PhyWrite                  48
+     enc28j60clkout                    14
+     enc28j60Init                     432
+     enc28j60getrev                    10
+     enc28j60PacketSend               102
+     enc28j60PacketReceive            198
+     ??DataTable8                       4
+     ??DataTable16                      4
+     ?<Constant "MAADR5 = 0x%x\r\n">   16
+     ?<Constant "MAADR4 = 0x%x\r\n">   16
+     ?<Constant "MAADR3 = 0x%x\r\n">   16
+     ?<Constant "MAADR2 = 0x%x\r\n">   16
+     ?<Constant "MAADR1 = 0x%x\r\n">   16
+     ?<Constant "MAADR0 = 0x%x\r\n">   16
+
+ 
+     3 bytes in section .bss
+    96 bytes in section .rodata
+ 1 146 bytes in section .text
+ 
+ 1 146 bytes of CODE  memory
+    96 bytes of CONST memory
+     3 bytes of DATA  memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,11 @@
+uip-fw.o: ..\uip\src\uip-fw.c
+uip-fw.o: ..\uip\src\uip.h
+uip-fw.o: ..\uip\src\uipopt.h
+uip-fw.o: ..\uip\inc\uip-conf.h
+uip-fw.o: ..\app\mydef.h
+uip-fw.o: C:\Keil\ARM\RV31\INC\stdint.h
+uip-fw.o: ..\uip\inc\../../app/service/telnetd/telnetd.h
+uip-fw.o: ..\uip\src\uipopt.h
+uip-fw.o: ..\uip\src\uip_arch.h
+uip-fw.o: ..\uip\src\uip-fw.h
+uip-fw.o: C:\Keil\ARM\RV31\INC\string.h

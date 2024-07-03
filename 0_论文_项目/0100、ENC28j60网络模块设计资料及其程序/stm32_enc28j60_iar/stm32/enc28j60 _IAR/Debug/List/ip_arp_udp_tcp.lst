@@ -1,0 +1,614 @@
+###############################################################################
+#                                                                             #
+#                                                       21/Apr/2009  21:08:10 #
+# IAR ANSI C/C++ Compiler V5.20.2.21007/W32 EVALUATION for ARM                #
+# Copyright 1999-2008 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\ip_arp_udp_tcp.c #
+#    Command line =  "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\TCPIP\ip_arp_udp_tcp.c" -lcN                        #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -lb      #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -o       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\" --no_cse  #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "D:\Program  #
+#                    Files\IAR Systems\Embedded Workbench 5.0                 #
+#                    Evaluation\ARM\INC\DLib_Config_Full.h" -I                #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\EWARM_V2.0.2\library\inc\" -I                       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\EWARM_V2.0.2\" -I     #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\" -I                  #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\" -I            #
+#                    "D:\Program Files\IAR Systems\Embedded Workbench 5.0     #
+#                    Evaluation\ARM\INC\" -Ol                                 #
+#    List file    =  F:\b百利胜\enc28j60\enc28j60                             #
+#                    _IAR\Debug\List\ip_arp_udp_tcp.lst                       #
+#    Object file  =  F:\b百利胜\enc28j60\enc28j60                             #
+#                    _IAR\Debug\Obj\ip_arp_udp_tcp.o                          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\ip_arp_udp_tcp.c
+      1          
+      2          /*************************************************
+      3           * vim:sw=8:ts=8:si:et
+      4           * To use the above modeline in vim you must have "set modeline" in your .vimrc
+      5           *
+      6           * Author: Guido Socher 
+      7           * Copyright: GPL V2
+      8           * See http://www.gnu.org/licenses/gpl.html
+      9           *
+     10           * IP, Arp, UDP and TCP functions.
+     11           *
+     12           * The TCP implementation uses some size optimisations which are valid
+     13           * only if all data can be sent in one single packet. This is however
+     14           * not a big limitation for a microcontroller as you will anyhow use
+     15           * small web-pages. The TCP stack is therefore a SDP-TCP stack (single data packet TCP).
+     16           *
+     17           * Chip type           : ATMEGA88 with ENC28J60
+     18           *********************************************/
+     19          //#include <includes.h>
+     20          #include "net.h"
+     21          #include "ip_arp_udp_tcp.h"
+     22          #include "enc28j60.h"
+     23          #define  pgm_read_byte(ptr)  ((char)*(ptr))
+     24          
+     25          //#define unsigned char  unsigned char
+     26          //#define unsigned  int unisgned int
+     27          
+     28          static unsigned char wwwport=80;
+     29          static unsigned char macaddr[6];
+     30          static unsigned char ipaddr[4];
+     31          static unsigned int info_hdr_len=0;
+     32          static unsigned int info_data_len=0;
+     33          static unsigned char seqnum=0xa; // my initial tcp sequence number
+     34          
+     35          // The Ip checksum is calculated over the ip header only starting
+     36          // with the header length field and a total length of 20 bytes
+     37          // unitl ip.dst
+     38          // You must set the IP checksum field to zero before you start
+     39          // the calculation.
+     40          // len for ip is 20.
+     41          //
+     42          // For UDP/TCP we do not make up the required pseudo header. Instead we 
+     43          // use the ip.src and ip.dst fields of the real packet:
+     44          // The udp checksum calculation starts with the ip.src field
+     45          // Ip.src=4bytes,Ip.dst=4 bytes,Udp header=8bytes + data length=16+len
+     46          // In other words the len here is 8 + length over which you actually
+     47          // want to calculate the checksum.
+     48          // You must set the checksum field to zero before you start
+     49          // the calculation.
+     50          // len for udp is: 8 + 8 + data length
+     51          // len for tcp is: 4+4 + 20 + option len + data length
+     52          //
+     53          // For more information on how this algorithm works see:
+     54          // http://www.netfor2.com/checksum.html
+     55          // http://www.msc.uky.edu/ken/cs471/notes/chap3.htm
+     56          // The RFC has also a C code example: http://www.faqs.org/rfcs/rfc1071.html
+     57          unsigned  int checksum(unsigned char *buf, unsigned  int len,unsigned char type)
+     58          	{
+     59          	// type 0=ip 
+     60          	//      1=udp
+     61          	//      2=tcp
+     62          	unsigned long sum = 0;
+     63          	
+     64          	//if(type==0){
+     65          	//        // do not add anything
+     66          	//}
+     67          	if(type==1)
+     68          		{
+     69          		sum+=IP_PROTO_UDP_V; // protocol udp
+     70          		// the length here is the length of udp (data+header len)
+     71          		// =length given to this function - (IP.scr+IP.dst length)
+     72          		sum+=len-8; // = real tcp len
+     73          		}
+     74          	if(type==2)
+     75          		{
+     76          		sum+=IP_PROTO_TCP_V; 
+     77          		// the length here is the length of tcp (data+header len)
+     78          		// =length given to this function - (IP.scr+IP.dst length)
+     79          		sum+=len-8; // = real tcp len
+     80          		}
+     81          	// build the sum of 16bit words
+     82          	while(len >1)
+     83          		{
+     84          		sum += 0xFFFF & (*buf<<8|*(buf+1));
+     85          		buf+=2;
+     86          		len-=2;
+     87          		}
+     88          	// if there is a byte left then add it (padded with zero)
+     89          	if (len)
+     90          		{
+     91          		sum += (0xFF & *buf)<<8;
+     92          		}
+     93          	// now calculate the sum over the bytes in the sum
+     94          	// until the result is only 16bit long
+     95          	while (sum>>16)
+     96          		{
+     97          		sum = (sum & 0xFFFF)+(sum >> 16);
+     98          		}
+     99          	// build 1's complement:
+    100          	return( (unsigned  int) sum ^ 0xFFFF);
+    101          	}
+    102          
+    103          // you must call this function once before you use any of the other functions:
+    104          void init_ip_arp_udp_tcp(unsigned char *mymac,unsigned char *myip,unsigned char wwwp)
+    105          	{
+    106          	unsigned char i=0;
+    107          	wwwport=wwwp;
+    108          	while(i<4)
+    109          		{
+    110                  ipaddr[i]=myip[i];
+    111                  i++;
+    112          		}
+    113          	i=0;
+    114          	while(i<6)
+    115          		{
+    116                  macaddr[i]=mymac[i];
+    117                  i++;
+    118          		}
+    119          	}
+    120          
+    121          unsigned char eth_type_is_arp_and_my_ip(unsigned char *buf,unsigned  int len)
+    122          	{
+    123          	unsigned char i=0;
+    124          	//  
+    125          	if (len<41)
+    126          		{
+    127          	    return(0);
+    128          		}
+    129          	if(buf[ETH_TYPE_H_P] != ETHTYPE_ARP_H_V || buf[ETH_TYPE_L_P] != ETHTYPE_ARP_L_V)
+    130          		{
+    131          	    return(0);
+    132          		}
+    133          	while(i<4)
+    134          		{
+    135          	    if(buf[ETH_ARP_DST_IP_P+i] != ipaddr[i])
+    136          			{
+    137          	        return(0);
+    138          	    	}
+    139          	    i++;
+    140          		}
+    141          	return(1);
+    142          	}
+    143          
+    144          unsigned char eth_type_is_ip_and_my_ip(unsigned char *buf,unsigned  int len)
+    145          	{
+    146          	unsigned char i=0;
+    147          	//eth+ip+udp header is 42
+    148          	if (len<42)
+    149          		{
+    150          	    return(0);
+    151          		}
+    152          	if(buf[ETH_TYPE_H_P]!=ETHTYPE_IP_H_V || buf[ETH_TYPE_L_P]!=ETHTYPE_IP_L_V)
+    153          		{
+    154          	    return(0);
+    155          		}
+    156          	if (buf[IP_HEADER_LEN_VER_P]!=0x45)
+    157          		{
+    158          	    // must be IP V4 and 20 byte header
+    159          	    return(0);
+    160          		}
+    161          	while(i<4)
+    162          		{
+    163          	    if(buf[IP_DST_P+i]!=ipaddr[i])
+    164          			{
+    165          	        return(0);
+    166          	    	}
+    167          	    i++;
+    168          		}
+    169          	return(1);
+    170          	}
+    171          // make a return eth header from a received eth packet
+    172          void make_eth(unsigned char *buf)
+    173          	{
+    174          	unsigned char i=0;
+    175          	//
+    176          	//copy the destination mac from the source and fill my mac into src
+    177          	while(i<6)
+    178          		{
+    179                  buf[ETH_DST_MAC +i]=buf[ETH_SRC_MAC +i];
+    180                  buf[ETH_SRC_MAC +i]=macaddr[i];
+    181                  i++;
+    182          		}
+    183          	}
+    184          void fill_ip_hdr_checksum(unsigned char *buf)
+    185          	{
+    186          	unsigned  int ck;
+    187          	// clear the 2 byte checksum
+    188          	buf[IP_CHECKSUM_P]=0;
+    189          	buf[IP_CHECKSUM_P+1]=0;
+    190          	buf[IP_FLAGS_P]=0x40; // don't fragment
+    191          	buf[IP_FLAGS_P+1]=0;  // fragement offset
+    192          	buf[IP_TTL_P]=64; // ttl
+    193          	// calculate the checksum:
+    194          	ck=checksum(&buf[IP_P], IP_HEADER_LEN,0);
+    195          	buf[IP_CHECKSUM_P]=ck>>8;
+    196          	buf[IP_CHECKSUM_P+1]=ck& 0xff;
+    197          	}
+    198          
+    199          // make a return ip header from a received ip packet
+    200          void make_ip(unsigned char *buf)
+    201          	{
+    202          	unsigned char i=0;
+    203          	while(i<4)
+    204          		{
+    205                  buf[IP_DST_P+i]=buf[IP_SRC_P+i];
+    206                  buf[IP_SRC_P+i]=ipaddr[i];
+    207                  i++;
+    208          		}
+    209          	fill_ip_hdr_checksum(buf);
+    210          	}
+    211          
+    212          // make a return tcp header from a received tcp packet
+    213          // rel_ack_num is how much we must step the seq number received from the
+    214          // other side. We do not send more than 255 bytes of text (=data) in the tcp packet.
+    215          // If mss=1 then mss is included in the options list
+    216          //
+    217          // After calling this function you can fill in the first data byte at TCP_OPTIONS_P+4
+    218          // If cp_seq=0 then an initial sequence number is used (should be use in synack)
+    219          // otherwise it is copied from the packet we received
+    220          void make_tcphead(unsigned char *buf,unsigned  int rel_ack_num,unsigned char mss,unsigned char cp_seq)
+    221          	{
+    222          	unsigned char i=0;
+    223          	unsigned char tseq;
+    224          	while(i<2)
+    225          		{
+    226          	    buf[TCP_DST_PORT_H_P+i]=buf[TCP_SRC_PORT_H_P+i];
+    227          	    buf[TCP_SRC_PORT_H_P+i]=0; // clear source port
+    228          	    i++;
+    229          		}
+    230          	// set source port  (http):
+    231          	buf[TCP_SRC_PORT_L_P]=wwwport;
+    232          	i=4;
+    233          	// sequence numbers:
+    234          	// add the rel ack num to SEQACK
+    235          	while(i>0)
+    236          		{
+    237          	    rel_ack_num=buf[TCP_SEQ_H_P+i-1]+rel_ack_num;
+    238          	    tseq=buf[TCP_SEQACK_H_P+i-1];
+    239          	    buf[TCP_SEQACK_H_P+i-1]=0xff&rel_ack_num;
+    240          	    if (cp_seq)
+    241          				{
+    242          		        // copy the acknum sent to us into the sequence number
+    243          		        buf[TCP_SEQ_H_P+i-1]=tseq;
+    244          		    	}
+    245          			else
+    246          				{
+    247          	            buf[TCP_SEQ_H_P+i-1]= 0; // some preset vallue
+    248          	    		}
+    249          	    rel_ack_num=rel_ack_num>>8;
+    250          	    i--;
+    251          		}
+    252          	if (cp_seq==0)
+    253          		{
+    254          	    // put inital seq number
+    255          	    buf[TCP_SEQ_H_P+0]= 0;
+    256          	    buf[TCP_SEQ_H_P+1]= 0;
+    257          	    // we step only the second byte, this allows us to send packts 
+    258          	    // with 255 bytes or 512 (if we step the initial seqnum by 2)
+    259          	    buf[TCP_SEQ_H_P+2]= seqnum; 
+    260          	    buf[TCP_SEQ_H_P+3]= 0;
+    261          	    // step the inititial seq num by something we will not use
+    262          	    // during this tcp session:
+    263          	    seqnum+=2;
+    264          		}
+    265          	// zero the checksum
+    266          	buf[TCP_CHECKSUM_H_P]=0;
+    267          	buf[TCP_CHECKSUM_L_P]=0;
+    268          	
+    269          	// The tcp header length is only a 4 bit field (the upper 4 bits).
+    270          	// It is calculated in units of 4 bytes. 
+    271          	// E.g 24 bytes: 24/4=6 => 0x60=header len field
+    272          	//buf[TCP_HEADER_LEN_P]=(((TCP_HEADER_LEN_PLAIN+4)/4)) <<4; // 0x60
+    273          	if (mss)
+    274          			{
+    275          		    // the only option we set is MSS to 1408:
+    276          		    // 1408 in hex is 0x580
+    277          		    buf[TCP_OPTIONS_P]=2;
+    278          		    buf[TCP_OPTIONS_P+1]=4;
+    279          		    buf[TCP_OPTIONS_P+2]=0x05; 
+    280          		    buf[TCP_OPTIONS_P+3]=0x80;
+    281          		    // 24 bytes:
+    282          		    buf[TCP_HEADER_LEN_P]=0x60;
+    283          			}
+    284          		else
+    285          			{
+    286          		    // no options:
+    287          		    // 20 bytes:
+    288          		    buf[TCP_HEADER_LEN_P]=0x50;
+    289          			}
+    290          	}
+    291          
+    292          void make_arp_answer_from_request(unsigned char *buf)
+    293          	{
+    294          	unsigned char i=0;
+    295          	//
+    296          	make_eth(buf);
+    297          	buf[ETH_ARP_OPCODE_H_P]=ETH_ARP_OPCODE_REPLY_H_V;
+    298          	buf[ETH_ARP_OPCODE_L_P]=ETH_ARP_OPCODE_REPLY_L_V;
+    299          	// fill the mac addresses:
+    300          	while(i<6)
+    301          		{
+    302                  buf[ETH_ARP_DST_MAC_P+i]=buf[ETH_ARP_SRC_MAC_P+i];
+    303                  buf[ETH_ARP_SRC_MAC_P+i]=macaddr[i];
+    304                  i++;
+    305          		}
+    306          	i=0;
+    307          	while(i<4)
+    308          		{
+    309                  buf[ETH_ARP_DST_IP_P+i]=buf[ETH_ARP_SRC_IP_P+i];
+    310                  buf[ETH_ARP_SRC_IP_P+i]=ipaddr[i];
+    311                  i++;
+    312          		}
+    313          	// eth+arp is 42 bytes:
+    314          	enc28j60PacketSend(42,buf); 
+    315          	}
+    316          
+    317          void make_echo_reply_from_request(unsigned char *buf,unsigned  int len)
+    318          	{
+    319          	make_eth(buf);
+    320          	make_ip(buf);
+    321          	buf[ICMP_TYPE_P]=ICMP_TYPE_ECHOREPLY_V;	  //////////////////////////////////////////////////////////////////////////////////
+    322          	// we changed only the icmp.type field from request(=8) to reply(=0).
+    323          	// we can therefore easily correct the checksum:
+    324          	if (buf[ICMP_CHECKSUM_P] > (0xff-0x08))
+    325          		{
+    326          	    buf[ICMP_CHECKSUM_P+1]++;
+    327          		}
+    328          	buf[ICMP_CHECKSUM_P]+=0x08;
+    329          	//
+    330          	enc28j60PacketSend(len,buf);
+    331          	}
+    332          
+    333          // you can send a max of 220 bytes of data
+    334          void make_udp_reply_from_request(unsigned char *buf,char *data,unsigned char datalen,unsigned  int port)
+    335          	{
+    336          	unsigned char i=0;
+    337          	unsigned  int ck;
+    338          	make_eth(buf);
+    339          	if (datalen>220)
+    340          		{
+    341          	    datalen=220;
+    342          		}
+    343          	// total length field in the IP header must be set:
+    344          	buf[IP_TOTLEN_H_P]=0;
+    345          	buf[IP_TOTLEN_L_P]=IP_HEADER_LEN+UDP_HEADER_LEN+datalen;
+    346          	make_ip(buf);
+    347          	buf[UDP_DST_PORT_H_P]=port>>8;
+    348          	buf[UDP_DST_PORT_L_P]=port & 0xff;
+    349          	// source port does not matter and is what the sender used.
+    350          	// calculte the udp length:
+    351          	buf[UDP_LEN_H_P]=0;
+    352          	buf[UDP_LEN_L_P]=UDP_HEADER_LEN+datalen;
+    353          	// zero the checksum
+    354          	buf[UDP_CHECKSUM_H_P]=0;
+    355          	buf[UDP_CHECKSUM_L_P]=0;
+    356          	// copy the data:
+    357          	while(i<datalen)
+    358          		{
+    359                  buf[UDP_DATA_P+i]=data[i];
+    360                  i++;
+    361          		}
+    362          	ck=checksum(&buf[IP_SRC_P], 16 + datalen,1);
+    363          	buf[UDP_CHECKSUM_H_P]=ck>>8;
+    364          	buf[UDP_CHECKSUM_L_P]=ck& 0xff;
+    365          	enc28j60PacketSend(UDP_HEADER_LEN+IP_HEADER_LEN+ETH_HEADER_LEN+datalen,buf);
+    366          	}
+    367          
+    368          void make_tcp_synack_from_syn(unsigned char *buf)
+    369          	{
+    370          	unsigned  int ck;
+    371          	make_eth(buf);
+    372          	// total length field in the IP header must be set:
+    373          	// 20 bytes IP + 24 bytes (20tcp+4tcp options)
+    374          	buf[IP_TOTLEN_H_P]=0;
+    375          	buf[IP_TOTLEN_L_P]=IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+4;
+    376          	make_ip(buf);
+    377          	buf[TCP_FLAGS_P]=TCP_FLAGS_SYNACK_V;
+    378          	make_tcphead(buf,1,1,0);
+    379          	// calculate the checksum, len=8 (start from ip.src) + TCP_HEADER_LEN_PLAIN + 4 (one option: mss)
+    380          	ck=checksum(&buf[IP_SRC_P], 8+TCP_HEADER_LEN_PLAIN+4,2);
+    381          	buf[TCP_CHECKSUM_H_P]=ck>>8;
+    382          	buf[TCP_CHECKSUM_L_P]=ck& 0xff;
+    383          	// add 4 for option mss:
+    384          	enc28j60PacketSend(IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+4+ETH_HEADER_LEN,buf);
+    385          	}
+    386          
+    387          // get a pointer to the start of tcp data in buf
+    388          // Returns 0 if there is no data
+    389          // You must call init_len_info once before calling this function
+    390          unsigned  int get_tcp_data_pointer(void)
+    391          	{
+    392          	if (info_data_len)
+    393          			{
+    394          	        return((unsigned  int)TCP_SRC_PORT_H_P+info_hdr_len);
+    395          			}
+    396          		else
+    397          			{
+    398          	        return(0);
+    399          			}
+    400          	}
+    401          
+    402          // do some basic length calculations and store the result in static varibales
+    403          void init_len_info(unsigned char *buf)
+    404          	{
+    405              info_data_len=(buf[IP_TOTLEN_H_P]<<8)|(buf[IP_TOTLEN_L_P]&0xff);
+    406              info_data_len-=IP_HEADER_LEN;
+    407              info_hdr_len=(buf[TCP_HEADER_LEN_P]>>4)*4; // generate len in bytes;
+    408              info_data_len-=info_hdr_len;
+    409              if (info_data_len<=0)
+    410          		{
+    411                  info_data_len=0;
+    412              	}
+    413          	}
+    414          
+    415          // fill in tcp data at position pos. pos=0 means start of
+    416          // tcp data. Returns the position at which the string after
+    417          // this string could be filled.
+    418          unsigned  int fill_tcp_data_p(unsigned char *buf,unsigned  int pos, const unsigned char *progmem_s)
+    419          	{
+    420          	char c;
+    421          	// fill in tcp data at position pos
+    422          	//
+    423          	// with no options the data starts after the checksum + 2 more bytes (urgent ptr)
+    424          	while ((c = pgm_read_byte(progmem_s++))) 
+    425          		{
+    426          	    buf[TCP_CHECKSUM_L_P+3+pos]=c;
+    427          	    pos++;
+    428          		}
+    429          	return(pos);
+    430          	}
+    431          
+    432          // fill in tcp data at position pos. pos=0 means start of
+    433          // tcp data. Returns the position at which the string after
+    434          // this string could be filled.
+    435          unsigned  int fill_tcp_data(unsigned char *buf,unsigned  int pos, const char *s)
+    436          	{
+    437          	// fill in tcp data at position pos
+    438          	//
+    439          	// with no options the data starts after the checksum + 2 more bytes (urgent ptr)
+    440          	while (*s) 
+    441          		{
+    442          	    buf[TCP_CHECKSUM_L_P+3+pos]=*s;
+    443          	    pos++;
+    444          	    s++;
+    445          		}
+    446          	return(pos);
+    447          	}
+    448          
+    449          // Make just an ack packet with no tcp data inside
+    450          // This will modify the eth/ip/tcp header 
+    451          void make_tcp_ack_from_any(unsigned char *buf)
+    452          	{
+    453          	unsigned  int j;
+    454          	make_eth(buf);
+    455          	// fill the header:
+    456          	buf[TCP_FLAGS_P]=TCP_FLAGS_ACK_V;
+    457          	if (info_data_len==0)
+    458          			{
+    459          	        // if there is no data then we must still acknoledge one packet
+    460          	        make_tcphead(buf,1,0,1); // no options
+    461          			}
+    462          		else
+    463          			{
+    464          	        make_tcphead(buf,info_data_len,0,1); // no options
+    465          			}
+    466          	
+    467          	// total length field in the IP header must be set:
+    468          	// 20 bytes IP + 20 bytes tcp (when no options) 
+    469          	j=IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN;
+    470          	buf[IP_TOTLEN_H_P]=j>>8;
+    471          	buf[IP_TOTLEN_L_P]=j& 0xff;
+    472          	make_ip(buf);
+    473          	// calculate the checksum, len=8 (start from ip.src) + TCP_HEADER_LEN_PLAIN + data len
+    474          	j=checksum(&buf[IP_SRC_P], 8+TCP_HEADER_LEN_PLAIN,2);
+    475          	buf[TCP_CHECKSUM_H_P]=j>>8;
+    476          	buf[TCP_CHECKSUM_L_P]=j& 0xff;
+    477          	enc28j60PacketSend(IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+ETH_HEADER_LEN,buf);
+    478          	}
+    479          
+    480          // you must have called init_len_info at some time before calling this function
+    481          // dlen is the amount of tcp data (http data) we send in this packet
+    482          // You can use this function only immediately after make_tcp_ack_from_any
+    483          // This is because this function will NOT modify the eth/ip/tcp header except for
+    484          // length and checksum
+    485          void make_tcp_ack_with_data(unsigned char *buf,unsigned  int dlen)
+    486          	{
+    487          	unsigned  int j;
+    488          	// fill the header:
+    489          	// This code requires that we send only one data packet
+    490          	// because we keep no state information. We must therefore set
+    491          	// the fin here:
+    492          	buf[TCP_FLAGS_P]=TCP_FLAGS_ACK_V|TCP_FLAGS_PUSH_V|TCP_FLAGS_FIN_V;
+    493          	
+    494          	// total length field in the IP header must be set:
+    495          	// 20 bytes IP + 20 bytes tcp (when no options) + len of data
+    496          	j=IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+dlen;
+    497          	buf[IP_TOTLEN_H_P]=j>>8;
+    498          	buf[IP_TOTLEN_L_P]=j& 0xff;
+    499          	fill_ip_hdr_checksum(buf);
+    500          	// zero the checksum
+    501          	buf[TCP_CHECKSUM_H_P]=0;
+    502          	buf[TCP_CHECKSUM_L_P]=0;
+    503          	// calculate the checksum, len=8 (start from ip.src) + TCP_HEADER_LEN_PLAIN + data len
+    504          	j=checksum(&buf[IP_SRC_P], 8+TCP_HEADER_LEN_PLAIN+dlen,2);
+    505          	buf[TCP_CHECKSUM_H_P]=j>>8;
+    506          	buf[TCP_CHECKSUM_L_P]=j& 0xff;
+    507          	enc28j60PacketSend(IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+dlen+ETH_HEADER_LEN,buf);
+    508          	}
+    509          
+    510          /* end of ip_arp_udp.c */
+
+   Maximum stack usage in bytes:
+
+     Function                     .cstack
+     --------                     -------
+     checksum                          0
+     eth_type_is_arp_and_my_ip         0
+     eth_type_is_ip_and_my_ip          0
+     fill_ip_hdr_checksum              0
+     fill_tcp_data                     0
+     fill_tcp_data_p                   0
+     get_tcp_data_pointer              0
+     init_ip_arp_udp_tcp               0
+     init_len_info                     0
+     make_arp_answer_from_request      0
+     make_echo_reply_from_request      0
+     make_eth                          0
+     make_ip                           0
+     make_tcp_ack_from_any             0
+     make_tcp_ack_with_data            0
+     make_tcp_synack_from_syn          0
+     make_tcphead                      0
+     make_udp_reply_from_request       0
+
+
+   Section sizes:
+
+     Function/Label               Bytes
+     --------------               -----
+     wwwport                         1
+     macaddr                         8
+     ipaddr                          4
+     info_hdr_len                    4
+     info_data_len                   4
+     seqnum                          1
+     checksum                       86
+     init_ip_arp_udp_tcp            58
+     eth_type_is_arp_and_my_ip      60
+     eth_type_is_ip_and_my_ip       68
+     make_eth                       36
+     fill_ip_hdr_checksum           44
+     make_ip                        44
+     make_tcphead                  272
+     make_arp_answer_from_request  104
+     make_echo_reply_from_request   62
+     make_udp_reply_from_request   160
+     make_tcp_synack_from_syn       74
+     get_tcp_data_pointer           20
+     init_len_info                  68
+     fill_tcp_data_p                34
+     fill_tcp_data                  28
+     make_tcp_ack_from_any          98
+     make_tcp_ack_with_data         76
+     ??DataTable7                    4
+     ??DataTable8                    4
+     ??DataTable9                    4
+     ??DataTable17                   4
+     ??DataTable22                   4
+
+ 
+    20 bytes in section .bss
+     2 bytes in section .data
+ 1 412 bytes in section .text
+ 
+ 1 412 bytes of CODE memory
+    22 bytes of DATA memory
+
+Errors: none
+Warnings: none

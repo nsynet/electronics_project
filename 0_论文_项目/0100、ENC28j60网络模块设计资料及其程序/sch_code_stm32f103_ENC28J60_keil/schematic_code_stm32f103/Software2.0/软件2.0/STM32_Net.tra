@@ -1,0 +1,39 @@
+*** Creating Trace Output File 'STM32_Net.tra' Ok.
+### Preparing for ADS-LD.
+### Creating ADS-LD Command Line
+### List of Objects: adding '"retarget.o"'
+### List of Objects: adding '"main.o"'
+### List of Objects: adding '"tasks.o"'
+### List of Objects: adding '"E:\Keil\ARM\RV31\LIB\ST\STM32F10xR.LIB"'
+### List of Objects: adding '"E:\Keil\ARM\RV31\LIB\FS_CM3.lib"'
+### List of Objects: adding '"E:\Keil\ARM\RV31\LIB\TCPD_CM3.lib"'
+### List of Objects: adding '"stm32f10x.o"'
+### List of Objects: adding '"rtx_config.o"'
+### List of Objects: adding '"file_config.o"'
+### List of Objects: adding '"net_config.o"'
+### List of Objects: adding '"enc28j60.o"'
+### List of Objects: adding '"stm32_net_bsl.o"'
+### List of Objects: adding '"ili9320.o"'
+### List of Objects: adding '"font_ch.o"'
+### List of Objects: adding '"usart.o"'
+### List of Objects: adding '"can_hw.o"'
+### List of Objects: adding '"rtx_can.o"'
+### List of Objects: adding '"net_debug.o"'
+### List of Objects: adding '"http_uif.o"'
+### List of Objects: adding '"http_cgi.o"'
+### List of Objects: adding '"http_err.o"'
+### ADS-LD Command completed:
+--device DARMSTM "retarget.o" "main.o" "tasks.o" "E:\Keil\ARM\RV31\LIB\ST\STM32F10xR.LIB" "E:\Keil\ARM\RV31\LIB\FS_CM3.lib" "E:\Keil\ARM\RV31\LIB\TCPD_CM3.lib" "stm32f10x.o" "rtx_config.o" "file_config.o" "net_config.o" "enc28j60.o" "stm32_net_bsl.o" "ili9320.o" "font_ch.o" "usart.o" "can_hw.o" "rtx_can.o" "net_debug.o" "http_uif.o" "http_cgi.o" "http_err.o" "E:\Keil\ARM\RV31\LIB\RTX_CM3.LIB" --strict --scatter "STM32_Net.sct" 
+--autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\STM32_Net.map" -o "STM32_Net.axf"### Preparing Environment (PrepEnvAds)
+### ADS-LD Output File: 'STM32_Net.axf'
+### ADS-LD Command File: 'STM32_Net.lnp'
+### Checking for dirty Components...
+### Creating CmdFile 'STM32_Net.lnp', Handle=0x00000268
+### Writing '.lnp' file
+### ADS-LD Command file 'STM32_Net.lnp' is ready.
+### ADS-LD: About to start ADS-LD Thread.
+### ADS-LD: executed with 0 errors
+### Updating obj list
+### LDADS_file() completed.

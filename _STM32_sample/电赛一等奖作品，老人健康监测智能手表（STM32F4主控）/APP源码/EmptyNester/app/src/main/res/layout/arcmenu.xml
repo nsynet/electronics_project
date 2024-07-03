@@ -1,0 +1,56 @@
+<name.liushiyao.arcmenu.ArcMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:arc="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/aremenu"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    arc:position="right_button"
+    arc:radius="150dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/arcmenu"
+
+        >
+
+        <ImageView
+            android:id="@+id/id_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/wifi"
+        android:tag="SmartWifi" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/rq_code"
+        android:tag="QR_Code" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/setting"
+        android:tag="Setting" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/about"
+        android:tag="About" />
+
+</name.liushiyao.arcmenu.ArcMenu>
+	
+	

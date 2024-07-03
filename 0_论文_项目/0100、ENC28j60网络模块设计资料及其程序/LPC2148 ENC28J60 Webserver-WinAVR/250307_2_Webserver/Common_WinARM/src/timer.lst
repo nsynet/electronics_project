@@ -1,0 +1,366 @@
+   1              		.file	"timer.c"
+   9              	.Ltext0:
+  10              		.align	2
+  12              	Timer0Handler:
+  13              	.LFB2:
+  14              		.file 1 "../Common_WinARM/src/timer.c"
+   1:../Common_WinARM/src/timer.c **** /*****************************************************************************
+   2:../Common_WinARM/src/timer.c ****  *   timer.c:  Timer C file for Philips LPC214x Family Microprocessors
+   3:../Common_WinARM/src/timer.c ****  *
+   4:../Common_WinARM/src/timer.c ****  *   Copyright(C) 2006, Philips Semiconductor
+   5:../Common_WinARM/src/timer.c ****  *   All rights reserved.
+   6:../Common_WinARM/src/timer.c ****  *
+   7:../Common_WinARM/src/timer.c ****  *   History
+   8:../Common_WinARM/src/timer.c ****  *   2005.10.01  ver 1.00    Prelimnary version, first Release
+   9:../Common_WinARM/src/timer.c ****  *
+  10:../Common_WinARM/src/timer.c **** ******************************************************************************/
+  11:../Common_WinARM/src/timer.c **** #include "LPC214x.h"		/* LPC21XX Peripheral Registers	*/
+  12:../Common_WinARM/src/timer.c **** #include "type.h"
+  13:../Common_WinARM/src/timer.c **** #include "irq.h"
+  14:../Common_WinARM/src/timer.c **** #include "timer.h"
+  15:../Common_WinARM/src/timer.c **** 
+  16:../Common_WinARM/src/timer.c **** #include "interrupt_utils.h"
+  17:../Common_WinARM/src/timer.c **** 
+  18:../Common_WinARM/src/timer.c **** volatile DWORD timer_counter = 0;
+  19:../Common_WinARM/src/timer.c **** 
+  20:../Common_WinARM/src/timer.c **** /******************************************************************************
+  21:../Common_WinARM/src/timer.c **** ** Function name:		Timer0Handler
+  22:../Common_WinARM/src/timer.c **** **
+  23:../Common_WinARM/src/timer.c **** ** Descriptions:		Timer/Counter 0 interrupt handler
+  24:../Common_WinARM/src/timer.c **** **				executes each 10ms @ 60 MHz CPU Clock
+  25:../Common_WinARM/src/timer.c **** **
+  26:../Common_WinARM/src/timer.c **** ** parameters:			None
+  27:../Common_WinARM/src/timer.c **** ** Returned value:		None
+  28:../Common_WinARM/src/timer.c **** ** 
+  29:../Common_WinARM/src/timer.c **** ******************************************************************************/
+  30:../Common_WinARM/src/timer.c **** // mthomas: static inserted to avoid warning by gcc 4.1.0
+  31:../Common_WinARM/src/timer.c **** #if 1
+  32:../Common_WinARM/src/timer.c **** static void /*RAMFUNC*/ Timer0Handler (void) __irq
+  33:../Common_WinARM/src/timer.c **** {  
+  15              	@ Function supports interworking.
+  16              		@ args = 0, pretend = 0, frame = 0
+  17              		@ frame_needed = 0, uses_anonymous_args = 0
+  18              		@ link register save eliminated.
+  19              		.loc 1 34 0
+  34:../Common_WinARM/src/timer.c ****     T0IR = 1;			/* clear interrupt flag */
+  20              	r3, .L3
+  21 0000 24309FE5 		mov	r2, #1
+  22 0004 0120A0E3 		str	r2, [r3, #0]
+  23 0008 002083E5 		.loc 1 37 0
+  35:../Common_WinARM/src/timer.c ****     IENABLE;			/* handles nested interrupt */
+  36:../Common_WinARM/src/timer.c **** 
+  37:../Common_WinARM/src/timer.c ****     timer_counter++;
+  24              		r2, .L3+4
+  25 000c 1C209FE5 		ldr	r3, [r2, #0]
+  26 0010 003092E5 		add	r3, r3, #1
+  27 0014 013083E2 		str	r3, [r2, #0]
+  28 0018 003082E5 		.loc 1 40 0
+  38:../Common_WinARM/src/timer.c **** 
+  39:../Common_WinARM/src/timer.c ****     IDISABLE;
+  40:../Common_WinARM/src/timer.c ****     VICVectAddr = 0;		/* Acknowledge Interrupt */
+  29              	r2, #0
+  30 001c 0020A0E3 		mvn	r3, #0
+  31 0020 0030E0E3 		.loc 1 33 0
+  32              		@ lr needed for prologue
+  33              		.loc 1 40 0
+  34              		str	r2, [r3, #-4047]
+  35 0024 CF2F03E5 		.loc 1 41 0
+  41:../Common_WinARM/src/timer.c **** }
+  36              	.L4:
+  37 0028 1EFF2FE1 		.align	2
+  38              	.L3:
+  39              		.word	-536854528
+  40              		.word	timer_counter
+  41 002c 004000E0 	.LFE2:
+  43              		.align	2
+  44              		.global	enable_timer
+  46              	enable_timer:
+  47              	.LFB3:
+  48              		.loc 1 71 0
+  49              		@ Function supports interworking.
+  42:../Common_WinARM/src/timer.c **** #endif
+  43:../Common_WinARM/src/timer.c **** 
+  44:../Common_WinARM/src/timer.c **** #if 0
+  45:../Common_WinARM/src/timer.c **** // mthomas: macro-approach - not needed since there
+  46:../Common_WinARM/src/timer.c **** // is an assembler-wrapper provided in Startup.S
+  47:../Common_WinARM/src/timer.c **** static void NACKEDFUNC Timer0Handler (void) __irq
+  48:../Common_WinARM/src/timer.c **** {  
+  49:../Common_WinARM/src/timer.c **** 	ISR_STORE();
+  50:../Common_WinARM/src/timer.c ****     T0IR = 1;			/* clear interrupt flag */
+  51:../Common_WinARM/src/timer.c **** 	ISR_ENABLE_NEST();  /* handles nested interrupt */
+  52:../Common_WinARM/src/timer.c **** 
+  53:../Common_WinARM/src/timer.c ****     timer_counter++;
+  54:../Common_WinARM/src/timer.c **** 
+  55:../Common_WinARM/src/timer.c **** 	ISR_DISABLE_NEST();     /* Disable Interrupt nesting */
+  56:../Common_WinARM/src/timer.c ****     VICVectAddr = 0;		/* Acknowledge Interrupt */
+  57:../Common_WinARM/src/timer.c **** 	ISR_RESTORE();
+  58:../Common_WinARM/src/timer.c **** }
+  59:../Common_WinARM/src/timer.c **** #endif
+  60:../Common_WinARM/src/timer.c **** 
+  61:../Common_WinARM/src/timer.c **** /******************************************************************************
+  62:../Common_WinARM/src/timer.c **** ** Function name:		enable_timer
+  63:../Common_WinARM/src/timer.c **** **
+  64:../Common_WinARM/src/timer.c **** ** Descriptions:		Enable timer
+  65:../Common_WinARM/src/timer.c **** **
+  66:../Common_WinARM/src/timer.c **** ** parameters:			timer number: 0 or 1
+  67:../Common_WinARM/src/timer.c **** ** Returned value:		None
+  68:../Common_WinARM/src/timer.c **** ** 
+  69:../Common_WinARM/src/timer.c **** ******************************************************************************/
+  70:../Common_WinARM/src/timer.c **** void enable_timer( BYTE timer_num )
+  71:../Common_WinARM/src/timer.c **** {
+  50              	retend = 0, frame = 0
+  51              		@ frame_needed = 0, uses_anonymous_args = 0
+  52              		@ link register save eliminated.
+  53              	.LVL0:
+  54              		.loc 1 72 0
+  55              		tst	r0, #255
+  72:../Common_WinARM/src/timer.c ****     if ( timer_num == 0 )
+  56              	1 74 0
+  57 0034 FF0010E3 		ldreq	r3, .L11
+  73:../Common_WinARM/src/timer.c ****     {
+  74:../Common_WinARM/src/timer.c **** 	T0TCR = 1;
+  58              	loc 1 78 0
+  59 0038 10309F05 		ldrne	r3, .L11+4
+  75:../Common_WinARM/src/timer.c ****     }
+  76:../Common_WinARM/src/timer.c ****     else
+  77:../Common_WinARM/src/timer.c ****     {
+  78:../Common_WinARM/src/timer.c **** 	T1TCR = 1;
+  60              	loc 1 74 0
+  61 003c 10309F15 		moveq	r2, #1
+  62              		.loc 1 78 0
+  63 0040 0120A003 		movne	r2, #1
+  64              		.loc 1 71 0
+  65 0044 0120A013 		@ lr needed for prologue
+  66              		.loc 1 78 0
+  67              		str	r2, [r3, #4]
+  68              		bx	lr
+  69 0048 042083E5 	.L12:
+  70 004c 1EFF2FE1 		.align	2
+  71              	.L11:
+  72              		.word	-536854528
+  73              		.word	-536838144
+  74 0050 004000E0 	.LFE3:
+  76              		.align	2
+  77              		.global	disable_timer
+  79              	disable_timer:
+  80              	.LFB4:
+  81              		.loc 1 93 0
+  82              		@ Function supports interworking.
+  79:../Common_WinARM/src/timer.c ****     }
+  80:../Common_WinARM/src/timer.c ****     return;
+  81:../Common_WinARM/src/timer.c **** }
+  82:../Common_WinARM/src/timer.c **** 
+  83:../Common_WinARM/src/timer.c **** /******************************************************************************
+  84:../Common_WinARM/src/timer.c **** ** Function name:		disable_timer
+  85:../Common_WinARM/src/timer.c **** **
+  86:../Common_WinARM/src/timer.c **** ** Descriptions:		Disable timer
+  87:../Common_WinARM/src/timer.c **** **
+  88:../Common_WinARM/src/timer.c **** ** parameters:			timer number: 0 or 1
+  89:../Common_WinARM/src/timer.c **** ** Returned value:		None
+  90:../Common_WinARM/src/timer.c **** ** 
+  91:../Common_WinARM/src/timer.c **** ******************************************************************************/
+  92:../Common_WinARM/src/timer.c **** void disable_timer( BYTE timer_num )
+  93:../Common_WinARM/src/timer.c **** {
+  83              	0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85              		@ link register save eliminated.
+  86              	.LVL1:
+  87              		.loc 1 94 0
+  88              		ands	r0, r0, #255
+  94:../Common_WinARM/src/timer.c ****     if ( timer_num == 0 )
+  89              	1 96 0
+  90 0058 FF0010E2 		ldreq	r3, .L18
+  95:../Common_WinARM/src/timer.c ****     {
+  96:../Common_WinARM/src/timer.c **** 	T0TCR = 0;
+  91              	loc 1 100 0
+  92 005c 10309F05 		ldrne	r3, .L18+4
+  97:../Common_WinARM/src/timer.c ****     }
+  98:../Common_WinARM/src/timer.c ****     else
+  99:../Common_WinARM/src/timer.c ****     {
+ 100:../Common_WinARM/src/timer.c **** 	T1TCR = 0;
+  93              	ovne	r2, #0
+  94 0060 10309F15 		.loc 1 93 0
+  95 0064 0020A013 		@ lr needed for prologue
+  96              		.loc 1 96 0
+  97              		streq	r0, [r3, #4]
+  98              		.loc 1 100 0
+  99 0068 04008305 		strne	r2, [r3, #4]
+ 100              		bx	lr
+ 101 006c 04208315 	.L19:
+ 102 0070 1EFF2FE1 		.align	2
+ 103              	.L18:
+ 104              		.word	-536854528
+ 105              		.word	-536838144
+ 106 0074 004000E0 	.LFE4:
+ 108              		.align	2
+ 109              		.global	reset_timer
+ 111              	reset_timer:
+ 112              	.LFB5:
+ 113              		.loc 1 115 0
+ 114              		@ Function supports interworking.
+ 101:../Common_WinARM/src/timer.c ****     }
+ 102:../Common_WinARM/src/timer.c ****     return;
+ 103:../Common_WinARM/src/timer.c **** }
+ 104:../Common_WinARM/src/timer.c **** 
+ 105:../Common_WinARM/src/timer.c **** /******************************************************************************
+ 106:../Common_WinARM/src/timer.c **** ** Function name:		reset_timer
+ 107:../Common_WinARM/src/timer.c **** **
+ 108:../Common_WinARM/src/timer.c **** ** Descriptions:		Reset timer
+ 109:../Common_WinARM/src/timer.c **** **
+ 110:../Common_WinARM/src/timer.c **** ** parameters:			timer number: 0 or 1
+ 111:../Common_WinARM/src/timer.c **** ** Returned value:		None
+ 112:../Common_WinARM/src/timer.c **** ** 
+ 113:../Common_WinARM/src/timer.c **** ******************************************************************************/
+ 114:../Common_WinARM/src/timer.c **** void reset_timer( BYTE timer_num )
+ 115:../Common_WinARM/src/timer.c **** {
+ 115              	 0, frame = 0
+ 116              		@ frame_needed = 0, uses_anonymous_args = 0
+ 117              		@ link register save eliminated.
+ 118              	.LVL2:
+ 119              		.loc 1 126 0
+ 120              		ldr	r1, .L25
+ 116:../Common_WinARM/src/timer.c ****     DWORD regVal;
+ 117:../Common_WinARM/src/timer.c **** 
+ 118:../Common_WinARM/src/timer.c ****     if ( timer_num == 0 )
+ 119:../Common_WinARM/src/timer.c ****     {
+ 120:../Common_WinARM/src/timer.c **** 	regVal = T0TCR;
+ 121:../Common_WinARM/src/timer.c **** 	regVal |= 0x02;
+ 122:../Common_WinARM/src/timer.c **** 	T0TCR = regVal;
+ 123:../Common_WinARM/src/timer.c ****     }
+ 124:../Common_WinARM/src/timer.c ****     else
+ 125:../Common_WinARM/src/timer.c ****     {
+ 126:../Common_WinARM/src/timer.c **** 	regVal = T1TCR;
+ 121              	1 120 0
+ 122 007c 20109FE5 		ldr	r2, .L25+4
+ 123              		.loc 1 118 0
+ 124 0080 20209FE5 		tst	r0, #255
+ 125              		.loc 1 120 0
+ 126 0084 FF0010E3 		ldreq	r3, [r2, #4]
+ 127              	.LVL3:
+ 128 0088 04309205 		.loc 1 126 0
+ 129              		ldrne	r3, [r1, #4]
+ 130              	.LVL4:
+ 131 008c 04309115 	.LVL5:
+ 132              		.loc 1 121 0
+ 133              		orreq	r3, r3, #2
+ 134              	.LVL6:
+ 135 0090 02308303 	.LVL7:
+ 136              		.loc 1 127 0
+ 137              		orrne	r3, r3, #2
+ 127:../Common_WinARM/src/timer.c **** 	regVal |= 0x02;
+ 138              	5 0
+ 139 0094 02308313 		@ lr needed for prologue
+ 140              	.LVL9:
+ 141              		.loc 1 122 0
+ 142              		streq	r3, [r2, #4]
+ 143              	.LVL10:
+ 144              		.loc 1 128 0
+ 145 0098 04308205 		strne	r3, [r1, #4]
+ 146              		bx	lr
+ 128:../Common_WinARM/src/timer.c **** 	T1TCR = regVal;
+ 147              	lign	2
+ 148 009c 04308115 	.L25:
+ 149 00a0 1EFF2FE1 		.word	-536838144
+ 150              		.word	-536854528
+ 151              	.LFE5:
+ 153 00a4 008000E0 		.align	2
+ 154 00a8 004000E0 		.global	init_timer
+ 156              	init_timer:
+ 157              	.LFB6:
+ 158              		.loc 1 145 0
+ 159              		@ Function supports interworking.
+ 160              		@ args = 0, pretend = 0, frame = 0
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129:../Common_WinARM/src/timer.c ****     }
+ 130:../Common_WinARM/src/timer.c ****     return;
+ 131:../Common_WinARM/src/timer.c **** }
+ 132:../Common_WinARM/src/timer.c **** 
+ 133:../Common_WinARM/src/timer.c **** /******************************************************************************
+ 134:../Common_WinARM/src/timer.c **** ** Function name:		init_timer
+ 135:../Common_WinARM/src/timer.c **** **
+ 136:../Common_WinARM/src/timer.c **** ** Descriptions:		Initialize timer, set timer interval, reset timer,
+ 137:../Common_WinARM/src/timer.c **** **				install timer interrupt handler
+ 138:../Common_WinARM/src/timer.c **** **
+ 139:../Common_WinARM/src/timer.c **** ** parameters:			None
+ 140:../Common_WinARM/src/timer.c **** ** Returned value:		true or false, if the interrupt handler can't be
+ 141:../Common_WinARM/src/timer.c **** **				installed, return false.
+ 142:../Common_WinARM/src/timer.c **** ** 
+ 143:../Common_WinARM/src/timer.c **** ******************************************************************************/
+ 144:../Common_WinARM/src/timer.c **** DWORD init_timer (void) 
+ 145:../Common_WinARM/src/timer.c **** {
+ 162              	ldr	r3, .L29
+ 163              		mov	r2, #0
+ 164              		str	r2, [r3, #0]
+ 165              		.loc 1 147 0
+ 146:../Common_WinARM/src/timer.c ****     timer_counter = 0;
+ 166              		ip, .L29+4
+ 167 00ac 38309FE5 		ldr	r3, .L29+8
+ 168 00b0 0020A0E3 		str	r3, [ip, #24]
+ 169 00b4 002083E5 		.loc 1 148 0
+ 147:../Common_WinARM/src/timer.c ****     T0MR0 = INTERVAL_10MS;	/* 10mSec = 150.000-1 counts */
+ 170              		r3, #3
+ 171 00b8 30C09FE5 		.loc 1 145 0
+ 172 00bc 30309FE5 		str	lr, [sp, #-4]!
+ 173 00c0 18308CE5 	.LCFI0:
+ 148:../Common_WinARM/src/timer.c ****     T0MCR = 3;			/* Interrupt and Reset on MR0 */
+ 174              	c 1 149 0
+ 175 00c4 0330A0E3 		ldr	r1, .L29+12
+ 176              		.loc 1 148 0
+ 177 00c8 04E02DE5 		str	r3, [ip, #20]
+ 178              		.loc 1 149 0
+ 149:../Common_WinARM/src/timer.c ****     if ( install_irq( TIMER0_INT, (void *)Timer0Handler ) == FALSE )
+ 179              	r0, #4
+ 180 00cc 24109FE5 		bl	install_irq
+ 181              		.loc 1 157 0
+ 182 00d0 14308CE5 		subs	r0, r0, #0
+ 183              		movne	r0, #1
+ 184 00d4 0400A0E3 		ldr	lr, [sp], #4
+ 185 00d8 FEFFFFEB 		bx	lr
+ 150:../Common_WinARM/src/timer.c ****     {
+ 151:../Common_WinARM/src/timer.c **** 	return (FALSE);
+ 152:../Common_WinARM/src/timer.c ****     }
+ 153:../Common_WinARM/src/timer.c ****     else
+ 154:../Common_WinARM/src/timer.c ****     {
+ 155:../Common_WinARM/src/timer.c **** 	return (TRUE);
+ 156:../Common_WinARM/src/timer.c ****     }
+ 157:../Common_WinARM/src/timer.c **** }
+ 186              	.align	2
+ 187 00dc 000050E2 	.L29:
+ 188 00e0 0100A013 		.word	timer_counter
+ 189 00e4 04E09DE4 		.word	-536854528
+ 190 00e8 1EFF2FE1 		.word	149999
+ 191              		.word	Timer0Handler
+ 192              	.LFE6:
+ 194 00ec 00000000 		.global	timer_counter
+ 195 00f0 004000E0 		.bss
+ 196 00f4 EF490200 		.align	2
+ 199              	timer_counter:
+ 200              		.space	4
+ 201              		.section	.debug_frame,"",%progbits
+ 202              	.Lframe0:
+ 203              		.4byte	.LECIE0-.LSCIE0
+ 204              	.LSCIE0:
+ 205              		.4byte	0xffffffff
+ 206 0000 00000000 		.byte	0x1
+ 270              		.2byte	0x1
+DEFINED SYMBOLS
+                            *ABS*:00000000 timer.c
+C:\WINDOWS\TEMP/ccwjaaaa.s:12     .text:00000000 Timer0Handler
+C:\WINDOWS\TEMP/ccwjaaaa.s:21     .text:00000000 $a
+C:\WINDOWS\TEMP/ccwjaaaa.s:41     .text:0000002c $d
+C:\WINDOWS\TEMP/ccwjaaaa.s:205    .bss:00000000 timer_counter
+C:\WINDOWS\TEMP/ccwjaaaa.s:48     .text:00000034 enable_timer
+C:\WINDOWS\TEMP/ccwjaaaa.s:57     .text:00000034 $a
+C:\WINDOWS\TEMP/ccwjaaaa.s:74     .text:00000050 $d
+C:\WINDOWS\TEMP/ccwjaaaa.s:81     .text:00000058 disable_timer
+C:\WINDOWS\TEMP/ccwjaaaa.s:90     .text:00000058 $a
+C:\WINDOWS\TEMP/ccwjaaaa.s:106    .text:00000074 $d
+C:\WINDOWS\TEMP/ccwjaaaa.s:113    .text:0000007c reset_timer
+C:\WINDOWS\TEMP/ccwjaaaa.s:122    .text:0000007c $a
+C:\WINDOWS\TEMP/ccwjaaaa.s:153    .text:000000a4 $d
+C:\WINDOWS\TEMP/ccwjaaaa.s:160    .text:000000ac init_timer
+C:\WINDOWS\TEMP/ccwjaaaa.s:167    .text:000000ac $a
+C:\WINDOWS\TEMP/ccwjaaaa.s:194    .text:000000ec $d
+
+UNDEFINED SYMBOLS
+install_irq

@@ -1,0 +1,779 @@
+Archive member included because of file (symbol)
+
+C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_divmodhi4.o)
+                              obj/./RS232/rs232.o (__divmodhi4)
+C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_copy_data.o)
+                              obj/main.o (__do_copy_data)
+C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_clear_bss.o)
+                              obj/main.o (__do_clear_bss)
+C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_udivmodhi4.o)
+                              C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_divmodhi4.o) (__udivmodhi4)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(memcpy.o)
+                              obj/./apps/telnetd/telnetd.o (memcpy)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(memset.o)
+                              obj/./uip/uip_arp.o (memset)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(strncmp.o)
+                              obj/./apps/telnetd/shell.o (strncmp)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(strncpy.o)
+                              obj/./apps/telnetd/telnetd.o (strncpy)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(puts.o)
+                              obj/./uip/psock.o (puts)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(iob.o)
+                              C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(puts.o) (__iob)
+
+Allocating common symbols
+Common symbol       size              file
+
+uip_len             0x2               obj/./uip/uip.o
+uip_sappdata        0x2               obj/./uip/uip.o
+uip_acc32           0x4               obj/./uip/uip.o
+uip_flags           0x1               obj/./uip/uip.o
+plen                0x2               obj/./unix/tapdev.o
+UIP_Ticks           0x2               obj/./unix/clock-arch.o
+uip_appdata         0x2               obj/./uip/uip.o
+uip_conn            0x2               obj/./uip/uip.o
+uip_conns           0x2da             obj/./uip/uip.o
+uip_listenports     0x2               obj/./uip/uip.o
+uip_stat            0x2c              obj/./uip/uip.o
+__iob               0x6               C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(iob.o)
+uip_buf             0x1a6             obj/./uip/uip.o
+uip_slen            0x2               obj/./uip/uip.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+LOAD obj/main.o
+LOAD obj/./apps/telnetd/telnetd.o
+LOAD obj/./apps/telnetd/shell.o
+LOAD obj/./uip/uip.o
+LOAD obj/./uip/timer.o
+LOAD obj/./uip/uip_arp.o
+LOAD obj/./uip/psock.o
+LOAD obj/./lib/memb.o
+LOAD obj/./unix/clock-arch.o
+LOAD obj/./unix/tapdev.o
+LOAD obj/./unix/enc28j60.o
+LOAD obj/./RS232/rs232.o
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libm.a
+LOAD C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a
+LOAD C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000     0x2e3c
+ *(.vectors)
+ .vectors       0x00000000       0x54 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+                0x00000054                __ctors_start = .
+ *(.ctors)
+                0x00000054                __ctors_end = .
+                0x00000054                __dtors_start = .
+ *(.dtors)
+                0x00000054                __dtors_end = .
+ *(.progmem.gcc*)
+ *(.progmem*)
+                0x00000054                . = ALIGN (0x2)
+ *(.init0)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000054        0xc C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+ *(.init3)
+ *(.init4)
+ .init4         0x00000060       0x16 C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_copy_data.o)
+                0x00000060                __do_copy_data
+ .init4         0x00000076       0x10 C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_clear_bss.o)
+                0x00000076                __do_clear_bss
+ *(.init5)
+ *(.init6)
+ *(.init7)
+ *(.init8)
+ *(.init9)
+ .init9         0x00000086        0x4 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+ *(.text)
+ .text          0x0000008a        0x4 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+                0x0000008a                __vector_12
+                0x0000008a                __bad_interrupt
+                0x0000008a                __vector_6
+                0x0000008a                __vector_3
+                0x0000008a                __vector_13
+                0x0000008a                __vector_17
+                0x0000008a                __vector_19
+                0x0000008a                __vector_7
+                0x0000008a                __vector_5
+                0x0000008a                __vector_4
+                0x0000008a                __vector_9
+                0x0000008a                __vector_2
+                0x0000008a                __vector_15
+                0x0000008a                __vector_8
+                0x0000008a                __vector_14
+                0x0000008a                __vector_10
+                0x0000008a                __vector_16
+                0x0000008a                __vector_18
+                0x0000008a                __vector_20
+ .text          0x0000008e      0x156 obj/main.o
+                0x000000b2                uip_appcall
+                0x000000b4                main
+                0x000001ca                uip_log
+                0x0000008e                Target_Init
+ .text          0x000001e4      0x462 obj/./apps/telnetd/telnetd.o
+                0x00000244                shell_prompt
+                0x00000328                telnetd_init
+                0x000001fa                shell_quit
+                0x00000272                shell_output
+                0x0000039a                telnetd_appcall
+ .text          0x00000646       0xd2 obj/./apps/telnetd/shell.o
+                0x0000069a                shell_start
+                0x00000698                shell_init
+                0x000006bc                shell_input
+ .text          0x00000718     0x126a obj/./uip/uip.o
+                0x000009fa                uip_unlisten
+                0x00000722                uip_add32
+                0x00000aa0                uip_process
+                0x000007fe                uip_ipchksum
+                0x00000a28                uip_listen
+                0x0000086c                uip_tcpchksum
+                0x000008c6                uip_connect
+                0x000007ea                uip_chksum
+                0x000007e2                htons
+                0x0000087c                uip_init
+                0x00000718                uip_setipid
+                0x00000874                uip_udpchksum
+                0x0000195a                uip_send
+ .text          0x00001982       0x7e obj/./uip/timer.o
+                0x000019c8                timer_expired
+                0x00001982                timer_set
+                0x000019b2                timer_restart
+                0x0000199e                timer_reset
+ .text          0x00001a00      0x534 obj/./uip/uip_arp.o
+                0x00001d24                uip_arp_out
+                0x00001bb6                uip_arp_arpin
+                0x00001a22                uip_arp_timer
+                0x00001a00                uip_arp_init
+ .text          0x00001f34      0x4ec obj/./uip/psock.o
+                0x00002060                psock_generator_send
+                0x0000210e                psock_newdata
+                0x000020fc                psock_datalen
+                0x00001ff4                psock_send
+                0x0000229c                psock_readbuf
+                0x000023f2                psock_init
+                0x00002142                psock_readto
+ .text          0x00002420       0xf0 obj/./lib/memb.o
+                0x00002464                memb_alloc
+                0x000024bc                memb_free
+                0x00002420                memb_init
+ .text          0x00002510       0x58 obj/./unix/clock-arch.o
+                0x0000254c                UIP_Clock_Init
+                0x0000251a                __vector_11
+                0x00002510                clock_time
+ .text          0x00002568       0xf2 obj/./unix/tapdev.o
+                0x000025f0                __vector_1
+                0x00002568                tapdev_init
+                0x00002648                tapdev_send
+                0x000025ba                tapdev_read
+ .text          0x0000265a      0x442 obj/./unix/enc28j60.o
+                0x00002698                enc28j60SetBank
+                0x0000278a                enc28j60_init
+                0x00002680                enc28j60WriteOp
+                0x000026e0                enc28j60Read
+                0x00002754                enc28j60PhyWrite
+                0x000029ae                enc28j60_packet_receive
+                0x00002916                enc28j60getrev
+                0x00002712                enc28j60_read_phyreg
+                0x00002920                enc28j60_packet_send
+                0x0000265a                enc28j60ReadOp
+                0x000026f6                enc28j60Write
+ .text          0x00002a9c      0x27e obj/./RS232/rs232.o
+                0x00002b02                RS232_RecvStr
+                0x00002ab4                RS232_SendByte
+                0x00002ad6                RS232_RecvByte
+                0x00002a9c                RS232_Init
+                0x00002ae0                RS232_SendStr
+                0x00002b68                RS232_Printf
+ .text          0x00002d1a       0x1a C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(memcpy.o)
+                0x00002d1a                memcpy
+ .text          0x00002d34       0x14 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x00002d34                memset
+ .text          0x00002d48       0x1c C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(strncmp.o)
+                0x00002d48                strncmp
+ .text          0x00002d64       0x1e C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(strncpy.o)
+                0x00002d64                strncpy
+ .text          0x00002d82       0x6c C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(puts.o)
+                0x00002d82                puts
+                0x00002dee                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x00002dee       0x26 C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_divmodhi4.o)
+                0x00002dee                __divmodhi4
+                0x00002dee                _div
+ .text.libgcc   0x00002e14       0x28 C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_udivmodhi4.o)
+                0x00002e14                __udivmodhi4
+                0x00002e3c                . = ALIGN (0x2)
+ *(.fini9)
+ *(.fini8)
+ *(.fini7)
+ *(.fini6)
+ *(.fini5)
+ *(.fini4)
+ *(.fini3)
+ *(.fini2)
+ *(.fini1)
+ *(.fini0)
+                0x00002e3c                _etext = .
+
+.data           0x00800060      0x276 load address 0x00002e3c
+                0x00800060                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800060       0x36 obj/main.o
+ .data          0x00800096        0x8 obj/./apps/telnetd/telnetd.o
+ .data          0x0080009e       0xf9 obj/./apps/telnetd/shell.o
+ .data          0x00800197      0x11c obj/./uip/uip.o
+                0x00800197                uip_ethaddr
+                0x008001a1                uip_draddr
+                0x0080019d                uip_netmask
+                0x008001a5                uip_hostaddr
+ .data          0x008002b3        0xa obj/./uip/uip_arp.o
+ .data          0x008002bd       0x13 obj/./uip/psock.o
+ .data          0x008002d0        0x6 obj/./unix/tapdev.o
+ *(.gnu.linkonce.d*)
+                0x008002d6                . = ALIGN (0x2)
+                0x008002d6                _edata = .
+                0x008002d6                PROVIDE (__data_end, .)
+
+.bss            0x008002d6      0x55c
+                0x008002d6                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x008002d6       0x68 obj/./apps/telnetd/telnetd.o
+ .bss           0x0080033e        0xc obj/./uip/uip.o
+ .bss           0x0080034a       0x1e obj/./uip/uip_arp.o
+ .bss           0x00800368        0x3 obj/./unix/enc28j60.o
+ *(COMMON)
+ COMMON         0x0080036b      0x4bd obj/./uip/uip.o
+                0x0080036b                uip_len
+                0x0080036d                uip_sappdata
+                0x0080036f                uip_acc32
+                0x00800373                uip_flags
+                0x00800374                uip_appdata
+                0x00800376                uip_conn
+                0x00800378                uip_conns
+                0x00800652                uip_listenports
+                0x00800654                uip_stat
+                0x00800680                uip_buf
+                0x00800826                uip_slen
+ COMMON         0x00800828        0x2 obj/./unix/clock-arch.o
+                0x00800828                UIP_Ticks
+ COMMON         0x0080082a        0x2 obj/./unix/tapdev.o
+                0x0080082a                plen
+ COMMON         0x0080082c        0x6 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(iob.o)
+                0x0080082c                __iob
+                0x00800832                PROVIDE (__bss_end, .)
+                0x00002e3c                __data_load_start = LOADADDR (.data)
+                0x000030b2                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x00800832        0x0
+                0x00800832                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x00800832                PROVIDE (__noinit_end, .)
+                0x00800832                _end = .
+                0x00800832                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.stab           0x00000000      0x36c
+ *(.stab)
+ .stab          0x00000000      0x36c C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+
+.stabstr        0x00000000       0x84
+ *(.stabstr)
+ .stabstr       0x00000000       0x84 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0xf0
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x14 obj/main.o
+ .debug_aranges
+                0x00000014       0x14 obj/./apps/telnetd/telnetd.o
+ .debug_aranges
+                0x00000028       0x14 obj/./apps/telnetd/shell.o
+ .debug_aranges
+                0x0000003c       0x14 obj/./uip/uip.o
+ .debug_aranges
+                0x00000050       0x14 obj/./uip/timer.o
+ .debug_aranges
+                0x00000064       0x14 obj/./uip/uip_arp.o
+ .debug_aranges
+                0x00000078       0x14 obj/./uip/psock.o
+ .debug_aranges
+                0x0000008c       0x14 obj/./lib/memb.o
+ .debug_aranges
+                0x000000a0       0x14 obj/./unix/clock-arch.o
+ .debug_aranges
+                0x000000b4       0x14 obj/./unix/tapdev.o
+ .debug_aranges
+                0x000000c8       0x14 obj/./unix/enc28j60.o
+ .debug_aranges
+                0x000000dc       0x14 obj/./RS232/rs232.o
+
+.debug_pubnames
+                0x00000000      0x63e
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000       0x47 obj/main.o
+ .debug_pubnames
+                0x00000047       0x68 obj/./apps/telnetd/telnetd.o
+ .debug_pubnames
+                0x000000af       0x41 obj/./apps/telnetd/shell.o
+ .debug_pubnames
+                0x000000f0      0x1b6 obj/./uip/uip.o
+ .debug_pubnames
+                0x000002a6       0x54 obj/./uip/timer.o
+ .debug_pubnames
+                0x000002fa       0x57 obj/./uip/uip_arp.o
+ .debug_pubnames
+                0x00000351       0x90 obj/./uip/psock.o
+ .debug_pubnames
+                0x000003e1       0x3d obj/./lib/memb.o
+ .debug_pubnames
+                0x0000041e       0x52 obj/./unix/clock-arch.o
+ .debug_pubnames
+                0x00000470       0x5a obj/./unix/tapdev.o
+ .debug_pubnames
+                0x000004ca       0xf8 obj/./unix/enc28j60.o
+ .debug_pubnames
+                0x000005c2       0x7c obj/./RS232/rs232.o
+
+.debug_info     0x00000000     0x2e26
+ *(.debug_info)
+ .debug_info    0x00000000      0x38f obj/main.o
+ .debug_info    0x0000038f      0x633 obj/./apps/telnetd/telnetd.o
+ .debug_info    0x000009c2      0x1a6 obj/./apps/telnetd/shell.o
+ .debug_info    0x00000b68      0xa85 obj/./uip/uip.o
+ .debug_info    0x000015ed      0x121 obj/./uip/timer.o
+ .debug_info    0x0000170e      0x320 obj/./uip/uip_arp.o
+ .debug_info    0x00001a2e      0x75a obj/./uip/psock.o
+ .debug_info    0x00002188      0x15a obj/./lib/memb.o
+ .debug_info    0x000022e2       0xdc obj/./unix/clock-arch.o
+ .debug_info    0x000023be      0x195 obj/./unix/tapdev.o
+ .debug_info    0x00002553      0x68b obj/./unix/enc28j60.o
+ .debug_info    0x00002bde      0x248 obj/./RS232/rs232.o
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0xf9b
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x159 obj/main.o
+ .debug_abbrev  0x00000159      0x1d1 obj/./apps/telnetd/telnetd.o
+ .debug_abbrev  0x0000032a      0x11f obj/./apps/telnetd/shell.o
+ .debug_abbrev  0x00000449      0x220 obj/./uip/uip.o
+ .debug_abbrev  0x00000669       0x9f obj/./uip/timer.o
+ .debug_abbrev  0x00000708      0x170 obj/./uip/uip_arp.o
+ .debug_abbrev  0x00000878      0x21e obj/./uip/psock.o
+ .debug_abbrev  0x00000a96       0xdb obj/./lib/memb.o
+ .debug_abbrev  0x00000b71       0x7b obj/./unix/clock-arch.o
+ .debug_abbrev  0x00000bec       0xe0 obj/./unix/tapdev.o
+ .debug_abbrev  0x00000ccc      0x1e9 obj/./unix/enc28j60.o
+ .debug_abbrev  0x00000eb5       0xe6 obj/./RS232/rs232.o
+
+.debug_line     0x00000000     0x26a7
+ *(.debug_line)
+ .debug_line    0x00000000      0x21b obj/main.o
+ .debug_line    0x0000021b      0x3a8 obj/./apps/telnetd/telnetd.o
+ .debug_line    0x000005c3      0x114 obj/./apps/telnetd/shell.o
+ .debug_line    0x000006d7      0xbed obj/./uip/uip.o
+ .debug_line    0x000012c4       0xaf obj/./uip/timer.o
+ .debug_line    0x00001373      0x30b obj/./uip/uip_arp.o
+ .debug_line    0x0000167e      0x463 obj/./uip/psock.o
+ .debug_line    0x00001ae1      0x119 obj/./lib/memb.o
+ .debug_line    0x00001bfa      0x185 obj/./unix/clock-arch.o
+ .debug_line    0x00001d7f      0x199 obj/./unix/tapdev.o
+ .debug_line    0x00001f18      0x469 obj/./unix/enc28j60.o
+ .debug_line    0x00002381      0x326 obj/./RS232/rs232.o
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str      0x00000000      0xb5f
+ *(.debug_str)
+ .debug_str     0x00000000      0x1b7 obj/main.o
+                                0x21b (size before relaxing)
+ .debug_str     0x000001b7      0x114 obj/./apps/telnetd/telnetd.o
+                                0x2d8 (size before relaxing)
+ .debug_str     0x000002cb       0x9d obj/./apps/telnetd/shell.o
+                                 0xbb (size before relaxing)
+ .debug_str     0x00000368      0x2b8 obj/./uip/uip.o
+                                0x4b2 (size before relaxing)
+ .debug_str     0x00000620       0x40 obj/./uip/timer.o
+                                 0x9c (size before relaxing)
+ .debug_str     0x00000660       0x9f obj/./uip/uip_arp.o
+                                0x1e6 (size before relaxing)
+ .debug_str     0x000006ff      0x119 obj/./uip/psock.o
+                                0x2d4 (size before relaxing)
+ .debug_str     0x00000818       0x31 obj/./lib/memb.o
+                                 0xa7 (size before relaxing)
+ .debug_str     0x00000849       0x42 obj/./unix/clock-arch.o
+                                0x10e (size before relaxing)
+ .debug_str     0x0000088b       0x4f obj/./unix/tapdev.o
+                                0x151 (size before relaxing)
+ .debug_str     0x000008da      0x1f4 obj/./unix/enc28j60.o
+                                0x2e9 (size before relaxing)
+ .debug_str     0x00000ace       0x91 obj/./RS232/rs232.o
+                                0x162 (size before relaxing)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(uip.elf elf32-avr)
+
+Cross Reference Table
+
+Symbol                                            File
+RS232_Init                                        obj/./RS232/rs232.o
+                                                  obj/main.o
+RS232_Printf                                      obj/./RS232/rs232.o
+                                                  obj/main.o
+RS232_RecvByte                                    obj/./RS232/rs232.o
+RS232_RecvStr                                     obj/./RS232/rs232.o
+RS232_SendByte                                    obj/./RS232/rs232.o
+RS232_SendStr                                     obj/./RS232/rs232.o
+Target_Init                                       obj/main.o
+UIP_Clock_Init                                    obj/./unix/clock-arch.o
+                                                  obj/main.o
+UIP_Ticks                                         obj/./unix/tapdev.o
+                                                  obj/./unix/clock-arch.o
+__bad_interrupt                                   C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__bss_end                                         C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_clear_bss.o)
+__bss_start                                       C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_clear_bss.o)
+__data_end                                        C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_copy_data.o)
+__data_load_start                                 C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_copy_data.o)
+__data_start                                      C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_copy_data.o)
+__divmodhi4                                       C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_divmodhi4.o)
+                                                  obj/./RS232/rs232.o
+__do_clear_bss                                    C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_clear_bss.o)
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(iob.o)
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(puts.o)
+                                                  obj/./RS232/rs232.o
+                                                  obj/./unix/enc28j60.o
+                                                  obj/./unix/tapdev.o
+                                                  obj/./unix/clock-arch.o
+                                                  obj/./lib/memb.o
+                                                  obj/./uip/psock.o
+                                                  obj/./uip/uip_arp.o
+                                                  obj/./uip/timer.o
+                                                  obj/./uip/uip.o
+                                                  obj/./apps/telnetd/shell.o
+                                                  obj/./apps/telnetd/telnetd.o
+                                                  obj/main.o
+__do_copy_data                                    C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_copy_data.o)
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(iob.o)
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(puts.o)
+                                                  obj/./RS232/rs232.o
+                                                  obj/./unix/enc28j60.o
+                                                  obj/./unix/tapdev.o
+                                                  obj/./unix/clock-arch.o
+                                                  obj/./lib/memb.o
+                                                  obj/./uip/psock.o
+                                                  obj/./uip/uip_arp.o
+                                                  obj/./uip/timer.o
+                                                  obj/./uip/uip.o
+                                                  obj/./apps/telnetd/shell.o
+                                                  obj/./apps/telnetd/telnetd.o
+                                                  obj/main.o
+__heap_end                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__init                                            C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__iob                                             C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(iob.o)
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(puts.o)
+__stack                                           C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+                                                  obj/main.o
+__udivmodhi4                                      C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_udivmodhi4.o)
+                                                  C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_divmodhi4.o)
+__vector_1                                        obj/./unix/tapdev.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_10                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_11                                       obj/./unix/clock-arch.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_12                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_13                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_14                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_15                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_16                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_17                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_18                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_19                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_2                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_20                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_3                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_4                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_5                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_6                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_7                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_8                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_9                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vector_default                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+__vectors                                         C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+_div                                              C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_divmodhi4.o)
+clock_time                                        obj/./unix/clock-arch.o
+                                                  obj/./uip/timer.o
+enc28j60PhyWrite                                  obj/./unix/enc28j60.o
+enc28j60Read                                      obj/./unix/enc28j60.o
+enc28j60ReadOp                                    obj/./unix/enc28j60.o
+enc28j60SetBank                                   obj/./unix/enc28j60.o
+enc28j60Write                                     obj/./unix/enc28j60.o
+enc28j60WriteOp                                   obj/./unix/enc28j60.o
+enc28j60_init                                     obj/./unix/enc28j60.o
+                                                  obj/./unix/tapdev.o
+enc28j60_packet_receive                           obj/./unix/enc28j60.o
+                                                  obj/./unix/tapdev.o
+enc28j60_packet_send                              obj/./unix/enc28j60.o
+                                                  obj/./unix/tapdev.o
+enc28j60_read_phyreg                              obj/./unix/enc28j60.o
+enc28j60getrev                                    obj/./unix/enc28j60.o
+htons                                             obj/./uip/uip.o
+                                                  obj/main.o
+main                                              obj/main.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm32.o
+memb_alloc                                        obj/./lib/memb.o
+                                                  obj/./apps/telnetd/telnetd.o
+memb_free                                         obj/./lib/memb.o
+                                                  obj/./apps/telnetd/telnetd.o
+memb_init                                         obj/./lib/memb.o
+                                                  obj/./apps/telnetd/telnetd.o
+memcpy                                            C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(memcpy.o)
+                                                  obj/./uip/psock.o
+                                                  obj/./uip/uip.o
+                                                  obj/./apps/telnetd/telnetd.o
+memset                                            C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(memset.o)
+                                                  obj/./lib/memb.o
+                                                  obj/./uip/uip_arp.o
+plen                                              obj/./unix/tapdev.o
+psock_datalen                                     obj/./uip/psock.o
+psock_generator_send                              obj/./uip/psock.o
+psock_init                                        obj/./uip/psock.o
+psock_newdata                                     obj/./uip/psock.o
+psock_readbuf                                     obj/./uip/psock.o
+psock_readto                                      obj/./uip/psock.o
+psock_send                                        obj/./uip/psock.o
+puts                                              C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(puts.o)
+                                                  obj/./uip/psock.o
+shell_init                                        obj/./apps/telnetd/shell.o
+                                                  obj/./apps/telnetd/telnetd.o
+shell_input                                       obj/./apps/telnetd/shell.o
+                                                  obj/./apps/telnetd/telnetd.o
+shell_output                                      obj/./apps/telnetd/telnetd.o
+                                                  obj/./apps/telnetd/shell.o
+shell_prompt                                      obj/./apps/telnetd/telnetd.o
+                                                  obj/./apps/telnetd/shell.o
+shell_quit                                        obj/./apps/telnetd/telnetd.o
+                                                  obj/./apps/telnetd/shell.o
+shell_start                                       obj/./apps/telnetd/shell.o
+                                                  obj/./apps/telnetd/telnetd.o
+strncmp                                           C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(strncmp.o)
+                                                  obj/./apps/telnetd/shell.o
+strncpy                                           C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(strncpy.o)
+                                                  obj/./apps/telnetd/telnetd.o
+tapdev_init                                       obj/./unix/tapdev.o
+                                                  obj/main.o
+tapdev_read                                       obj/./unix/tapdev.o
+                                                  obj/main.o
+tapdev_send                                       obj/./unix/tapdev.o
+                                                  obj/main.o
+telnetd_appcall                                   obj/./apps/telnetd/telnetd.o
+                                                  obj/./uip/uip.o
+telnetd_init                                      obj/./apps/telnetd/telnetd.o
+                                                  obj/main.o
+timer_expired                                     obj/./uip/timer.o
+                                                  obj/main.o
+timer_reset                                       obj/./uip/timer.o
+                                                  obj/main.o
+timer_restart                                     obj/./uip/timer.o
+timer_set                                         obj/./uip/timer.o
+                                                  obj/main.o
+uip_acc32                                         obj/./uip/uip.o
+uip_add32                                         obj/./uip/uip.o
+uip_appcall                                       obj/main.o
+uip_appdata                                       obj/./uip/psock.o
+                                                  obj/./uip/uip_arp.o
+                                                  obj/./uip/uip.o
+                                                  obj/./apps/telnetd/telnetd.o
+uip_arp_arpin                                     obj/./uip/uip_arp.o
+                                                  obj/main.o
+uip_arp_init                                      obj/./uip/uip_arp.o
+                                                  obj/main.o
+uip_arp_out                                       obj/./uip/uip_arp.o
+                                                  obj/main.o
+uip_arp_timer                                     obj/./uip/uip_arp.o
+                                                  obj/main.o
+uip_buf                                           obj/./unix/tapdev.o
+                                                  obj/./uip/uip_arp.o
+                                                  obj/./uip/uip.o
+                                                  obj/main.o
+uip_chksum                                        obj/./uip/uip.o
+uip_conn                                          obj/./uip/psock.o
+                                                  obj/./uip/uip.o
+                                                  obj/./apps/telnetd/telnetd.o
+                                                  obj/main.o
+uip_connect                                       obj/./uip/uip.o
+uip_conns                                         obj/./uip/uip.o
+                                                  obj/main.o
+uip_draddr                                        obj/./uip/uip.o
+                                                  obj/./uip/uip_arp.o
+uip_ethaddr                                       obj/./uip/uip.o
+                                                  obj/./uip/uip_arp.o
+uip_flags                                         obj/./uip/psock.o
+                                                  obj/./uip/uip.o
+                                                  obj/./apps/telnetd/telnetd.o
+uip_hostaddr                                      obj/./uip/uip.o
+                                                  obj/./uip/uip_arp.o
+uip_init                                          obj/./uip/uip.o
+                                                  obj/main.o
+uip_ipchksum                                      obj/./uip/uip.o
+uip_len                                           obj/./unix/tapdev.o
+                                                  obj/./uip/psock.o
+                                                  obj/./uip/uip_arp.o
+                                                  obj/./uip/uip.o
+                                                  obj/./apps/telnetd/telnetd.o
+                                                  obj/main.o
+uip_listen                                        obj/./uip/uip.o
+                                                  obj/./apps/telnetd/telnetd.o
+uip_listenports                                   obj/./uip/uip.o
+uip_log                                           obj/main.o
+                                                  obj/./uip/uip.o
+uip_netmask                                       obj/./uip/uip.o
+                                                  obj/./uip/uip_arp.o
+uip_process                                       obj/./uip/uip.o
+                                                  obj/main.o
+uip_sappdata                                      obj/./uip/uip.o
+uip_send                                          obj/./uip/uip.o
+                                                  obj/./uip/psock.o
+                                                  obj/./apps/telnetd/telnetd.o
+uip_setipid                                       obj/./uip/uip.o
+uip_slen                                          obj/./uip/uip.o
+uip_stat                                          obj/./uip/uip.o
+uip_tcpchksum                                     obj/./uip/uip.o
+uip_udpchksum                                     obj/./uip/uip.o
+uip_unlisten                                      obj/./uip/uip.o

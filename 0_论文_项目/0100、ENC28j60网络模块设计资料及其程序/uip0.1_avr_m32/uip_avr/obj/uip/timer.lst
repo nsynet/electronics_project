@@ -1,0 +1,135 @@
+   1               		.file	"timer.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	timer_set
+  20               	timer_set:
+  21               	.LFB2:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24 0000 0F93      		push r16
+  25 0002 1F93      		push r17
+  26               	/* prologue end (size=2) */
+  27 0004 8C01      		movw r16,r24
+  28               	.LM2:
+  29 0006 F801      		movw r30,r16
+  30 0008 7383      		std Z+3,r23
+  31 000a 6283      		std Z+2,r22
+  32               	.LM3:
+  33 000c 0E94 0000 		call clock_time
+  34 0010 F801      		movw r30,r16
+  35 0012 9183      		std Z+1,r25
+  36 0014 8083      		st Z,r24
+  37               	/* epilogue: frame size=0 */
+  38 0016 1F91      		pop r17
+  39 0018 0F91      		pop r16
+  40 001a 0895      		ret
+  41               	/* epilogue end (size=3) */
+  42               	/* function timer_set size 14 (9) */
+  43               	.LFE2:
+  45               	.global	timer_reset
+  47               	timer_reset:
+  48               	.LFB3:
+  49               	.LM4:
+  50               	/* prologue: frame size=0 */
+  51               	/* prologue end (size=0) */
+  52 001c FC01      		movw r30,r24
+  53               	.LM5:
+  54 001e 8081      		ld r24,Z
+  55 0020 9181      		ldd r25,Z+1
+  56 0022 2281      		ldd r18,Z+2
+  57 0024 3381      		ldd r19,Z+3
+  58 0026 820F      		add r24,r18
+  59 0028 931F      		adc r25,r19
+  60 002a 9183      		std Z+1,r25
+  61 002c 8083      		st Z,r24
+  62               	/* epilogue: frame size=0 */
+  63 002e 0895      		ret
+  64               	/* epilogue end (size=1) */
+  65               	/* function timer_reset size 10 (9) */
+  66               	.LFE3:
+  68               	.global	timer_restart
+  70               	timer_restart:
+  71               	.LFB4:
+  72               	.LM6:
+  73               	/* prologue: frame size=0 */
+  74 0030 0F93      		push r16
+  75 0032 1F93      		push r17
+  76               	/* prologue end (size=2) */
+  77 0034 8C01      		movw r16,r24
+  78               	.LM7:
+  79 0036 0E94 0000 		call clock_time
+  80 003a F801      		movw r30,r16
+  81 003c 9183      		std Z+1,r25
+  82 003e 8083      		st Z,r24
+  83               	/* epilogue: frame size=0 */
+  84 0040 1F91      		pop r17
+  85 0042 0F91      		pop r16
+  86 0044 0895      		ret
+  87               	/* epilogue end (size=3) */
+  88               	/* function timer_restart size 11 (6) */
+  89               	.LFE4:
+  91               	.global	timer_expired
+  93               	timer_expired:
+  94               	.LFB5:
+  95               	.LM8:
+  96               	/* prologue: frame size=0 */
+  97 0046 0F93      		push r16
+  98 0048 1F93      		push r17
+  99 004a CF93      		push r28
+ 100 004c DF93      		push r29
+ 101               	/* prologue end (size=4) */
+ 102 004e 8C01      		movw r16,r24
+ 103               	.LM9:
+ 104 0050 C0E0      		ldi r28,lo8(0)
+ 105 0052 D0E0      		ldi r29,hi8(0)
+ 106 0054 0E94 0000 		call clock_time
+ 107 0058 F801      		movw r30,r16
+ 108 005a 2081      		ld r18,Z
+ 109 005c 3181      		ldd r19,Z+1
+ 110 005e 821B      		sub r24,r18
+ 111 0060 930B      		sbc r25,r19
+ 112 0062 9C01      		movw r18,r24
+ 113 0064 8281      		ldd r24,Z+2
+ 114 0066 9381      		ldd r25,Z+3
+ 115 0068 2817      		cp r18,r24
+ 116 006a 3907      		cpc r19,r25
+ 117 006c 14F0      		brlt .L5
+ 118               	.LM10:
+ 119 006e C1E0      		ldi r28,lo8(1)
+ 120 0070 D0E0      		ldi r29,hi8(1)
+ 121               	.L5:
+ 122               	.LM11:
+ 123 0072 CE01      		movw r24,r28
+ 124               	/* epilogue: frame size=0 */
+ 125 0074 DF91      		pop r29
+ 126 0076 CF91      		pop r28
+ 127 0078 1F91      		pop r17
+ 128 007a 0F91      		pop r16
+ 129 007c 0895      		ret
+ 130               	/* epilogue end (size=5) */
+ 131               	/* function timer_expired size 28 (19) */
+ 132               	.LFE5:
+ 134               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 timer.c
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccA7baaa.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccA7baaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccA7baaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccA7baaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccA7baaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccA7baaa.s:20     .text:00000000 timer_set
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccA7baaa.s:47     .text:0000001c timer_reset
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccA7baaa.s:70     .text:00000030 timer_restart
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccA7baaa.s:93     .text:00000046 timer_expired
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+clock_time

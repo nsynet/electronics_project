@@ -1,0 +1,630 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Documents and Settings\Administrator\My Documents\STM32ENC28J60\USART_Pol.uv2
+Project File Date:  06/26/2009
+
+<h2>Output:</h2>
+Load "C:\\Documents and Settings\\Administrator\\My Documents\\STM32ENC28J60\\Output\\USART_Pol.AXF" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+linking...
+Program Size: Code=7536 RO-data=1368 RW-data=88 ZI-data=2112  
+FromELF: creating hex file...
+".\Output\USART_Pol.axf" - 0 Error(s), 42 Warning(s).
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+linking...
+Program Size: Code=7536 RO-data=1368 RW-data=88 ZI-data=2112  
+FromELF: creating hex file...
+".\Output\USART_Pol.axf" - 0 Error(s), 42 Warning(s).
+Load "C:\\Documents and Settings\\Administrator\\My Documents\\STM32ENC28J60\\Output\\USART_Pol.AXF" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+linking...
+Program Size: Code=7516 RO-data=1368 RW-data=88 ZI-data=2112  
+FromELF: creating hex file...
+".\Output\USART_Pol.axf" - 0 Error(s), 42 Warning(s).
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+linking...
+Program Size: Code=7516 RO-data=1368 RW-data=88 ZI-data=2112  
+FromELF: creating hex file...
+".\Output\USART_Pol.axf" - 0 Error(s), 42 Warning(s).
+Load "C:\\Documents and Settings\\Administrator\\My Documents\\STM32ENC28J60\\Output\\USART_Pol.AXF" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+SPI.C(22): error:  #20: identifier "GPIO_Mode_OUT_PP" is undefined
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+Target not created
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+SPI.C(23): error:  #20: identifier "GPIO_Mode_OUT_PP" is undefined
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+Target not created
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+linking...
+Program Size: Code=7544 RO-data=1368 RW-data=88 ZI-data=2112  
+FromELF: creating hex file...
+".\Output\USART_Pol.axf" - 0 Error(s), 42 Warning(s).
+Load "C:\\Documents and Settings\\Administrator\\My Documents\\STM32ENC28J60\\Output\\USART_Pol.AXF" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(165): error:  #167: argument of type "const unsigned char *" is incompatible with parameter of type "unsigned char *"
+simple_server.c(166): error:  #167: argument of type "const unsigned char *" is incompatible with parameter of type "unsigned char *"
+simple_server.c(166): error:  #167: argument of type "const unsigned char *" is incompatible with parameter of type "unsigned char *"
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+Target not created
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(165): error:  #167: argument of type "const unsigned char *" is incompatible with parameter of type "unsigned char *"
+simple_server.c(166): error:  #167: argument of type "const unsigned char *" is incompatible with parameter of type "unsigned char *"
+simple_server.c(166): error:  #167: argument of type "const unsigned char *" is incompatible with parameter of type "unsigned char *"
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+Target not created
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+linking...
+Program Size: Code=7548 RO-data=1376 RW-data=80 ZI-data=2112  
+FromELF: creating hex file...
+".\Output\USART_Pol.axf" - 0 Error(s), 42 Warning(s).
+Build target 'Z32R'
+compiling ENC28J60.C...
+compiling Retarget.c...
+compiling SPI.C...
+compiling STM32_Init.c...
+compiling USART_Pol.c...
+assembling STM32F10x.s...
+compiling simple_server.c...
+simple_server.c(94): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(113): warning:  #68-D: integer conversion resulted in a change of sign
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(121): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(124): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(128): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(133): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(139): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(143): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(145): warning:  #870-D: invalid multibyte character sequence
+simple_server.c(253): warning:  #514-D: pointless comparison of unsigned integer with a negative constant
+compiling ip_arp_udp_tcp.c...
+ip_arp_udp_tcp.c(423): warning:  #1293-D: assignment in condition
+linking...
+Program Size: Code=7548 RO-data=1376 RW-data=80 ZI-data=2112  
+FromELF: creating hex file...
+".\Output\USART_Pol.axf" - 0 Error(s), 42 Warning(s).
+Load "C:\\Documents and Settings\\Administrator\\My Documents\\STM32ENC28J60\\Output\\USART_Pol.AXF" 
+Erase Done.
+Programming Done.
+Verify OK.

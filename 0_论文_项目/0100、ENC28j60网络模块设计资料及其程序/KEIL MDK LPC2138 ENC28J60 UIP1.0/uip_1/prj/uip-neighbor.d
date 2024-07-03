@@ -1,0 +1,10 @@
+uip-neighbor.o: ..\uip\src\uip-neighbor.c
+uip-neighbor.o: ..\uip\src\uip-neighbor.h
+uip-neighbor.o: ..\uip\src\uip.h
+uip-neighbor.o: ..\uip\src\uipopt.h
+uip-neighbor.o: ..\uip\inc\uip-conf.h
+uip-neighbor.o: ..\app\mydef.h
+uip-neighbor.o: C:\Keil\ARM\RV31\INC\stdint.h
+uip-neighbor.o: ..\uip\inc\../../app/service/telnetd/telnetd.h
+uip-neighbor.o: ..\uip\src\uipopt.h
+uip-neighbor.o: C:\Keil\ARM\RV31\INC\string.h

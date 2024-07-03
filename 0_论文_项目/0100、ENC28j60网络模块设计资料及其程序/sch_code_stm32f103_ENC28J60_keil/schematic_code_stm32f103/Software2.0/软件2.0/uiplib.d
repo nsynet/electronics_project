@@ -1,0 +1,14 @@
+uiplib.o: uip\uiplib.c
+uiplib.o: uip\uip.h
+uiplib.o: uip\uipopt.h
+uiplib.o: uip\uip-conf.h
+uiplib.o: E:\Keil\\ARM\RV31\INC\inttypes.h
+uiplib.o: E:\Keil\\ARM\RV31\INC\stdint.h
+uiplib.o: uip\../uip_app_router.h
+uiplib.o: uip\httpd/httpd.h
+uiplib.o: uip\httpd/../psock.h
+uiplib.o: uip\httpd/../pt.h
+uiplib.o: uip\httpd/../lc.h
+uiplib.o: uip\httpd/../lc-switch.h
+uiplib.o: uip\httpd/httpd-fs.h
+uiplib.o: uip\uiplib.h

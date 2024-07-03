@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/finddevicetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:text="搜索在线设备"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RelativeLayout
+        android:layout_width="185dp"
+        android:layout_height="230dp"
+        android:background="@drawable/find_bg2"
+        android:layout_gravity="center"
+        android:layout_weight="0.12">
+
+
+        <com.zihao.radar.view.RadarView
+            android:id="@+id/radar_view"
+            android:layout_width="350px"
+            android:layout_height="350px"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_above="@+id/devcie_list"
+            android:layout_alignStart="@+id/devcie_list"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:id="@+id/devcie_list"
+            android:layout_width="133dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="20dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="visible"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/smart_button"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:text="启动SmartLink"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/link_device_button"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:text="连接已绑定的设备"
+        android:layout_gravity="center"/>
+
+
+
+    <!--<Button
+        android:id="@+id/add_device_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="模拟添加设备" />-->
+
+
+</LinearLayout>

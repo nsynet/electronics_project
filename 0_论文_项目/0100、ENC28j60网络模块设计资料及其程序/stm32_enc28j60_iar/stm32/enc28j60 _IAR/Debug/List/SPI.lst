@@ -1,0 +1,117 @@
+###############################################################################
+#                                                                             #
+#                                                       21/Apr/2009  21:08:09 #
+# IAR ANSI C/C++ Compiler V5.20.2.21007/W32 EVALUATION for ARM                #
+# Copyright 1999-2008 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\SPI.C            #
+#    Command line =  "F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\SPI.C" -lcN     #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -lb      #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -o       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\" --no_cse  #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "D:\Program  #
+#                    Files\IAR Systems\Embedded Workbench 5.0                 #
+#                    Evaluation\ARM\INC\DLib_Config_Full.h" -I                #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\EWARM_V2.0.2\library\inc\" -I                       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\EWARM_V2.0.2\" -I     #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\" -I                  #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\" -I            #
+#                    "D:\Program Files\IAR Systems\Embedded Workbench 5.0     #
+#                    Evaluation\ARM\INC\" -Ol                                 #
+#    List file    =  F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\SPI.lst     #
+#    Object file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\SPI.o        #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\SPI.C
+      1          //#include "includes.h"
+      2          #include <STM32F10X_SPI.h>
+      3          #include <STM32F10X_GPIO.h>
+      4          #include <STM32F10X_RCC.h>
+      5          //SPI1初始化
+      6          void	SPI1_Init(void)
+      7          	{
+      8          	SPI_InitTypeDef  SPI_InitStructure;
+      9          	GPIO_InitTypeDef GPIO_InitStructure;
+     10          	
+     11          	/* Enable SPI1 and GPIOA clocks */
+     12          	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+     13          	
+     14          	/* Configure SPI1 pins:  SCK, MISO and MOSI */
+     15          	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
+     16          	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+     17          	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+     18          	GPIO_Init(GPIOA, &GPIO_InitStructure);
+     19          	
+     20                  
+     21                  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 ;
+     22                  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;//推挽式输出
+     23                  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+     24                  GPIO_Init(GPIOA, &GPIO_InitStructure);
+     25                  
+     26                 GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5;
+     27                 GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;//推挽式输出
+     28                 GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+     29                 GPIO_Init(GPIOC, &GPIO_InitStructure);
+     30          	/* SPI1 configuration */ 
+     31          	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+     32          	SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+     33          	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+     34          	SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
+     35          	SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge;
+     36          	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+     37          	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+     38          	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+     39          	SPI_InitStructure.SPI_CRCPolynomial = 7;
+     40          	SPI_Init(SPI1, &SPI_InitStructure);
+     41          	
+     42          	/* Enable SPI1  */
+     43          	SPI_Cmd(SPI1, ENABLE); 
+     44          	}
+     45          
+     46          //SPI1读写一字节数据
+     47          unsigned char	SPI1_ReadWrite(unsigned char writedat)
+     48          	{
+     49          	/* Loop while DR register in not emplty */
+     50          	while(SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+     51          	
+     52          	/* Send byte through the SPI1 peripheral */
+     53          	SPI_I2S_SendData(SPI1, writedat);
+     54          	
+     55          	/* Wait to receive a byte */
+     56          	while(SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
+     57          	
+     58          	/* Return the byte read from the SPI bus */
+     59          	return SPI_I2S_ReceiveData(SPI1);
+     60          	}
+     61          
+
+   Maximum stack usage in bytes:
+
+     Function       .cstack
+     --------       -------
+     SPI1_Init           0
+     SPI1_ReadWrite      0
+
+
+   Section sizes:
+
+     Function/Label Bytes
+     -------------- -----
+     SPI1_Init       180
+     SPI1_ReadWrite   50
+     ??DataTable5      4
+
+ 
+ 234 bytes in section .text
+ 
+ 234 bytes of CODE memory
+
+Errors: none
+Warnings: none

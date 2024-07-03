@@ -1,0 +1,371 @@
+###############################################################################
+#                                                                             #
+#                                                       21/Apr/2009  21:08:10 #
+# IAR ANSI C/C++ Compiler V5.20.2.21007/W32 EVALUATION for ARM                #
+# Copyright 1999-2008 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\main.c                 #
+#    Command line =  "F:\b百利胜\enc28j60\enc28j60 _IAR\main.c" -lcN          #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -lb      #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -o       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\" --no_cse  #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "D:\Program  #
+#                    Files\IAR Systems\Embedded Workbench 5.0                 #
+#                    Evaluation\ARM\INC\DLib_Config_Full.h" -I                #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\EWARM_V2.0.2\library\inc\" -I                       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\EWARM_V2.0.2\" -I     #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\" -I                  #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\" -I            #
+#                    "D:\Program Files\IAR Systems\Embedded Workbench 5.0     #
+#                    Evaluation\ARM\INC\" -Ol                                 #
+#    List file    =  F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\main.lst    #
+#    Object file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\main.o       #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+F:\b百利胜\enc28j60\enc28j60 _IAR\main.c
+      1          
+      2          
+      3          
+      4          /* Includes ------------------------------------------------------------------*/
+      5          #include "main.h"
+      6          #include "user_uart.h"
+      7          #include "my_PWM_1k.h"
+      8          #include "stdio.h"
+      9          #include "ENC28J60.H"
+     10          
+     11          //#include "STM32_Init.h"       // STM32 Initialization
+     12          #include "spi.h"
+     13          #include "simple_server.h"
+     14          //#include "SPI_45db161.h"
+     15          
+     16          //#define LED             ( 1 << 5 )              // PB5: LED D2
+     17          
+     18          //#define BP2             0x2000                     // PC13: BP2
+     19          //#define BP3             0x0001                     // PA0 : BP3
+     20          
+     21          //#define UP              0x0800                     // PB11: UP
+     22          //#define RIGHT           0x1000                     // PB12: RIGHT
+     23          //#define LEFT            0x2000                     // PB13: LEFT
+     24          //#define DOWN            0x4000                     // PB14: DOWN
+     25          //#define OK              0x8000                     // PB15: OK
+     26          
+     27          //#define JOYSTICK        0xF800                     // JOYSTICK ALL KEYS
+     28          /*----------------------------------------------------------*\
+     29           | SOFTWARE DATA                                            |
+     30          \*----------------------------------------------------------*/
+     31          /*----------------------------------------------------------*\
+     32           |  Delay                                                   |
+     33           |  延时 Inserts a delay time.                              |
+     34           |  nCount: 延时时间                                        |
+     35           |  nCount: specifies the delay time length.                |
+     36          \*----------------------------------------------------------*/
+     37          void Delay(vu32 nCount) {
+     38            for(; nCount != 0; nCount--);
+     39            }
+     40          /*----------------------------------------------------------*\
+     41           | SendChar                                                 |
+     42           | Write character to Serial Port.                          |
+     43          \*----------------------------------------------------------*/
+     44          int SendChar (int ch)  {
+     45          
+     46            while (!(USART1->SR & USART_FLAG_TXE));
+     47            USART1->DR = (ch & 0x1FF);
+     48          
+     49            return (ch);
+     50          }
+     51          /*----------------------------------------------------------*\
+     52           | GetKey                                                   |
+     53           | Read character to Serial Port.                           |
+     54          \*----------------------------------------------------------*/
+     55          /*int GetKey (void)  {
+     56          
+     57            while (!(USART1->SR & USART_FLAG_RXNE));
+     58          
+     59            return ((int)(USART1->DR & 0x1FF));
+     60          }
+     61          */
+     62          const unsigned char enc28j60_MAC[6] = {0x11, 0x02, 0x03, 0x04, 0x05, 0x66};
+     63          
+     64          /******************************************************************************/
+     65          #define BufferSize 32
+     66          u8 SPI1_Buffer_Tx[BufferSize] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
+     67                                           0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
+     68                                           0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B,
+     69                                           0x1C, 0x1D, 0x1E, 0x1F, 0x20};
+     70          
+     71          u8 SPI2_Buffer_Tx[BufferSize] = {0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59,
+     72                                           0x5A, 0x5B, 0x5C, 0x5D, 0x5E, 0x5F, 0x60, 0x61, 0x62,
+     73                                           0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B,
+     74                                           0x6C, 0x6D, 0x6E, 0x6F, 0x70};
+     75          
+     76          
+     77          #ifdef __GNUC__
+     78            /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+     79               set to 'Yes') calls __io_putchar() */
+     80            #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+     81          #else
+     82            #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+     83          #endif /* __GNUC__ */
+     84          
+     85          /*******************************************************************************
+     86          * Function Name  : main
+     87          * Description    : Main program.
+     88          * Input          : None
+     89          * Output         : None
+     90          * Return         : None
+     91          *******************************************************************************/
+     92          int main(void)
+     93          {
+     94          #ifdef DEBUG
+     95            debug();
+     96          #endif
+     97            int rev = 0;
+     98            //配置系统时钟,使用内部时钟
+     99            RCC_HSI_Configuration();
+    100            //配置  NVIC 和 Vector Table 
+    101            NVIC_Configuration();
+    102            UART1_NVIC_Configuration();
+    103            UART1_GPIO_Configuration();
+    104            UART1_Configuration(); 
+    105            /*************************************************************************/
+    106            USART_SendData(USART1, 0x39);
+    107            USART_SendData(USART1, ',');
+    108           while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+    109           {
+    110            }
+    111           USART_SendData(USART1, '\n');
+    112            while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+    113           {
+    114           }
+    115            
+    116            Uart1_PutString("this OK !__This first usar\n\n" , strlen("this OK !__This first usar\n\n"));
+    117              printf("\n The printf is OK?");  
+    118            //主循环 
+    119            printf("\n The number is %f",112.123);
+    120          
+    121                 
+    122          
+    123           // stm32_Init ();                                // STM32 setup
+    124          //  GPIOD->ODR &= ~(1<<9);//GPIOA->BRR = ENC28J60_CS;
+    125          //  GPIOD->ODR |= 1<<9;//GPIOA->BSRR = ENC28J60_CS;
+    126            printf ("SPI1_Init starting...\r\n");
+    127            SPI1_Init();
+    128            printf ("enc28j60 init...\r\n");
+    129             GPIO_ResetBits(GPIOC,  GPIO_Pin_5);
+    130             GPIO_SetBits(GPIOC,  GPIO_Pin_5);
+    131            //enc28j60Init((unsigned char *)enc28j60_MAC);  
+    132          
+    133          
+    134              simple_server();
+    135          
+    136              enc28j60Init((unsigned char *)enc28j60_MAC);
+    137          
+    138              rev = enc28j60getrev();
+    139          
+    140              return rev;  
+    141           /*  AT45DB161_init(); 
+    142             GPIO_ResetBits(GPIOB,  GPIO_Pin_10);
+    143             GPIO_ResetBits(GPIOB,  GPIO_Pin_12);
+    144             GPIO_SetBits(GPIOB,  GPIO_Pin_10);
+    145             GPIO_SetBits(GPIOB,  GPIO_Pin_12);
+    146              
+    147           
+    148             
+    149             DF_Read_Str(0,(unsigned int)sizeof(SPI1_Buffer_Tx),SPI1_Buffer_Tx);
+    150             
+    151             DF_Write_Str(0,(unsigned int)sizeof(SPI2_Buffer_Tx),SPI2_Buffer_Tx);
+    152             
+    153             DF_Read_Str(0,(unsigned int)sizeof(SPI1_Buffer_Tx),SPI1_Buffer_Tx);*/
+    154             
+    155          
+    156             
+    157            /*
+    158             Buffer_Write_Byte (0, 0x01);
+    159             Buffer_To_Page(0);
+    160             
+    161             Page_To_Buffer (0);
+    162             Buffer_Read_Byte(0);
+    163             
+    164             
+    165             USART_SendData(USART1,Buffer_Read_Byte(0));
+    166             while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+    167             {
+    168             }*/
+    169             
+    170          /*
+    171             for(i=0;i<30;i++)
+    172            {
+    173              printf("\n%d",my_PWM[i]);
+    174            }
+    175             */
+    176            // while(1)
+    177             //{
+    178            // }
+    179            }
+    180          /***************************************************************************/
+    181          //
+    182          //
+    183          //
+    184          /***************************************************************************/
+    185          void RCC_HSI_Configuration(void)//配置系统时钟,使用内部时钟
+    186          {
+    187              //将外设 RCC寄存器重设为缺省值
+    188              RCC_DeInit();
+    189          //    RCC_HSEConfig(RCC_HSE_ON);
+    190              //预取指缓存使能
+    191              FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
+    192          
+    193               //设置代码延时值
+    194              //FLASH_Latency_2  2 延时周期
+    195              FLASH_SetLatency(FLASH_Latency_2);
+    196          
+    197              //设置 AHB 时钟（HCLK）
+    198              //RCC_SYSCLK_Div1  AHB 时钟 =  系统时钟 
+    199              RCC_HCLKConfig(RCC_SYSCLK_Div1);
+    200          
+    201               //设置高速 AHB 时钟（PCLK2）
+    202              //RCC_HCLK_Div2  APB1 时钟  = HCLK / 2 
+    203              RCC_PCLK2Config(RCC_HCLK_Div2);//这改为Div1与原来的Div2怎没什么变化
+    204          
+    205              //设置低速 AHB 时钟（PCLK1）
+    206              //RCC_HCLK_Div2  APB1 时钟  = HCLK / 2 
+    207              RCC_PCLK1Config(RCC_HCLK_Div2);   
+    208              RCC_PLLConfig(RCC_PLLSource_HSI_Div2,RCC_PLLMul_16);//PLLCLK =8MHz/2*16=64MHz
+    209              
+    210              //使能或者失能 PLL
+    211              RCC_PLLCmd(ENABLE);
+    212          
+    213              //等待指定的 RCC 标志位设置成功 等待PLL初始化成功
+    214              while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
+    215              {
+    216             }
+    217              //设置系统时钟（SYSCLK） 设置PLL为系统时钟源
+    218              RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+    219              //RCC_SYSCLKConfig(RCC_SYSCLKSource_HSI);
+    220              //等待PLL成功用作于系统时钟的时钟源
+    221              //  0x00：HSI 作为系统时钟 
+    222              //  0x04：HSE作为系统时钟 
+    223              //  0x08：PLL作为系统时钟  
+    224              while(RCC_GetSYSCLKSource() != 0x08) 
+    225              {
+    226              }
+    227          
+    228          
+    229            //使能或者失能 APB2 外设时钟
+    230            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+    231            RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+    232            
+    233          }
+    234          /*******************************************************************************
+    235          * Function Name  : NVIC_Configuration
+    236          * Description    : Configures NVIC and Vector Table base location.
+    237          * Input          : None
+    238          * Output         : None
+    239          * Return         : None
+    240          *******************************************************************************/
+    241          void NVIC_Configuration(void)
+    242          {
+    243          #ifdef  VECT_TAB_RAM
+    244            /* Set the Vector Table base location at 0x20000000 */
+    245            NVIC_SetVectorTable(NVIC_VectTab_RAM, 0x0);
+    246          #else  /* VECT_TAB_FLASH  */
+    247            /* Set the Vector Table base location at 0x08000000 */
+    248            NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x0);
+    249          #endif
+    250          }
+    251          
+    252          /*******************************************************************************
+    253          * Function Name  : PUTCHAR_PROTOTYPE
+    254          * Description    : Retargets the C library printf function to the USART.
+    255          * Input          : None
+    256          * Output         : None
+    257          * Return         : None
+    258          *******************************************************************************/
+    259          PUTCHAR_PROTOTYPE
+    260          {
+    261          /* Write a character to the USART */
+    262            USART_SendData(USART1, (u8) ch);
+    263          
+    264            /* Loop until the end of transmission */
+    265            while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)  {
+    266            }
+    267          
+    268            return ch;
+    269          }
+    270          
+    271          
+    272          #ifdef  DEBUG
+    273          /*******************************************************************************
+    274          * Function Name  : assert_failed
+    275          * Description    : Reports the name of the source file and the source line number
+    276          *                  where the assert_param error has occurred.
+    277          * Input          : - file:pointer to the source file name
+    278          *                  - line: assert_param error line source number
+    279          * Output         : None
+    280          * Return         : None
+    281          *******************************************************************************/
+    282          void assert_failed(u8* file, u32 line)
+    283          { 
+    284            /* User can add his own implementation to report the file name and line number,
+    285               ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+    286          
+    287            /* Infinite loop */
+    288            while (1)
+    289            {
+    290            }
+    291          }
+    292          #endif
+    293          
+    294          /******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+     Function              .cstack
+     --------              -------
+     Delay                      0
+     NVIC_Configuration         0
+     RCC_HSI_Configuration      0
+     SendChar                   0
+     fputc                      0
+     main                       0
+
+
+   Section sizes:
+
+     Function/Label                          Bytes
+     --------------                          -----
+     my_PWM                                    60
+     Delay                                     22
+     SendChar                                  28
+     enc28j60_MAC                               8
+     SPI1_Buffer_Tx                            32
+     SPI2_Buffer_Tx                            32
+     main                                     188
+     RCC_HSI_Configuration                    100
+     NVIC_Configuration                        14
+     fputc                                     32
+     ??DataTable7                               4
+     ?<Constant "this OK !__This first...">    32
+     ?<Constant "\n The printf is OK?">        20
+     ?<Constant "\n The number is %f">         20
+     ?<Constant "SPI1_Init starting...\r\n">   24
+     ?<Constant "enc28j60 init...\r\n">        20
+
+ 
+ 124 bytes in section .data
+ 124 bytes in section .rodata
+ 388 bytes in section .text
+ 
+ 388 bytes of CODE  memory
+ 124 bytes of CONST memory
+ 124 bytes of DATA  memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dip"
+    android:layout_height="fill_parent"
+    android:src="@drawable/bitmap_book_read_chapterlist_repeat"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="240dip"
+        android:layout_height="27.0dip"
+        android:background="#ff313131"
+        android:gravity="center"
+        android:paddingLeft="15.0dip"
+        android:text="个人中心"
+
+        android:textColor="#ff959595"
+        android:textSize="16.0sp"
+        android:layout_weight="0.08" />
+
+    <ImageView
+        android:layout_width="240dip"
+        android:layout_height="201dp"
+        android:src="@drawable/xx2"
+        />
+
+    <TextView
+        android:layout_width="240dip"
+        android:layout_height="50.0dip"
+        android:id="@+id/user_info"
+        android:background="@drawable/selector_category_item"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_category_mark"
+        android:drawablePadding="1.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="15.0dip"
+        android:paddingRight="10.0dip"
+        android:text="用户信息"
+        android:textColor="#ff959595"
+        android:textSize="16.0sp" />
+
+    <TextView
+        android:layout_width="240dip"
+        android:layout_height="50.0dip"
+        android:id="@+id/data_count"
+        android:background="@drawable/selector_category_item"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_category_mark"
+        android:drawablePadding="1.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="15.0dip"
+        android:paddingRight="10.0dip"
+        android:text="数据统计"
+        android:textColor="#ff959595"
+        android:textSize="16.0sp" />
+
+
+    <TextView
+        android:layout_width="240dip"
+        android:layout_height="50.0dip"
+        android:id="@+id/product"
+        android:background="@drawable/selector_category_item"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_category_mark"
+        android:drawablePadding="1.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="15.0dip"
+        android:paddingRight="10.0dip"
+        android:text="产品介绍"
+        android:textColor="#ff959595"
+        android:textSize="16.0sp" />
+
+   <!-- <View
+        android:layout_width="240dip"
+        android:layout_height="2.0dip"
+        android:background="@drawable/ic_shelf_category_divider" />-->
+
+    <!--<View
+        android:layout_width="240dip"
+        android:layout_height="2.0dip"
+        android:background="@drawable/ic_shelf_category_divider" />-->
+
+
+    <TextView
+        android:layout_width="240dip"
+        android:layout_height="50.0dip"
+        android:background="@drawable/selector_category_item"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_category_mark"
+        android:drawablePadding="1.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="15.0dip"
+        android:paddingRight="10.0dip"
+        android:text="关于软件"
+        android:textColor="#ff959595"
+        android:textSize="16.0sp"
+        android:id="@+id/about_software"
+       />
+
+    <View
+        android:layout_width="240dip"
+        android:layout_height="2.0dip"
+        android:background="@drawable/ic_shelf_category_divider"
+        android:layout_weight="0.91" />
+
+    <TextView
+        android:layout_width="240dip"
+        android:layout_height="50.0dip"
+        android:id="@+id/logout"
+        android:background="@color/red"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_category_mark"
+        android:drawablePadding="1.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="15.0dip"
+        android:paddingRight="10.0dip"
+        android:text="退出登录"
+        android:textColor="#ff959595"
+        android:textSize="16.0sp" />
+
+
+
+</LinearLayout>

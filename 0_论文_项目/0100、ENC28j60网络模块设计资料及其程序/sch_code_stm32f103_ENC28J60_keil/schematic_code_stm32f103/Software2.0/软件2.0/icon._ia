@@ -1,0 +1,1 @@
+--device DARMSTM --pd "__RTX SETA 1" -g --apcs=interwork -I "E:\Keil\\ARM\INC\ST\STM32F10x" --list "icon.lst" --xref -o "icon.o" "icon.s"

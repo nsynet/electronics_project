@@ -1,0 +1,26 @@
+*** Creating Trace Output File 'lpc2103.tra' Ok.
+### Preparing for ADS-LD.
+### Creating ADS-LD Command Line
+### List of Objects: adding '"main.o"'
+### List of Objects: adding '"retarget.o"'
+### List of Objects: adding '"serial.o"'
+### List of Objects: adding '"startup.o"'
+### List of Objects: adding '"enc28j60.o"'
+### List of Objects: adding '"enc_main.o"'
+### List of Objects: adding '"ip_arp_udp_tcp.o"'
+### List of Objects: adding '"simple_server.o"'
+### ADS-LD Command completed:
+"main.o" "retarget.o" "serial.o" "startup.o" "enc28j60.o" "enc_main.o" "ip_arp_udp_tcp.o" "simple_server.o" --strict --scatter "lpc2103.sct" 
+--map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\lpc2103.map" -o "lpc2103.axf"### Preparing Environment (PrepEnvAds)
+### ADS-LD Output File: 'lpc2103.axf'
+### ADS-LD Command File: 'lpc2103.lnp'
+### Checking for dirty Components...
+### Creating CmdFile 'lpc2103.lnp', Handle=0x000002E4
+### Writing '.lnp' file
+### ADS-LD Command file 'lpc2103.lnp' is ready.
+### ADS-LD: About to start ADS-LD Thread.
+### ADS-LD: executed with 0 errors
+### Updating obj list
+### LDADS_file() completed.

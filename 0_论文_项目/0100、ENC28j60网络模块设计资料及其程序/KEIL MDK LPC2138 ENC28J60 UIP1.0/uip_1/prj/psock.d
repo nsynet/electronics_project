@@ -1,0 +1,14 @@
+psock.o: ..\uip\src\psock.c
+psock.o: C:\Keil\ARM\RV31\INC\stdio.h
+psock.o: C:\Keil\ARM\RV31\INC\string.h
+psock.o: ..\uip\src\uipopt.h
+psock.o: ..\uip\inc\uip-conf.h
+psock.o: ..\app\mydef.h
+psock.o: C:\Keil\ARM\RV31\INC\stdint.h
+psock.o: ..\uip\inc\../../app/service/telnetd/telnetd.h
+psock.o: ..\uip\src\uipopt.h
+psock.o: ..\uip\src\psock.h
+psock.o: ..\uip\src\pt.h
+psock.o: ..\uip\src\lc.h
+psock.o: ..\uip\src\lc-switch.h
+psock.o: ..\uip\src\uip.h

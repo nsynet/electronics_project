@@ -1,0 +1,203 @@
+   1               		.file	"hello-world.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	hello_world_init
+  20               	hello_world_init:
+  21               	.LFB2:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24               	/* prologue end (size=0) */
+  25               	.LM2:
+  26 0000 83E0      		ldi r24,lo8(-6141)
+  27 0002 98EE      		ldi r25,hi8(-6141)
+  28 0004 0E94 0000 		call uip_listen
+  29               	/* epilogue: frame size=0 */
+  30 0008 0895      		ret
+  31               	/* epilogue end (size=1) */
+  32               	/* function hello_world_init size 5 (4) */
+  33               	.LFE2:
+  35               		.data
+  36               	.LC0:
+  37 0000 4865 6C6C 		.string	"Hello. What is your name?\n"
+  37      6F2E 2057 
+  37      6861 7420 
+  37      6973 2079 
+  37      6F75 7220 
+  38               	.LC1:
+  39 001b 4865 6C6C 		.string	"Hello "
+  39      6F20 00
+  40               		.text
+  41               	.global	hello_world_appcall
+  43               	hello_world_appcall:
+  44               	.LFB3:
+  45               	.LM3:
+  46               	/* prologue: frame size=0 */
+  47 000a 0F93      		push r16
+  48 000c 1F93      		push r17
+  49 000e CF93      		push r28
+  50 0010 DF93      		push r29
+  51               	/* prologue end (size=4) */
+  52               	.LM4:
+  53 0012 0091 0000 		lds r16,uip_conn
+  54 0016 1091 0000 		lds r17,(uip_conn)+1
+  55 001a E801      		movw r28,r16
+  56 001c 6C96      		adiw r28,28
+  57               	.LM5:
+  58 001e 8091 0000 		lds r24,uip_flags
+  59 0022 86FF      		sbrs r24,6
+  60 0024 08C0      		rjmp .L3
+  61               	.LM6:
+  62 0026 C801      		movw r24,r16
+  63 0028 C196      		adiw r24,49
+  64 002a 4AE0      		ldi r20,lo8(10)
+  65 002c 50E0      		ldi r21,hi8(10)
+  66 002e BC01      		movw r22,r24
+  67 0030 CE01      		movw r24,r28
+  68 0032 0E94 0000 		call psock_init
+  69               	.L3:
+  70               	.LBB2:
+  71               	.LBB3:
+  72               	.LBB4:
+  73               	.LM7:
+  74 0036 F801      		movw r30,r16
+  75 0038 848D      		ldd r24,Z+28
+  76 003a 958D      		ldd r25,Z+29
+  77 003c 8C35      		cpi r24,92
+  78 003e 9105      		cpc r25,__zero_reg__
+  79 0040 11F1      		breq .L11
+  80 0042 8D35      		cpi r24,93
+  81 0044 9105      		cpc r25,__zero_reg__
+  82 0046 30F4      		brsh .L19
+  83 0048 0097      		sbiw r24,0
+  84 004a 59F0      		breq .L5
+  85 004c 8B35      		cpi r24,91
+  86 004e 9105      		cpc r25,__zero_reg__
+  87 0050 69F0      		breq .L7
+  88 0052 4CC0      		rjmp .L4
+  89               	.L19:
+  90 0054 8E35      		cpi r24,94
+  91 0056 9105      		cpc r25,__zero_reg__
+  92 0058 49F1      		breq .L14
+  93 005a 8F35      		cpi r24,95
+  94 005c 9105      		cpc r25,__zero_reg__
+  95 005e 99F1      		breq .L17
+  96 0060 45C0      		rjmp .L4
+  97               	.L5:
+  98               	.LM8:
+  99 0062 8BE5      		ldi r24,lo8(91)
+ 100 0064 90E0      		ldi r25,hi8(91)
+ 101 0066 F801      		movw r30,r16
+ 102 0068 958F      		std Z+29,r25
+ 103 006a 848F      		std Z+28,r24
+ 104               	.L7:
+ 105 006c 4AE1      		ldi r20,lo8(26)
+ 106 006e 50E0      		ldi r21,hi8(26)
+ 107 0070 60E0      		ldi r22,lo8(.LC0)
+ 108 0072 70E0      		ldi r23,hi8(.LC0)
+ 109 0074 CE01      		movw r24,r28
+ 110 0076 0E94 0000 		call psock_send
+ 111 007a 8823      		tst r24
+ 112 007c C9F1      		breq .L2
+ 113               	.LM9:
+ 114 007e 8CE5      		ldi r24,lo8(92)
+ 115 0080 90E0      		ldi r25,hi8(92)
+ 116 0082 9983      		std Y+1,r25
+ 117 0084 8883      		st Y,r24
+ 118               	.L11:
+ 119 0086 6AE0      		ldi r22,lo8(10)
+ 120 0088 CE01      		movw r24,r28
+ 121 008a 0E94 0000 		call psock_readto
+ 122 008e 8823      		tst r24
+ 123 0090 79F1      		breq .L2
+ 124               	.LM10:
+ 125 0092 CE01      		movw r24,r28
+ 126 0094 4596      		adiw r24,21
+ 127 0096 48E0      		ldi r20,lo8(8)
+ 128 0098 50E0      		ldi r21,hi8(8)
+ 129 009a BC01      		movw r22,r24
+ 130 009c CE01      		movw r24,r28
+ 131 009e 4F96      		adiw r24,31
+ 132 00a0 0E94 0000 		call strncpy
+ 133               	.LM11:
+ 134 00a4 8EE5      		ldi r24,lo8(94)
+ 135 00a6 90E0      		ldi r25,hi8(94)
+ 136 00a8 9983      		std Y+1,r25
+ 137 00aa 8883      		st Y,r24
+ 138               	.L14:
+ 139 00ac 46E0      		ldi r20,lo8(6)
+ 140 00ae 50E0      		ldi r21,hi8(6)
+ 141 00b0 60E0      		ldi r22,lo8(.LC1)
+ 142 00b2 70E0      		ldi r23,hi8(.LC1)
+ 143 00b4 CE01      		movw r24,r28
+ 144 00b6 0E94 0000 		call psock_send
+ 145 00ba 8823      		tst r24
+ 146 00bc C9F0      		breq .L2
+ 147               	.LM12:
+ 148 00be 8FE5      		ldi r24,lo8(95)
+ 149 00c0 90E0      		ldi r25,hi8(95)
+ 150 00c2 9983      		std Y+1,r25
+ 151 00c4 8883      		st Y,r24
+ 152               	.L17:
+ 153 00c6 DE01      		movw r26,r28
+ 154 00c8 5F96      		adiw r26,31
+ 155 00ca FD01      		movw r30,r26
+ 156 00cc 0190      		ld __tmp_reg__,Z+
+ 157 00ce 0020      		tst __tmp_reg__
+ 158 00d0 E9F7      		brne .-6
+ 159 00d2 3197      		sbiw r30,1
+ 160 00d4 EA1B      		sub r30,r26
+ 161 00d6 FB0B      		sbc r31,r27
+ 162 00d8 AF01      		movw r20,r30
+ 163 00da BD01      		movw r22,r26
+ 164 00dc CE01      		movw r24,r28
+ 165 00de 0E94 0000 		call psock_send
+ 166 00e2 8823      		tst r24
+ 167 00e4 29F0      		breq .L2
+ 168               	.LM13:
+ 169 00e6 80E1      		ldi r24,lo8(16)
+ 170 00e8 8093 0000 		sts uip_flags,r24
+ 171               	.L4:
+ 172               	.LM14:
+ 173 00ec 1982      		std Y+1,__zero_reg__
+ 174 00ee 1882      		st Y,__zero_reg__
+ 175               	.L2:
+ 176               	.LBE4:
+ 177               	.LBE3:
+ 178               	.LBE2:
+ 179               	/* epilogue: frame size=0 */
+ 180 00f0 DF91      		pop r29
+ 181 00f2 CF91      		pop r28
+ 182 00f4 1F91      		pop r17
+ 183 00f6 0F91      		pop r16
+ 184 00f8 0895      		ret
+ 185               	/* epilogue end (size=5) */
+ 186               	/* function hello_world_appcall size 120 (111) */
+ 187               	.LFE3:
+ 189               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 hello-world.c
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccaibaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccaibaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccaibaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccaibaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccaibaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccaibaaa.s:20     .text:00000000 hello_world_init
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccaibaaa.s:43     .text:0000000a hello_world_appcall
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+uip_listen
+uip_conn
+uip_flags
+psock_init
+psock_send
+psock_readto
+strncpy

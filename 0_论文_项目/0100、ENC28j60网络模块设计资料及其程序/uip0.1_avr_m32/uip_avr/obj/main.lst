@@ -1,0 +1,284 @@
+   1               		.file	"main.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               		.data
+  19               	.LC0:
+  20 0000 6865 6C6C 		.string	"hello world!\n"
+  20      6F20 776F 
+  20      726C 6421 
+  20      0A00 
+  21               		.text
+  22               	.global	Target_Init
+  24               	Target_Init:
+  25               	.LFB4:
+  26               	.LM1:
+  27               	/* prologue: frame size=0 */
+  28               	/* prologue end (size=0) */
+  29               	.LM2:
+  30 0000 60E8      		ldi r22,lo8(9600)
+  31 0002 75E2      		ldi r23,hi8(9600)
+  32 0004 80E0      		ldi r24,hlo8(9600)
+  33 0006 90E0      		ldi r25,hhi8(9600)
+  34 0008 0E94 0000 		call RS232_Init
+  35               	.LM3:
+  36 000c 80E0      		ldi r24,lo8(.LC0)
+  37 000e 90E0      		ldi r25,hi8(.LC0)
+  38 0010 9F93      		push r25
+  39 0012 8F93      		push r24
+  40 0014 0E94 0000 		call RS232_Printf
+  41               	.LM4:
+  42 0018 0E94 0000 		call UIP_Clock_Init
+  43               	.LM5:
+  44               	/* #APP */
+  45 001c 7894      		sei
+  46               	/* #NOAPP */
+  47 001e 0F90      		pop __tmp_reg__
+  48 0020 0F90      		pop __tmp_reg__
+  49               	/* epilogue: frame size=0 */
+  50 0022 0895      		ret
+  51               	/* epilogue end (size=1) */
+  52               	/* function Target_Init size 19 (18) */
+  53               	.LFE4:
+  55               	.global	uip_appcall
+  57               	uip_appcall:
+  58               	.LFB5:
+  59               	.LM6:
+  60               	/* prologue: frame size=0 */
+  61               	/* prologue end (size=0) */
+  62               	/* epilogue: frame size=0 */
+  63 0024 0895      		ret
+  64               	/* epilogue end (size=1) */
+  65               	/* function uip_appcall size 1 (0) */
+  66               	.LFE5:
+  68               		.data
+  69               	.LC1:
+  70 000e 7061 636B 		.string	"packet type error\n"
+  70      6574 2074 
+  70      7970 6520 
+  70      6572 726F 
+  70      720A 00
+  71               		.text
+  72               	.global	main
+  74               	main:
+  75               	.LFB6:
+  76               	.LM7:
+  77               	/* prologue: frame size=8 */
+  78 0026 C0E0      		ldi r28,lo8(__stack - 8)
+  79 0028 D0E0      		ldi r29,hi8(__stack - 8)
+  80 002a DEBF      		out __SP_H__,r29
+  81 002c CDBF      		out __SP_L__,r28
+  82               	/* prologue end (size=4) */
+  83               	.LM8:
+  84 002e 0E94 0000 		call Target_Init
+  85               	.LM9:
+  86 0032 62E3      		ldi r22,lo8(50)
+  87 0034 70E0      		ldi r23,hi8(50)
+  88 0036 CE01      		movw r24,r28
+  89 0038 0196      		adiw r24,1
+  90 003a 0E94 0000 		call timer_set
+  91               	.LM10:
+  92 003e 68EE      		ldi r22,lo8(1000)
+  93 0040 73E0      		ldi r23,hi8(1000)
+  94 0042 CE01      		movw r24,r28
+  95 0044 0596      		adiw r24,5
+  96 0046 0E94 0000 		call timer_set
+  97               	.LM11:
+  98 004a 0E94 0000 		call tapdev_init
+  99               	.LM12:
+ 100 004e 0E94 0000 		call uip_init
+ 101               	.LM13:
+ 102 0052 0E94 0000 		call uip_arp_init
+ 103               	.LM14:
+ 104 0056 0E94 0000 		call telnetd_init
+ 105               	.L28:
+ 106               	.LM15:
+ 107 005a 0E94 0000 		call tapdev_read
+ 108 005e 9093 0000 		sts (uip_len)+1,r25
+ 109 0062 8093 0000 		sts uip_len,r24
+ 110               	.LM16:
+ 111 0066 892B      		or r24,r25
+ 112 0068 B1F1      		breq .L6
+ 113               	.LM17:
+ 114 006a 80E0      		ldi r24,lo8(2048)
+ 115 006c 98E0      		ldi r25,hi8(2048)
+ 116 006e 0E94 0000 		call htons
+ 117 0072 2091 0000 		lds r18,uip_buf+12
+ 118 0076 3091 0000 		lds r19,(uip_buf+12)+1
+ 119 007a 2817      		cp r18,r24
+ 120 007c 3907      		cpc r19,r25
+ 121 007e 61F4      		brne .L7
+ 122               	.LM18:
+ 123 0080 81E0      		ldi r24,lo8(1)
+ 124 0082 0E94 0000 		call uip_process
+ 125               	.LM19:
+ 126 0086 8091 0000 		lds r24,uip_len
+ 127 008a 9091 0000 		lds r25,(uip_len)+1
+ 128 008e 892B      		or r24,r25
+ 129 0090 21F3      		breq .L28
+ 130               	.LM20:
+ 131 0092 0E94 0000 		call uip_arp_out
+ 132 0096 13C0      		rjmp .L27
+ 133               	.L7:
+ 134               	.LM21:
+ 135 0098 86E0      		ldi r24,lo8(2054)
+ 136 009a 98E0      		ldi r25,hi8(2054)
+ 137 009c 0E94 0000 		call htons
+ 138 00a0 2091 0000 		lds r18,uip_buf+12
+ 139 00a4 3091 0000 		lds r19,(uip_buf+12)+1
+ 140 00a8 2817      		cp r18,r24
+ 141 00aa 3907      		cpc r19,r25
+ 142 00ac 59F4      		brne .L10
+ 143               	.LM22:
+ 144 00ae 0E94 0000 		call uip_arp_arpin
+ 145               	.LM23:
+ 146 00b2 8091 0000 		lds r24,uip_len
+ 147 00b6 9091 0000 		lds r25,(uip_len)+1
+ 148 00ba 892B      		or r24,r25
+ 149 00bc 71F2      		breq .L28
+ 150               	.L27:
+ 151               	.LM24:
+ 152 00be 0E94 0000 		call tapdev_send
+ 153 00c2 CBCF      		rjmp .L28
+ 154               	.L10:
+ 155               	.LM25:
+ 156 00c4 80E0      		ldi r24,lo8(.LC1)
+ 157 00c6 90E0      		ldi r25,hi8(.LC1)
+ 158 00c8 9F93      		push r25
+ 159 00ca 8F93      		push r24
+ 160 00cc 0E94 0000 		call RS232_Printf
+ 161 00d0 0F90      		pop __tmp_reg__
+ 162 00d2 0F90      		pop __tmp_reg__
+ 163 00d4 C2CF      		rjmp .L28
+ 164               	.L6:
+ 165               	.LM26:
+ 166 00d6 CE01      		movw r24,r28
+ 167 00d8 0196      		adiw r24,1
+ 168 00da 0E94 0000 		call timer_expired
+ 169 00de 892B      		or r24,r25
+ 170 00e0 09F4      		brne .+2
+ 171 00e2 BBCF      		rjmp .L28
+ 172               	.LM27:
+ 173 00e4 CE01      		movw r24,r28
+ 174 00e6 0196      		adiw r24,1
+ 175 00e8 0E94 0000 		call timer_reset
+ 176 00ec 00E0      		ldi r16,lo8(uip_conns)
+ 177 00ee 10E0      		ldi r17,hi8(uip_conns)
+ 178               	.L20:
+ 179               	.LM28:
+ 180 00f0 1093 0000 		sts (uip_conn)+1,r17
+ 181 00f4 0093 0000 		sts uip_conn,r16
+ 182 00f8 82E0      		ldi r24,lo8(2)
+ 183 00fa 0E94 0000 		call uip_process
+ 184               	.LM29:
+ 185 00fe 8091 0000 		lds r24,uip_len
+ 186 0102 9091 0000 		lds r25,(uip_len)+1
+ 187 0106 892B      		or r24,r25
+ 188 0108 21F0      		breq .L17
+ 189               	.LM30:
+ 190 010a 0E94 0000 		call uip_arp_out
+ 191               	.LM31:
+ 192 010e 0E94 0000 		call tapdev_send
+ 193               	.L17:
+ 194 0112 075B      		subi r16,lo8(-(73))
+ 195 0114 1F4F      		sbci r17,hi8(-(73))
+ 196               	.LM32:
+ 197 0116 80E0      		ldi r24,hi8(uip_conns+657)
+ 198 0118 0030      		cpi r16,lo8(uip_conns+657)
+ 199 011a 1807      		cpc r17,r24
+ 200 011c 49F3      		breq .L20
+ 201 011e 44F3      		brlt .L20
+ 202               	.LM33:
+ 203 0120 CE01      		movw r24,r28
+ 204 0122 0596      		adiw r24,5
+ 205 0124 0E94 0000 		call timer_expired
+ 206 0128 892B      		or r24,r25
+ 207 012a 09F4      		brne .+2
+ 208 012c 96CF      		rjmp .L28
+ 209               	.LM34:
+ 210 012e CE01      		movw r24,r28
+ 211 0130 0596      		adiw r24,5
+ 212 0132 0E94 0000 		call timer_reset
+ 213               	.LM35:
+ 214 0136 0E94 0000 		call uip_arp_timer
+ 215 013a 8FCF      		rjmp .L28
+ 216               	/* epilogue: frame size=8 */
+ 217               	/* epilogue: noreturn */
+ 218               	/* epilogue end (size=0) */
+ 219               	/* function main size 139 (135) */
+ 220               	.LFE6:
+ 222               		.data
+ 223               	.LC2:
+ 224 0021 7549 5020 		.string	"uIP log message: %s\n"
+ 224      6C6F 6720 
+ 224      6D65 7373 
+ 224      6167 653A 
+ 224      2025 730A 
+ 225               		.text
+ 226               	.global	uip_log
+ 228               	uip_log:
+ 229               	.LFB7:
+ 230               	.LM36:
+ 231               	/* prologue: frame size=0 */
+ 232               	/* prologue end (size=0) */
+ 233               	.LM37:
+ 234 013c 9F93      		push r25
+ 235 013e 8F93      		push r24
+ 236 0140 80E0      		ldi r24,lo8(.LC2)
+ 237 0142 90E0      		ldi r25,hi8(.LC2)
+ 238 0144 9F93      		push r25
+ 239 0146 8F93      		push r24
+ 240 0148 0E94 0000 		call RS232_Printf
+ 241 014c 0F90      		pop __tmp_reg__
+ 242 014e 0F90      		pop __tmp_reg__
+ 243 0150 0F90      		pop __tmp_reg__
+ 244 0152 0F90      		pop __tmp_reg__
+ 245               	/* epilogue: frame size=0 */
+ 246 0154 0895      		ret
+ 247               	/* epilogue end (size=1) */
+ 248               	/* function uip_log size 13 (12) */
+ 249               	.LFE7:
+ 251               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/cc4Yaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/cc4Yaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/cc4Yaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/cc4Yaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/cc4Yaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/cc4Yaaaa.s:24     .text:00000000 Target_Init
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/cc4Yaaaa.s:57     .text:00000024 uip_appcall
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/cc4Yaaaa.s:74     .text:00000026 main
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/cc4Yaaaa.s:228    .text:0000013c uip_log
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+RS232_Init
+RS232_Printf
+UIP_Clock_Init
+__stack
+timer_set
+tapdev_init
+uip_init
+uip_arp_init
+telnetd_init
+tapdev_read
+uip_len
+htons
+uip_buf
+uip_process
+uip_arp_out
+uip_arp_arpin
+tapdev_send
+timer_expired
+timer_reset
+uip_conns
+uip_conn
+uip_arp_timer

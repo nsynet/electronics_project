@@ -1,0 +1,15 @@
+psock.o: uip\psock.c
+psock.o: E:\Keil\\ARM\RV31\INC\stdio.h
+psock.o: E:\Keil\\ARM\RV31\INC\string.h
+psock.o: uip\uipopt.h
+psock.o: uip\uip-conf.h
+psock.o: E:\Keil\\ARM\RV31\INC\inttypes.h
+psock.o: E:\Keil\\ARM\RV31\INC\stdint.h
+psock.o: uip\psock.h
+psock.o: uip\pt.h
+psock.o: uip\lc.h
+psock.o: uip\lc-switch.h
+psock.o: uip\uip.h
+psock.o: uip\../uip_app_router.h
+psock.o: uip\httpd/httpd.h
+psock.o: uip\httpd/httpd-fs.h

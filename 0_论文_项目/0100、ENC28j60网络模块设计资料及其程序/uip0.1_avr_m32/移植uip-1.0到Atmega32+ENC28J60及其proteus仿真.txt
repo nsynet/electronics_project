@@ -1,0 +1,75 @@
+移植uip-1.0到Atmega32+ENC28J60及其proteus仿真
+
+期学习TCP/IP，觉得TCP/IP 很难，难的不光是它有一套很深奥的理论，而且还有很多细节。 
+所以光从书本上学习 TCP/IP 理论是绝对不行的，必须动手实验；实验也是个问题，你得有两台电脑亚！ 
+
+不过，另一台电脑可以通过仿真来实现；仿真软件有很多不同类型，这里指的是电路仿真软件； 
+常用的电路仿真软件有 Proteus，我们可以用它来仿真单片机及其外围电路的运行。 
+新版的 Proteus (如7.2版） 就带有 enc28j60 这个网络芯片；我们可以通过 AVR 单片机来控制这个芯片， 
+单片机是什么？就是一台小电脑嘛！ 
+
+当然，上面讲的是硬件的实现，软件呢？总不可能在 AVR 上运行一个 XP 吧！ 
+
+好了，到这里我们讲解软件的实现: 
+这里的软件指的是 TCP/IP 协议栈，常见的 TCP/IP 协议栈有 Lwip、uip、uC/IP、uC/TCPIP， 
+这里就用 uip 吧！ 
+
+先来简单介绍一下 uip： 
+uip 是一个针对8位和16位单片机的 TCP/IP 协议栈，它使用了 BSD 授权，商业也可以免费使用。 
+它具有速度快、占用 ROM 及 RAM 空间少的特点，一般只占用 8K 的 ROM 和 1K 的 RAM ，够小了吧！ 
+它是 Lwip (另一轻量级 TCP/IP 协议栈)的作者写的，实力非凡，所以它的质量还是可以放心的； 
+同时它还具有丰富的说明文档和例子，更易于学习和使用。 
+
+要使用它就必须移植，下面是我的移植过程： 
+
+工程用 Winavr2006 建立: 
+
+
+
+1）把 uip-1.0 的所有文件加入到工程，包括 uip 目录的文件（除uip-split.c）、unix 目录的文件、lib 目录的文件； 
+2）修改 uip/uip-neighbor.c 文件的 
+void uip_neighbor_add(uip_ipaddr_t ipaddr, struct uip_neighbor_addr *addr) 
+函数，一般注释掉 printf 语句即可，或者改为你自己的串口格式化打印实现。 
+3）uip 目录里的源文件除 uipopt.h 外一般都无需修改；uipopt.h 包含了 uip-conf.h ，所以大部分修改可以在 
+uip-conf.h 里进行。 
+uip-conf.h 里加入如下定义，可以减少编译的警告： 
+#define notdef     0 
+#define UIP_CONF_IPV6   0 
+#define UIP_ARCH_ADD32   0 
+#define UIP_ARCH_CHKSUM   0 
+#define UIP_NEIGHBOR_CONF_ADDRTYPE 0 
+4）移植工作主要是 定时器中断程序 与 网络驱动 的编写；网络驱动是另一个开源项目—— AVRNET 中的，所以我就直接偷来用了。这里不详细讲解，请参看我的代码。 
+
+新版的 Proteus (如7.2版） 带有 enc28j60 这个网络芯片； 
+但为了使用它，你还需要安装一个叫 WinPCap 的软件； 
+以下这个仿真电路其实是另一个开源项目—— AVRNET 中的。 
+
+
+
+修改你的电脑的IP地址为192.168.0.90，子网掩码为255.255.255.0 ； 
+为了测试 AVR 是否与主机连通及 UIP 是否在AVR上运行正常，首先来个 ping 测试： 
+1）全速运行仿真 
+2）在运行输入 ping -t 192.168.0.80 
+看到如下的话，就代表 AVR 与主机连通了 并且 UIP 在AVR上运行正常！ 
+
+
+
+有了上面的“强心针”，我有理由做一个更复杂的测试！ 
+1）把apps\telnetd目录里的文件加入到工程； 
+2）在uip-conf.h文件加入 
+  #define TELNETD_CONF_NUMLINES 1 
+  #define TELNETD_CONF_LINELEN 40 
+3）在 main 函数里加入远程登录服务器telnetd的初始化 telnetd_init(); 
+4）全速运行仿真 
+5）在运行输入 telnet 192.168.0.80 
+
+
+
+来到这里，Atmega32的 RAM 基本被我用光了，下一步是最大限度裁减它，并做个 嵌入式网页服务器 出来! 
+
+期待！！ 
+
+
+完整代码送给大家
+欢迎光临我的小站 以后更新会在那里进行
+http://sites.google.com/site/jiaojinxing

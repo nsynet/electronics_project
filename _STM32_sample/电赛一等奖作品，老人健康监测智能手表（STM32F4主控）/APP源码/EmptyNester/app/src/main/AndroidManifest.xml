@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="name.liushiyao.emptynester">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/main_ico_man"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat">
+        <activity android:name=".LoadActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/setting_title"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Setting_Drug_Activity"
+            android:label="@string/setting_drug_title"
+            android:theme="@style/Base.V11.Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".WifiActivity"
+            android:label="@string/wifiactivity_title"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".QRCodeActivity"
+            android:label="@string/preferences_decode_QR_title"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+        <activity
+            android:name="com.karics.library.zxing.android.CaptureActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".AboutActivity"
+            android:label="用户信息"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+
+            .,. />
+        <activity
+            android:name=".RegeditActivity"
+            android:label="@string/regeditactivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".FindDeviceActivity"
+            android:label="@string/find_device"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="lecho.lib.hellocharts.samples.LineChartActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="lecho.lib.hellocharts.samples.LineColumnDependencyActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="lecho.lib.hellocharts.samples.PreviewLineChartActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Production"></activity>
+        <activity android:name=".Setting_Time_Activity"
+            android:theme="@style/Theme.AppCompat.Dialog"
+        />
+
+
+    </application>
+
+</manifest>

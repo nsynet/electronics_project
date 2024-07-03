@@ -1,0 +1,198 @@
+   1               		.file	"tapdev.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               		.data
+  19               	.LC0:
+  20 0000 41        		.byte	65
+  21 0001 56        		.byte	86
+  22 0002 52        		.byte	82
+  23 0003 4E        		.byte	78
+  24 0004 45        		.byte	69
+  25 0005 54        		.byte	84
+  26               		.text
+  27               	.global	tapdev_init
+  29               	tapdev_init:
+  30               	.LFB4:
+  31               	.LM1:
+  32               	/* prologue: frame size=6 */
+  33 0000 CF93      		push r28
+  34 0002 DF93      		push r29
+  35 0004 CDB7      		in r28,__SP_L__
+  36 0006 DEB7      		in r29,__SP_H__
+  37 0008 2697      		sbiw r28,6
+  38 000a 0FB6      		in __tmp_reg__,__SREG__
+  39 000c F894      		cli
+  40 000e DEBF      		out __SP_H__,r29
+  41 0010 0FBE      		out __SREG__,__tmp_reg__
+  42 0012 CDBF      		out __SP_L__,r28
+  43               	/* prologue end (size=10) */
+  44               	.LM2:
+  45 0014 AE01      		movw r20,r28
+  46 0016 4F5F      		subi r20,lo8(-(1))
+  47 0018 5F4F      		sbci r21,hi8(-(1))
+  48 001a 86E0      		ldi r24,lo8(6)
+  49 001c 20E0      		ldi r18,lo8(.LC0)
+  50 001e 30E0      		ldi r19,hi8(.LC0)
+  51 0020 DA01      		movw r26,r20
+  52 0022 F901      		movw r30,r18
+  53 0024 0190      		ld __tmp_reg__,Z+
+  54 0026 0D92      		st X+,__tmp_reg__
+  55 0028 8A95      		dec r24
+  56 002a E1F7      		brne .-8
+  57               	.LM3:
+  58 002c CA01      		movw r24,r20
+  59 002e 0E94 0000 		call enc28j60_init
+  60               	.LM4:
+  61 0032 1092 0000 		sts (plen)+1,__zero_reg__
+  62 0036 1092 0000 		sts plen,__zero_reg__
+  63               	.LM5:
+  64 003a 8BB7      		in r24,91-0x20
+  65 003c 8064      		ori r24,lo8(64)
+  66 003e 8BBF      		out 91-0x20,r24
+  67               	/* epilogue: frame size=6 */
+  68 0040 2696      		adiw r28,6
+  69 0042 0FB6      		in __tmp_reg__,__SREG__
+  70 0044 F894      		cli
+  71 0046 DEBF      		out __SP_H__,r29
+  72 0048 0FBE      		out __SREG__,__tmp_reg__
+  73 004a CDBF      		out __SP_L__,r28
+  74 004c DF91      		pop r29
+  75 004e CF91      		pop r28
+  76 0050 0895      		ret
+  77               	/* epilogue end (size=9) */
+  78               	/* function tapdev_init size 41 (22) */
+  79               	.LFE4:
+  81               	.global	tapdev_read
+  83               	tapdev_read:
+  84               	.LFB5:
+  85               	.LM6:
+  86               	/* prologue: frame size=0 */
+  87               	/* prologue end (size=0) */
+  88               	.LM7:
+  89 0052 2091 0000 		lds r18,UIP_Ticks
+  90 0056 3091 0000 		lds r19,(UIP_Ticks)+1
+  91               	.L3:
+  92               	.LM8:
+  93 005a 8091 0000 		lds r24,plen
+  94 005e 9091 0000 		lds r25,(plen)+1
+  95 0062 892B      		or r24,r25
+  96 0064 39F4      		brne .L4
+  97 0066 8091 0000 		lds r24,UIP_Ticks
+  98 006a 9091 0000 		lds r25,(UIP_Ticks)+1
+  99 006e 2817      		cp r18,r24
+ 100 0070 3907      		cpc r19,r25
+ 101 0072 99F3      		breq .L3
+ 102               	.L4:
+ 103               	.LM9:
+ 104 0074 2091 0000 		lds r18,plen
+ 105 0078 3091 0000 		lds r19,(plen)+1
+ 106               	.LM10:
+ 107 007c 1092 0000 		sts (plen)+1,__zero_reg__
+ 108 0080 1092 0000 		sts plen,__zero_reg__
+ 109               	.LM11:
+ 110 0084 C901      		movw r24,r18
+ 111               	/* epilogue: frame size=0 */
+ 112 0086 0895      		ret
+ 113               	/* epilogue end (size=1) */
+ 114               	/* function tapdev_read size 27 (26) */
+ 115               	.LFE5:
+ 117               	.global	__vector_1
+ 119               	__vector_1:
+ 120               	.LFB6:
+ 121               	.LM12:
+ 122               	/* prologue: frame size=0 */
+ 123 0088 1F92      		push __zero_reg__
+ 124 008a 0F92      		push __tmp_reg__
+ 125 008c 0FB6      		in __tmp_reg__,__SREG__
+ 126 008e 0F92      		push __tmp_reg__
+ 127 0090 1124      		clr __zero_reg__
+ 128 0092 2F93      		push r18
+ 129 0094 3F93      		push r19
+ 130 0096 4F93      		push r20
+ 131 0098 5F93      		push r21
+ 132 009a 6F93      		push r22
+ 133 009c 7F93      		push r23
+ 134 009e 8F93      		push r24
+ 135 00a0 9F93      		push r25
+ 136 00a2 AF93      		push r26
+ 137 00a4 BF93      		push r27
+ 138 00a6 EF93      		push r30
+ 139 00a8 FF93      		push r31
+ 140               	/* prologue end (size=17) */
+ 141               	.LM13:
+ 142 00aa 64EA      		ldi r22,lo8(420)
+ 143 00ac 71E0      		ldi r23,hi8(420)
+ 144 00ae 80E0      		ldi r24,lo8(uip_buf)
+ 145 00b0 90E0      		ldi r25,hi8(uip_buf)
+ 146 00b2 0E94 0000 		call enc28j60_packet_receive
+ 147 00b6 9093 0000 		sts (plen)+1,r25
+ 148 00ba 8093 0000 		sts plen,r24
+ 149               	/* epilogue: frame size=0 */
+ 150 00be FF91      		pop r31
+ 151 00c0 EF91      		pop r30
+ 152 00c2 BF91      		pop r27
+ 153 00c4 AF91      		pop r26
+ 154 00c6 9F91      		pop r25
+ 155 00c8 8F91      		pop r24
+ 156 00ca 7F91      		pop r23
+ 157 00cc 6F91      		pop r22
+ 158 00ce 5F91      		pop r21
+ 159 00d0 4F91      		pop r20
+ 160 00d2 3F91      		pop r19
+ 161 00d4 2F91      		pop r18
+ 162 00d6 0F90      		pop __tmp_reg__
+ 163 00d8 0FBE      		out __SREG__,__tmp_reg__
+ 164 00da 0F90      		pop __tmp_reg__
+ 165 00dc 1F90      		pop __zero_reg__
+ 166 00de 1895      		reti
+ 167               	/* epilogue end (size=17) */
+ 168               	/* function __vector_1 size 44 (10) */
+ 169               	.LFE6:
+ 171               	.global	tapdev_send
+ 173               	tapdev_send:
+ 174               	.LFB7:
+ 175               	.LM14:
+ 176               	/* prologue: frame size=0 */
+ 177               	/* prologue end (size=0) */
+ 178               	.LM15:
+ 179 00e0 6091 0000 		lds r22,uip_len
+ 180 00e4 7091 0000 		lds r23,(uip_len)+1
+ 181 00e8 80E0      		ldi r24,lo8(uip_buf)
+ 182 00ea 90E0      		ldi r25,hi8(uip_buf)
+ 183 00ec 0E94 0000 		call enc28j60_packet_send
+ 184               	/* epilogue: frame size=0 */
+ 185 00f0 0895      		ret
+ 186               	/* epilogue end (size=1) */
+ 187               	/* function tapdev_send size 9 (8) */
+ 188               	.LFE7:
+ 190               		.comm plen,2,1
+ 191               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 tapdev.c
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmsbaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmsbaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmsbaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmsbaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmsbaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmsbaaa.s:29     .text:00000000 tapdev_init
+                            *COM*:00000002 plen
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmsbaaa.s:83     .text:00000052 tapdev_read
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmsbaaa.s:119    .text:00000088 __vector_1
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccmsbaaa.s:173    .text:000000e0 tapdev_send
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+enc28j60_init
+UIP_Ticks
+uip_buf
+enc28j60_packet_receive
+uip_len
+enc28j60_packet_send

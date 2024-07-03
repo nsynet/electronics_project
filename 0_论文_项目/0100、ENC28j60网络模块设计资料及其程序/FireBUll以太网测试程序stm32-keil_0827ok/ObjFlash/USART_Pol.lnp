@@ -1,0 +1,4 @@
+--device DARMSTM "..\objflash\retarget.o" "..\objflash\stm32_init.o" "..\objflash\main.o" ".\STM32F10xR.LIB" "..\objflash\ip_arp_udp_tcp.o" "..\objflash\simple_server.o" "..\objflash\enc28j60.o" "..\objflash\spi.o" "..\objflash\stm32f10x.o" --strict --scatter "..\ObjFlash\USART_Pol.sct" 
+--autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list "..\LstFlash\USART_Pol.map" -o "..\ObjFlash\USART_Pol.axf"

@@ -1,0 +1,1 @@
+-c --device DARMP -g -O0 --apcs=interwork -I..\..\..\INC\NXP -I..\uip\inc -I..\uip\src -I..\uip\lib -I "e:\Keil\ARM\INC\Philips" -o "uip-split.o" --omf_browse "uip-split.crf" --depend "uip-split.d" "..\uip\src\uip-split.c"

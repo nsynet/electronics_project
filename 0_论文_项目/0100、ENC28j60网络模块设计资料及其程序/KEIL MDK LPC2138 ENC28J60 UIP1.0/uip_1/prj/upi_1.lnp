@@ -1,0 +1,4 @@
+--device DARMP "startup.o" "main.o" "sys_clock.o" "shell.o" "telnetd.o" "pcd8544.o" "pcd8544_hal.o" "rtc.o" "enc28j60.o" "enc28j60_hal.o" "clock-arch.o" "tapdev.o" "psock.o" "timer.o" "uip.o" "uip_arp.o" "uip-fw.o" "uiplib.o" "uip-neighbor.o" "memb.o" --strict --scatter "upi_1.sct" 
+--autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\upi_1.map" -o "upi_1.axf"

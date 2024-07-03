@@ -1,0 +1,13 @@
+hello-world.o: ..\app\service\hello-world.c
+hello-world.o: ..\app\service\hello-world.h
+hello-world.o: ..\uip\src\uipopt.h
+hello-world.o: ..\uip\inc\uip-conf.h
+hello-world.o: ..\..\..\INC\NXP\mydef.h
+hello-world.o: e:\Keil\ARM\RV31\INC\stdint.h
+hello-world.o: ..\uip\inc\../../app/service/hello-world.h
+hello-world.o: ..\uip\src\psock.h
+hello-world.o: ..\uip\src\pt.h
+hello-world.o: ..\uip\src\lc.h
+hello-world.o: ..\uip\src\lc-switch.h
+hello-world.o: ..\uip\src\uip.h
+hello-world.o: e:\Keil\ARM\RV31\INC\string.h

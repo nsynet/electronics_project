@@ -1,0 +1,932 @@
+   1               		.file	"psock.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  19               	buf_setup:
+  20               	.LFB3:
+  21               	.LM1:
+  22               	/* prologue: frame size=0 */
+  23               	/* prologue end (size=0) */
+  24 0000 FC01      		movw r30,r24
+  25               	.LM2:
+  26 0002 7183      		std Z+1,r23
+  27 0004 6083      		st Z,r22
+  28               	.LM3:
+  29 0006 5383      		std Z+3,r21
+  30 0008 4283      		std Z+2,r20
+  31               	/* epilogue: frame size=0 */
+  32 000a 0895      		ret
+  33               	/* epilogue end (size=1) */
+  34               	/* function buf_setup size 6 (5) */
+  35               	.LFE3:
+  38               	send_data:
+  39               	.LFB6:
+  40               	.LM4:
+  41               	/* prologue: frame size=0 */
+  42 000c CF93      		push r28
+  43 000e DF93      		push r29
+  44               	/* prologue end (size=2) */
+  45 0010 EC01      		movw r28,r24
+  46               	.LM5:
+  47 0012 8C89      		ldd r24,Y+20
+  48 0014 8630      		cpi r24,lo8(6)
+  49 0016 41F4      		brne .L4
+  50               	.LM6:
+  51 0018 8091 0000 		lds r24,uip_flags
+  52 001c 9927      		clr r25
+  53 001e 9C01      		movw r18,r24
+  54 0020 2470      		andi r18,lo8(4)
+  55 0022 3070      		andi r19,hi8(4)
+  56 0024 82FF      		sbrs r24,2
+  57 0026 15C0      		rjmp .L3
+  58               	.L4:
+  59               	.LM7:
+  60 0028 E091 0000 		lds r30,uip_conn
+  61 002c F091 0000 		lds r31,(uip_conn)+1
+  62 0030 8A85      		ldd r24,Y+10
+  63 0032 9B85      		ldd r25,Y+11
+  64 0034 6289      		ldd r22,Z+18
+  65 0036 7389      		ldd r23,Z+19
+  66 0038 6817      		cp r22,r24
+  67 003a 7907      		cpc r23,r25
+  68 003c 08F0      		brlo .L7
+  69               	.LM8:
+  70 003e BC01      		movw r22,r24
+  71               	.L7:
+  72 0040 8C81      		ldd r24,Y+4
+  73 0042 9D81      		ldd r25,Y+5
+  74 0044 0E94 0000 		call uip_send
+  75               	.LM9:
+  76 0048 86E0      		ldi r24,lo8(6)
+  77 004a 8C8B      		std Y+20,r24
+  78               	.LM10:
+  79 004c 81E0      		ldi r24,lo8(1)
+  80 004e 90E0      		ldi r25,hi8(1)
+  81 0050 01C0      		rjmp .L2
+  82               	.L3:
+  83               	.LM11:
+  84 0052 C901      		movw r24,r18
+  85               	.L2:
+  86               	/* epilogue: frame size=0 */
+  87 0054 DF91      		pop r29
+  88 0056 CF91      		pop r28
+  89 0058 0895      		ret
+  90               	/* epilogue end (size=3) */
+  91               	/* function send_data size 39 (34) */
+  92               	.LFE6:
+  95               	data_acked:
+  96               	.LFB7:
+  97               	.LM12:
+  98               	/* prologue: frame size=0 */
+  99 005a CF93      		push r28
+ 100 005c DF93      		push r29
+ 101               	/* prologue end (size=2) */
+ 102 005e FC01      		movw r30,r24
+ 103               	.LM13:
+ 104 0060 8489      		ldd r24,Z+20
+ 105 0062 8630      		cpi r24,lo8(6)
+ 106 0064 41F5      		brne .L9
+ 107               	.LM14:
+ 108 0066 8091 0000 		lds r24,uip_flags
+ 109 006a 80FF      		sbrs r24,0
+ 110 006c 24C0      		rjmp .L9
+ 111               	.LM15:
+ 112 006e A091 0000 		lds r26,uip_conn
+ 113 0072 B091 0000 		lds r27,(uip_conn)+1
+ 114 0076 8285      		ldd r24,Z+10
+ 115 0078 9385      		ldd r25,Z+11
+ 116 007a ED01      		movw r28,r26
+ 117 007c 4A89      		ldd r20,Y+18
+ 118 007e 5B89      		ldd r21,Y+19
+ 119 0080 2481      		ldd r18,Z+4
+ 120 0082 3581      		ldd r19,Z+5
+ 121 0084 4817      		cp r20,r24
+ 122 0086 5907      		cpc r21,r25
+ 123 0088 58F4      		brsh .L10
+ 124               	.LM16:
+ 125 008a 841B      		sub r24,r20
+ 126 008c 950B      		sbc r25,r21
+ 127 008e 9387      		std Z+11,r25
+ 128 0090 8287      		std Z+10,r24
+ 129               	.LM17:
+ 130 0092 8A89      		ldd r24,Y+18
+ 131 0094 9B89      		ldd r25,Y+19
+ 132 0096 280F      		add r18,r24
+ 133 0098 391F      		adc r19,r25
+ 134 009a 3583      		std Z+5,r19
+ 135 009c 2483      		std Z+4,r18
+ 136 009e 06C0      		rjmp .L11
+ 137               	.L10:
+ 138               	.LM18:
+ 139 00a0 280F      		add r18,r24
+ 140 00a2 391F      		adc r19,r25
+ 141 00a4 3583      		std Z+5,r19
+ 142 00a6 2483      		std Z+4,r18
+ 143               	.LM19:
+ 144 00a8 1386      		std Z+11,__zero_reg__
+ 145 00aa 1286      		std Z+10,__zero_reg__
+ 146               	.L11:
+ 147               	.LM20:
+ 148 00ac 81E0      		ldi r24,lo8(1)
+ 149 00ae 848B      		std Z+20,r24
+ 150               	.LM21:
+ 151 00b0 81E0      		ldi r24,lo8(1)
+ 152 00b2 90E0      		ldi r25,hi8(1)
+ 153 00b4 02C0      		rjmp .L8
+ 154               	.L9:
+ 155               	.LM22:
+ 156 00b6 80E0      		ldi r24,lo8(0)
+ 157 00b8 90E0      		ldi r25,hi8(0)
+ 158               	.L8:
+ 159               	/* epilogue: frame size=0 */
+ 160 00ba DF91      		pop r29
+ 161 00bc CF91      		pop r28
+ 162 00be 0895      		ret
+ 163               	/* epilogue end (size=3) */
+ 164               	/* function data_acked size 51 (46) */
+ 165               	.LFE7:
+ 167               	.global	psock_send
+ 169               	psock_send:
+ 170               	.LFB8:
+ 171               	.LM23:
+ 172               	/* prologue: frame size=0 */
+ 173 00c0 1F93      		push r17
+ 174 00c2 CF93      		push r28
+ 175 00c4 DF93      		push r29
+ 176               	/* prologue end (size=3) */
+ 177 00c6 EC01      		movw r28,r24
+ 178               	.LBB2:
+ 179               	.LM24:
+ 180 00c8 8A81      		ldd r24,Y+2
+ 181 00ca 9B81      		ldd r25,Y+3
+ 182 00cc 0097      		sbiw r24,0
+ 183 00ce 21F0      		breq .L14
+ 184               	.LM25:
+ 185 00d0 8F3C      		cpi r24,207
+ 186 00d2 9105      		cpc r25,__zero_reg__
+ 187 00d4 A9F0      		breq .L20
+ 188 00d6 22C0      		rjmp .L13
+ 189               	.L14:
+ 190               	.LM26:
+ 191 00d8 4115      		cp r20,__zero_reg__
+ 192 00da 5105      		cpc r21,__zero_reg__
+ 193 00dc 41F4      		brne .L15
+ 194               	.LM27:
+ 195 00de 5B83      		std Y+3,r21
+ 196 00e0 4A83      		std Y+2,r20
+ 197 00e2 81E0      		ldi r24,lo8(1)
+ 198 00e4 90E0      		ldi r25,hi8(1)
+ 199 00e6 1EC0      		rjmp .L12
+ 200               	.L25:
+ 201               	.LM28:
+ 202 00e8 80E0      		ldi r24,lo8(0)
+ 203 00ea 90E0      		ldi r25,hi8(0)
+ 204 00ec 1BC0      		rjmp .L12
+ 205               	.L15:
+ 206               	.LM29:
+ 207 00ee 7D83      		std Y+5,r23
+ 208 00f0 6C83      		std Y+4,r22
+ 209               	.LM30:
+ 210 00f2 5B87      		std Y+11,r21
+ 211 00f4 4A87      		std Y+10,r20
+ 212               	.LM31:
+ 213 00f6 1C8A      		std Y+20,__zero_reg__
+ 214               	.L22:
+ 215               	.LM32:
+ 216 00f8 8FEC      		ldi r24,lo8(207)
+ 217 00fa 90E0      		ldi r25,hi8(207)
+ 218 00fc 9B83      		std Y+3,r25
+ 219 00fe 8A83      		std Y+2,r24
+ 220               	.L20:
+ 221 0100 CE01      		movw r24,r28
+ 222 0102 0E94 0000 		call data_acked
+ 223 0106 182F      		mov r17,r24
+ 224 0108 CE01      		movw r24,r28
+ 225 010a 0E94 0000 		call send_data
+ 226 010e 1823      		and r17,r24
+ 227 0110 59F3      		breq .L25
+ 228 0112 8A85      		ldd r24,Y+10
+ 229 0114 9B85      		ldd r25,Y+11
+ 230 0116 892B      		or r24,r25
+ 231 0118 79F7      		brne .L22
+ 232               	.LM33:
+ 233 011a 1C8A      		std Y+20,__zero_reg__
+ 234               	.L13:
+ 235               	.LM34:
+ 236 011c 1B82      		std Y+3,__zero_reg__
+ 237 011e 1A82      		std Y+2,__zero_reg__
+ 238 0120 82E0      		ldi r24,lo8(2)
+ 239 0122 90E0      		ldi r25,hi8(2)
+ 240               	.L12:
+ 241               	.LBE2:
+ 242               	/* epilogue: frame size=0 */
+ 243 0124 DF91      		pop r29
+ 244 0126 CF91      		pop r28
+ 245 0128 1F91      		pop r17
+ 246 012a 0895      		ret
+ 247               	/* epilogue end (size=4) */
+ 248               	/* function psock_send size 55 (48) */
+ 249               	.LFE8:
+ 251               	.global	psock_generator_send
+ 253               	psock_generator_send:
+ 254               	.LFB9:
+ 255               	.LM35:
+ 256               	/* prologue: frame size=0 */
+ 257 012c CF92      		push r12
+ 258 012e DF92      		push r13
+ 259 0130 EF92      		push r14
+ 260 0132 FF92      		push r15
+ 261 0134 1F93      		push r17
+ 262 0136 CF93      		push r28
+ 263 0138 DF93      		push r29
+ 264               	/* prologue end (size=7) */
+ 265 013a EC01      		movw r28,r24
+ 266 013c 7B01      		movw r14,r22
+ 267 013e 6A01      		movw r12,r20
+ 268               	.LBB3:
+ 269               	.LM36:
+ 270 0140 8A81      		ldd r24,Y+2
+ 271 0142 9B81      		ldd r25,Y+3
+ 272 0144 0097      		sbiw r24,0
+ 273 0146 21F0      		breq .L28
+ 274               	.LM37:
+ 275 0148 8E3E      		cpi r24,238
+ 276 014a 9105      		cpc r25,__zero_reg__
+ 277 014c 19F1      		breq .L36
+ 278 014e 30C0      		rjmp .L27
+ 279               	.L28:
+ 280               	.LM38:
+ 281 0150 6115      		cp r22,__zero_reg__
+ 282 0152 7105      		cpc r23,__zero_reg__
+ 283 0154 41F4      		brne .L29
+ 284               	.LM39:
+ 285 0156 7B83      		std Y+3,r23
+ 286 0158 6A83      		std Y+2,r22
+ 287 015a 81E0      		ldi r24,lo8(1)
+ 288 015c 90E0      		ldi r25,hi8(1)
+ 289 015e 2CC0      		rjmp .L26
+ 290               	.L38:
+ 291               	.LM40:
+ 292 0160 80E0      		ldi r24,lo8(0)
+ 293 0162 90E0      		ldi r25,hi8(0)
+ 294 0164 29C0      		rjmp .L26
+ 295               	.L29:
+ 296               	.LM41:
+ 297 0166 CA01      		movw r24,r20
+ 298 0168 FB01      		movw r30,r22
+ 299 016a 0995      		icall
+ 300 016c 9B87      		std Y+11,r25
+ 301 016e 8A87      		std Y+10,r24
+ 302               	.LM42:
+ 303 0170 8091 0000 		lds r24,uip_appdata
+ 304 0174 9091 0000 		lds r25,(uip_appdata)+1
+ 305 0178 9D83      		std Y+5,r25
+ 306 017a 8C83      		std Y+4,r24
+ 307               	.LM43:
+ 308 017c 1C8A      		std Y+20,__zero_reg__
+ 309               	.L31:
+ 310               	.LM44:
+ 311 017e 8091 0000 		lds r24,uip_flags
+ 312 0182 82FF      		sbrs r24,2
+ 313 0184 03C0      		rjmp .L34
+ 314               	.LM45:
+ 315 0186 C601      		movw r24,r12
+ 316 0188 F701      		movw r30,r14
+ 317 018a 0995      		icall
+ 318               	.L34:
+ 319               	.LM46:
+ 320 018c 8EEE      		ldi r24,lo8(238)
+ 321 018e 90E0      		ldi r25,hi8(238)
+ 322 0190 9B83      		std Y+3,r25
+ 323 0192 8A83      		std Y+2,r24
+ 324               	.L36:
+ 325 0194 CE01      		movw r24,r28
+ 326 0196 0E94 0000 		call data_acked
+ 327 019a 182F      		mov r17,r24
+ 328 019c CE01      		movw r24,r28
+ 329 019e 0E94 0000 		call send_data
+ 330 01a2 1823      		and r17,r24
+ 331 01a4 E9F2      		breq .L38
+ 332               	.LM47:
+ 333 01a6 8A85      		ldd r24,Y+10
+ 334 01a8 9B85      		ldd r25,Y+11
+ 335 01aa 892B      		or r24,r25
+ 336 01ac 41F7      		brne .L31
+ 337               	.LM48:
+ 338 01ae 1C8A      		std Y+20,__zero_reg__
+ 339               	.L27:
+ 340               	.LM49:
+ 341 01b0 1B82      		std Y+3,__zero_reg__
+ 342 01b2 1A82      		std Y+2,__zero_reg__
+ 343 01b4 82E0      		ldi r24,lo8(2)
+ 344 01b6 90E0      		ldi r25,hi8(2)
+ 345               	.L26:
+ 346               	.LBE3:
+ 347               	/* epilogue: frame size=0 */
+ 348 01b8 DF91      		pop r29
+ 349 01ba CF91      		pop r28
+ 350 01bc 1F91      		pop r17
+ 351 01be FF90      		pop r15
+ 352 01c0 EF90      		pop r14
+ 353 01c2 DF90      		pop r13
+ 354 01c4 CF90      		pop r12
+ 355 01c6 0895      		ret
+ 356               	/* epilogue end (size=8) */
+ 357               	/* function psock_generator_send size 79 (64) */
+ 358               	.LFE9:
+ 360               	.global	psock_datalen
+ 362               	psock_datalen:
+ 363               	.LFB10:
+ 364               	.LM50:
+ 365               	/* prologue: frame size=0 */
+ 366               	/* prologue end (size=0) */
+ 367 01c8 FC01      		movw r30,r24
+ 368               	.LM51:
+ 369 01ca 2289      		ldd r18,Z+18
+ 370 01cc 3389      		ldd r19,Z+19
+ 371 01ce 8089      		ldd r24,Z+16
+ 372 01d0 9189      		ldd r25,Z+17
+ 373               	.LM52:
+ 374 01d2 281B      		sub r18,r24
+ 375 01d4 390B      		sbc r19,r25
+ 376 01d6 C901      		movw r24,r18
+ 377               	/* epilogue: frame size=0 */
+ 378 01d8 0895      		ret
+ 379               	/* epilogue end (size=1) */
+ 380               	/* function psock_datalen size 9 (8) */
+ 381               	.LFE10:
+ 383               	.global	psock_newdata
+ 385               	psock_newdata:
+ 386               	.LFB11:
+ 387               	.LM53:
+ 388               	/* prologue: frame size=0 */
+ 389               	/* prologue end (size=0) */
+ 390 01da FC01      		movw r30,r24
+ 391               	.LM54:
+ 392 01dc 2485      		ldd r18,Z+12
+ 393 01de 3585      		ldd r19,Z+13
+ 394 01e0 2115      		cp r18,__zero_reg__
+ 395 01e2 3105      		cpc r19,__zero_reg__
+ 396 01e4 79F4      		brne .L47
+ 397               	.LM55:
+ 398 01e6 8489      		ldd r24,Z+20
+ 399 01e8 8230      		cpi r24,lo8(2)
+ 400 01ea 21F4      		brne .L43
+ 401               	.LM56:
+ 402 01ec 83E0      		ldi r24,lo8(3)
+ 403 01ee 848B      		std Z+20,r24
+ 404               	.LM57:
+ 405 01f0 C901      		movw r24,r18
+ 406 01f2 0895      		ret
+ 407               	.L43:
+ 408               	.LM58:
+ 409 01f4 8091 0000 		lds r24,uip_flags
+ 410 01f8 9927      		clr r25
+ 411 01fa 9C01      		movw r18,r24
+ 412 01fc 2270      		andi r18,lo8(2)
+ 413 01fe 3070      		andi r19,hi8(2)
+ 414 0200 81FF      		sbrs r24,1
+ 415 0202 03C0      		rjmp .L45
+ 416               	.L47:
+ 417               	.LM59:
+ 418 0204 81E0      		ldi r24,lo8(1)
+ 419 0206 90E0      		ldi r25,hi8(1)
+ 420 0208 0895      		ret
+ 421               	.L45:
+ 422               	.LM60:
+ 423 020a C901      		movw r24,r18
+ 424               	.LM61:
+ 425 020c 0895      		ret
+ 426               	/* epilogue: frame size=0 */
+ 427               	/* epilogue: noreturn */
+ 428               	/* epilogue end (size=0) */
+ 429               	/* function psock_newdata size 26 (26) */
+ 430               	.LFE11:
+ 432               	.global	psock_readto
+ 434               	psock_readto:
+ 435               	.LFB12:
+ 436               	.LM62:
+ 437               	/* prologue: frame size=0 */
+ 438 020e DF92      		push r13
+ 439 0210 EF92      		push r14
+ 440 0212 FF92      		push r15
+ 441 0214 0F93      		push r16
+ 442 0216 1F93      		push r17
+ 443 0218 CF93      		push r28
+ 444 021a DF93      		push r29
+ 445               	/* prologue end (size=7) */
+ 446 021c EC01      		movw r28,r24
+ 447 021e D62E      		mov r13,r22
+ 448               	.LBB4:
+ 449               	.LM63:
+ 450 0220 8A81      		ldd r24,Y+2
+ 451 0222 9B81      		ldd r25,Y+3
+ 452 0224 0097      		sbiw r24,0
+ 453 0226 21F0      		breq .L50
+ 454               	.LM64:
+ 455 0228 8B51      		subi r24,lo8(283)
+ 456 022a 9140      		sbci r25,hi8(283)
+ 457 022c 89F0      		breq .L56
+ 458 022e 90C0      		rjmp .L49
+ 459               	.L50:
+ 460               	.LM65:
+ 461 0230 4A89      		ldd r20,Y+18
+ 462 0232 5B89      		ldd r21,Y+19
+ 463 0234 6885      		ldd r22,Y+8
+ 464 0236 7985      		ldd r23,Y+9
+ 465 0238 CE01      		movw r24,r28
+ 466 023a 0E96      		adiw r24,14
+ 467 023c 0E94 0000 		call buf_setup
+ 468               	.L51:
+ 469               	.LM66:
+ 470 0240 8C85      		ldd r24,Y+12
+ 471 0242 9D85      		ldd r25,Y+13
+ 472 0244 892B      		or r24,r25
+ 473 0246 C1F4      		brne .L53
+ 474               	.LM67:
+ 475 0248 8BE1      		ldi r24,lo8(283)
+ 476 024a 91E0      		ldi r25,hi8(283)
+ 477 024c 9B83      		std Y+3,r25
+ 478 024e 8A83      		std Y+2,r24
+ 479               	.L56:
+ 480 0250 CE01      		movw r24,r28
+ 481 0252 0E94 0000 		call psock_newdata
+ 482 0256 8823      		tst r24
+ 483 0258 09F4      		brne .+2
+ 484 025a 77C0      		rjmp .L73
+ 485               	.LM68:
+ 486 025c 82E0      		ldi r24,lo8(2)
+ 487 025e 8C8B      		std Y+20,r24
+ 488               	.LM69:
+ 489 0260 8091 0000 		lds r24,uip_appdata
+ 490 0264 9091 0000 		lds r25,(uip_appdata)+1
+ 491 0268 9F83      		std Y+7,r25
+ 492 026a 8E83      		std Y+6,r24
+ 493               	.LM70:
+ 494 026c 8091 0000 		lds r24,uip_len
+ 495 0270 9091 0000 		lds r25,(uip_len)+1
+ 496 0274 9D87      		std Y+13,r25
+ 497 0276 8C87      		std Y+12,r24
+ 498               	.L53:
+ 499               	.LBB5:
+ 500               	.LM71:
+ 501 0278 BE01      		movw r22,r28
+ 502 027a 625F      		subi r22,lo8(-(14))
+ 503 027c 7F4F      		sbci r23,hi8(-(14))
+ 504 027e 86E0      		ldi r24,lo8(6)
+ 505 0280 E82E      		mov r14,r24
+ 506 0282 F12C      		mov r15,__zero_reg__
+ 507 0284 EC0E      		add r14,r28
+ 508 0286 FD1E      		adc r15,r29
+ 509 0288 8E01      		movw r16,r28
+ 510 028a 045F      		subi r16,lo8(-(12))
+ 511 028c 1F4F      		sbci r17,hi8(-(12))
+ 512               	.LBB6:
+ 513               	.LM72:
+ 514 028e FB01      		movw r30,r22
+ 515 0290 8281      		ldd r24,Z+2
+ 516 0292 9381      		ldd r25,Z+3
+ 517 0294 892B      		or r24,r25
+ 518 0296 69F1      		breq .L59
+ 519 0298 8C85      		ldd r24,Y+12
+ 520 029a 9D85      		ldd r25,Y+13
+ 521 029c 892B      		or r24,r25
+ 522 029e 49F1      		breq .L59
+ 523               	.L62:
+ 524               	.LM73:
+ 525 02a0 FB01      		movw r30,r22
+ 526 02a2 A081      		ld r26,Z
+ 527 02a4 B181      		ldd r27,Z+1
+ 528 02a6 F701      		movw r30,r14
+ 529 02a8 8081      		ld r24,Z
+ 530 02aa 9181      		ldd r25,Z+1
+ 531 02ac FC01      		movw r30,r24
+ 532 02ae 2081      		ld r18,Z
+ 533 02b0 2C93      		st X,r18
+ 534               	.LM74:
+ 535 02b2 D701      		movw r26,r14
+ 536 02b4 8D91      		ld r24,X+
+ 537 02b6 9C91      		ld r25,X
+ 538 02b8 1197      		sbiw r26,1
+ 539 02ba 0196      		adiw r24,1
+ 540 02bc 8D93      		st X+,r24
+ 541 02be 9C93      		st X,r25
+ 542               	.LM75:
+ 543 02c0 FB01      		movw r30,r22
+ 544 02c2 8081      		ld r24,Z
+ 545 02c4 9181      		ldd r25,Z+1
+ 546 02c6 0196      		adiw r24,1
+ 547 02c8 9183      		std Z+1,r25
+ 548 02ca 8083      		st Z,r24
+ 549               	.LM76:
+ 550 02cc D801      		movw r26,r16
+ 551 02ce 4D91      		ld r20,X+
+ 552 02d0 5C91      		ld r21,X
+ 553 02d2 1197      		sbiw r26,1
+ 554 02d4 4150      		subi r20,lo8(-(-1))
+ 555 02d6 5040      		sbci r21,hi8(-(-1))
+ 556 02d8 4D93      		st X+,r20
+ 557 02da 5C93      		st X,r21
+ 558               	.LM77:
+ 559 02dc 8281      		ldd r24,Z+2
+ 560 02de 9381      		ldd r25,Z+3
+ 561 02e0 0197      		sbiw r24,1
+ 562 02e2 9383      		std Z+3,r25
+ 563 02e4 8283      		std Z+2,r24
+ 564               	.LM78:
+ 565 02e6 2D15      		cp r18,r13
+ 566 02e8 51F0      		breq .L74
+ 567               	.LM79:
+ 568 02ea 892B      		or r24,r25
+ 569 02ec 11F0      		breq .L59
+ 570 02ee 452B      		or r20,r21
+ 571 02f0 B9F6      		brne .L62
+ 572               	.L59:
+ 573               	.LM80:
+ 574 02f2 F801      		movw r30,r16
+ 575 02f4 8081      		ld r24,Z
+ 576 02f6 9181      		ldd r25,Z+1
+ 577 02f8 0097      		sbiw r24,0
+ 578 02fa 39F4      		brne .L67
+ 579               	.LM81:
+ 580 02fc 1BC0      		rjmp .L61
+ 581               	.L74:
+ 582               	.LM82:
+ 583 02fe 82E0      		ldi r24,lo8(2)
+ 584 0300 90E0      		ldi r25,hi8(2)
+ 585 0302 18C0      		rjmp .L61
+ 586               	.L75:
+ 587               	.LM83:
+ 588 0304 83E0      		ldi r24,lo8(3)
+ 589 0306 90E0      		ldi r25,hi8(3)
+ 590 0308 15C0      		rjmp .L61
+ 591               	.L67:
+ 592               	.LM84:
+ 593 030a D701      		movw r26,r14
+ 594 030c ED91      		ld r30,X+
+ 595 030e FC91      		ld r31,X
+ 596 0310 8191      		ld r24,Z+
+ 597               	.LM85:
+ 598 0312 D801      		movw r26,r16
+ 599 0314 2D91      		ld r18,X+
+ 600 0316 3C91      		ld r19,X
+ 601 0318 1197      		sbiw r26,1
+ 602 031a 2150      		subi r18,lo8(-(-1))
+ 603 031c 3040      		sbci r19,hi8(-(-1))
+ 604 031e 2D93      		st X+,r18
+ 605 0320 3C93      		st X,r19
+ 606               	.LM86:
+ 607 0322 D701      		movw r26,r14
+ 608 0324 ED93      		st X+,r30
+ 609 0326 FC93      		st X,r31
+ 610               	.LM87:
+ 611 0328 8D15      		cp r24,r13
+ 612 032a 61F3      		breq .L75
+ 613               	.LM88:
+ 614 032c 232B      		or r18,r19
+ 615 032e 69F7      		brne .L67
+ 616               	.LM89:
+ 617 0330 81E0      		ldi r24,lo8(1)
+ 618 0332 90E0      		ldi r25,hi8(1)
+ 619               	.L61:
+ 620               	.LBE6:
+ 621               	.LBE5:
+ 622               	.LM90:
+ 623 0334 81FF      		sbrs r24,1
+ 624 0336 84CF      		rjmp .L51
+ 625               	.LM91:
+ 626 0338 CE01      		movw r24,r28
+ 627 033a 0E94 0000 		call psock_datalen
+ 628 033e 0097      		sbiw r24,0
+ 629 0340 39F4      		brne .L49
+ 630               	.LM92:
+ 631 0342 1C8A      		std Y+20,__zero_reg__
+ 632               	.LM93:
+ 633 0344 9B83      		std Y+3,r25
+ 634 0346 8A83      		std Y+2,r24
+ 635 0348 07C0      		rjmp .L48
+ 636               	.L73:
+ 637               	.LM94:
+ 638 034a 80E0      		ldi r24,lo8(0)
+ 639 034c 90E0      		ldi r25,hi8(0)
+ 640 034e 04C0      		rjmp .L48
+ 641               	.L49:
+ 642               	.LM95:
+ 643 0350 1B82      		std Y+3,__zero_reg__
+ 644 0352 1A82      		std Y+2,__zero_reg__
+ 645 0354 82E0      		ldi r24,lo8(2)
+ 646 0356 90E0      		ldi r25,hi8(2)
+ 647               	.L48:
+ 648               	.LBE4:
+ 649               	/* epilogue: frame size=0 */
+ 650 0358 DF91      		pop r29
+ 651 035a CF91      		pop r28
+ 652 035c 1F91      		pop r17
+ 653 035e 0F91      		pop r16
+ 654 0360 FF90      		pop r15
+ 655 0362 EF90      		pop r14
+ 656 0364 DF90      		pop r13
+ 657 0366 0895      		ret
+ 658               	/* epilogue end (size=8) */
+ 659               	/* function psock_readto size 174 (159) */
+ 660               	.LFE12:
+ 662               		.data
+ 663               	.LC0:
+ 664 0000 5761 6974 		.string	"Waited for newdata"
+ 664      6564 2066 
+ 664      6F72 206E 
+ 664      6577 6461 
+ 664      7461 00
+ 665               		.text
+ 666               	.global	psock_readbuf
+ 668               	psock_readbuf:
+ 669               	.LFB13:
+ 670               	.LM96:
+ 671               	/* prologue: frame size=0 */
+ 672 0368 0F93      		push r16
+ 673 036a 1F93      		push r17
+ 674 036c CF93      		push r28
+ 675 036e DF93      		push r29
+ 676               	/* prologue end (size=4) */
+ 677 0370 EC01      		movw r28,r24
+ 678               	.LBB7:
+ 679               	.LM97:
+ 680 0372 8A81      		ldd r24,Y+2
+ 681 0374 9B81      		ldd r25,Y+3
+ 682 0376 0097      		sbiw r24,0
+ 683 0378 21F0      		breq .L78
+ 684               	.LM98:
+ 685 037a 8653      		subi r24,lo8(310)
+ 686 037c 9140      		sbci r25,hi8(310)
+ 687 037e 89F0      		breq .L84
+ 688 0380 95C0      		rjmp .L77
+ 689               	.L78:
+ 690               	.LM99:
+ 691 0382 4A89      		ldd r20,Y+18
+ 692 0384 5B89      		ldd r21,Y+19
+ 693 0386 6885      		ldd r22,Y+8
+ 694 0388 7985      		ldd r23,Y+9
+ 695 038a CE01      		movw r24,r28
+ 696 038c 0E96      		adiw r24,14
+ 697 038e 0E94 0000 		call buf_setup
+ 698               	.L79:
+ 699               	.LM100:
+ 700 0392 8C85      		ldd r24,Y+12
+ 701 0394 9D85      		ldd r25,Y+13
+ 702 0396 892B      		or r24,r25
+ 703 0398 E1F4      		brne .L81
+ 704               	.LM101:
+ 705 039a 86E3      		ldi r24,lo8(310)
+ 706 039c 91E0      		ldi r25,hi8(310)
+ 707 039e 9B83      		std Y+3,r25
+ 708 03a0 8A83      		std Y+2,r24
+ 709               	.L84:
+ 710 03a2 CE01      		movw r24,r28
+ 711 03a4 0E94 0000 		call psock_newdata
+ 712 03a8 8823      		tst r24
+ 713 03aa 09F4      		brne .+2
+ 714 03ac 7CC0      		rjmp .L93
+ 715               	.LM102:
+ 716 03ae 80E0      		ldi r24,lo8(.LC0)
+ 717 03b0 90E0      		ldi r25,hi8(.LC0)
+ 718 03b2 0E94 0000 		call puts
+ 719               	.LM103:
+ 720 03b6 82E0      		ldi r24,lo8(2)
+ 721 03b8 8C8B      		std Y+20,r24
+ 722               	.LM104:
+ 723 03ba 8091 0000 		lds r24,uip_appdata
+ 724 03be 9091 0000 		lds r25,(uip_appdata)+1
+ 725 03c2 9F83      		std Y+7,r25
+ 726 03c4 8E83      		std Y+6,r24
+ 727               	.LM105:
+ 728 03c6 8091 0000 		lds r24,uip_len
+ 729 03ca 9091 0000 		lds r25,(uip_len)+1
+ 730 03ce 9D87      		std Y+13,r25
+ 731 03d0 8C87      		std Y+12,r24
+ 732               	.L81:
+ 733               	.LBB8:
+ 734               	.LM106:
+ 735 03d2 8E01      		movw r16,r28
+ 736 03d4 025F      		subi r16,lo8(-(14))
+ 737 03d6 1F4F      		sbci r17,hi8(-(14))
+ 738               	.LBB9:
+ 739               	.LM107:
+ 740 03d8 2C85      		ldd r18,Y+12
+ 741 03da 3D85      		ldd r19,Y+13
+ 742 03dc F801      		movw r30,r16
+ 743 03de 4281      		ldd r20,Z+2
+ 744 03e0 5381      		ldd r21,Z+3
+ 745 03e2 2417      		cp r18,r20
+ 746 03e4 3507      		cpc r19,r21
+ 747 03e6 00F5      		brsh .L86
+ 748               	.LM108:
+ 749 03e8 8E81      		ldd r24,Y+6
+ 750 03ea 9F81      		ldd r25,Y+7
+ 751 03ec A901      		movw r20,r18
+ 752 03ee BC01      		movw r22,r24
+ 753 03f0 8E85      		ldd r24,Y+14
+ 754 03f2 9F85      		ldd r25,Y+15
+ 755 03f4 0E94 0000 		call memcpy
+ 756               	.LM109:
+ 757 03f8 8E85      		ldd r24,Y+14
+ 758 03fa 9F85      		ldd r25,Y+15
+ 759 03fc 2C85      		ldd r18,Y+12
+ 760 03fe 3D85      		ldd r19,Y+13
+ 761 0400 820F      		add r24,r18
+ 762 0402 931F      		adc r25,r19
+ 763 0404 9F87      		std Y+15,r25
+ 764 0406 8E87      		std Y+14,r24
+ 765               	.LM110:
+ 766 0408 F801      		movw r30,r16
+ 767 040a 8281      		ldd r24,Z+2
+ 768 040c 9381      		ldd r25,Z+3
+ 769 040e 821B      		sub r24,r18
+ 770 0410 930B      		sbc r25,r19
+ 771 0412 9383      		std Z+3,r25
+ 772 0414 8283      		std Z+2,r24
+ 773               	.LM111:
+ 774 0416 8E81      		ldd r24,Y+6
+ 775 0418 9F81      		ldd r25,Y+7
+ 776 041a 820F      		add r24,r18
+ 777 041c 931F      		adc r25,r19
+ 778 041e 9F83      		std Y+7,r25
+ 779 0420 8E83      		std Y+6,r24
+ 780               	.LM112:
+ 781 0422 1D86      		std Y+13,__zero_reg__
+ 782 0424 1C86      		std Y+12,__zero_reg__
+ 783 0426 B5CF      		rjmp .L79
+ 784               	.L86:
+ 785 0428 6E81      		ldd r22,Y+6
+ 786 042a 7F81      		ldd r23,Y+7
+ 787 042c 8E85      		ldd r24,Y+14
+ 788 042e 9F85      		ldd r25,Y+15
+ 789               	.LM113:
+ 790 0430 2417      		cp r18,r20
+ 791 0432 3507      		cpc r19,r21
+ 792 0434 B1F4      		brne .L89
+ 793               	.LM114:
+ 794 0436 0E94 0000 		call memcpy
+ 795               	.LM115:
+ 796 043a 8E85      		ldd r24,Y+14
+ 797 043c 9F85      		ldd r25,Y+15
+ 798 043e 2C85      		ldd r18,Y+12
+ 799 0440 3D85      		ldd r19,Y+13
+ 800 0442 820F      		add r24,r18
+ 801 0444 931F      		adc r25,r19
+ 802 0446 9F87      		std Y+15,r25
+ 803 0448 8E87      		std Y+14,r24
+ 804               	.LM116:
+ 805 044a F801      		movw r30,r16
+ 806 044c 1382      		std Z+3,__zero_reg__
+ 807 044e 1282      		std Z+2,__zero_reg__
+ 808               	.LM117:
+ 809 0450 8E81      		ldd r24,Y+6
+ 810 0452 9F81      		ldd r25,Y+7
+ 811 0454 820F      		add r24,r18
+ 812 0456 931F      		adc r25,r19
+ 813 0458 9F83      		std Y+7,r25
+ 814 045a 8E83      		std Y+6,r24
+ 815               	.LM118:
+ 816 045c 1D86      		std Y+13,__zero_reg__
+ 817 045e 1C86      		std Y+12,__zero_reg__
+ 818 0460 19C0      		rjmp .L94
+ 819               	.L89:
+ 820               	.LM119:
+ 821 0462 0E94 0000 		call memcpy
+ 822               	.LM120:
+ 823 0466 8E85      		ldd r24,Y+14
+ 824 0468 9F85      		ldd r25,Y+15
+ 825 046a F801      		movw r30,r16
+ 826 046c 2281      		ldd r18,Z+2
+ 827 046e 3381      		ldd r19,Z+3
+ 828 0470 820F      		add r24,r18
+ 829 0472 931F      		adc r25,r19
+ 830 0474 9F87      		std Y+15,r25
+ 831 0476 8E87      		std Y+14,r24
+ 832               	.LM121:
+ 833 0478 8C85      		ldd r24,Y+12
+ 834 047a 9D85      		ldd r25,Y+13
+ 835 047c 821B      		sub r24,r18
+ 836 047e 930B      		sbc r25,r19
+ 837 0480 9D87      		std Y+13,r25
+ 838 0482 8C87      		std Y+12,r24
+ 839               	.LM122:
+ 840 0484 8E81      		ldd r24,Y+6
+ 841 0486 9F81      		ldd r25,Y+7
+ 842 0488 820F      		add r24,r18
+ 843 048a 931F      		adc r25,r19
+ 844 048c 9F83      		std Y+7,r25
+ 845 048e 8E83      		std Y+6,r24
+ 846               	.LM123:
+ 847 0490 1382      		std Z+3,__zero_reg__
+ 848 0492 1282      		std Z+2,__zero_reg__
+ 849               	.L94:
+ 850               	.LBE9:
+ 851               	.LBE8:
+ 852               	.LM124:
+ 853 0494 CE01      		movw r24,r28
+ 854 0496 0E94 0000 		call psock_datalen
+ 855 049a 0097      		sbiw r24,0
+ 856 049c 39F4      		brne .L77
+ 857               	.LM125:
+ 858 049e 1C8A      		std Y+20,__zero_reg__
+ 859               	.LM126:
+ 860 04a0 9B83      		std Y+3,r25
+ 861 04a2 8A83      		std Y+2,r24
+ 862 04a4 07C0      		rjmp .L76
+ 863               	.L93:
+ 864               	.LM127:
+ 865 04a6 80E0      		ldi r24,lo8(0)
+ 866 04a8 90E0      		ldi r25,hi8(0)
+ 867 04aa 04C0      		rjmp .L76
+ 868               	.L77:
+ 869               	.LM128:
+ 870 04ac 1B82      		std Y+3,__zero_reg__
+ 871 04ae 1A82      		std Y+2,__zero_reg__
+ 872 04b0 82E0      		ldi r24,lo8(2)
+ 873 04b2 90E0      		ldi r25,hi8(2)
+ 874               	.L76:
+ 875               	.LBE7:
+ 876               	/* epilogue: frame size=0 */
+ 877 04b4 DF91      		pop r29
+ 878 04b6 CF91      		pop r28
+ 879 04b8 1F91      		pop r17
+ 880 04ba 0F91      		pop r16
+ 881 04bc 0895      		ret
+ 882               	/* epilogue end (size=5) */
+ 883               	/* function psock_readbuf size 172 (163) */
+ 884               	.LFE13:
+ 886               	.global	psock_init
+ 888               	psock_init:
+ 889               	.LFB14:
+ 890               	.LM129:
+ 891               	/* prologue: frame size=0 */
+ 892 04be 0F93      		push r16
+ 893 04c0 1F93      		push r17
+ 894               	/* prologue end (size=2) */
+ 895 04c2 8C01      		movw r16,r24
+ 896               	.LM130:
+ 897 04c4 F801      		movw r30,r16
+ 898 04c6 148A      		std Z+20,__zero_reg__
+ 899               	.LM131:
+ 900 04c8 1586      		std Z+13,__zero_reg__
+ 901 04ca 1486      		std Z+12,__zero_reg__
+ 902               	.LM132:
+ 903 04cc 7187      		std Z+9,r23
+ 904 04ce 6087      		std Z+8,r22
+ 905               	.LM133:
+ 906 04d0 538B      		std Z+19,r21
+ 907 04d2 428B      		std Z+18,r20
+ 908               	.LM134:
+ 909 04d4 C801      		movw r24,r16
+ 910 04d6 0E96      		adiw r24,14
+ 911 04d8 0E94 0000 		call buf_setup
+ 912               	.LM135:
+ 913 04dc F801      		movw r30,r16
+ 914 04de 1182      		std Z+1,__zero_reg__
+ 915 04e0 1082      		st Z,__zero_reg__
+ 916               	.LM136:
+ 917 04e2 1382      		std Z+3,__zero_reg__
+ 918 04e4 1282      		std Z+2,__zero_reg__
+ 919               	/* epilogue: frame size=0 */
+ 920 04e6 1F91      		pop r17
+ 921 04e8 0F91      		pop r16
+ 922 04ea 0895      		ret
+ 923               	/* epilogue end (size=3) */
+ 924               	/* function psock_init size 23 (18) */
+ 925               	.LFE14:
+ 927               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 psock.c
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:19     .text:00000000 buf_setup
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:38     .text:0000000c send_data
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:95     .text:0000005a data_acked
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:169    .text:000000c0 psock_send
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:253    .text:0000012c psock_generator_send
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:362    .text:000001c8 psock_datalen
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:385    .text:000001da psock_newdata
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:434    .text:0000020e psock_readto
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:668    .text:00000368 psock_readbuf
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccCibaaa.s:888    .text:000004be psock_init
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+uip_flags
+uip_conn
+uip_send
+uip_appdata
+uip_len
+puts
+memcpy

@@ -1,0 +1,101 @@
+   1               		.file	"clock-arch.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	clock_time
+  20               	clock_time:
+  21               	.LFB4:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24               	/* prologue end (size=0) */
+  25               	.LM2:
+  26 0000 8091 0000 		lds r24,UIP_Ticks
+  27 0004 9091 0000 		lds r25,(UIP_Ticks)+1
+  28               	/* epilogue: frame size=0 */
+  29 0008 0895      		ret
+  30               	/* epilogue end (size=1) */
+  31               	/* function clock_time size 5 (4) */
+  32               	.LFE4:
+  34               	.global	__vector_11
+  36               	__vector_11:
+  37               	.LFB5:
+  38               	.LM3:
+  39               	/* prologue: frame size=0 */
+  40 000a 1F92      		push __zero_reg__
+  41 000c 0F92      		push __tmp_reg__
+  42 000e 0FB6      		in __tmp_reg__,__SREG__
+  43 0010 0F92      		push __tmp_reg__
+  44 0012 1124      		clr __zero_reg__
+  45 0014 8F93      		push r24
+  46 0016 9F93      		push r25
+  47               	/* prologue end (size=7) */
+  48               	.LM4:
+  49 0018 80E8      		ldi r24,lo8(-128)
+  50 001a 82BF      		out 82-0x20,r24
+  51               	.LM5:
+  52 001c 8091 0000 		lds r24,UIP_Ticks
+  53 0020 9091 0000 		lds r25,(UIP_Ticks)+1
+  54 0024 0196      		adiw r24,1
+  55 0026 9093 0000 		sts (UIP_Ticks)+1,r25
+  56 002a 8093 0000 		sts UIP_Ticks,r24
+  57               	/* epilogue: frame size=0 */
+  58 002e 9F91      		pop r25
+  59 0030 8F91      		pop r24
+  60 0032 0F90      		pop __tmp_reg__
+  61 0034 0FBE      		out __SREG__,__tmp_reg__
+  62 0036 0F90      		pop __tmp_reg__
+  63 0038 1F90      		pop __zero_reg__
+  64 003a 1895      		reti
+  65               	/* epilogue end (size=7) */
+  66               	/* function __vector_11 size 25 (11) */
+  67               	.LFE5:
+  69               	.global	UIP_Clock_Init
+  71               	UIP_Clock_Init:
+  72               	.LFB6:
+  73               	.LM6:
+  74               	/* prologue: frame size=0 */
+  75               	/* prologue end (size=0) */
+  76               	.LM7:
+  77 003c 13BE      		out 83-0x20,__zero_reg__
+  78               	.LM8:
+  79 003e 83B7      		in r24,83-0x20
+  80 0040 8460      		ori r24,lo8(4)
+  81 0042 83BF      		out 83-0x20,r24
+  82               	.LM9:
+  83 0044 89B7      		in r24,89-0x20
+  84 0046 8160      		ori r24,lo8(1)
+  85 0048 89BF      		out 89-0x20,r24
+  86               	.LM10:
+  87 004a 80E8      		ldi r24,lo8(-128)
+  88 004c 82BF      		out 82-0x20,r24
+  89               	.LM11:
+  90 004e 1092 0000 		sts (UIP_Ticks)+1,__zero_reg__
+  91 0052 1092 0000 		sts UIP_Ticks,__zero_reg__
+  92               	/* epilogue: frame size=0 */
+  93 0056 0895      		ret
+  94               	/* epilogue end (size=1) */
+  95               	/* function UIP_Clock_Init size 14 (13) */
+  96               	.LFE6:
+  98               		.comm UIP_Ticks,2,1
+  99               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 clock-arch.c
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccobbaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccobbaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccobbaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccobbaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccobbaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccobbaaa.s:20     .text:00000000 clock_time
+                            *COM*:00000002 UIP_Ticks
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccobbaaa.s:36     .text:0000000a __vector_11
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccobbaaa.s:71     .text:0000003c UIP_Clock_Init
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss

@@ -1,0 +1,203 @@
+   1               		.file	"memb.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	memb_init
+  20               	memb_init:
+  21               	.LFB2:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24 0000 0F93      		push r16
+  25 0002 1F93      		push r17
+  26               	/* prologue end (size=2) */
+  27 0004 8C01      		movw r16,r24
+  28               	.LM2:
+  29 0006 FC01      		movw r30,r24
+  30 0008 8281      		ldd r24,Z+2
+  31 000a 9381      		ldd r25,Z+3
+  32 000c AC01      		movw r20,r24
+  33 000e 60E0      		ldi r22,lo8(0)
+  34 0010 70E0      		ldi r23,hi8(0)
+  35 0012 8481      		ldd r24,Z+4
+  36 0014 9581      		ldd r25,Z+5
+  37 0016 0E94 0000 		call memset
+  38               	.LM3:
+  39 001a F801      		movw r30,r16
+  40 001c 2081      		ld r18,Z
+  41 001e 3181      		ldd r19,Z+1
+  42 0020 8281      		ldd r24,Z+2
+  43 0022 9381      		ldd r25,Z+3
+  44 0024 289F      		mul r18,r24
+  45 0026 A001      		movw r20,r0
+  46 0028 299F      		mul r18,r25
+  47 002a 500D      		add r21,r0
+  48 002c 389F      		mul r19,r24
+  49 002e 500D      		add r21,r0
+  50 0030 1124      		clr r1
+  51 0032 60E0      		ldi r22,lo8(0)
+  52 0034 70E0      		ldi r23,hi8(0)
+  53 0036 8681      		ldd r24,Z+6
+  54 0038 9781      		ldd r25,Z+7
+  55 003a 0E94 0000 		call memset
+  56               	/* epilogue: frame size=0 */
+  57 003e 1F91      		pop r17
+  58 0040 0F91      		pop r16
+  59 0042 0895      		ret
+  60               	/* epilogue end (size=3) */
+  61               	/* function memb_init size 34 (29) */
+  62               	.LFE2:
+  64               	.global	memb_alloc
+  66               	memb_alloc:
+  67               	.LFB3:
+  68               	.LM4:
+  69               	/* prologue: frame size=0 */
+  70 0044 CF93      		push r28
+  71 0046 DF93      		push r29
+  72               	/* prologue end (size=2) */
+  73 0048 DC01      		movw r26,r24
+  74               	.LM5:
+  75 004a 20E0      		ldi r18,lo8(0)
+  76 004c 30E0      		ldi r19,hi8(0)
+  77 004e EC01      		movw r28,r24
+  78 0050 4A81      		ldd r20,Y+2
+  79 0052 5B81      		ldd r21,Y+3
+  80               	.L10:
+  81               	.LM6:
+  82 0054 2417      		cp r18,r20
+  83 0056 3507      		cpc r19,r21
+  84 0058 D8F4      		brsh .L9
+  85               	.LM7:
+  86 005a ED01      		movw r28,r26
+  87 005c EC81      		ldd r30,Y+4
+  88 005e FD81      		ldd r31,Y+5
+  89 0060 E20F      		add r30,r18
+  90 0062 F31F      		adc r31,r19
+  91 0064 8081      		ld r24,Z
+  92 0066 8823      		tst r24
+  93 0068 81F4      		brne .L5
+  94               	.LM8:
+  95 006a 81E0      		ldi r24,lo8(1)
+  96 006c 8083      		st Z,r24
+  97               	.LM9:
+  98 006e 8D91      		ld r24,X+
+  99 0070 9C91      		ld r25,X
+ 100 0072 289F      		mul r18,r24
+ 101 0074 F001      		movw r30,r0
+ 102 0076 299F      		mul r18,r25
+ 103 0078 F00D      		add r31,r0
+ 104 007a 389F      		mul r19,r24
+ 105 007c F00D      		add r31,r0
+ 106 007e 1124      		clr r1
+ 107 0080 2E81      		ldd r18,Y+6
+ 108 0082 3F81      		ldd r19,Y+7
+ 109 0084 2E0F      		add r18,r30
+ 110 0086 3F1F      		adc r19,r31
+ 111 0088 05C0      		rjmp .L2
+ 112               	.L5:
+ 113               	.LM10:
+ 114 008a 2F5F      		subi r18,lo8(-(1))
+ 115 008c 3F4F      		sbci r19,hi8(-(1))
+ 116 008e E2CF      		rjmp .L10
+ 117               	.L9:
+ 118               	.LM11:
+ 119 0090 20E0      		ldi r18,lo8(0)
+ 120 0092 30E0      		ldi r19,hi8(0)
+ 121               	.L2:
+ 122               	.LM12:
+ 123 0094 C901      		movw r24,r18
+ 124               	/* epilogue: frame size=0 */
+ 125 0096 DF91      		pop r29
+ 126 0098 CF91      		pop r28
+ 127 009a 0895      		ret
+ 128               	/* epilogue end (size=3) */
+ 129               	/* function memb_alloc size 44 (39) */
+ 130               	.LFE3:
+ 132               	.global	memb_free
+ 134               	memb_free:
+ 135               	.LFB4:
+ 136               	.LM13:
+ 137               	/* prologue: frame size=0 */
+ 138 009c CF93      		push r28
+ 139 009e DF93      		push r29
+ 140               	/* prologue end (size=2) */
+ 141 00a0 EC01      		movw r28,r24
+ 142               	.LM14:
+ 143 00a2 2E81      		ldd r18,Y+6
+ 144 00a4 3F81      		ldd r19,Y+7
+ 145               	.LM15:
+ 146 00a6 A0E0      		ldi r26,lo8(0)
+ 147 00a8 B0E0      		ldi r27,hi8(0)
+ 148 00aa 4A81      		ldd r20,Y+2
+ 149 00ac 5B81      		ldd r21,Y+3
+ 150               	.L20:
+ 151               	.LM16:
+ 152 00ae A417      		cp r26,r20
+ 153 00b0 B507      		cpc r27,r21
+ 154 00b2 C8F4      		brsh .L19
+ 155               	.LM17:
+ 156 00b4 2617      		cp r18,r22
+ 157 00b6 3707      		cpc r19,r23
+ 158 00b8 81F4      		brne .L15
+ 159               	.LM18:
+ 160 00ba EC81      		ldd r30,Y+4
+ 161 00bc FD81      		ldd r31,Y+5
+ 162 00be EA0F      		add r30,r26
+ 163 00c0 FB1F      		adc r31,r27
+ 164 00c2 8081      		ld r24,Z
+ 165 00c4 8823      		tst r24
+ 166 00c6 11F0      		breq .L16
+ 167               	.LM19:
+ 168 00c8 8150      		subi r24,lo8(-(-1))
+ 169 00ca 8083      		st Z,r24
+ 170               	.L16:
+ 171               	.LM20:
+ 172 00cc 8C81      		ldd r24,Y+4
+ 173 00ce 9D81      		ldd r25,Y+5
+ 174 00d0 A80F      		add r26,r24
+ 175 00d2 B91F      		adc r27,r25
+ 176 00d4 8C91      		ld r24,X
+ 177 00d6 9927      		clr r25
+ 178 00d8 08C0      		rjmp .L11
+ 179               	.L15:
+ 180               	.LM21:
+ 181 00da 8881      		ld r24,Y
+ 182 00dc 9981      		ldd r25,Y+1
+ 183 00de 280F      		add r18,r24
+ 184 00e0 391F      		adc r19,r25
+ 185               	.LM22:
+ 186 00e2 1196      		adiw r26,1
+ 187 00e4 E4CF      		rjmp .L20
+ 188               	.L19:
+ 189               	.LM23:
+ 190 00e6 8FEF      		ldi r24,lo8(255)
+ 191 00e8 90E0      		ldi r25,hi8(255)
+ 192               	.L11:
+ 193               	/* epilogue: frame size=0 */
+ 194 00ea DF91      		pop r29
+ 195 00ec CF91      		pop r28
+ 196 00ee 0895      		ret
+ 197               	/* epilogue end (size=3) */
+ 198               	/* function memb_free size 42 (37) */
+ 199               	.LFE4:
+ 201               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 memb.c
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuacaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuacaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuacaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuacaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuacaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuacaaa.s:20     .text:00000000 memb_init
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuacaaa.s:66     .text:00000044 memb_alloc
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuacaaa.s:134    .text:0000009c memb_free
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+memset

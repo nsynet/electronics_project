@@ -1,0 +1,205 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+   >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        >
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_title"
+        android:textSize="33sp"
+        android:id="@+id/setting_title"
+        android:layout_gravity="center_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        >
+
+
+    </RelativeLayout>
+
+
+
+    <Switch
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/temp_switch"
+        android:text="@string/setting_temp"
+        android:textSize="31sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:checked="true"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="       默认36.6~37.5℃属于正常范围"
+        android:visibility="gone"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        >
+    </RelativeLayout>
+    <Switch
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_drug"
+        android:textSize="31sp"
+        android:id="@+id/drug_switch"
+        android:checked="true"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="       默认每天九点（点击进行设置）"
+        android:visibility="gone"
+        android:id="@+id/drug_text"
+        android:layout_gravity="center_horizontal" />
+    <Switch
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="时间一"
+        android:textSize="21sp"
+        android:id="@+id/time1"
+        android:layout_gravity="center_horizontal"
+        android:checked="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+
+        />
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="未设置时间"
+        android:layout_below="@+id/time1"
+        android:layout_alignStart="@+id/textView2"
+        android:id="@+id/textView1"
+        android:layout_gravity="center_horizontal" />
+
+    <Switch
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="时间二"
+        android:textSize="21sp"
+        android:id="@+id/time2"
+        android:checked="false"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="未设置时间"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/time2"
+        android:layout_gravity="center_horizontal" />
+
+    <Switch
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="时间三"
+        android:textSize="21sp"
+        android:id="@+id/time3"
+        android:checked="false"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/time2" />
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:text="未设置时间"
+        android:layout_below="@+id/time3"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_gravity="center_horizontal" />
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        >
+    </RelativeLayout>
+
+    <Switch
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_heart"
+        android:textSize="31sp"
+        android:id="@+id/heart_switch"
+        android:checked="true"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="       默认健康心率次数为60~100次/分"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        >
+    </RelativeLayout>
+
+    <Switch
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_fall"
+        android:textSize="31sp"
+        android:id="@+id/fall_switch"
+        android:checked="true"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="       特色功能"
+        android:visibility="gone"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/setting_save"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAVE"
+            android:textSize="24sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+
+</LinearLayout>

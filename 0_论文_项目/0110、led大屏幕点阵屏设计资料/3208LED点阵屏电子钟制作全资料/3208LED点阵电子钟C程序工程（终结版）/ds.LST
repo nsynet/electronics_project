@@ -1,0 +1,206 @@
+A51 MACRO ASSEMBLER  DS                                                                   01/09/2006 22:13:54 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.10
+OBJECT MODULE PLACED IN ds.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE ds.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+                      14     
+                      15     DSSP  SEGMENT  CODE    ;³ÌÐò¶Î
+                      16     
+                      17     PUBLIC  DSS                       ;Èë¿ÚµØÖ·£¬Ìø×ªµ½DL±êºÅ´¦Ö´ÐÐ»ã±à³ÌÐò
+                      18     
+----                  19     RSEG  DSSP                        ;³ÌÐò¶Î
+                      20     
+                      21     
+                      22     
+  0096                23     IN EQU P1.6
+  0019                24     FLAG1     EQU   19H   ;DS18B20Æ÷¼þ´æÔÚ±êÖ¾
+  0021                25     TTL       EQU   21H   ;ÎÂ¶È¶Á³öÖµ£¨¸ßÎ»ÔÚTTL-1ÖÐ£¬µÍÎ»ÔÚTTLÖÐ£©
+                      26     ;-------------------------------------------DS18B20¶ÁÊ¾Ý³ÌÐò£¨0~99¶È£©
+                      27     ; ÕâÊÇDS18B20¸´Î»³õÊ¼»¯×Ó³ÌÐò
+0000                  28     INIT_1820:
+0000 D296             29     SETB IN
+0002 00               30     NOP
+0003 C296             31     CLR IN
+                      32     ;Ö÷»ú·¢³öÑÓÊ±537Î¢ÃëµÄ¸´Î»µÍÂö³å
+0005 7903             33     MOV R1,#3
+0007 786B             34     TSR1:MOV R0,#107
+0009 D8FE             35     DJNZ R0,$
+000B D9FA             36     DJNZ R1,TSR1
+000D D296             37     SETB IN;È»ºóÀ­¸ßÊ¾ÝÏß
+000F 00               38     NOP
+0010 00               39     NOP
+0011 00               40     NOP
+0012 7825             41     MOV R0,#25H
+0014                  42     TSR2:
+0014 309605           43     JNB IN,TSR3;µÈ´DS18B20»ØÓ¦
+0017 D8FB             44     DJNZ R0,TSR2
+0019 020000   F       45     LJMP TSR4 ; ÑÓÊ±
+001C                  46     TSR3:
+001C D219             47     SETB FLAG1 ; ÖÃ±êÖ¾Î»,±íÊ¾DS1820´æÔÚ
+001E 020000   F       48     LJMP TSR5
+0021                  49     TSR4:
+0021 C219             50     CLR FLAG1 ; Çå±êÖ¾Î»,±íÊ¾DS1820²»´æÔÚ
+0023 020000   F       51     LJMP TSR7
+0026                  52     TSR5:              
+0026 7875             53     MOV R0,#117
+0028                  54     TSR6:
+0028 D8FE             55     DJNZ R0,TSR6 ; Ê±ÐòÒªÇóÑÓÊ±Ò»¶ÎÊ±¼ä */
+002A                  56     TSR7:
+002A D296             57     SETB IN
+002C 22               58     RET
+A51 MACRO ASSEMBLER  DS                                                                   01/09/2006 22:13:54 PAGE     2
+
+                      59     ;------------------------------------------¶Á³ö×ª»»ºóµÄÎÂ¶ÈÖµ
+002D                  60     DSS:
+002D                  61     DS1820PRO:
+                      62     ;ÕâÀïÍ¨¹µ÷ÓÃÏÔÊ¾×Ó³ÌÐòÊµÏÖÑÓÊ±Ò»¶ÎÊ±¼ä,µÈ´AD×ª»»½áÊø,12Î»µÄ»°750Î¢Ãë
+002D D296             63     SETB IN
+002F 120000   F       64     LCALL INIT_1820;ÏÈ¸´Î»DS18B20
+0032 201902           65     JB FLAG1,TSS2
+0035 8032             66     jmp BCD33 ; ÅÐ¶ÏDS1820ÊÇ·ñ´æÔÚ?ÈôDS18B20²»´æÔÚÔò·µ»Ø
+0037                  67     TSS2:
+0037 74CC             68     MOV A,#0CCH ; Ìø¹ROMÆ¥Åä
+0039 120000   F       69     LCALL WRITE_1820
+003C 7444             70     MOV A,#44H ; ·¢³öÎÂ¶È×ª»»ÃüÁî
+003E 120000   F       71     LCALL WRITE_1820
+0041 120000   F       72     CALL  DL1MS 
+0044 D296             73     SETB IN
+0046 120000   F       74     LCALL INIT_1820;×¼±¸¶ÁÎÂ¶ÈÇ°ÏÈ¸´Î»
+0049 74CC             75     MOV A,#0CCH ; Ìø¹ROMÆ¥Åä
+004B 120000   F       76     LCALL WRITE_1820
+004E 74BE             77     MOV A,#0BEH ; ·¢³ö¶ÁÎÂ¶ÈÃüÁî
+0050 120000   F       78     LCALL WRITE_1820
+0053 120000   F       79     LCALL READ_18200; ½«¶Á³öµÄÎÂ¶ÈÊ¾Ý±£´æµ½35H/36H 
+0056 E521             80     MOV A,TTL
+0058 8520F0           81     MOV B,TTL-1
+005B A2F0             82     MOV C,B.0;½«28HÖÐµÄ×îµÍÎ»ÒÆÈëC
+005D 13               83     RRC A
+005E A2F1             84     MOV C,B.1
+0060 13               85     RRC A
+0061 A2F2             86     MOV C,B.2
+0063 13               87     RRC A
+0064 A2F3             88     MOV C,B.3
+0066 13               89     RRC A
+0067 F521             90     MOV TTL,A 
+0069                  91     BCD33: 
+0069 201904           92     JB FLAG1,BCD44
+006C 7FFF             93     mov R7,#0FFH
+006E 8002             94     JMP TORET
+0070                  95     BCD44:
+0070 AF21             96     MOV R7,TTL
+0072                  97     TORET:
+0072 22               98     RET
+                      99     ;--------------------------------Ð´DS18B20µÄ×Ó³ÌÐò(ÓÐ¾ßÌåµÄÊ±ÐòÒªÇó)
+0073                 100     WRITE_1820:
+0073 7A08            101     MOV R2,#8;Ò»¹²8Î»Ê¾Ý
+0075 C3              102     CLR C
+0076                 103     WR1:
+0076 C296            104     CLR IN
+0078 7B06            105     MOV R3,#6
+007A DBFE            106     DJNZ R3,$
+007C 13              107     RRC A
+007D 9296            108     MOV IN,C
+007F 7B17            109     MOV R3,#23
+0081 DBFE            110     DJNZ R3,$
+0083 D296            111     SETB IN
+0085 00              112     NOP
+0086 DAEE            113     DJNZ R2,WR1
+0088 D296            114     SETB IN
+008A 22              115     RET
+                     116     ;-----------------------------¶ÁDS18B20µÄ³ÌÐò,´ÓDS18B20ÖÐ¶Á³öÁ½¸ö×Ö½ÚµÄÎÂ¶ÈÊ¾Ý 
+008B                 117     READ_18200:
+008B 7C02            118     MOV R4,#2 ; ½«ÎÂ¶È¸ßÎ»ºÍµÍÎ»´ÓDS18B20ÖÐ¶Á³ö
+008D 7921            119     MOV R1,#TTL ; µÍÎ»´æÈë29H(TEMPER_L),¸ßÎ»´æÈë28H(TEMPER_H)
+008F                 120     RE00:
+008F 7A08            121     MOV R2,#8;Ê¾ÝÒ»¹²ÓÐ8Î»
+0091                 122     RE01:
+0091 C3              123     CLR C
+0092 D296            124     SETB IN
+A51 MACRO ASSEMBLER  DS                                                                   01/09/2006 22:13:54 PAGE     3
+
+0094 00              125     NOP
+0095 00              126     NOP
+0096 C296            127     CLR IN
+0098 00              128     NOP
+0099 00              129     NOP
+009A 00              130     NOP
+009B D296            131     SETB IN
+009D 7B09            132     MOV R3,#9
+009F                 133     RE10: 
+009F DBFE            134     DJNZ R3,RE10
+00A1 A296            135     MOV C,IN
+00A3 7B17            136     MOV R3,#23
+00A5                 137     RE20: 
+00A5 DBFE            138     DJNZ R3,RE20
+00A7 13              139     RRC A
+00A8 DAE7            140     DJNZ R2,RE01
+00AA F7              141     MOV @R1,A
+00AB 19              142     DEC R1
+00AC DCE1            143     DJNZ R4,RE00
+00AE 22              144     RET
+                     145     
+00AF                 146     DL1MS:
+00AF 7EFF            147         MOV R6,#255
+00B1 DEFE            148              DJNZ R6,$
+00B3 22              149         RET 
+                     150     
+                     151     END
+A51 MACRO ASSEMBLER  DS                                                                   01/09/2006 22:13:54 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BCD33. . . . . . .  C ADDR   0069H   R   SEG=DSSP
+BCD44. . . . . . .  C ADDR   0070H   R   SEG=DSSP
+DL1MS. . . . . . .  C ADDR   00AFH   R   SEG=DSSP
+DS1820PRO. . . . .  C ADDR   002DH   R   SEG=DSSP
+DSS. . . . . . . .  C ADDR   002DH   R   SEG=DSSP
+DSSP . . . . . . .  C SEG    00B4H       REL=UNIT
+FLAG1. . . . . . .  N NUMB   0019H   A   
+IN . . . . . . . .  B ADDR   0090H.6 A   
+INIT_1820. . . . .  C ADDR   0000H   R   SEG=DSSP
+P1 . . . . . . . .  D ADDR   0090H   A   
+RE00 . . . . . . .  C ADDR   008FH   R   SEG=DSSP
+RE01 . . . . . . .  C ADDR   0091H   R   SEG=DSSP
+RE10 . . . . . . .  C ADDR   009FH   R   SEG=DSSP
+RE20 . . . . . . .  C ADDR   00A5H   R   SEG=DSSP
+READ_18200 . . . .  C ADDR   008BH   R   SEG=DSSP
+TORET. . . . . . .  C ADDR   0072H   R   SEG=DSSP
+TSR1 . . . . . . .  C ADDR   0007H   R   SEG=DSSP
+TSR2 . . . . . . .  C ADDR   0014H   R   SEG=DSSP
+TSR3 . . . . . . .  C ADDR   001CH   R   SEG=DSSP
+TSR4 . . . . . . .  C ADDR   0021H   R   SEG=DSSP
+TSR5 . . . . . . .  C ADDR   0026H   R   SEG=DSSP
+TSR6 . . . . . . .  C ADDR   0028H   R   SEG=DSSP
+TSR7 . . . . . . .  C ADDR   002AH   R   SEG=DSSP
+TSS2 . . . . . . .  C ADDR   0037H   R   SEG=DSSP
+TTL. . . . . . . .  N NUMB   0021H   A   
+WR1. . . . . . . .  C ADDR   0076H   R   SEG=DSSP
+WRITE_1820 . . . .  C ADDR   0073H   R   SEG=DSSP
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

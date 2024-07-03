@@ -1,0 +1,10 @@
+tapdev.o: ..\uip\arm\tapdev.c
+tapdev.o: ..\app\mydef.h
+tapdev.o: C:\Keil\ARM\RV31\INC\stdint.h
+tapdev.o: ..\uip\inc\uip-conf.h
+tapdev.o: ..\uip\inc\../../app/service/telnetd/telnetd.h
+tapdev.o: ..\uip\src\uipopt.h
+tapdev.o: ..\uip\inc\uip-conf.h
+tapdev.o: ..\uip\inc\netdev.h
+tapdev.o: ..\uip\inc\../../drivers/enc28j60/enc28j60.h
+tapdev.o: ..\uip\arm\../src/uip.h

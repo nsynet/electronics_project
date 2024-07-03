@@ -1,0 +1,9 @@
+演示视频观看地址:
+
+1.安富莱STM32-V5开发板 基于uCOS-III STemWin FatFS ARM_DSP_Lib的示波器设计 【超清视频】
+ http://v.youku.com/v_show/id_XODcxMDUxMDAw.html
+
+2. matlab 软件体积太大 (4.7G)，大家自行到百度云下载 
+   matlab 2012a下载----数字信号处理教程是用的这个版本 
+ http://bbs.armfly.com/read.php?tid=6116
+

@@ -1,0 +1,1 @@
+-c --device DARMSTM -D__RTX -g -O0 --apcs=interwork -I "E:\Keil\\ARM\INC\ST\STM32F10x" -o "web.o" --omf_browse "web.crf" --depend "web.d" "WEB.C"

@@ -1,0 +1,212 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 12/14/2005 23:13:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.10
+OBJECT MODULE PLACED IN MAIN.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE MAIN.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     MAINP  SEGMENT  CODE    ;³ÌÐò¶Î
+                       2     
+                       3     PUBLIC  MAIN                      ;Èë¿ÚµØÖ·£¬Ìø×ªµ½DL±êºÅ´¦Ö´ÐÐ»ã±à³ÌÐò
+                       4     
+----                   5     RSEG  MAINP                       ;³ÌÐò¶Î
+                       6     
+                       7     
+                       8                ;ÕâÊÇ¹ØÓÚDS18B20µÄ¶ÁÐ´³ÌÐò,Ê¾Ý½ÅIN,¾§Õñ12MHZ
+                       9     ;ÎÂ¶È´«¸ÐÆ÷18B20»ã±à³ÌÐò,²ÉÓÃÆ÷¼þÄ¬ÈÏµÄ12Î»×ª»¯,×î´ó×ª»¯Ê±¼ä750Î¢Ãë
+                      10     ;¿ÉÒÔ½«¼ì²âµ½µÄÎÂ¶ÈÖ±½ÓÏÔÊ¾µ½AT89C51¿ª·¢ÊµÑé°åµÄÁ½¸öÊÂë¹ÜÉÏ
+                      11     ;ÏÔÊ¾ÎÂ¶È00µ½99¶È,ºÜ×¼È·Å¶~~ÎÞÐèÐ£Õ!
+                      12     
+                      13     ;µ¥Æ¬»úÄÚ´æ·ÖÅäÉêÃ÷!
+  0019                14     TEMPER_L EQU 19H;ÓÃÓÚ±£´æ¶Á³öÎÂ¶ÈµÄµÍ8Î»
+  0018                15     TEMPER_H EQU 18H;ÓÃÓÚ±£´æ¶Á³öÎÂ¶ÈµÄ¸ß8Î»
+  00B3                16     in equ P3.3
+                      17     
+                      18     
+                      19     
+0000                  20     MAIN: 
+0000 120000   F       21     LCALL GET_TEMPER;µ÷ÓÃ¶ÁÎÂ¶È×Ó³ÌÐò
+                      22     
+                      23     ;½øÐÐÎÂ¶ÈÏÔÊ¾,ÕâÀïÎÒÃÇ¿¼ÂÇÓÃÍøÕ¾Ìá¹©µÄÁ½Î»ÊÂë¹ÜÀ´ÏÔÊ¾ÎÂ¶È
+                      24     ;ÏÔÊ¾·¶Î§00µ½99¶È,ÏÔÊ¾¾«¶ÈÎª1¶È
+                      25     ;ÒòÎª12Î»×ª»¯Ê±Ã¿Ò»Î»µÄ¾«¶ÈÎª0.0625¶È,ÎÒÃÇ²»ÒªÇóÏÔÊ¾Ð¡ÊËùÒÔ¿ÉÒÔÅ×Æú29HµÄµÍ4Î»
+                      26     ;½«28HÖÐµÄµÍ4Î»ÒÆÈë29HÖÐµÄ¸ß4Î»,ÕâÑù»ñµÃÒ»¸öÐÂ×Ö½Ú,Õâ¸ö×Ö½Ú¾ÍÊÇÊµ¼Ê²âÁ¿»ñµÃµÄÎÂ¶È
+                      27     ;Õâ¸ö×ª»¯ÎÂ¶ÈµÄ·½·¨¿ÉÊÇÎÒÏë³öÀ´µÄÅ¶~~·Ç³£¼ò½àÎÞÐè³ËÓÚ0.0625ÏµÊ
+                      28     
+0003 E529             29     MOV A,29H
+0005 8528F0           30              MOV B,28H
+0008 A2F0             31     MOV C,B.0;½«28HÖÐµÄ×îµÍÎ»ÒÆÈëC
+000A 13               32     RRC A
+000B A2F1             33     MOV C,B.1
+000D 13               34     RRC A
+000E A2F2             35     MOV C,B.2
+0010 13               36     RRC A
+0011 A2F3             37     MOV C,B.3
+0013 13               38     RRC A
+0014 F529             39     MOV 29H,A 
+                      40     
+0016 22               41     RET
+                      42     
+                      43     
+                      44     ; ÕâÊÇDS18B20¸´Î»³õÊ¼»¯×Ó³ÌÐò
+0017                  45     INIT_1820:
+0017 D2B3             46     SETB IN
+0019 00               47     NOP
+001A C2B3             48     CLR IN
+                      49     ;Ö÷»ú·¢³öÑÓÊ±537Î¢ÃëµÄ¸´Î»µÍÂö³å
+001C 7903             50     MOV R1,#3
+001E 786B             51     TSR1:MOV R0,#107
+0020 D8FE             52     DJNZ R0,$
+0022 D9FA             53     DJNZ R1,TSR1
+0024 D2B3             54     SETB IN;È»ºóÀ­¸ßÊ¾ÝÏß
+0026 00               55     NOP
+0027 00               56     NOP
+0028 00               57     NOP
+0029 7825             58     MOV R0,#25H
+A51 MACRO ASSEMBLER  MAIN                                                                 12/14/2005 23:13:49 PAGE     2
+
+002B                  59     TSR2:
+002B 30B305           60     JNB IN,TSR3;µÈ´DS18B20»ØÓ¦
+002E D8FB             61     DJNZ R0,TSR2
+0030 020000   F       62     LJMP TSR4 ; ÑÓÊ±
+0033                  63     TSR3:
+                      64     ;SETB FLAG1 ; ÖÃ±êÖ¾Î»,±íÊ¾DS1820´æÔÚ
+0033 020000   F       65     LJMP TSR5
+0036                  66     TSR4:
+                      67     ;CLR FLAG1 ; Çå±êÖ¾Î»,±íÊ¾DS1820²»´æÔÚ
+0036 020000   F       68     LJMP TSR7
+                      69     
+0039                  70     TSR5:
+0039 7875             71     MOV R0,#117
+003B                  72     TSR6:
+003B D8FE             73     DJNZ R0,TSR6 ; Ê±ÐòÒªÇóÑÓÊ±Ò»¶ÎÊ±¼ä
+003D                  74     TSR7:
+003D D2B3             75     SETB IN
+003F 22               76     RET
+                      77     
+                      78     
+                      79     ; ¶Á³ö×ª»»ºóµÄÎÂ¶ÈÖµ
+0040                  80     GET_TEMPER:
+0040 D2B3             81     SETB IN
+0042 120000   F       82     LCALL INIT_1820;ÏÈ¸´Î»DS18B20
+                      83     ;JB FLAG1,TSS2
+                      84     ;CLR P1.2
+                      85     ;RET ; ÅÐ¶ÏDS1820ÊÇ·ñ´æÔÚ?ÈôDS18B20²»´æÔÚÔò·µ»Ø
+0045                  86     TSS2:
+                      87     ;CLR P1.3;DS18B20ÒÑ¾­±»¼ì²âµ½!!!!!!!!!!!!!!!!!!
+0045 74CC             88     MOV A,#0CCH ; Ìø¹ROMÆ¥Åä
+0047 120000   F       89     LCALL WRITE_1820
+004A 7444             90     MOV A,#44H ; ·¢³öÎÂ¶È×ª»»ÃüÁî
+004C 120000   F       91     LCALL WRITE_1820
+                      92     
+                      93     ;ÕâÀïÍ¨¹µ÷ÓÃÏÔÊ¾×Ó³ÌÐòÊµÏÖÑÓÊ±Ò»¶ÎÊ±¼ä,µÈ´AD×ª»»½áÊø,12Î»µÄ»°750Î¢Ãë
+                      94     ;LCALL D1MS;DISPLAY
+                      95     
+004F 120000   F       96     LCALL INIT_1820;×¼±¸¶ÁÎÂ¶ÈÇ°ÏÈ¸´Î»
+                      97     
+0052 74CC             98     MOV A,#0CCH ; Ìø¹ROMÆ¥Åä
+0054 120000   F       99     LCALL WRITE_1820
+                     100     
+0057 74BE            101     MOV A,#0BEH ; ·¢³ö¶ÁÎÂ¶ÈÃüÁî
+0059 120000   F      102     LCALL WRITE_1820
+                     103     
+005C 120000   F      104     LCALL READ_18200; ½«¶Á³öµÄÎÂ¶ÈÊ¾Ý±£´æµ½35H/36H 
+                     105     
+005F 22              106     RET
+                     107     
+                     108     ;Ð´DS18B20µÄ×Ó³ÌÐò(ÓÐ¾ßÌåµÄÊ±ÐòÒªÇó)
+0060                 109     WRITE_1820:
+0060 7A08            110     MOV R2,#8;Ò»¹²8Î»Ê¾Ý
+0062 C3              111     CLR C
+0063                 112     WR1:
+0063 C2B3            113     CLR IN
+0065 7B06            114     MOV R3,#6
+0067 DBFE            115     DJNZ R3,$
+0069 13              116     RRC A
+006A 92B3            117     MOV IN,C
+006C 7B17            118     MOV R3,#23
+006E DBFE            119     DJNZ R3,$
+0070 D2B3            120     SETB IN
+0072 00              121     NOP
+0073 DAEE            122     DJNZ R2,WR1
+0075 D2B3            123     SETB IN
+0077 22              124     RET
+A51 MACRO ASSEMBLER  MAIN                                                                 12/14/2005 23:13:49 PAGE     3
+
+                     125     
+                     126     ; ¶ÁDS18B20µÄ³ÌÐò,´ÓDS18B20ÖÐ¶Á³öÁ½¸ö×Ö½ÚµÄÎÂ¶ÈÊ¾Ý 
+0078                 127     READ_18200:
+0078 7C02            128     MOV R4,#2 ; ½«ÎÂ¶È¸ßÎ»ºÍµÍÎ»´ÓDS18B20ÖÐ¶Á³ö
+007A 7929            129     MOV R1,#29H ; µÍÎ»´æÈë29H(TEMPER_L),¸ßÎ»´æÈë28H(TEMPER_H)
+007C                 130     RE00:
+007C 7A08            131     MOV R2,#8;Ê¾ÝÒ»¹²ÓÐ8Î»
+007E                 132     RE01:
+007E C3              133     CLR C
+007F D2B3            134     SETB IN
+0081 00              135     NOP
+0082 00              136     NOP
+0083 C2B3            137     CLR IN
+0085 00              138     NOP
+0086 00              139     NOP
+0087 00              140     NOP
+0088 D2B3            141     SETB IN
+                     142     
+008A 7B09            143     MOV R3,#9
+008C                 144     RE10: 
+008C DBFE            145     DJNZ R3,RE10
+                     146     
+008E A2B3            147     MOV C,IN
+                     148     
+0090 7B17            149     MOV R3,#23
+0092                 150     RE20: 
+0092 DBFE            151     DJNZ R3,RE20
+                     152     
+0094 13              153     RRC A
+0095 DAE7            154     DJNZ R2,RE01
+0097 F7              155     MOV @R1,A
+0098 19              156     DEC R1
+0099 DCE1            157     DJNZ R4,RE00
+009B 22              158     RET
+                     159     
+                     160     
+                     161     end
+A51 MACRO ASSEMBLER  MAIN                                                                 12/14/2005 23:13:49 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+GET_TEMPER . . . .  C ADDR   0040H   R   SEG=MAINP
+IN . . . . . . . .  B ADDR   00B0H.3 A   
+INIT_1820. . . . .  C ADDR   0017H   R   SEG=MAINP
+MAIN . . . . . . .  C ADDR   0000H   R   SEG=MAINP
+MAINP. . . . . . .  C SEG    009CH       REL=UNIT
+P3 . . . . . . . .  D ADDR   00B0H   A   
+RE00 . . . . . . .  C ADDR   007CH   R   SEG=MAINP
+RE01 . . . . . . .  C ADDR   007EH   R   SEG=MAINP
+RE10 . . . . . . .  C ADDR   008CH   R   SEG=MAINP
+RE20 . . . . . . .  C ADDR   0092H   R   SEG=MAINP
+READ_18200 . . . .  C ADDR   0078H   R   SEG=MAINP
+TEMPER_H . . . . .  N NUMB   0018H   A   
+TEMPER_L . . . . .  N NUMB   0019H   A   
+TSR1 . . . . . . .  C ADDR   001EH   R   SEG=MAINP
+TSR2 . . . . . . .  C ADDR   002BH   R   SEG=MAINP
+TSR3 . . . . . . .  C ADDR   0033H   R   SEG=MAINP
+TSR4 . . . . . . .  C ADDR   0036H   R   SEG=MAINP
+TSR5 . . . . . . .  C ADDR   0039H   R   SEG=MAINP
+TSR6 . . . . . . .  C ADDR   003BH   R   SEG=MAINP
+TSR7 . . . . . . .  C ADDR   003DH   R   SEG=MAINP
+TSS2 . . . . . . .  C ADDR   0045H   R   SEG=MAINP
+WR1. . . . . . . .  C ADDR   0063H   R   SEG=MAINP
+WRITE_1820 . . . .  C ADDR   0060H   R   SEG=MAINP
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

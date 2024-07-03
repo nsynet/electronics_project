@@ -1,0 +1,284 @@
+   1               		.file	"shell.c"
+   2               		.arch atmega32
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               		.data
+  19               	.LC0:
+  20 0000 7374 6174 		.string	"stats"
+  20      7300 
+  21               	.LC1:
+  22 0006 636F 6E6E 		.string	"conn"
+  22      00
+  23               	.LC2:
+  24 000b 6865 6C70 		.string	"help"
+  24      00
+  25               	.LC3:
+  26 0010 6578 6974 		.string	"exit"
+  26      00
+  27               	.LC4:
+  28 0015 3F00      		.string	"?"
+  31               	parsetab:
+  32 0017 0000      		.word	.LC0
+  33 0019 0000      		.word	pm(help)
+  34 001b 0000      		.word	.LC1
+  35 001d 0000      		.word	pm(help)
+  36 001f 0000      		.word	.LC2
+  37 0021 0000      		.word	pm(help)
+  38 0023 0000      		.word	.LC3
+  39 0025 0000      		.word	pm(shell_quit)
+  40 0027 0000      		.word	.LC4
+  41 0029 0000      		.word	pm(help)
+  42 002b 0000      		.word	0
+  43 002d 0000      		.word	pm(unknown)
+  44               	.LC5:
+  45 002f 00        		.string	""
+  46               	.LC6:
+  47 0030 4176 6169 		.string	"Available commands:"
+  47      6C61 626C 
+  47      6520 636F 
+  47      6D6D 616E 
+  47      6473 3A00 
+  48               	.LC7:
+  49 0044 7374 6174 		.string	"stats   - show network statistics"
+  49      7320 2020 
+  49      2D20 7368 
+  49      6F77 206E 
+  49      6574 776F 
+  50               	.LC8:
+  51 0066 636F 6E6E 		.string	"conn    - show TCP connections"
+  51      2020 2020 
+  51      2D20 7368 
+  51      6F77 2054 
+  51      4350 2063 
+  52               	.LC9:
+  53 0085 6865 6C70 		.string	"help, ? - show help"
+  53      2C20 3F20 
+  53      2D20 7368 
+  53      6F77 2068 
+  53      656C 7000 
+  54               	.LC10:
+  55 0099 6578 6974 		.string	"exit    - exit shell"
+  55      2020 2020 
+  55      2D20 6578 
+  55      6974 2073 
+  55      6865 6C6C 
+  56               		.text
+  58               	help:
+  59               	.LFB4:
+  60               	.LM1:
+  61               	/* prologue: frame size=0 */
+  62               	/* prologue end (size=0) */
+  63               	.LM2:
+  64 0000 60E0      		ldi r22,lo8(.LC5)
+  65 0002 70E0      		ldi r23,hi8(.LC5)
+  66 0004 80E0      		ldi r24,lo8(.LC6)
+  67 0006 90E0      		ldi r25,hi8(.LC6)
+  68 0008 0E94 0000 		call shell_output
+  69               	.LM3:
+  70 000c 60E0      		ldi r22,lo8(.LC5)
+  71 000e 70E0      		ldi r23,hi8(.LC5)
+  72 0010 80E0      		ldi r24,lo8(.LC7)
+  73 0012 90E0      		ldi r25,hi8(.LC7)
+  74 0014 0E94 0000 		call shell_output
+  75               	.LM4:
+  76 0018 60E0      		ldi r22,lo8(.LC5)
+  77 001a 70E0      		ldi r23,hi8(.LC5)
+  78 001c 80E0      		ldi r24,lo8(.LC8)
+  79 001e 90E0      		ldi r25,hi8(.LC8)
+  80 0020 0E94 0000 		call shell_output
+  81               	.LM5:
+  82 0024 60E0      		ldi r22,lo8(.LC5)
+  83 0026 70E0      		ldi r23,hi8(.LC5)
+  84 0028 80E0      		ldi r24,lo8(.LC9)
+  85 002a 90E0      		ldi r25,hi8(.LC9)
+  86 002c 0E94 0000 		call shell_output
+  87               	.LM6:
+  88 0030 60E0      		ldi r22,lo8(.LC5)
+  89 0032 70E0      		ldi r23,hi8(.LC5)
+  90 0034 80E0      		ldi r24,lo8(.LC10)
+  91 0036 90E0      		ldi r25,hi8(.LC10)
+  92 0038 0E94 0000 		call shell_output
+  93               	/* epilogue: frame size=0 */
+  94 003c 0895      		ret
+  95               	/* epilogue end (size=1) */
+  96               	/* function help size 31 (30) */
+  97               	.LFE4:
+  99               		.data
+ 100               	.LC11:
+ 101 00ae 556E 6B6E 		.string	"Unknown command: "
+ 101      6F77 6E20 
+ 101      636F 6D6D 
+ 101      616E 643A 
+ 101      2000 
+ 102               		.text
+ 104               	unknown:
+ 105               	.LFB5:
+ 106               	.LM7:
+ 107               	/* prologue: frame size=0 */
+ 108               	/* prologue end (size=0) */
+ 109 003e FC01      		movw r30,r24
+ 110               	.LM8:
+ 111 0040 8081      		ld r24,Z
+ 112 0042 8823      		tst r24
+ 113 0044 29F0      		breq .L2
+ 114               	.LM9:
+ 115 0046 BF01      		movw r22,r30
+ 116 0048 80E0      		ldi r24,lo8(.LC11)
+ 117 004a 90E0      		ldi r25,hi8(.LC11)
+ 118 004c 0E94 0000 		call shell_output
+ 119               	.L2:
+ 120 0050 0895      		ret
+ 121               	/* epilogue: frame size=0 */
+ 122               	/* epilogue: noreturn */
+ 123               	/* epilogue end (size=0) */
+ 124               	/* function unknown size 10 (10) */
+ 125               	.LFE5:
+ 127               	.global	shell_init
+ 129               	shell_init:
+ 130               	.LFB6:
+ 131               	.LM10:
+ 132               	/* prologue: frame size=0 */
+ 133               	/* prologue end (size=0) */
+ 134               	/* epilogue: frame size=0 */
+ 135 0052 0895      		ret
+ 136               	/* epilogue end (size=1) */
+ 137               	/* function shell_init size 1 (0) */
+ 138               	.LFE6:
+ 140               		.data
+ 141               	.LC12:
+ 142 00c0 7549 5020 		.string	"uIP command shell"
+ 142      636F 6D6D 
+ 142      616E 6420 
+ 142      7368 656C 
+ 142      6C00 
+ 143               	.LC13:
+ 144 00d2 5479 7065 		.string	"Type '?' and return for help"
+ 144      2027 3F27 
+ 144      2061 6E64 
+ 144      2072 6574 
+ 144      7572 6E20 
+ 145               	.LC14:
+ 146 00ef 7549 5020 		.string	"uIP 1.0> "
+ 146      312E 303E 
+ 146      2000 
+ 147               		.text
+ 148               	.global	shell_start
+ 150               	shell_start:
+ 151               	.LFB7:
+ 152               	.LM11:
+ 153               	/* prologue: frame size=0 */
+ 154               	/* prologue end (size=0) */
+ 155               	.LM12:
+ 156 0054 60E0      		ldi r22,lo8(.LC5)
+ 157 0056 70E0      		ldi r23,hi8(.LC5)
+ 158 0058 80E0      		ldi r24,lo8(.LC12)
+ 159 005a 90E0      		ldi r25,hi8(.LC12)
+ 160 005c 0E94 0000 		call shell_output
+ 161               	.LM13:
+ 162 0060 60E0      		ldi r22,lo8(.LC5)
+ 163 0062 70E0      		ldi r23,hi8(.LC5)
+ 164 0064 80E0      		ldi r24,lo8(.LC13)
+ 165 0066 90E0      		ldi r25,hi8(.LC13)
+ 166 0068 0E94 0000 		call shell_output
+ 167               	.LM14:
+ 168 006c 80E0      		ldi r24,lo8(.LC14)
+ 169 006e 90E0      		ldi r25,hi8(.LC14)
+ 170 0070 0E94 0000 		call shell_prompt
+ 171               	/* epilogue: frame size=0 */
+ 172 0074 0895      		ret
+ 173               	/* epilogue end (size=1) */
+ 174               	/* function shell_start size 17 (16) */
+ 175               	.LFE7:
+ 177               	.global	shell_input
+ 179               	shell_input:
+ 180               	.LFB8:
+ 181               	.LM15:
+ 182               	/* prologue: frame size=0 */
+ 183 0076 0F93      		push r16
+ 184 0078 1F93      		push r17
+ 185 007a CF93      		push r28
+ 186 007c DF93      		push r29
+ 187               	/* prologue end (size=4) */
+ 188 007e 8C01      		movw r16,r24
+ 189               	.LBB2:
+ 190               	.LM16:
+ 191 0080 C0E0      		ldi r28,lo8(parsetab)
+ 192 0082 D0E0      		ldi r29,hi8(parsetab)
+ 193               	.LBB3:
+ 194               	.LM17:
+ 195 0084 8091 0000 		lds r24,parsetab
+ 196 0088 9091 0000 		lds r25,(parsetab)+1
+ 197               	.L14:
+ 198               	.LM18:
+ 199 008c 892B      		or r24,r25
+ 200 008e A1F0      		breq .L8
+ 201               	.LM19:
+ 202 0090 A881      		ld r26,Y
+ 203 0092 B981      		ldd r27,Y+1
+ 204 0094 FD01      		movw r30,r26
+ 205 0096 0190      		ld __tmp_reg__,Z+
+ 206 0098 0020      		tst __tmp_reg__
+ 207 009a E9F7      		brne .-6
+ 208 009c 3197      		sbiw r30,1
+ 209 009e EA1B      		sub r30,r26
+ 210 00a0 FB0B      		sbc r31,r27
+ 211 00a2 AF01      		movw r20,r30
+ 212 00a4 B801      		movw r22,r16
+ 213 00a6 CD01      		movw r24,r26
+ 214 00a8 0E94 0000 		call strncmp
+ 215 00ac 892B      		or r24,r25
+ 216 00ae 21F0      		breq .L8
+ 217               	.LM20:
+ 218 00b0 2496      		adiw r28,4
+ 219 00b2 8881      		ld r24,Y
+ 220 00b4 9981      		ldd r25,Y+1
+ 221 00b6 EACF      		rjmp .L14
+ 222               	.L8:
+ 223               	.LM21:
+ 224 00b8 EA81      		ldd r30,Y+2
+ 225 00ba FB81      		ldd r31,Y+3
+ 226 00bc C801      		movw r24,r16
+ 227 00be 0995      		icall
+ 228               	.LBE3:
+ 229               	.LBE2:
+ 230               	.LM22:
+ 231 00c0 80E0      		ldi r24,lo8(.LC14)
+ 232 00c2 90E0      		ldi r25,hi8(.LC14)
+ 233 00c4 0E94 0000 		call shell_prompt
+ 234               	/* epilogue: frame size=0 */
+ 235 00c8 DF91      		pop r29
+ 236 00ca CF91      		pop r28
+ 237 00cc 1F91      		pop r17
+ 238 00ce 0F91      		pop r16
+ 239 00d0 0895      		ret
+ 240               	/* epilogue end (size=5) */
+ 241               	/* function shell_input size 46 (37) */
+ 242               	.LFE8:
+ 244               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 shell.c
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:31     .data:00000017 parsetab
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:58     .text:00000000 help
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:104    .text:0000003e unknown
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:129    .text:00000052 shell_init
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:150    .text:00000054 shell_start
+C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp/ccuSbaaa.s:179    .text:00000076 shell_input
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+shell_quit
+shell_output
+shell_prompt
+strncmp

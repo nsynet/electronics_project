@@ -1,0 +1,38 @@
+*** Creating Trace Output File 'upi_1.tra' Ok.
+### Preparing for ADS-LD.
+### Creating ADS-LD Command Line
+### List of Objects: adding '"startup.o"'
+### List of Objects: adding '"main.o"'
+### List of Objects: adding '"sys_clock.o"'
+### List of Objects: adding '"shell.o"'
+### List of Objects: adding '"telnetd.o"'
+### List of Objects: adding '"pcd8544.o"'
+### List of Objects: adding '"pcd8544_hal.o"'
+### List of Objects: adding '"rtc.o"'
+### List of Objects: adding '"enc28j60.o"'
+### List of Objects: adding '"enc28j60_hal.o"'
+### List of Objects: adding '"clock-arch.o"'
+### List of Objects: adding '"tapdev.o"'
+### List of Objects: adding '"psock.o"'
+### List of Objects: adding '"timer.o"'
+### List of Objects: adding '"uip.o"'
+### List of Objects: adding '"uip_arp.o"'
+### List of Objects: adding '"uip-fw.o"'
+### List of Objects: adding '"uiplib.o"'
+### List of Objects: adding '"uip-neighbor.o"'
+### List of Objects: adding '"memb.o"'
+### ADS-LD Command completed:
+--device DARMP "startup.o" "main.o" "sys_clock.o" "shell.o" "telnetd.o" "pcd8544.o" "pcd8544_hal.o" "rtc.o" "enc28j60.o" "enc28j60_hal.o" "clock-arch.o" "tapdev.o" "psock.o" "timer.o" "uip.o" "uip_arp.o" "uip-fw.o" "uiplib.o" "uip-neighbor.o" "memb.o" --strict --scatter "upi_1.sct" 
+--autoat --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\upi_1.map" -o "upi_1.axf"### Preparing Environment (PrepEnvAds)
+### ADS-LD Output File: 'upi_1.axf'
+### ADS-LD Command File: 'upi_1.lnp'
+### Checking for dirty Components...
+### Creating CmdFile 'upi_1.lnp', Handle=0x0000029C
+### Writing '.lnp' file
+### ADS-LD Command file 'upi_1.lnp' is ready.
+### ADS-LD: About to start ADS-LD Thread.
+### ADS-LD: executed with 0 errors
+### Updating obj list
+### LDADS_file() completed.

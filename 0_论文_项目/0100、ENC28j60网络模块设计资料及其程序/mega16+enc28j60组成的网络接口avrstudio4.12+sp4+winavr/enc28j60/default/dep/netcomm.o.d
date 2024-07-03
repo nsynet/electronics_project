@@ -1,0 +1,1 @@
+netcomm.o: ../netcomm.c

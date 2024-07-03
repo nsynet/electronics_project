@@ -1,0 +1,673 @@
+###############################################################################
+#                                                                             #
+# IAR ELF Linker V5.20.2.51007/W32 for ARM              22/Apr/2009  23:41:43 #
+# Copyright 2007-2008 IAR Systems AB.                                         #
+#                                                                             #
+#    Output file  =  F:\b百利胜\enc28j60\enc28j60                             #
+#                    _IAR\Debug\Exe\usart_sendshuzhi_520.out                  #
+#    Map file     =  F:\b百利胜\enc28j60\enc28j60                             #
+#                    _IAR\Debug\List\usart_sendshuzhi_520.map                 #
+#    Command line =  "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\ENC28J60.o" "F:\b百利胜\enc28j60\enc28j60 #
+#                     _IAR\Debug\Obj\SPI.o" "F:\b百利胜\enc28j60\enc28j60     #
+#                    _IAR\Debug\Obj\cortexm3_macro.o"                         #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\ip_arp_udp_tcp.o"                         #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\main.o"     #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\simple_server.o"                          #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\stm32f10x_flash.o"                        #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\stm32f10x_gpio.o"                         #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\stm32f10x_it.o"                           #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\stm32f10x_lib.o"                          #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\stm32f10x_nvic.o"                         #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\stm32f10x_rcc.o"                          #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\stm32f10x_spi.o"                          #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\stm32f10x_usart.o"                        #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\stm32f10x_vector.o"                       #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Obj\user_uart.o" -o                           #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\Exe\usart_sendshuzhi_520.out" --map           #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\Debug\List\usart_sendshuzhi_520.map" --config       #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\EWARM_V2.0.2\stm32f10x_flash.icf" --semihosting     #
+#                    --entry __iar_program_start                              #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+__endian      = little
+__thumb_aware = enabled
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A1":  place at mem:0x8000000 { ro section .intvec };
+"P1":  place in [from mem:0x8000000 to mem:0x807ffff] { ro };
+"P2":  place in [from mem:0x20000000 to mem:0x2000ffff] {
+          rw, block CSTACK, block HEAP };
+
+  Section            Kind        Address    Size  Object
+  -------            ----        -------    ----  ------
+"A1":                                      0x130
+  .intvec            const    0x08000000   0x130  stm32f10x_vector.o [1]
+                            - 0x08000130   0x130
+
+"P1":                                     0x40b4
+  .text              ro code  0x08000130  0x1132  xprintffull.o [3]
+  .text              ro code  0x08001264   0x590  ip_arp_udp_tcp.o [1]
+  .text              ro code  0x080017f4   0x488  ENC28J60.o [1]
+  .text              ro code  0x08001c7c   0x400  simple_server.o [1]
+  .text              ro code  0x0800207c   0x288  DblDiv.o [4]
+  .text              ro code  0x08002304   0x250  stm32f10x_rcc.o [1]
+  .text              ro code  0x08002554   0x1ac  stm32f10x_usart.o [1]
+  .text              ro code  0x08002700   0x1a2  DblMul.o [4]
+  .text              ro code  0x080028a4   0x180  DblSub.o [4]
+  .text              ro code  0x08002a24   0x154  main.o [1]
+  .text              ro code  0x08002b78   0x142  stm32f10x_it.o [1]
+  .text              ro code  0x08002cbc   0x128  stm32f10x_gpio.o [1]
+  .text              ro code  0x08002de4   0x120  xdscale.o [3]
+  .text              ro code  0x08002f04    0xee  user_uart.o [1]
+  .text              ro code  0x08002ff4    0xec  SPI.o [1]
+  .text              ro code  0x080030e0    0xe8  DblAdd.o [4]
+  .text              ro code  0x080031c8    0xe4  stm32f10x_nvic.o [1]
+  .text              ro code  0x080032ac    0xdc  xdnorm.o [3]
+  .text              ro code  0x08003388    0xd0  I64DivMod.o [4]
+  .text              ro code  0x08003458    0xbc  xxmemxmalloc.o [3]
+  .text              ro code  0x08003514    0x98  stm32f10x_spi.o [1]
+  .text              ro code  0x080035ac    0x8c  xsyslock.o [3]
+  .text              ro code  0x08003638    0x88  xxmemxfree.o [3]
+  .text              ro code  0x080036c0    0x7c  cppinit.o [3]
+  .text              ro code  0x0800373c    0x7a  cortexm3_macro.o [1]
+  .text              ro code  0x080037b8    0x78  rle_init2.o [4]
+  .text              ro code  0x08003830    0x6e  ABImemcpy.o [4]
+  .text              ro code  0x080038a0    0x58  memchr.o [4]
+  .text              ro code  0x080038f8    0x56  DblToI32.o [4]
+  .rodata            const    0x08003950    0x50  simple_server.o [1]
+  .text              ro code  0x080039a0    0x50  MtxWrapper.o [3]
+  .rodata            const    0x080039f0    0x4c  simple_server.o [1]
+  .text              ro code  0x08003a3c    0x4c  xencoding_sb.o [3]
+  .rodata            const    0x08003a88    0x48  xlocale_c.o [3]
+  .text              ro code  0x08003ad0    0x46  strcpy.o [4]
+  .text              ro code  0x08003b18    0x44  stm32f10x_flash.o [1]
+  .rodata            const    0x08003b5c    0x40  simple_server.o [1]
+  .rodata            const    0x08003b9c    0x3c  simple_server.o [1]
+  .text              ro code  0x08003bd8    0x38  strlen.o [4]
+  .text              ro code  0x08003c10    0x38  DblSubNrml.o [4]
+  .rodata            const    0x08003c48    0x30  simple_server.o [1]
+  .text              ro code  0x08003c78    0x30  DblCmpLe.o [4]
+  .text              ro code  0x08003ca8    0x30  DblCmpGe.o [4]
+  .text              ro code  0x08003cd8    0x2e  I32ToDbl.o [4]
+  .text              ro code  0x08003d08    0x2a  strncmp.o [3]
+  .rodata            const    0x08003d34    0x28  simple_server.o [1]
+  .text              ro code  0x08003d5c    0x28  xgetmemchunk.o [3]
+  .rodata            const    0x08003d84    0x24  simple_server.o [1]
+  .iar.init_table    const    0x08003da8    0x2c  - Linker created -
+  .rodata            const    0x08003dd4    0x20  main.o [1]
+  .text              ro code  0x08003df4    0x20  printf.o [3]
+  .text              ro code  0x08003e14    0x20  xmbtowc.o [3]
+  .text              ro code  0x08003e34    0x1c  data_init2.o [4]
+  .text              ro code  0x08003e50    0x1a  xwctomb.o [3]
+  .text              ro code  0x08003e6c    0x1a  zero_init2.o [4]
+  .rodata            const    0x08003e88    0x18  main.o [1]
+  .rodata            const    0x08003ea0    0x18  simple_server.o [1]
+  .text              ro code  0x08003eb8    0x18  cmain.o [4]
+  .text              ro code  0x08003ed0    0x18  strchr.o [4]
+  .text              ro code  0x08003ee8    0x18  iarwstd.o [5]
+  .text              ro code  0x08003f00    0x16  xprout.o [3]
+  .rodata            const    0x08003f18    0x14  main.o [1]
+  .rodata            const    0x08003f2c    0x14  main.o [1]
+  .rodata            const    0x08003f40    0x14  main.o [1]
+  .rodata            const    0x08003f54    0x14  simple_server.o [1]
+  .rodata            const    0x08003f68    0x14  simple_server.o [1]
+  .rodata            const    0x08003f7c    0x14  simple_server.o [1]
+  .text              ro code  0x08003f90    0x14  div.o [3]
+  .text              ro code  0x08003fa4    0x14  localeconv.o [3]
+  .text              ro code  0x08003fb8    0x14  exit.o [5]
+  .text              ro code  0x08003fcc    0x14  setlocale.o [3]
+  .rodata            const    0x08003fe0    0x10  ENC28J60.o [1]
+  .rodata            const    0x08003ff0    0x10  ENC28J60.o [1]
+  .rodata            const    0x08004000    0x10  ENC28J60.o [1]
+  .rodata            const    0x08004010    0x10  ENC28J60.o [1]
+  .rodata            const    0x08004020    0x10  ENC28J60.o [1]
+  .rodata            const    0x08004030    0x10  ENC28J60.o [1]
+  .rodata            const    0x08004040    0x10  simple_server.o [1]
+  .rodata            const    0x08004050    0x10  simple_server.o [1]
+  .rodata            const    0x08004060    0x10  simple_server.o [1]
+  .rodata            const    0x08004070    0x10  stm32f10x_rcc.o [1]
+  .rodata            const    0x08004080    0x10  xprintffull.o [3]
+  .text              ro code  0x08004090     0xe  cexit.o [4]
+  .rodata            const    0x080040a0     0xc  simple_server.o [1]
+  .rodata            const    0x080040ac     0xc  simple_server.o [1]
+  .text              ro code  0x080040b8     0xc  putchar.o [3]
+  .text              ro code  0x080040c4     0xa  xmbcurmax.o [3]
+  .rodata            const    0x080040d0     0x8  main.o [1]
+  .rodata            const    0x080040d8     0x8  simple_server.o [1]
+  .rodata            const    0x080040e0     0x8  xprintffull.o [3]
+  .rodata            const    0x080040e8     0x8  localeconv.o [3]
+  .rodata            const    0x080040f0     0x8  localeconv.o [3]
+  .rodata            const    0x080040f8     0x8  xencoding_sb.o [3]
+  .rodata            const    0x08004100     0x8  xencoding_sb.o [3]
+  .rodata            const    0x08004108     0x8  xlocale_c.o [3]
+  .rodata            const    0x08004110     0x8  xlocale_c.o [3]
+  .rodata            const    0x08004118     0x4  stm32f10x_rcc.o [1]
+  .text              ro code  0x0800411c     0x4  low_level_init.o [3]
+  .text              ro code  0x08004120     0x4  exit.o [3]
+  .text              ro code  0x08004124     0x2  I64DivZer.o [4]
+  .rodata            const    0x08004126     0x2  localeconv.o [3]
+  .rodata            const    0x08004128     0x2  xlocale_c.o [3]
+  .rodata            const    0x0800412a     0x1  localeconv.o [3]
+  .rodata            const    0x0800412b     0x1  setlocale.o [3]
+  .rodata            const    0x0800412c     0x1  xlocale_c.o [3]
+  Initializer bytes  ro data  0x0800412d    0xb7  <for P2 s0> (used: 0xb6)
+                            - 0x080041e4  0x40b4
+
+"P2", part 1 of 3:                         0x7d4
+  CSTACK                      0x20000000   0x400  <Block>
+    CSTACK           uninit   0x20000000   0x400  <Block tail>
+  HEAP                        0x20000400   0x200  <Block>
+    HEAP             uninit   0x20000400   0x200  <Block tail>
+  .iar.dynexit                0x20000600   0x1d4  <Block>
+    .iar.dynexit     uninit   0x20000600     0xc  cppinit.o [3]
+    .iar.dynexit     uninit   0x2000060c   0x1c8  <Block tail>
+                            - 0x200007d4   0x7d4
+
+"P2", part 2 of 3:                         0x67c
+  .bss               zero     0x200007d4   0x5e0  simple_server.o [1]
+  .bss               zero     0x20000db4    0x50  xfiles.o [3]
+  .bss               zero     0x20000e04    0x14  xsyslock.o [3]
+  .bss               zero     0x20000e18     0x8  ip_arp_udp_tcp.o [1]
+  .bss               zero     0x20000e20     0x8  xxmemxmalloc.o [3]
+  .bss               zero     0x20000e28     0x4  ip_arp_udp_tcp.o [1]
+  .bss               zero     0x20000e2c     0x4  ip_arp_udp_tcp.o [1]
+  .bss               zero     0x20000e30     0x4  ip_arp_udp_tcp.o [1]
+  .bss               zero     0x20000e34     0x4  xgetmemchunk.o [3]
+  .bss               zero     0x20000e38     0x4  MtxWrapper.o [3]
+  .bss               zero     0x20000e3c     0x4  MtxWrapper.o [3]
+  .bss               zero     0x20000e40     0x4  MtxWrapper.o [3]
+  .bss               zero     0x20000e44     0x4  MtxWrapper.o [3]
+  .bss               zero     0x20000e48     0x4  iarwstd.o [5]
+  .bss               zero     0x20000e4c     0x2  ENC28J60.o [1]
+  .bss               zero     0x20000e4e     0x1  ENC28J60.o [1]
+                            - 0x20000e4f   0x67b
+
+"P2", part 3 of 3:                         0x14a
+  P2 s0                       0x20000e50   0x14a  <Init block>
+    .data            inited   0x20000e50    0x84  setlocale.o [3]
+    .data            inited   0x20000ed4    0x4c  localeconv.o [3]
+    .data            inited   0x20000f20    0x40  xfiles.o [3]
+    .data            inited   0x20000f60    0x18  simple_server.o [1]
+    .data            inited   0x20000f78     0x8  simple_server.o [1]
+    .data            inited   0x20000f80     0x8  simple_server.o [1]
+    .data            inited   0x20000f88     0x4  simple_server.o [1]
+    .data            inited   0x20000f8c     0x4  simple_server.o [1]
+    .data            inited   0x20000f90     0x4  simple_server.o [1]
+    .data            inited   0x20000f94     0x4  cppinit.o [3]
+    .data            inited   0x20000f98     0x1  ip_arp_udp_tcp.o [1]
+    .data            inited   0x20000f99     0x1  ip_arp_udp_tcp.o [1]
+                            - 0x20000f9a   0x14a
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+Kind        Routine           From       Size  To          Size
+----        -------           ----       ----  --          ----
+Zero        __iar_zero_init2                   0x200007d4  0x67b
+Copy/zeros  __iar_rle_init2   0x800412d  0xb7
+                                               0x20000e50  0x14a
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module              ro code  ro data  rw data
+    ------              -------  -------  -------
+F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj: [1]
+    ENC28J60.o            1 160       96        3
+    SPI.o                   236
+    cortexm3_macro.o        122
+    ip_arp_udp_tcp.o      1 424        2       22
+    main.o                  340      124
+    simple_server.o       1 024      617    1 556
+    stm32f10x_flash.o        68
+    stm32f10x_gpio.o        296
+    stm32f10x_it.o          322
+    stm32f10x_nvic.o        228
+    stm32f10x_rcc.o         592       20
+    stm32f10x_spi.o         152
+    stm32f10x_usart.o       428
+    stm32f10x_vector.o               304
+    user_uart.o             238
+    ---------------------------------------------
+    Total:                6 630    1 163    1 581
+
+command line: [2]
+    ---------------------------------------------
+    Total:
+
+dl7M_tl_if.a: [3]
+    MtxWrapper.o             80                16
+    cppinit.o               124        4       16
+    div.o                    20
+    exit.o                    4
+    localeconv.o             20       93       76
+    low_level_init.o          4
+    printf.o                 32
+    putchar.o                12
+    setlocale.o              20       20      132
+    strncmp.o                42
+    xdnorm.o                220
+    xdscale.o               288
+    xencoding_sb.o           76       16
+    xfiles.o                          34      144
+    xgetmemchunk.o           40                 4
+    xlocale_c.o                       91
+    xmbcurmax.o              10
+    xmbtowc.o                32
+    xprintffull.o         4 402       24
+    xprout.o                 22
+    xsyslock.o              140                20
+    xwctomb.o                26
+    xxmemxfree.o            136
+    xxmemxmalloc.o          188                 8
+    ---------------------------------------------
+    Total:                5 938      282      416
+
+rt7M_tl.a: [4]
+    ABImemcpy.o             110
+    DblAdd.o                232
+    DblCmpGe.o               48
+    DblCmpLe.o               48
+    DblDiv.o                648
+    DblMul.o                418
+    DblSub.o                384
+    DblSubNrml.o             56
+    DblToI32.o               86
+    I32ToDbl.o               46
+    I64DivMod.o             208
+    I64DivZer.o               2
+    cexit.o                  14
+    cmain.o                  24
+    data_init2.o             28
+    memchr.o                 88
+    rle_init2.o             120
+    strchr.o                 24
+    strcpy.o                 70
+    strlen.o                 56
+    zero_init2.o             26
+    ---------------------------------------------
+    Total:                2 736
+
+shb_l.a: [5]
+    exit.o                   20
+    iarwstd.o                24                 4
+    ---------------------------------------------
+    Total:                   44                 4
+
+    Gaps                     18       12
+    Linker created                    45    1 992
+-------------------------------------------------
+    Grand Total:         15 366    1 502    3 993
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address   Size  Type      Object
+-----                      -------   ----  ----      ------
+.iar.dynexit$$Base      0x20000600          --   Gb  - Linker created -
+.iar.dynexit$$Limit     0x200007d4          --   Gb  - Linker created -
+ADC1_2_IRQHandler       0x08002be5    0x2  Code  Gb  stm32f10x_it.o [1]
+ADC3_IRQHandler         0x08002c89    0x2  Code  Gb  stm32f10x_it.o [1]
+ADCPrescTable           0x08004118    0x4  Data  Lc  stm32f10x_rcc.o [1]
+APBAHBPrescTable        0x08004070   0x10  Data  Lc  stm32f10x_rcc.o [1]
+BusFaultException       0x08002b85    0x2  Code  Gb  stm32f10x_it.o [1]
+CAN_RX1_IRQHandler      0x08002bf1    0x2  Code  Gb  stm32f10x_it.o [1]
+CAN_SCE_IRQHandler      0x08002bf5    0x2  Code  Gb  stm32f10x_it.o [1]
+CSTACK$$Base            0x20000000          --   Gb  - Linker created -
+CSTACK$$Limit           0x20000400          --   Gb  - Linker created -
+DMA1_Channel1_IRQHandler
+                        0x08002bc9    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA1_Channel2_IRQHandler
+                        0x08002bcd    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA1_Channel3_IRQHandler
+                        0x08002bd1    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA1_Channel4_IRQHandler
+                        0x08002bd5    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA1_Channel5_IRQHandler
+                        0x08002bd9    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA1_Channel6_IRQHandler
+                        0x08002bdd    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA1_Channel7_IRQHandler
+                        0x08002be1    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA2_Channel1_IRQHandler
+                        0x08002cad    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA2_Channel2_IRQHandler
+                        0x08002cb1    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA2_Channel3_IRQHandler
+                        0x08002cb5    0x2  Code  Gb  stm32f10x_it.o [1]
+DMA2_Channel4_5_IRQHandler
+                        0x08002cb9    0x2  Code  Gb  stm32f10x_it.o [1]
+DebugMonitor            0x08002b8d    0x2  Code  Gb  stm32f10x_it.o [1]
+DtorRecArray            0x20000600    0xc  Data  Lc  cppinit.o [3]
+EXTI0_IRQHandler        0x08002bb5    0x2  Code  Gb  stm32f10x_it.o [1]
+EXTI15_10_IRQHandler    0x08002c6d    0x2  Code  Gb  stm32f10x_it.o [1]
+EXTI1_IRQHandler        0x08002bb9    0x2  Code  Gb  stm32f10x_it.o [1]
+EXTI2_IRQHandler        0x08002bbd    0x2  Code  Gb  stm32f10x_it.o [1]
+EXTI3_IRQHandler        0x08002bc1    0x2  Code  Gb  stm32f10x_it.o [1]
+EXTI4_IRQHandler        0x08002bc5    0x2  Code  Gb  stm32f10x_it.o [1]
+EXTI9_5_IRQHandler      0x08002bf9    0x2  Code  Gb  stm32f10x_it.o [1]
+Enc28j60Bank            0x20000e4e    0x1  Data  Lc  ENC28J60.o [1]
+FLASH_IRQHandler        0x08002bad    0x2  Code  Gb  stm32f10x_it.o [1]
+FLASH_PrefetchBufferCmd
+                        0x08003b39   0x20  Code  Gb  stm32f10x_flash.o [1]
+FLASH_SetLatency        0x08003b19   0x20  Code  Gb  stm32f10x_flash.o [1]
+FSMC_IRQHandler         0x08002c8d    0x2  Code  Gb  stm32f10x_it.o [1]
+GPIO_Init               0x08002cbd  0x116  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_ResetBits          0x08002ddd    0x6  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_SetBits            0x08002dd5    0x6  Code  Gb  stm32f10x_gpio.o [1]
+HEAP$$Base              0x20000400          --   Gb  - Linker created -
+HEAP$$Limit             0x20000600          --   Gb  - Linker created -
+HardFaultException      0x08002b7d    0x2  Code  Gb  stm32f10x_it.o [1]
+I2C1_ER_IRQHandler      0x08002c1d    0x2  Code  Gb  stm32f10x_it.o [1]
+I2C1_EV_IRQHandler      0x08002c19    0x2  Code  Gb  stm32f10x_it.o [1]
+I2C2_ER_IRQHandler      0x08002c25    0x2  Code  Gb  stm32f10x_it.o [1]
+I2C2_EV_IRQHandler      0x08002c21    0x2  Code  Gb  stm32f10x_it.o [1]
+MemManageException      0x08002b81    0x2  Code  Gb  stm32f10x_it.o [1]
+NMIException            0x08002b79    0x2  Code  Gb  stm32f10x_it.o [1]
+NVIC_Configuration      0x08002b45    0xe  Code  Gb  main.o [1]
+NVIC_Init               0x080031d9   0xb4  Code  Gb  stm32f10x_nvic.o [1]
+NVIC_PriorityGroupConfig
+                        0x080031c9    0xa  Code  Gb  stm32f10x_nvic.o [1]
+NVIC_SetVectorTable     0x08003295   0x10  Code  Gb  stm32f10x_nvic.o [1]
+NextPacketPtr           0x20000e4c    0x2  Data  Lc  ENC28J60.o [1]
+PVD_IRQHandler          0x08002ba1    0x2  Code  Gb  stm32f10x_it.o [1]
+PendSVC                 0x08002b95    0x2  Code  Gb  stm32f10x_it.o [1]
+RCC_APB2PeriphClockCmd  0x080024dd   0x24  Code  Gb  stm32f10x_rcc.o [1]
+RCC_DeInit              0x08002305   0x60  Code  Gb  stm32f10x_rcc.o [1]
+RCC_GetClocksFreq       0x080023ed   0xec  Code  Gb  stm32f10x_rcc.o [1]
+RCC_GetFlagStatus       0x08002501   0x44  Code  Gb  stm32f10x_rcc.o [1]
+RCC_GetSYSCLKSource     0x0800239d    0xa  Code  Gb  stm32f10x_rcc.o [1]
+RCC_HCLKConfig          0x080023a9   0x14  Code  Gb  stm32f10x_rcc.o [1]
+RCC_HSI_Configuration   0x08002ae1   0x64  Code  Gb  main.o [1]
+RCC_IRQHandler          0x08002bb1    0x2  Code  Gb  stm32f10x_it.o [1]
+RCC_PCLK1Config         0x080023bd   0x16  Code  Gb  stm32f10x_rcc.o [1]
+RCC_PCLK2Config         0x080023d5   0x18  Code  Gb  stm32f10x_rcc.o [1]
+RCC_PLLCmd              0x0800237d    0xc  Code  Gb  stm32f10x_rcc.o [1]
+RCC_PLLConfig           0x08002365   0x18  Code  Gb  stm32f10x_rcc.o [1]
+RCC_SYSCLKConfig        0x08002389   0x14  Code  Gb  stm32f10x_rcc.o [1]
+RTCAlarm_IRQHandler     0x08002c71    0x2  Code  Gb  stm32f10x_it.o [1]
+RTC_IRQHandler          0x08002ba9    0x2  Code  Gb  stm32f10x_it.o [1]
+Region$$Table$$Base     0x08003da8          --   Gb  - Linker created -
+Region$$Table$$Limit    0x08003dd4          --   Gb  - Linker created -
+SDIO_IRQHandler         0x08002c91    0x2  Code  Gb  stm32f10x_it.o [1]
+SPI1_IRQHandler         0x08002c29    0x2  Code  Gb  stm32f10x_it.o [1]
+SPI1_Init               0x08002ff5   0xb4  Code  Gb  SPI.o [1]
+SPI1_ReadWrite          0x080030a9   0x32  Code  Gb  SPI.o [1]
+SPI2_IRQHandler         0x08002c2d    0x2  Code  Gb  stm32f10x_it.o [1]
+SPI3_IRQHandler         0x08002c99    0x2  Code  Gb  stm32f10x_it.o [1]
+SPI_Cmd                 0x0800356d   0x1c  Code  Gb  stm32f10x_spi.o [1]
+SPI_I2S_GetFlagStatus   0x08003591   0x1a  Code  Gb  stm32f10x_spi.o [1]
+SPI_I2S_ReceiveData     0x0800358d    0x4  Code  Gb  stm32f10x_spi.o [1]
+SPI_I2S_SendData        0x08003589    0x4  Code  Gb  stm32f10x_spi.o [1]
+SPI_Init                0x08003515   0x58  Code  Gb  stm32f10x_spi.o [1]
+SVCHandler              0x08002b91    0x2  Code  Gb  stm32f10x_it.o [1]
+SysTickHandler          0x08002b99    0x2  Code  Gb  stm32f10x_it.o [1]
+TAMPER_IRQHandler       0x08002ba5    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM1_BRK_IRQHandler     0x08002bfd    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM1_CC_IRQHandler      0x08002c09    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM1_TRG_COM_IRQHandler
+                        0x08002c05    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM1_UP_IRQHandler      0x08002c01    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM2_IRQHandler         0x08002c0d    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM3_IRQHandler         0x08002c11    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM4_IRQHandler         0x08002c15    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM5_IRQHandler         0x08002c95    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM6_IRQHandler         0x08002ca5    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM7_IRQHandler         0x08002ca9    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM8_BRK_IRQHandler     0x08002c79    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM8_CC_IRQHandler      0x08002c85    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM8_TRG_COM_IRQHandler
+                        0x08002c81    0x2  Code  Gb  stm32f10x_it.o [1]
+TIM8_UP_IRQHandler      0x08002c7d    0x2  Code  Gb  stm32f10x_it.o [1]
+UART1_Configuration     0x08002f29   0x48  Code  Gb  user_uart.o [1]
+UART1_GPIO_Configuration
+                        0x08002f71   0x3c  Code  Gb  user_uart.o [1]
+UART1_NVIC_Configuration
+                        0x08002f05   0x24  Code  Gb  user_uart.o [1]
+UART4_IRQHandler        0x08002c9d    0x2  Code  Gb  stm32f10x_it.o [1]
+UART5_IRQHandler        0x08002ca1    0x2  Code  Gb  stm32f10x_it.o [1]
+USART1_IRQHandler       0x08002c31   0x34  Code  Gb  stm32f10x_it.o [1]
+USART2_IRQHandler       0x08002c65    0x2  Code  Gb  stm32f10x_it.o [1]
+USART3_IRQHandler       0x08002c69    0x2  Code  Gb  stm32f10x_it.o [1]
+USART_Cmd               0x080025f1   0x1c  Code  Gb  stm32f10x_usart.o [1]
+USART_GetFlagStatus     0x08002675   0x1a  Code  Gb  stm32f10x_usart.o [1]
+USART_GetITStatus       0x08002691   0x70  Code  Gb  stm32f10x_usart.o [1]
+USART_ITConfig          0x0800260d   0x58  Code  Gb  stm32f10x_usart.o [1]
+USART_Init              0x08002555   0x9c  Code  Gb  stm32f10x_usart.o [1]
+USART_ReceiveData       0x0800266d    0x8  Code  Gb  stm32f10x_usart.o [1]
+USART_SendData          0x08002665    0x8  Code  Gb  stm32f10x_usart.o [1]
+USBWakeUp_IRQHandler    0x08002c75    0x2  Code  Gb  stm32f10x_it.o [1]
+USB_HP_CAN_TX_IRQHandler
+                        0x08002be9    0x2  Code  Gb  stm32f10x_it.o [1]
+USB_LP_CAN_RX0_IRQHandler
+                        0x08002bed    0x2  Code  Gb  stm32f10x_it.o [1]
+Uart1_PutChar           0x08002fad   0x22  Code  Gb  user_uart.o [1]
+Uart1_PutString         0x08002fd5   0x1e  Code  Gb  user_uart.o [1]
+UsageFaultException     0x08002b89    0x2  Code  Gb  stm32f10x_it.o [1]
+WWDG_IRQHandler         0x08002b9d    0x2  Code  Gb  stm32f10x_it.o [1]
+_EncodingSb_Mbtowc      0x08003a59   0x30  Code  Gb  xencoding_sb.o [3]
+_EncodingSb_Wctomb      0x08003a3d   0x1c  Code  Gb  xencoding_sb.o [3]
+_GenldDefault           0x08000fbd  0x274  Code  Lc  xprintffull.o [3]
+_IsdstStr               0x20000e74    0x4  Data  Gb  setlocale.o [3]
+_LdtobDefault           0x08000b91  0x42c  Code  Lc  xprintffull.o [3]
+_LitobDefault           0x08000a5d  0x134  Code  Lc  xprintffull.o [3]
+_LocaleC_lconv          0x08003a88   0x48  Data  Gb  xlocale_c.o [3]
+_LocaleEncoding         0x08003fcd   0x10  Code  Gb  setlocale.o [3]
+_LocaleReturnString     0x20000e84   0x50  Data  Lc  setlocale.o [3]
+_Locale_LconvArray      0x20000e80    0x4  Data  Gb  setlocale.o [3]
+_Locale_Profile         0x20000e50   0x1c  Data  Gb  setlocale.o [3]
+_Locale_lconv           0x20000ed4   0x48  Data  Gb  localeconv.o [3]
+_Mbtowc                 0x08003e15   0x20  Code  Gb  xmbtowc.o [3]
+_Printf                 0x08000131  0x648  Code  Gb  xprintffull.o [3]
+_Prout                  0x08003f01   0x16  Code  Gb  xprout.o [3]
+_PutcharsDefault        0x08001231   0x32  Code  Lc  xprintffull.o [3]
+_PutstrDefault          0x08000779  0x2e4  Code  Lc  xprintffull.o [3]
+_TzoneStr               0x20000e6c    0x4  Data  Gb  setlocale.o [3]
+_Wctomb                 0x08003e51   0x1a  Code  Gb  xwctomb.o [3]
+__BASEPRICONFIG         0x080037a3         Code  Gb  cortexm3_macro.o [1]
+__DMB                   0x08003755         Code  Gb  cortexm3_macro.o [1]
+__DSB                   0x0800374f         Code  Gb  cortexm3_macro.o [1]
+__GetBASEPRI            0x080037a9         Code  Gb  cortexm3_macro.o [1]
+__ISB                   0x08003749         Code  Gb  cortexm3_macro.o [1]
+__MRS_CONTROL           0x0800375f         Code  Gb  cortexm3_macro.o [1]
+__MRS_MSP               0x0800377b         Code  Gb  cortexm3_macro.o [1]
+__MRS_PSP               0x0800376f         Code  Gb  cortexm3_macro.o [1]
+__MSR_CONTROL           0x08003765         Code  Gb  cortexm3_macro.o [1]
+__MSR_MSP               0x08003781         Code  Gb  cortexm3_macro.o [1]
+__MSR_PSP               0x08003775         Code  Gb  cortexm3_macro.o [1]
+__READ_FAULTMASK        0x0800379d         Code  Gb  cortexm3_macro.o [1]
+__READ_PRIMASK          0x0800378f         Code  Gb  cortexm3_macro.o [1]
+__RESETFAULTMASK        0x08003795         Code  Gb  cortexm3_macro.o [1]
+__RESETPRIMASK          0x08003787         Code  Gb  cortexm3_macro.o [1]
+__REV_HalfWord          0x080037af         Code  Gb  cortexm3_macro.o [1]
+__REV_Word              0x080037b3         Code  Gb  cortexm3_macro.o [1]
+__SETFAULTMASK          0x08003799         Code  Gb  cortexm3_macro.o [1]
+__SETPRIMASK            0x0800378b         Code  Gb  cortexm3_macro.o [1]
+__SEV                   0x08003745         Code  Gb  cortexm3_macro.o [1]
+__SVC                   0x0800375b         Code  Gb  cortexm3_macro.o [1]
+__WFE                   0x08003741         Code  Gb  cortexm3_macro.o [1]
+__WFI                   0x0800373d         Code  Gb  cortexm3_macro.o [1]
+__aeabi_cdcmple         0x08003c79         Code  Gb  DblCmpLe.o [4]
+__aeabi_cdrcmple        0x08003ca9         Code  Gb  DblCmpGe.o [4]
+__aeabi_d2iz            0x080038f9         Code  Gb  DblToI32.o [4]
+__aeabi_d2uiz           0x08003925         Code  Gb  DblToI32.o [4]
+__aeabi_dadd            0x080030e1         Code  Gb  DblAdd.o [4]
+__aeabi_ddiv            0x0800207d         Code  Gb  DblDiv.o [4]
+__aeabi_dmul            0x08002701         Code  Gb  DblMul.o [4]
+__aeabi_dsub            0x080028a5         Code  Gb  DblSub.o [4]
+__aeabi_i2d             0x08003cd9         Code  Gb  I32ToDbl.o [4]
+__aeabi_ldiv0           0x08004125         Code  Gb  I64DivZer.o [4]
+__aeabi_ldivmod         0x080033bd         Code  Gb  I64DivMod.o [4]
+__aeabi_memcpy          0x08003831         Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy4         0x08003849         Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy8         0x08003849         Code  Gb  ABImemcpy.o [4]
+__aeabi_ui2d            0x08003ced         Code  Gb  I32ToDbl.o [4]
+__aeabi_uldivmod        0x080033d1         Code  Gb  I64DivMod.o [4]
+__call_dtors            0x080036f9    0x4  Code  Gb  cppinit.o [3]
+__cstart_call_dtors     0x08004093         Code  Gb  cexit.o [4]
+__cxa_atexit            0x080036c1   0x38  Code  Gb  cppinit.o [3]
+__cxa_finalize          0x080036fd   0x3c  Code  Gb  cppinit.o [3]
+__data_Aldata           0x20000e20    0x8  Data  Gb  xxmemxmalloc.o [3]
+__data_GetMemChunk      0x08003d5d   0x28  Code  Gb  xgetmemchunk.o [3]
+__exit                  0x08003fb9   0x14  Code  Gb  exit.o [5]
+__iar_Dnorm             0x080032ad   0xdc  Code  Gb  xdnorm.o [3]
+__iar_Dscale            0x08002de5  0x120  Code  Gb  xdscale.o [3]
+__iar_Locksyslock       0x080035d5   0x4c  Code  Gb  xsyslock.o [3]
+__iar_Mbcurmax          0x080040c5    0xa  Code  Gb  xmbcurmax.o [3]
+__iar_Memchr            0x080038a1         Code  Gb  memchr.o [4]
+__iar_Mtxdst            0x080039b1    0xe  Code  Gb  MtxWrapper.o [3]
+__iar_Mtxinit           0x080039a1    0xe  Code  Gb  MtxWrapper.o [3]
+__iar_Mtxlock           0x080039c1    0xe  Code  Gb  MtxWrapper.o [3]
+__iar_Mtxunlock         0x080039d1    0xe  Code  Gb  MtxWrapper.o [3]
+__iar_Stdout            0x20000f20   0x40  Data  Gb  xfiles.o [3]
+__iar_Strchr            0x08003ed1         Code  Gb  strchr.o [4]
+__iar_SubNrmlX          0x08003c11         Code  Gb  DblSubNrml.o [4]
+__iar_SubNrmlY          0x08003c2d         Code  Gb  DblSubNrml.o [4]
+__iar_Tls_setup__IsdstStr
+                        0x20000e78    0x4  Data  Gb  setlocale.o [3]
+__iar_Tls_setup__Locale_Profile
+                        0x20000e7c    0x4  Data  Gb  setlocale.o [3]
+__iar_Tls_setup__Locale_lconv
+                        0x20000f1c    0x4  Data  Gb  localeconv.o [3]
+__iar_Tls_setup__TzoneStr
+                        0x20000e70    0x4  Data  Gb  setlocale.o [3]
+__iar_Unlocksyslock     0x08003621   0x14  Code  Gb  xsyslock.o [3]
+__iar_d2uiz             0x0800392f         Code  Gb  DblToI32.o [4]
+__iar_dadd              0x080030f3         Code  Gb  DblAdd.o [4]
+__iar_data_init2        0x08003e35   0x1c  Code  Gb  data_init2.o [4]
+__iar_dsub              0x080028b7         Code  Gb  DblSub.o [4]
+__iar_dsubStart         0x080028cb         Code  Gb  DblSub.o [4]
+__iar_program_start     0x08003eb9         Code  Gb  cmain.o [4]
+__iar_rle_init2         0x080037b9   0x78  Code  Gb  rle_init2.o [4]
+__iar_sh_stdout_close   0x08003ee9   0x14  Code  Gb  iarwstd.o [5]
+__iar_sh_stdout_handle  0x20000e48    0x4  Data  Lc  iarwstd.o [5]
+__iar_ui2d              0x08003cef         Code  Gb  I32ToDbl.o [4]
+__iar_zero_init2        0x08003e6d   0x1a  Code  Gb  zero_init2.o [4]
+__low_level_init        0x0800411d    0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x08000000  0x130  Data  Gb  stm32f10x_vector.o [1]
+_exit                   0x08004091         Code  Gb  cexit.o [4]
+_main                   0x08003ecb         Code  Gb  cmain.o [4]
+analyse_get_url         0x08001c95   0x56  Code  Gb  simple_server.o [1]
+baseurl                 0x20000f60   0x18  Data  Lc  simple_server.o [1]
+buf                     0x200007d4  0x5e0  Data  Lc  simple_server.o [1]
+checksum                0x08001265   0x56  Code  Gb  ip_arp_udp_tcp.o [1]
+clearlocks              0x080035ad   0x26  Code  Lc  xsyslock.o [3]
+div                     0x08003f91   0x14  Code  Gb  div.o [3]
+enc28j60Init            0x08001989  0x1b0  Code  Gb  ENC28J60.o [1]
+enc28j60PacketReceive   0x08001bb1   0xc6  Code  Gb  ENC28J60.o [1]
+enc28j60PacketSend      0x08001b49   0x66  Code  Gb  ENC28J60.o [1]
+enc28j60PhyWrite        0x08001949   0x30  Code  Gb  ENC28J60.o [1]
+enc28j60Read            0x08001911   0x18  Code  Gb  ENC28J60.o [1]
+enc28j60ReadBuffer      0x08001871   0x34  Code  Gb  ENC28J60.o [1]
+enc28j60ReadOp          0x080017f5   0x44  Code  Gb  ENC28J60.o [1]
+enc28j60SetBank         0x080018d5   0x3c  Code  Gb  ENC28J60.o [1]
+enc28j60Write           0x08001929   0x1e  Code  Gb  ENC28J60.o [1]
+enc28j60WriteBuffer     0x080018a5   0x2e  Code  Gb  ENC28J60.o [1]
+enc28j60WriteOp         0x08001839   0x36  Code  Gb  ENC28J60.o [1]
+enc28j60_MAC            0x080040d0    0x8  Data  Gb  main.o [1]
+enc28j60clkout          0x08001979    0xe  Code  Gb  ENC28J60.o [1]
+enc28j60getrev          0x08001b3d    0xa  Code  Gb  ENC28J60.o [1]
+eth_type_is_arp_and_my_ip
+                        0x080012f9   0x3c  Code  Gb  ip_arp_udp_tcp.o [1]
+eth_type_is_ip_and_my_ip
+                        0x08001335   0x44  Code  Gb  ip_arp_udp_tcp.o [1]
+exit                    0x08004121    0x4  Code  Gb  exit.o [3]
+fill_ip_hdr_checksum    0x0800139d   0x2c  Code  Gb  ip_arp_udp_tcp.o [1]
+fill_tcp_data           0x08001725   0x1c  Code  Gb  ip_arp_udp_tcp.o [1]
+fill_tcp_data_p         0x08001701   0x22  Code  Gb  ip_arp_udp_tcp.o [1]
+fputc                   0x08002b55   0x20  Code  Gb  main.o [1]
+free                    0x08003639   0x88  Code  Gb  xxmemxfree.o [3]
+get_tcp_data_pointer    0x080016a5   0x14  Code  Gb  ip_arp_udp_tcp.o [1]
+info_data_len           0x20000e30    0x4  Data  Lc  ip_arp_udp_tcp.o [1]
+info_hdr_len            0x20000e2c    0x4  Data  Lc  ip_arp_udp_tcp.o [1]
+init_ip_arp_udp_tcp     0x080012bd   0x3a  Code  Gb  ip_arp_udp_tcp.o [1]
+init_len_info           0x080016b9   0x44  Code  Gb  ip_arp_udp_tcp.o [1]
+ipaddr                  0x20000e28    0x4  Data  Lc  ip_arp_udp_tcp.o [1]
+localeconv              0x08003fa5   0x10  Code  Gb  localeconv.o [3]
+macaddr                 0x20000e18    0x8  Data  Lc  ip_arp_udp_tcp.o [1]
+main                    0x08002a25   0xbc  Code  Gb  main.o [1]
+make_arp_answer_from_request
+                        0x08001509   0x68  Code  Gb  ip_arp_udp_tcp.o [1]
+make_echo_reply_from_request
+                        0x08001579   0x3e  Code  Gb  ip_arp_udp_tcp.o [1]
+make_eth                0x08001379   0x24  Code  Gb  ip_arp_udp_tcp.o [1]
+make_ip                 0x080013c9   0x2c  Code  Gb  ip_arp_udp_tcp.o [1]
+make_tcp_ack_from_any   0x08001741   0x62  Code  Gb  ip_arp_udp_tcp.o [1]
+make_tcp_ack_with_data  0x080017a9   0x4c  Code  Gb  ip_arp_udp_tcp.o [1]
+make_tcp_synack_from_syn
+                        0x08001659   0x4a  Code  Gb  ip_arp_udp_tcp.o [1]
+make_tcphead            0x080013f5  0x110  Code  Gb  ip_arp_udp_tcp.o [1]
+make_udp_reply_from_request
+                        0x080015b9   0xa0  Code  Gb  ip_arp_udp_tcp.o [1]
+malloc                  0x08003459   0xbc  Code  Gb  xxmemxmalloc.o [3]
+memchr                  0x080038a1         Code  Gb  memchr.o [4]
+mtx                     0x20000e08   0x10  Data  Lc  xsyslock.o [3]
+mtxdst                  0x20000e3c    0x4  Data  Lc  MtxWrapper.o [3]
+mtxinit                 0x20000e38    0x4  Data  Lc  MtxWrapper.o [3]
+mtxlock                 0x20000e40    0x4  Data  Lc  MtxWrapper.o [3]
+mtxunlock               0x20000e44    0x4  Data  Lc  MtxWrapper.o [3]
+myip                    0x20000f88    0x4  Data  Lc  simple_server.o [1]
+mymac                   0x20000f78    0x8  Data  Lc  simple_server.o [1]
+myudpport               0x20000f90    0x4  Data  Lc  simple_server.o [1]
+mywwwport               0x20000f8c    0x4  Data  Lc  simple_server.o [1]
+next_abi_dtor_rec       0x20000f94    0x4  Data  Lc  cppinit.o [3]
+obuf                    0x20000db4   0x50  Data  Lc  xfiles.o [3]
+password                0x20000f80    0x8  Data  Lc  simple_server.o [1]
+print_webpage           0x08001ced   0xc4  Code  Gb  simple_server.o [1]
+printf                  0x08003df5   0x20  Code  Gb  printf.o [3]
+putchar                 0x080040b9    0xc  Code  Gb  putchar.o [3]
+seqnum                  0x20000f99    0x1  Data  Lc  ip_arp_udp_tcp.o [1]
+simple_server           0x08001db5  0x2c4  Code  Gb  simple_server.o [1]
+strchr                  0x08003ed1         Code  Gb  strchr.o [4]
+strcpy                  0x08003ad1         Code  Gb  strcpy.o [4]
+strlen                  0x08003bd9         Code  Gb  strlen.o [4]
+strncmp                 0x08003d09   0x2a  Code  Wk  strncmp.o [3]
+syslock_o               0x20000e04    0x4  Data  Lc  xsyslock.o [3]
+verify_password         0x08001c7d   0x16  Code  Gb  simple_server.o [1]
+wwwport                 0x20000f98    0x1  Data  Lc  ip_arp_udp_tcp.o [1]
+
+
+[1] = F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj
+[2] = command line
+[3] = dl7M_tl_if.a
+[4] = rt7M_tl.a
+[5] = shb_l.a
+
+  15 366 bytes of readonly  code memory
+   1 502 bytes of readonly  data memory
+   3 993 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,456 @@
+###############################################################################
+#                                                                             #
+#                                                       22/Apr/2009  23:41:43 #
+# IAR ANSI C/C++ Compiler V5.20.2.21007/W32 EVALUATION for ARM                #
+# Copyright 1999-2008 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\simple_server.c  #
+#    Command line =  "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\TCPIP\simple_server.c" -lcN                         #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -lb      #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\List\" -o       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\Debug\Obj\" --no_cse  #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "D:\Program  #
+#                    Files\IAR Systems\Embedded Workbench 5.0                 #
+#                    Evaluation\ARM\INC\DLib_Config_Full.h" -I                #
+#                    "F:\b百利胜\enc28j60\enc28j60                            #
+#                    _IAR\EWARM_V2.0.2\library\inc\" -I                       #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\EWARM_V2.0.2\" -I     #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\" -I                  #
+#                    "F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\" -I            #
+#                    "D:\Program Files\IAR Systems\Embedded Workbench 5.0     #
+#                    Evaluation\ARM\INC\" -Ol                                 #
+#    List file    =  F:\b百利胜\enc28j60\enc28j60                             #
+#                    _IAR\Debug\List\simple_server.lst                        #
+#    Object file  =  F:\b百利胜\enc28j60\enc28j60                             #
+#                    _IAR\Debug\Obj\simple_server.o                           #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+F:\b百利胜\enc28j60\enc28j60 _IAR\TCPIP\simple_server.c
+      1          
+      2          
+      3          /********************************************
+      4           * vim:sw=8:ts=8:si:et
+      5           * To use the above modeline in vim you must have "set modeline" in your .vimrc
+      6           * Author: Guido Socher
+      7           * Copyright: GPL V2
+      8           * See http://www.gnu.org/licenses/gpl.html
+      9           *
+     10           * Ethernet remote device and sensor
+     11           * UDP and HTTP interface 
+     12                  url looks like this http://baseurl/password/command
+     13                  or http://baseurl/password/
+     14           *
+     15           * Title: Microchip ENC28J60 Ethernet Interface Driver
+     16           * Chip type           : ATMEGA88 with ENC28J60
+     17           * Note: there is a version number in the text. Search for tuxgraphics
+     18           *********************************************/
+     19          
+     20          
+     21          /*********************************************
+     22           * modified: 2007-08-08
+     23           * Author  : awake
+     24           * Copyright: GPL V2
+     25           * http://www.icdev.com.cn/?2213/
+     26           * Host chip: ADUC7026
+     27          **********************************************/
+     28          //#include <includes.h>
+     29          #include <string.h>
+     30          #include "enc28j60.h"
+     31          #include "ip_arp_udp_tcp.h"
+     32          #include "net.h"
+     33          #include "simple_server.h"
+     34          #define PSTR(s) s
+     35          
+     36          //extern void delay_ms(unsigned char ms);
+     37          
+     38          // please modify the following two lines. mac and ip have to be unique
+     39          // in your local area network. You can not have the same numbers in
+     40          // two devices:
+     41          static unsigned char mymac[6] = {0x54,0x55,0x58,0x10,0x00,0x24};
+     42          static unsigned char myip[4] = {192,168,1,25};
+     43          // base url (you can put a DNS name instead of an IP addr. if you have
+     44          // a DNS server (baseurl must end in "/"):
+     45          static char baseurl[]="http://192.168.1.25/";
+     46          static unsigned int mywwwport =80; // listen port for tcp/www (max range 1-254)
+     47          // or on a different port:
+     48          //static char baseurl[]="http://10.0.0.24:88/";
+     49          //static unsigned int mywwwport =88; // listen port for tcp/www (max range 1-254)
+     50          //
+     51          static unsigned int myudpport =1200; // listen port for udp
+     52          // how did I get the mac addr? Translate the first 3 numbers into ascii is: TUX
+     53          
+     54          #define BUFFER_SIZE 1500//400
+     55          static unsigned char buf[BUFFER_SIZE+1];
+     56          
+     57          // the password string (only the first 5 char checked), (only a-z,0-9,_ characters):
+     58          static char password[]="123456"; // must not be longer than 9 char
+     59          const unsigned char WebSide[] = {
+     60          "<p><b><span lang=EN-US>A/D </span>温度监视<span lang=EN-US>:(</span>范围<span\r\n"
+     61          "lang=EN-US>0~<st1:chmetcnv UnitName=\"°C\" SourceValue=\"50\" HasSpace=\"False\"\r\n"
+     62          "Negative=\"False\" NumberType=\"1\" TCSC=\"0\" w:st=\"on\">50°C</st1:chmetcnv>)</span></b></p>\r\n"
+     63          "\r\n"
+     64          "<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=540\r\n"
+     65          " style='width:405.0pt;mso-cellspacing:0cm;background:red;border:outset 4.5pt;\r\n"
+     66          " mso-padding-alt:0cm 0cm 0cm 0cm'>\r\n"
+     67          " <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>\r\n"
+     68          "  <td style='padding:0cm 0cm 0cm 0cm'>\r\n"
+     69          "  <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0\r\n"
+     70          "   style='mso-cellspacing:0cm;mso-padding-alt:0cm 0cm 0cm 0cm'>\r\n"
+     71          "   <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>\r\n"
+     72          "    <td style='background:lime;padding:0cm 0cm 0cm 0cm'>\r\n"
+     73          "    <p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>\r\n"
+     74          "    </td>\r\n"
+     75          };
+     76          // 
+     77          unsigned char verify_password(char *str)
+     78          	{
+     79          	// the first characters of the received string are
+     80          	// a simple password/cookie:
+     81          	if (strncmp(password,str,5)==0)
+     82          		{
+     83          	    return(1);
+     84          		}
+     85          	return(0);
+     86          	}
+     87          
+     88          // takes a string of the form password/commandNumber and analyse it
+     89          // return values: -1 invalid password, otherwise command number
+     90          //                -2 no command given but password valid
+     91          signed char analyse_get_url(char *str)
+     92          	{
+     93          	unsigned char i=0;
+     94          	if (verify_password(str)==0)
+     95          		{
+     96          		return(-1);
+     97          		}
+     98          	// find first "/"
+     99          	// passw not longer than 9 char:
+    100          	while(*str && i<10 && *str >',' && *str<'{')
+    101          		{
+    102                  if (*str=='/')
+    103          			{
+    104                      str++;
+    105                      break;
+    106                  	}
+    107                  i++;
+    108                  str++;
+    109          		}
+    110          	if (*str < 0x3a && *str > 0x2f)
+    111          		{
+    112                  // is a ASCII number, return it
+    113                  return(*str-0x30);
+    114          		}
+    115          	return(-2);
+    116          	}
+    117          
+    118          // prepare the webpage by writing the data to the tcp send buffer
+    119          unsigned int print_webpage(unsigned char *buf,unsigned char on_off)
+    120          	{
+    121              unsigned int plen;
+    122              plen=fill_tcp_data_p(buf,0,PSTR("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\nPragma: no-cache\r\n\r\n"));
+    123              plen=fill_tcp_data_p(buf,plen,PSTR("<center><p>LED输出: "));
+    124              if (on_off)
+    125          			{
+    126                      plen=fill_tcp_data_p(buf,plen,PSTR("<font color=\"#00FF00\"> 亮</font>"));
+    127              		}
+    128          		else
+    129          			{
+    130                      plen=fill_tcp_data_p(buf,plen,PSTR("灭"));
+    131              		}
+    132              plen=fill_tcp_data_p(buf,plen,PSTR(" <small><a href=\""));
+    133              plen=fill_tcp_data(buf,plen,baseurl);
+    134              plen=fill_tcp_data(buf,plen,password);
+    135              plen=fill_tcp_data_p(buf,plen,PSTR("\">[刷新]</a></small></p>\n<p><a href=\""));
+    136              // the url looks like this http://baseurl/password/command
+    137              plen=fill_tcp_data(buf,plen,baseurl);
+    138              plen=fill_tcp_data(buf,plen,password);
+    139              if (on_off)
+    140          			{
+    141                      plen=fill_tcp_data_p(buf,plen,PSTR("/0\">关闭LED</a><p>"));
+    142              		}
+    143          		else
+    144          			{
+    145                      plen=fill_tcp_data_p(buf,plen,PSTR("/1\">开启LED</a><p>"));
+    146              		}
+    147              plen=fill_tcp_data_p(buf,plen,PSTR("</center><hr><br>STM32F103VBT6 基于UCOS-II V2.85 WEB 网页试验----阳志勇\n"));
+    148              //plen=fill_tcp_data_p(buf,plen,PSTR(WebSide));
+    149              
+    150              return(plen);
+    151          	}
+    152          
+    153          int simple_server(void)
+    154          	{      
+    155              unsigned int plen;
+    156              unsigned int dat_p;
+    157              unsigned char i=0;
+    158              unsigned char cmd_pos=0;
+    159              signed char cmd;
+    160              unsigned char payloadlen=0;
+    161              char str[30];
+    162              char cmdval;
+    163          
+    164                  
+    165          //	Del_1ms(100);
+    166          	/*initialize enc28j60*/
+    167          	enc28j60Init(mymac);//ENC28J60初始化mymac[6] = {0x54,0x55,0x58,0x10,0x00,0x24};
+    168          	init_ip_arp_udp_tcp(mymac,myip,mywwwport);//init_ip_arp_udp_tcp(mymac,myip,mywwwport)
+    169              //指示灯状态:0x476 is PHLCON LEDA(绿)=links status, LEDB(红)=receive/transmit
+    170              enc28j60PhyWrite(PHLCON,0x7a4);	
+    171          	enc28j60clkout(2); // change clkout from 6.25MHz to 12.5MHz
+    172          //	Del_1ms(20);
+    173          
+    174          	//init the ethernet/ip layer:
+    175              while(1)
+    176              	{
+    177          //		OSTimeDlyHMSM(0, 0, 0, 50);
+    178                  // get the next new packet:
+    179                  plen = enc28j60PacketReceive(BUFFER_SIZE, buf);
+    180                  //USART_DMASendData(USART1,buf,plen);
+    181          
+    182                  /*plen will ne unequal to zero if there is a valid packet (without crc error) */
+    183                  if(plen==0)
+    184                  	{
+    185                      continue;
+    186                  	}
+    187                  // iarp s broadcast if unknown but a host may also
+    188                  // verify the mac address by sending it to 
+    189                  // a unicast address.
+    190                  if(eth_type_is_arp_and_my_ip(buf,plen))
+    191                  	{
+    192          			make_arp_answer_from_request(buf);//ping 192.168.1.25 -t
+    193          			//USART_DMASendText(USART1,"make_arp_answer_from_request\n");
+    194                      continue;
+    195                  	}
+    196          
+    197                  // check if ip packets are for us:
+    198                  if(eth_type_is_ip_and_my_ip(buf,plen)==0)//没有收到数据
+    199                  	{
+    200                      continue;
+    201                  	}
+    202          
+    203                  
+    204                  if(buf[IP_PROTO_P]==IP_PROTO_ICMP_V && buf[ICMP_TYPE_P]==ICMP_TYPE_ECHOREQUEST_V)
+    205                  	{
+    206                      // a ping packet, let's send pong	
+    207          			make_echo_reply_from_request(buf, plen);
+    208          			//USART_DMASendText(USART1,"make_echo_reply_from_request\n");
+    209          			continue;
+    210                  	}
+    211                         // tcp port www start, compare only the lower byte
+    212          		if (buf[IP_PROTO_P]==IP_PROTO_TCP_V&&buf[TCP_DST_PORT_H_P]==0&&buf[TCP_DST_PORT_L_P]==mywwwport)
+    213          			{
+    214                      if (buf[TCP_FLAGS_P] & TCP_FLAGS_SYN_V)
+    215          				{
+    216                          make_tcp_synack_from_syn(buf);
+    217                          // make_tcp_synack_from_syn does already send the syn,ack
+    218                          continue;
+    219                      	}
+    220          	      if (buf[TCP_FLAGS_P] & TCP_FLAGS_ACK_V)
+    221          				{
+    222          	            init_len_info(buf); // init some data structures
+    223          	            // we can possibly have no data, just ack:
+    224          	            dat_p=get_tcp_data_pointer();
+    225          	            if (dat_p==0)
+    226          					{
+    227          	                if (buf[TCP_FLAGS_P] & TCP_FLAGS_FIN_V)
+    228          						{
+    229          	                    // finack, answer with ack
+    230          	                    make_tcp_ack_from_any(buf);
+    231          	                	}
+    232          	                // just an ack with no data, wait for next packet
+    233          	                continue;
+    234          	                }
+    235          				if (strncmp("GET ",(char *)&(buf[dat_p]),4)!=0)
+    236          					{
+    237          			        // head, post and other methods:
+    238          			        //
+    239          			        // for possible status codes see:
+    240          			        // http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+    241          			        plen=fill_tcp_data_p(buf,0,PSTR("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n<h1>200 OK</h1>"));
+    242          			        goto SENDTCP;
+    243          					}
+    244          				if (strncmp("/ ",(char *)&(buf[dat_p+4]),2)==0)
+    245          					{
+    246          			        plen=fill_tcp_data_p(buf,0,PSTR("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n"));
+    247          			        plen=fill_tcp_data_p(buf,plen,PSTR("<p>Usage: "));
+    248          			        plen=fill_tcp_data(buf,plen,baseurl);
+    249          			        plen=fill_tcp_data_p(buf,plen,PSTR("password</p>"));
+    250          			        //goto SENDTCP;
+    251          					}
+    252          				cmd=analyse_get_url((char *)&(buf[dat_p+5]));
+    253          				// for possible status codes see:
+    254          				// http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+    255          				if (cmd==-1)
+    256          					{
+    257          			        plen=fill_tcp_data_p(buf,0,PSTR("HTTP/1.0 401 Unauthorized\r\nContent-Type: text/html\r\n\r\n<h1>401 Unauthorized</h1>"));
+    258          			       // goto SENDTCP;
+    259          					}
+    260          				if (cmd==1)
+    261          					{
+    262          			        //PORTD|= (1<<PD7);// transistor on
+    263          					//IOCLR |= (1<<26);
+    264          //                    LED1ON();
+    265          					i=1;
+    266          					}
+    267          				if (cmd==0)
+    268          					{
+    269          			        //PORTD &= ~(1<<PD7);// transistor off
+    270          					//IOSET |= (1<<26);
+    271          //                    LED1OFF();
+    272          					i=0;
+    273          					}
+    274          				// if (cmd==-2) or any other value
+    275          				// just display the status:
+    276          				plen=print_webpage(buf,(i));
+    277          				
+    278          				SENDTCP:
+    279          				make_tcp_ack_from_any(buf); // send ack for http get
+    280          				make_tcp_ack_with_data(buf,plen); // send data
+    281          				continue;
+    282          				}
+    283          			}
+    284          	// tcp port www end
+    285          	//
+    286          	// udp start, we listen on udp port 1200=0x4B0
+    287          		if (buf[IP_PROTO_P]==IP_PROTO_UDP_V&&buf[UDP_DST_PORT_H_P]==4&&buf[UDP_DST_PORT_L_P]==0xb0)
+    288          			{
+    289          			payloadlen=buf[UDP_LEN_L_P]-UDP_HEADER_LEN;
+    290          			// you must sent a string starting with v
+    291          			// e.g udpcom version 10.0.0.24
+    292          			if (verify_password((char *)&(buf[UDP_DATA_P])))
+    293          				{
+    294          				// find the first comma which indicates 
+    295          				// the start of a command:
+    296          				cmd_pos=0;
+    297          				while(cmd_pos<payloadlen)
+    298          					{
+    299          					cmd_pos++;
+    300          					if (buf[UDP_DATA_P+cmd_pos]==',')
+    301          						{
+    302          					    cmd_pos++; // put on start of cmd
+    303          					    break;
+    304          						}
+    305          					}
+    306          				// a command is one char and a value. At
+    307          				// least 3 characters long. It has an '=' on
+    308          				// position 2:
+    309          				if (cmd_pos<2 || cmd_pos>payloadlen-3 || buf[UDP_DATA_P+cmd_pos+1]!='=')
+    310          					{
+    311          					strcpy(str,"e=no_cmd");
+    312          					goto ANSWER;
+    313          					}
+    314          				// supported commands are
+    315          				// t=1 t=0 t=?
+    316          				if (buf[UDP_DATA_P+cmd_pos]=='t')
+    317          					{
+    318          					cmdval=buf[UDP_DATA_P+cmd_pos+2];
+    319          					if(cmdval=='1')
+    320          							{
+    321          						    //PORTD|= (1<<PD7);// transistor on
+    322          							//IOCLR |= (1<<26);
+    323                                      //LED1ON();
+    324          						    strcpy(str,"t=1");
+    325          						    goto ANSWER;
+    326          							}
+    327          						else if(cmdval=='0')
+    328          							{
+    329          						    //PORTD &= ~(1<<PD7);// transistor off
+    330          							//IOSET |= (1<<26);
+    331                                      //LED1OFF();
+    332          						    strcpy(str,"t=0");
+    333          						    goto ANSWER;
+    334          							}
+    335          						else if(cmdval=='?')
+    336          							{
+    337          	/*
+    338          						    if (IOPIN & (1<<26))
+    339          								{
+    340          					            strcpy(str,"t=1");
+    341          					            goto ANSWER;
+    342          						    	}
+    343          	*/
+    344          						    strcpy(str,"t=0");
+    345          						    goto ANSWER;
+    346          							}
+    347          					}
+    348          				strcpy(str,"e=no_such_cmd");
+    349          				goto ANSWER;
+    350          				}
+    351          			strcpy(str,"e=invalid_pw");
+    352          			ANSWER:
+    353          			make_udp_reply_from_request(buf,str,strlen(str),myudpport);
+    354          			
+    355          			}
+    356          		}
+    357          //        return (0);
+    358          	}
+
+   Maximum stack usage in bytes:
+
+     Function        .cstack
+     --------        -------
+     analyse_get_url      0
+     print_webpage        0
+     simple_server        0
+     verify_password      0
+
+
+   Section sizes:
+
+     Function/Label                                 Bytes
+     --------------                                 -----
+     mymac                                             8
+     myip                                              4
+     baseurl                                          24
+     mywwwport                                         4
+     myudpport                                         4
+     buf                                            1504
+     password                                          8
+     WebSide                                         892
+     verify_password                                  22
+     analyse_get_url                                  86
+     print_webpage                                   196
+     simple_server                                   708
+     ??DataTable4                                      4
+     ??DataTable5                                      4
+     ?<Constant "HTTP/1.0 200 OK\r\nCont...">         64
+     ?<Constant "<center><p>LED\312\344\263\366: ">   24
+     ?<Constant "<font color=\"#00FF00\"...">         36
+     ?<Constant "\303\360">                            4
+     ?<Constant " <small><a href=\"">                 20
+     ?<Constant "\">[\313\242\320\302]</a></small><   40
+     ?<Constant "/0\">\271\330\261\325LED</a><p>">    20
+     ?<Constant "/1\">\277\252\306\364LED</a><p>">    20
+     ?<Constant "</center><hr><br>STM3...">           76
+     ?<Constant "HTTP/1.0 200 OK\r\nCont...">_1       60
+     ?<Constant "GET ">                                8
+     ?<Constant "HTTP/1.0 200 OK\r\nCont...">_2       48
+     ?<Constant "<p>Usage: ">                         12
+     ?<Constant "password</p>">                       16
+     ?<Constant "/ ">                                  4
+     ?<Constant "HTTP/1.0 401 Unauthor...">           80
+     ?<Constant "e=no_cmd">                           12
+     ?<Constant "t=1">                                 4
+     ?<Constant "t=0">                                 4
+     ?<Constant "e=no_such_cmd">                      16
+     ?<Constant "e=invalid_pw">                       16
+
+ 
+ 1 504 bytes in section .bss
+    52 bytes in section .data
+ 1 476 bytes in section .rodata
+ 1 020 bytes in section .text
+ 
+ 1 020 bytes of CODE  memory
+ 1 476 bytes of CONST memory
+ 1 556 bytes of DATA  memory
+
+Errors: none
+Warnings: none

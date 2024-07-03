@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        >
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户信息"
+        android:textSize="33sp"
+        android:id="@+id/about_title"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@id/relativeLayout"
+        android:layout_alignStart="@+id/imageButton" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_title"
+        android:id="@+id/user_info"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账号"
+            android:textSize="24sp"
+            android:layout_marginStart="51dp"
+            android:id="@+id/account_info"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="226dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/account_editText"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/account_info" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_info"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户名"
+            android:textSize="24sp"
+            android:id="@+id/username_info"
+            android:layout_marginStart="28dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/username_editText"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/username_info" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_info"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="年龄"
+            android:textSize="24sp"
+            android:layout_marginStart="50dp"
+            android:id="@+id/age_info"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="228dp"
+            android:id="@+id/age_edit"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/age_info" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性别"
+            android:textSize="24sp"
+            android:id="@+id/sex_info"
+
+            android:layout_marginStart="51dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="228dp"
+            android:id="@+id/sex_edit"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/sex_info" />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_info"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="病历"
+            android:textSize="24sp"
+            android:layout_marginStart="51dp"
+            android:id="@+id/history_info"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="228dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/history_edit"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/history_info" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_title"
+        android:id="@+id/user_info"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注意事项"
+            android:textSize="24sp"
+            android:id="@+id/attention_info"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="19dp" />
+        <EditText
+            android:layout_width="212dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/attention_editText"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/attention_info" />
+    </RelativeLayout>
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton_info"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/setting_save"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAVE"
+            android:textSize="24sp"
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+
+</LinearLayout>

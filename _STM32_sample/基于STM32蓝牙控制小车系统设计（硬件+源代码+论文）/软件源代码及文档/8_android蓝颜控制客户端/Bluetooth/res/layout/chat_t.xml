@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id = "@+id/container"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    
+    <RelativeLayout
+	   android:layout_width="fill_parent"
+	  android:layout_height="wrap_content"
+	 
+	  android:id= "@+id/edit_bottombar"
+	  android:layout_alignParentBottom = "true">
+
+        <Button
+            android:id="@+id/btn_disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="断开" />
+			
+		<Button
+		    android:id="@+id/btn_msg_send"
+		    android:layout_width="44dp"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentRight="true"
+		    android:text="发送" />
+		
+		<Button
+		    android:id="@+id/btn_msg_send1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentRight="true"
+		    android:text="发送1" />
+		
+		<Button
+		    android:id="@+id/btn_msg_send2"
+		    android:layout_width="44dp"
+		    android:layout_height="fill_parent"
+		    android:layout_alignParentRight="true"
+		    android:text="发送2" />
+		
+		<Button
+		    android:id="@+id/btn_msg_send3"
+		    android:layout_width="44dp"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentRight="true"
+		    android:text="发送3" />
+
+	</RelativeLayout>  
+
+	 <ListView
+	     android:id="@+id/list"
+	     android:layout_width="wrap_content"
+	     android:layout_height="match_parent"
+	     android:layout_alignParentRight="true"
+	     android:layout_below="@id/container"
+	     android:layout_weight="1.0"
+	     android:divider="#ffc6c6c6"
+	     android:scrollingCache="false" />
+
+</RelativeLayout>

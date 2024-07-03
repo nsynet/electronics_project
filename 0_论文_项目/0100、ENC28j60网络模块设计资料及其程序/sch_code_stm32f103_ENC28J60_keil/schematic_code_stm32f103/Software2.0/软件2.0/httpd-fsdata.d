@@ -1,0 +1,15 @@
+httpd-fsdata.o: uip\httpd\httpd-fsdata.c
+httpd-fsdata.o: E:\Keil\\ARM\RV31\INC\RTL.h
+httpd-fsdata.o: uip\httpd\httpd-fsdata.h
+httpd-fsdata.o: uip\httpd\../uip.h
+httpd-fsdata.o: uip\httpd\../uipopt.h
+httpd-fsdata.o: uip\httpd\../uip-conf.h
+httpd-fsdata.o: E:\Keil\\ARM\RV31\INC\inttypes.h
+httpd-fsdata.o: E:\Keil\\ARM\RV31\INC\stdint.h
+httpd-fsdata.o: uip\httpd\../../uip_app_router.h
+httpd-fsdata.o: uip\httpd\../httpd/httpd.h
+httpd-fsdata.o: uip\httpd\../httpd/../psock.h
+httpd-fsdata.o: uip\httpd\../httpd/../pt.h
+httpd-fsdata.o: uip\httpd\../httpd/../lc.h
+httpd-fsdata.o: uip\httpd\../httpd/../lc-switch.h
+httpd-fsdata.o: uip\httpd\../httpd/httpd-fs.h
